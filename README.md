@@ -133,6 +133,12 @@ docker compose up -d
 
 ---
 
+> ⚠️ **API Wazuh Manager** : l'API (port 55000) n'est pas configurée dans cette version.
+> Les fonctionnalités nécessitant l'API (Ruleset Test, gestion des agents) ne sont donc pas disponibles.
+> Le dashboard reste pleinement utilisable pour la consultation des alertes et des logs (via Discover, Dev Tools, Visualize).
+
+---
+
 ## 📁 Structure du projet
 
 ```
@@ -140,7 +146,6 @@ pulse-rh-security/
 ├── docker-compose.yml           # Stack Docker Compose complète
 ├── .env.example                 # Modèle de variables d'environnement
 ├── setup-hosts.sh               # Ajoute les domaines locaux dans /etc/hosts
-├── generate_readme.py           # Ce script Python pour générer le README
 ├── README.md
 ├── traefik/
 │   ├── traefik.yml
@@ -236,14 +241,16 @@ Utilisez ces rôles pour implémenter le RBAC (contrôle d'accès basé sur les 
 
 ### 3. Format des logs de sécurité pour Wazuh
 
-Le backend doit envoyer les événements de sécurité au format JSON vers le port UDP 514 du manager Wazuh (`wazuh-manager`).
+Le backend doit envoyer les événements de sécurité **directement dans l'indexer Wazuh (OpenSearch)**.
 
-**Exemple de log JSON :**
+- **Endpoint** : `https://wazuh-indexer:9200/wazuh-alerts-YYYY.MM.DD/_doc`
+- **Authentification** : `admin` / `PulseWazuh_Indexer2026!`
+- **Format JSON** :
 
 ```json
 {
   "timestamp": "2026-06-10T12:00:00Z",
-  "user_id": "6d5cfe65-...",
+  "user_id": "uuid",
   "role": "collaborator",
   "action": "chat_request",
   "endpoint": "/chat",
@@ -253,25 +260,31 @@ Le backend doit envoyer les événements de sécurité au format JSON vers le po
 }
 ```
 
-**Implémentation Python (syslog) :**
+**Implémentation Python (exemple) :**
 
 ```python
-import logging
-import logging.handlers
-import socket
-import json
+import requests
+import datetime
 
-logger = logging.getLogger("pulse_security")
-handler = logging.handlers.SysLogHandler(
-    address=("wazuh-manager", 514),
-    socktype=socket.SOCK_DGRAM,
+log = {
+    "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+    "user_id": "6d5cfe65-...",
+    "role": "collaborator",
+    "action": "chat_request",
+    "status": "REFUSED",
+    "reason": "prompt_injection_detected",
+    "ip": "192.168.1.1",
+}
+
+requests.post(
+    f"https://wazuh-indexer:9200/wazuh-alerts-{datetime.date.today().strftime('%Y.%m.%d')}/_doc",
+    auth=("admin", "PulseWazuh_Indexer2026!"),
+    json=log,
+    verify=False,  # certificats auto-signés
 )
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
-
-def log_event(event_dict: dict):
-    logger.info(json.dumps(event_dict))
 ```
+
+> **Note :** Les logs sont indexés immédiatement et consultables via Dev Tools ou l'API. L'affichage dans Discover peut présenter un bug avec le champ `timestamp`, mais les données sont bien présentes.
 
 **Les règles Wazuh correspondantes** (dans `pulse_rules.xml`) déclenchent des alertes :
 
@@ -340,6 +353,7 @@ if (roles.includes("admin")) {
 
 ## 🛠️ Maintenance & dépannage
 
+- **Logs non visibles dans Discover** : si le message `Could not locate that index-pattern-field (id: timestamp)` apparaît, utilisez **Dev Tools** ou **Visualize** pour interroger les données. Les logs sont bien présents dans OpenSearch. Ce bug est lié à la création manuelle d'index.
 - **Vérifier l'état des services** : `docker compose ps`
 - **Afficher les logs** : `docker compose logs -f <service>`
 - **Bad Gateway** : Vérifier que le conteneur concerné est `healthy`. Si le problème persiste, redémarrer : `docker compose restart <service>`
@@ -357,7 +371,3 @@ docker compose up -d
 ## 📜 Licence
 
 Projet interne Ynov Campus Maroc – Y‑Days 2026.
-
----
-
-*README généré automatiquement par `generate_readme.py`*
