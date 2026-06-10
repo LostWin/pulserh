@@ -1,0 +1,89 @@
+{
+  "realm": "pulse",
+  "enabled": true,
+  "displayName": "Pulse RH",
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 5,
+  "roles": {
+    "realm": [
+      {
+        "name": "collaborator",
+        "description": "Collaborateur - accès basique RH"
+      },
+      {
+        "name": "manager",
+        "description": "Manager - KPIs équipe et alertes"
+      },
+      {
+        "name": "hr",
+        "description": "Équipe RH - gestion complète"
+      },
+      {
+        "name": "director",
+        "description": "Direction - tableaux de bord stratégiques"
+      },
+      {
+        "name": "admin",
+        "description": "Administrateur technique - accès total"
+      }
+    ]
+  },
+  "defaultRoles": ["collaborator"],
+  "passwordPolicy": "length(12) and upperCase(1) and lowerCase(1) and digits(1) and specialChars(1) and notUsername(undefined)",
+  "clients": [
+    {
+      "clientId": "pulse-web",
+      "name": "Pulse RH Web",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://app.pulse.local/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "https://app.pulse.local",
+        "http://localhost:3000"
+      ],
+      "protocol": "openid-connect"
+    },
+    {
+      "clientId": "pulse-backend",
+      "name": "Pulse RH Backend",
+      "enabled": true,
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "serviceAccountsEnabled": true,
+      "protocol": "openid-connect",
+      "secret": "PulseRH_BackendSecret_2026"
+    },
+    {
+      "clientId": "prometheus",
+      "name": "Prometheus",
+      "enabled": true,
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "redirectUris": [
+        "https://prometheus.pulse.local/*"
+      ],
+      "webOrigins": [
+        "https://prometheus.pulse.local"
+      ],
+      "protocol": "openid-connect",
+      "secret": "PulseRH_PrometheusSecret_2026"
+    }
+  ]
+}

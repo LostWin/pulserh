@@ -1,0 +1,6 @@
+users:
+  - username: wazuh-wui
+    password: PulseWazuh_API2026!
+    run_as: false
+    roles:
+      - administrator

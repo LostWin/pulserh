@@ -1,0 +1,23 @@
+server.host: "0.0.0.0"
+server.port: 5601
+
+opensearch.hosts: ["https://wazuh-indexer:9200"]
+opensearch.ssl.verificationMode: certificate
+opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/ca-bundle.crt"]
+opensearch.ssl.certificate: /usr/share/wazuh-dashboard/certs/dashboard.pem
+opensearch.ssl.key: /usr/share/wazuh-dashboard/certs/dashboard.key
+opensearch.username: "kibanaserver"
+opensearch.password: "kibanaserver"
+opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
+
+opensearch_security.multitenancy.enabled: false
+opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+
+# OpenID Connect – maintenant tout le monde utilise HTTPS sans erreur de certificat
+opensearch_security.auth.type: "openid"
+opensearch_security.openid.connect_url: "https://auth.pulse.local/realms/pulse/.well-known/openid-configuration"
+opensearch_security.openid.client_id: "wazuh-dashboard"
+opensearch_security.openid.client_secret: "PulseRH_WazuhDash_Secret2026"
+opensearch_security.openid.scope: "openid profile email roles"
+opensearch_security.openid.base_redirect_url: "https://wazuh.pulse.local"
+opensearch_security.openid.logout_url: "https://auth.pulse.local/realms/pulse/protocol/openid-connect/logout"

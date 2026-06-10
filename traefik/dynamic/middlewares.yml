@@ -1,0 +1,27 @@
+tls:
+  certificates:
+    - certFile: /etc/traefik/certs/pulse.crt
+      keyFile: /etc/traefik/certs/pulse.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/certs/pulse.crt
+        keyFile: /etc/traefik/certs/pulse.key
+http:
+  middlewares:
+    security-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        frameDeny: false          # ← changer true en false
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"
+        permissionsPolicy: "camera=(), microphone=(), geolocation=()"
+
+    rate-limit:
+      rateLimit:
+        average: 100
+        burst: 50
+        period: 1s
