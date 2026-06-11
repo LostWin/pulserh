@@ -1,0 +1,20 @@
+# Environnement
+.env
+
+# Volumes Docker (données persistantes)
+postgres_data/
+redis_data/
+keycloak_data/
+prometheus_data/
+grafana_data/
+wazuh_indexer_data/
+wazuh_manager_data/
+wazuh_manager_logs/
+
+# Certificats privés (s'ils sont dans un dossier)
+traefik/certs/
+wazuh/certs/
+
+# Fichiers temporaires
+/tmp/
+*.log

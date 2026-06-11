@@ -1,0 +1,151 @@
+<!-- ============================================================
+     PULSE RH - Custom Security Rules
+     Auteur : Équipe Sécurité
+     Version : 1.0.0
+     ============================================================ -->
+
+<group name="pulse_rh,">
+
+  <!-- ─────────────────────────────────────────────
+       GROUPE 1 : Authentification Keycloak
+       ───────────────────────────────────────────── -->
+
+  <!-- Échec de connexion simple -->
+  <rule id="100001" level="5">
+    <decoded_as>json</decoded_as>
+    <field name="action">login_failed</field>
+    <description>PulseRH: Échec de connexion Keycloak pour $(user_id)</description>
+    <group>authentication_failed,pulse_auth,</group>
+  </rule>
+
+  <!-- Brute force : 5 échecs en 2 minutes -->
+  <rule id="100002" level="10" frequency="5" timeframe="120">
+    <if_matched_sid>100001</if_matched_sid>
+    <same_field>ip</same_field>
+    <description>PulseRH: BRUTE FORCE détecté depuis $(ip) - 5 échecs en 2 min</description>
+    <group>authentication_failures,brute_force,pulse_auth,</group>
+  </rule>
+
+  <!-- Brute force critique : 10 échecs en 5 minutes -->
+  <rule id="100003" level="14" frequency="10" timeframe="300">
+    <if_matched_sid>100001</if_matched_sid>
+    <same_field>ip</same_field>
+    <description>PulseRH: ATTAQUE BRUTE FORCE CRITIQUE depuis $(ip)</description>
+    <group>authentication_failures,brute_force,pulse_auth,attack,</group>
+  </rule>
+
+  <!-- Connexion depuis un nouveau pays/IP inhabituelle -->
+  <rule id="100004" level="7">
+    <decoded_as>json</decoded_as>
+    <field name="action">login_success</field>
+    <field name="status">suspicious_ip</field>
+    <description>PulseRH: Connexion réussie depuis IP suspecte pour $(user_id)</description>
+    <group>authentication_success,pulse_auth,</group>
+  </rule>
+
+  <!-- ─────────────────────────────────────────────
+       GROUPE 2 : Accès non autorisé (RBAC)
+       ───────────────────────────────────────────── -->
+
+  <!-- Refus d'accès à une ressource -->
+  <rule id="100010" level="6">
+    <decoded_as>json</decoded_as>
+    <field name="status">REFUSED</field>
+    <field name="reason">access_out_of_scope</field>
+    <description>PulseRH: Accès refusé hors périmètre pour $(user_id) [rôle: $(role)]</description>
+    <group>access_control,pulse_rbac,</group>
+  </rule>
+
+  <!-- Escalade de privilèges détectée -->
+  <rule id="100011" level="12">
+    <decoded_as>json</decoded_as>
+    <field name="status">REFUSED</field>
+    <field name="reason">privilege_escalation_attempt</field>
+    <description>PulseRH: TENTATIVE D'ESCALADE DE PRIVILÈGES par $(user_id)</description>
+    <group>access_control,privilege_escalation,pulse_rbac,attack,</group>
+  </rule>
+
+  <!-- 3 refus en 5 minutes pour le même utilisateur -->
+  <rule id="100012" level="10" frequency="3" timeframe="300">
+    <if_matched_sid>100010</if_matched_sid>
+    <same_field>user_id</same_field>
+    <description>PulseRH: Accès répétés hors périmètre - $(user_id) suspect</description>
+    <group>access_control,pulse_rbac,suspicious_activity,</group>
+  </rule>
+
+  <!-- ─────────────────────────────────────────────
+       GROUPE 3 : IA & Prompt Injection
+       ───────────────────────────────────────────── -->
+
+  <!-- Tentative de prompt injection -->
+  <rule id="100020" level="11">
+    <decoded_as>json</decoded_as>
+    <field name="action">chat_request</field>
+    <field name="status">REFUSED</field>
+    <field name="reason">prompt_injection_detected</field>
+    <description>PulseRH: PROMPT INJECTION détectée - utilisateur $(user_id)</description>
+    <group>ai_security,prompt_injection,pulse_ai,attack,</group>
+  </rule>
+
+  <!-- Prompt injection répétée : tentative persistante -->
+  <rule id="100021" level="14" frequency="3" timeframe="600">
+    <if_matched_sid>100020</if_matched_sid>
+    <same_field>user_id</same_field>
+    <description>PulseRH: ATTAQUE PERSISTANTE par prompt injection - $(user_id)</description>
+    <group>ai_security,prompt_injection,pulse_ai,attack,</group>
+  </rule>
+
+  <!-- Extraction de données sensibles via IA -->
+  <rule id="100022" level="13">
+    <decoded_as>json</decoded_as>
+    <field name="action">chat_request</field>
+    <field name="status">REFUSED</field>
+    <field name="reason">sensitive_data_extraction_attempt</field>
+    <description>PulseRH: Tentative d'extraction de données sensibles via IA - $(user_id)</description>
+    <group>ai_security,data_exfiltration,pulse_ai,attack,</group>
+  </rule>
+
+  <!-- ─────────────────────────────────────────────
+       GROUPE 4 : Rate Limiting
+       ───────────────────────────────────────────── -->
+
+  <!-- Rate limit déclenché -->
+  <rule id="100030" level="7">
+    <decoded_as>json</decoded_as>
+    <field name="status">RATE_LIMITED</field>
+    <description>PulseRH: Rate limit déclenché pour $(user_id) sur $(endpoint)</description>
+    <group>rate_limiting,pulse_api,</group>
+  </rule>
+
+  <!-- Rate limit répété : comportement automatisé suspect -->
+  <rule id="100031" level="11" frequency="5" timeframe="300">
+    <if_matched_sid>100030</if_matched_sid>
+    <same_field>user_id</same_field>
+    <description>PulseRH: Comportement automatisé suspect - $(user_id) dépasse le rate limit en continu</description>
+    <group>rate_limiting,pulse_api,suspicious_activity,automated_attack,</group>
+  </rule>
+
+  <!-- ─────────────────────────────────────────────
+       GROUPE 5 : Génération de documents
+       ───────────────────────────────────────────── -->
+
+  <!-- Génération de document pour un autre utilisateur -->
+  <rule id="100040" level="9">
+    <decoded_as>json</decoded_as>
+    <field name="action">document_generated</field>
+    <field name="status">SUSPICIOUS</field>
+    <field name="reason">cross_user_document</field>
+    <description>PulseRH: Génération de document pour un autre utilisateur - $(user_id)</description>
+    <group>document_security,pulse_docs,suspicious_activity,</group>
+  </rule>
+
+  <!-- Volume anormal de documents générés -->
+  <rule id="100041" level="8" frequency="20" timeframe="3600">
+    <decoded_as>json</decoded_as>
+    <field name="action">document_generated</field>
+    <same_field>user_id</same_field>
+    <description>PulseRH: Volume anormal de documents - $(user_id) a généré 20+ docs en 1h</description>
+    <group>document_security,pulse_docs,suspicious_activity,</group>
+  </rule>
+
+</group>

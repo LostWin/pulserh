@@ -1,0 +1,18 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/ossec/logs/alerts/alerts.json
+    json.keys_under_root: true
+    json.add_error_key: true
+    json.overwrite_keys: true
+
+output.elasticsearch:
+  hosts: ["https://wazuh-indexer:9200"]
+  username: "admin"
+  password: "PulseWazuh_Indexer2026!"
+  ssl.verification_mode: full
+  ssl.certificate_authorities: ["/etc/ssl/wazuh/root-ca.pem"]
+  ssl.certificate: "/etc/ssl/wazuh/manager.pem"
+  ssl.key: "/etc/ssl/wazuh/manager.key"
+  index: "wazuh-alerts-%{+yyyy.MM.dd}"

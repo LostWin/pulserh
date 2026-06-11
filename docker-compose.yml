@@ -1,0 +1,366 @@
+name: pulse-rh
+
+networks:
+  pulse_public:
+    driver: bridge
+    name: pulse_public
+  pulse_internal:
+    driver: bridge
+    name: pulse_internal
+    internal: true
+  pulse_data:
+    driver: bridge
+    name: pulse_data
+    internal: true
+
+volumes:
+  postgres_data:
+  redis_data:
+  keycloak_data:
+  prometheus_data:
+  grafana_data:
+  wazuh_indexer_data:
+  wazuh_manager_data:
+  wazuh_manager_logs:
+
+services:
+
+  # =========================================================
+  # TRAEFIK
+  # =========================================================
+  traefik:
+    image: traefik:v3.1
+    container_name: pulse_traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - pulse_public
+    volumes:
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik/dynamic:/etc/traefik/dynamic:ro
+      - ./traefik/certs:/etc/traefik/certs:ro
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      TZ: Africa/Casablanca
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck", "--ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # =========================================================
+  # POSTGRESQL
+  # =========================================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: pulse_postgres
+    restart: unless-stopped
+    expose:
+      - "5432"
+    networks:
+      - pulse_data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      KEYCLOAK_DB: ${KEYCLOAK_DB}
+      KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER}
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      PULSE_AI_DB: ${PULSE_AI_DB}
+      PULSE_AI_DB_USER: ${PULSE_AI_DB_USER}
+      PULSE_AI_DB_PASSWORD: ${PULSE_AI_DB_PASSWORD}
+      WAZUH_DB: ${WAZUH_DB}
+      WAZUH_DB_USER: ${WAZUH_DB_USER}
+      WAZUH_DB_PASSWORD: ${WAZUH_DB_PASSWORD}
+      TZ: Africa/Casablanca
+    command: >
+      postgres
+      -c log_connections=on
+      -c log_disconnections=on
+      -c log_statement=ddl
+      -c log_min_duration_statement=1000
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # =========================================================
+  # REDIS
+  # =========================================================
+  redis:
+    image: redis:7-alpine
+    container_name: pulse_redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+    networks:
+      - pulse_data
+      - pulse_internal
+    volumes:
+      - redis_data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    environment:
+      TZ: Africa/Casablanca
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # =========================================================
+  # KEYCLOAK
+  # Corrections :
+  # - healthcheck sur port 9000 (management Quarkus)
+  # - pas de KC_HOSTNAME_ADMIN
+  # - KC_HOSTNAME sans protocole
+  # - exposition port 9000 en interne pour healthcheck
+  # - start-dev pour éviter la recompilation à chaque restart
+  # =========================================================
+# =========================================================
+  # KEYCLOAK
+  # =========================================================
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: pulse_keycloak
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    expose:
+      - "8080"
+    networks:
+      - pulse_public
+      - pulse_data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    environment:
+          # Remplacer KC_BOOTSTRAP_ADMIN_* par les variables legacy
+          KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+          KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+          KC_DB: postgres
+          KC_DB_URL: jdbc:postgresql://postgres:5432/${KEYCLOAK_DB}
+          KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
+          KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+          KC_HOSTNAME: auth.pulse.local
+          KC_HOSTNAME_STRICT: "false"
+          KC_HTTP_ENABLED: "true"
+          KC_PROXY_HEADERS: xforwarded
+          KC_HEALTH_ENABLED: "true"
+          KC_METRICS_ENABLED: "true"
+          KC_LOG_LEVEL: INFO
+          TZ: Africa/Casablanca
+    command: start
+    healthcheck:
+          test:
+            - "CMD-SHELL"
+            - "exec 3<>/dev/tcp/localhost/9000 && echo -e 'GET /health/ready HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n' >&3 && cat <&3 | grep -q 'UP' || exit 1"
+          interval: 30s
+          timeout: 10s
+          retries: 10
+          start_period: 120s
+
+  # =========================================================
+  # KEYCLOAK INIT (import realm une seule fois)
+  # =========================================================
+  keycloak-init:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: pulse_keycloak_init
+    restart: "no"
+    networks:
+      - pulse_public
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    volumes:
+      - ./keycloak/init-realm.sh:/opt/init-realm.sh:ro
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    entrypoint: ["/bin/bash", "/opt/init-realm.sh"]
+  # =========================================================
+  # PROMETHEUS
+  # =========================================================
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    container_name: pulse_prometheus
+    restart: unless-stopped
+    expose:
+      - "9090"
+    networks:
+      - pulse_public
+      - pulse_internal
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    environment:
+      TZ: Africa/Casablanca
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# =========================================================
+  # GRAFANA
+  # =========================================================
+  grafana:
+    image: grafana/grafana:11.1.0
+    container_name: pulse_grafana
+    restart: unless-stopped
+    expose:
+      - "3000"
+    networks:
+      - pulse_public
+      - pulse_internal
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
+      TZ: Africa/Casablanca
+    depends_on:
+      - prometheus
+      - keycloak
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+  # =========================================================
+  # WAZUH INDEXER (OpenSearch)
+  # =========================================================
+  wazuh-indexer:
+    image: wazuh/wazuh-indexer:4.8.0
+    container_name: wazuh-indexer
+    restart: unless-stopped
+    expose:
+      - "9200"
+    networks:
+      - pulse_internal
+      - pulse_public
+    environment:
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g -Dcom.amazon.dlic.auth.http.jwt.keybyoidc.KeySetRetriever.sslValidate=false"
+      bootstrap.memory_lock: "true"
+      TZ: Africa/Casablanca
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
+      WAZUH_INDEXER_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - wazuh_indexer_data:/var/lib/wazuh-indexer
+      - ./wazuh/config/wazuh-indexer.yml:/usr/share/wazuh-indexer/opensearch.yml:ro
+      - ./wazuh/certs/indexer.pem:/usr/share/wazuh-indexer/certs/indexer.pem:ro
+      - ./wazuh/certs/indexer.key:/usr/share/wazuh-indexer/certs/indexer.key:ro
+      - ./wazuh/certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem:ro
+      - ./wazuh/certs/indexer-trust.crt:/usr/share/wazuh-indexer/certs/indexer-trust.crt:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sk https://localhost:9200/_cluster/health -u admin:$${WAZUH_INDEXER_PASSWORD} | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+
+  # =========================================================
+  # WAZUH MANAGER
+  # =========================================================
+  wazuh-manager:
+    image: wazuh/wazuh-manager:4.8.0
+    container_name: wazuh-manager
+    restart: unless-stopped
+    expose:
+      - "1514"
+      - "1515"
+      - "514"
+      - "55000"
+    networks:
+      - pulse_internal
+      - pulse_public
+    environment:
+      INDEXER_URL: https://wazuh-indexer:9200
+      INDEXER_USERNAME: admin
+      INDEXER_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
+      FILEBEAT_SSL_VERIFICATION_MODE: full
+      SSL_CERTIFICATE_AUTHORITIES: /etc/ssl/wazuh/root-ca.pem
+      SSL_CERTIFICATE: /etc/ssl/wazuh/manager.pem
+      SSL_KEY: /etc/ssl/wazuh/manager.key
+      FILEBEAT_ELASTICSEARCH_PIPELINE: ""    # ← ajouter cette ligne (pipeline vide)
+      TZ: Africa/Casablanca
+    volumes:
+      - wazuh_manager_data:/var/ossec/data
+      - wazuh_manager_logs:/var/ossec/logs
+       # - ./wazuh/config/filebeat.yml:/etc/filebeat/filebeat.yml:ro
+      #- ./wazuh/config/ossec-minimal.conf:/wazuh-config-mount/etc/ossec.conf:ro
+      - ./wazuh/rules/pulse_rules.xml:/var/ossec/etc/rules/pulse_rules.xml:ro
+     # - ./wazuh/config/users.yml:/var/ossec/api/configuration/security/users.yml:ro
+      - ./wazuh/certs/manager.pem:/etc/ssl/wazuh/manager.pem:ro
+      - ./wazuh/certs/manager.key:/etc/ssl/wazuh/manager.key:ro
+      - ./wazuh/certs/root-ca.pem:/etc/ssl/wazuh/root-ca.pem:ro
+    depends_on:
+      wazuh-indexer:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 5s
+
+  # =========================================================
+  # WAZUH DASHBOARD
+  # =========================================================
+  wazuh-dashboard:
+    image: wazuh/wazuh-dashboard:4.8.0
+    container_name: wazuh-dashboard
+    restart: unless-stopped
+    expose:
+      - "5601"
+    networks:
+      - pulse_public
+      - pulse_internal
+    environment:
+      INDEXER_USERNAME: admin
+      INDEXER_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
+      WAZUH_API_URL: https://wazuh-manager
+      DASHBOARD_USERNAME: kibanaserver
+      DASHBOARD_PASSWORD: kibanaserver
+      TZ: Africa/Casablanca
+      NODE_EXTRA_CA_CERTS: /usr/share/wazuh-dashboard/certs/ca-bundle.crt
+    volumes:
+      - ./wazuh/config/wazuh-dashboard.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml:ro
+      - ./wazuh/certs/dashboard.pem:/usr/share/wazuh-dashboard/certs/dashboard.pem:ro
+      - ./wazuh/certs/dashboard.key:/usr/share/wazuh-dashboard/certs/dashboard.key:ro
+      - ./wazuh/certs/ca-bundle.crt:/usr/share/wazuh-dashboard/certs/ca-bundle.crt:ro
+    depends_on:
+      wazuh-manager:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
