@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# Pulse AI Backend — .gitignore
+# ═══════════════════════════════════════════════════════════════════════════
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# --- Virtual Environment ---
+venv/
+.venv/
+env/
+ENV/
+
+# --- Environment Variables (secrets) ---
+.env
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Docker ---
+*.log
+
+# --- Coverage & Testing ---
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+
+# --- Misc ---
+*.bak
+*.tmp
