@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const r=require\\('./node_modules/recharts/package.json'\\).version; const l=require\\('./node_modules/lucide-react/package.json'\\).version; const rc=require\\('./node_modules/react/package.json'\\).version; console.log\\('recharts', r\\); console.log\\('lucide-react', l\\); console.log\\('react', rc\\);\")",
+      "Bash(node -e \"const l=require\\('./node_modules/lucide-react'\\); const names=Object.keys\\(l\\); console.log\\('total exports:', names.length\\); const want=['TrendingUp','TrendingDown','Users','Calendar','Bell','Search','Send','Sparkles','Download','Plus','ArrowUpRight','ArrowDownRight','MoreVertical','CheckCircle2','AlertTriangle','Clock','Mail','Phone','MapPin','Briefcase','Award','Target','Activity','Server','Database','Cpu','HardDrive','Filter','ChevronRight','ChevronDown','X','Home','FileText','Heart','Smile','Frown','Zap','Shield','Settings','UserPlus','LogOut','Menu','Bot','MessageSquare','BarChart3','PieChart','Eye','Star','Coffee','Plane','Building2'].filter\\(n=>!names.includes\\(n\\)\\); console.log\\('MISSING:', want\\);\")",
+      "Bash(npm run *)",
+      "Bash(cd \"C:\\\\Users\\\\lahou\\\\.claude\\\\projects\\\\C--Users-lahou-Desktop-a\\\\memory\")",
+      "Bash(cat MEMORY.md)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --color-brand-light: #ECECE9;
+  --color-brand-dark: #202020;
+  --color-brand-danger: #EFA49A; 
+  --color-brand-secondary: #1F524B;
+  --color-brand-success: #1F524B;
+  --color-brand-warning: #DF4931;
+  --color-blue-300: #5a857d;
+  --color-blue-400: #3a6c63;
+  --color-blue-500: #1F524B;
+  --color-blue-600: #202020;
+  --color-blue-700: #192f2d;
+  --color-blue-900: #101f1d;
+  --color-purple-400: #3a6c63;
+  --color-purple-500: #1F524B;
+  --color-purple-600: #202020;
+  --color-purple-700: #192f2d;
+  --color-rose-50: #fde7e0;
+  --color-rose-500: #DF4931;
+  --color-rose-600: #DF4931;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-brand-light);
+  color: var(--color-brand-dark);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv01" 1, "cv02" 1;
+  text-rendering: optimizeLegibility;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #a8b0b4 transparent;
+}
+
+@layer base {
+  body {
+    color: var(--color-brand-dark);
+  }
+
+  ::selection {
+    background: var(--color-brand-secondary);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .brand-surface {
+    @apply rounded-xl border border-brand-secondary/10 bg-white shadow-sm;
+  }
+
+  .brand-panel {
+    @apply rounded-xl border border-brand-secondary/10 bg-brand-light shadow-sm;
+  }
+
+  .brand-button {
+    @apply inline-flex items-center justify-center rounded-xl border border-brand-secondary/10 bg-brand-secondary px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-dark;
+  }
+}
+
+/* Entrance animation for page content */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+/* Assistant "typing" indicator */
+@keyframes typing-blink {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1; }
+}
+.typing-dot {
+  animation: typing-blink 1.4s infinite both;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #a8b0b4;
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #7a8288;
+}
