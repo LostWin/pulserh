@@ -1,0 +1,48 @@
+# =============================================================================
+# Pulse AI Backend — Docker Ignore
+# =============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docker (ne pas copier dans le build context)
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml
+
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# Docs & Tests
+docs/
+tests/
+*.md
+LICENSE
+
+# OS
+.DS_Store
+Thumbs.db
