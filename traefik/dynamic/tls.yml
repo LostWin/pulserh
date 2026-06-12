@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /etc/traefik/certs/pulse.crt
+      keyFile: /etc/traefik/certs/pulse.key

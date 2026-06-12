@@ -11,9 +11,9 @@ http:
   middlewares:
     security-headers:
       headers:
-        stsSeconds: 31536000
-        stsIncludeSubdomains: true
-        stsPreload: true
+        stsSeconds: 0
+        stsIncludeSubdomains: false
+        stsPreload: false
         frameDeny: false          # ← changer true en false
         contentTypeNosniff: true
         browserXssFilter: true

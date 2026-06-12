@@ -101,7 +101,7 @@ export default function Layout() {
   const title = location.pathname.split('/').filter(Boolean).pop()?.replace(/-/g, ' ') || '';
 
   return (
-    <div className="flex min-h-screen overflow-hidden bg-brand-light text-brand-dark">
+    <div className="flex h-screen overflow-hidden bg-brand-light text-brand-dark">
 
       {/* ── Desktop sidebar ── */}
       <aside className="z-20 hidden w-60 shrink-0 flex-col bg-brand-dark md:flex">

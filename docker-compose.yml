@@ -364,3 +364,25 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+
+  # =========================================================
+  # FRONTEND (Pulse AI)
+  # =========================================================
+  frontend:
+    build:
+      context: ./pulseAIFront
+      dockerfile: Dockerfile
+    container_name: pulse_frontend
+    restart: unless-stopped
+    expose:
+      - "5173"
+    networks:
+      - pulse_public
+    volumes:
+      - ./pulseAIFront:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_KEYCLOAK_URL=https://auth.pulse.local
+      - VITE_KEYCLOAK_REALM=pulse
+      - VITE_KEYCLOAK_CLIENT=pulse-web

@@ -77,28 +77,67 @@ ou ajouter manuellement dans `/etc/hosts` :
 127.0.0.1 prometheus.pulse.local
 127.0.0.1 grafana.pulse.local
 127.0.0.1 wazuh.pulse.local
+127.0.0.1 ai.pulse.local
 ```
 
-### 3. Fichier d'environnement
+### 3. Fichier d'environnement (⚠️ Obligatoire)
+
+Le conteneur de base de données PostgreSQL ne démarrera pas sans les mots de passe.
 
 ```bash
 cp .env.example .env
 # Éditer .env si nécessaire (mots de passe, etc.)
 ```
 
-### 4. Lancer la stack
+### 4. Générer les certificats de sécurité locaux
+
+Puisque les certificats HTTPS sont ignorés par Git pour des raisons de sécurité, **vous devez les générer manuellement** avant de lancer Docker, sinon les dossiers seront créés vides et Wazuh plantera.
+
+Exécutez cette commande à la racine du projet (fonctionne sous Mac/Linux) :
 
 ```bash
-docker compose up -d
+rm -rf wazuh/certs traefik/certs && mkdir -p wazuh/certs traefik/certs
+
+# Certificats Wazuh
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout wazuh/certs/root-ca.key -out wazuh/certs/root-ca.pem -subj "/C=MA/ST=Casa/L=Casa/O=Pulse/CN=RootCA"
+for i in indexer manager dashboard; do
+  openssl req -new -nodes -newkey rsa:2048 -keyout wazuh/certs/$i.key -out wazuh/certs/$i.csr -subj "/C=MA/ST=Casa/L=Casa/O=Pulse/CN=$i"
+  openssl x509 -req -in wazuh/certs/$i.csr -CA wazuh/certs/root-ca.pem -CAkey wazuh/certs/root-ca.key -CAcreateserial -out wazuh/certs/$i.pem -days 365
+done
+cp wazuh/certs/root-ca.pem wazuh/certs/indexer-trust.crt
+cp wazuh/certs/root-ca.pem wazuh/certs/ca-bundle.crt
+
+# Certificats Traefik (SSO & Frontend)
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout traefik/certs/pulse.key -out traefik/certs/pulse.crt -subj "/C=MA/ST=Casa/L=Casa/O=Pulse/CN=*.pulse.local"
+
+chmod -R 755 wazuh/certs traefik/certs
+```
+
+### 5. Faire confiance au certificat (Spécial macOS)
+
+Sur macOS (Safari / Firefox), le système bloquera l'accès à `ai.pulse.local` en raison du protocole HSTS et du fait que le certificat est auto-signé.
+Pour autoriser la navigation, ajoutez le certificat fraîchement créé au trousseau d'accès de votre Mac :
+
+```bash
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain traefik/certs/pulse.crt
+```
+> **Attention :** Pensez à fermer complètement votre navigateur et à le relancer pour que cela prenne effet.
+
+### 6. Lancer la stack
+
+```bash
+# Sur certaines installations Mac, il faut utiliser "docker-compose" avec un tiret
+docker-compose up -d --build
 ```
 
 > Attendre que tous les services soient **healthy** (vérifier avec `docker compose ps`).
 > Le premier démarrage peut prendre quelques minutes (téléchargement des images, initialisation).
 
-### 5. Accéder aux services
+### 7. Accéder aux services
 
 | Service             | URL                              | Identifiants / Authentification                        |
 |---------------------|----------------------------------|--------------------------------------------------------|
+| **Pulse RH (Frontend)** | **https://ai.pulse.local**     | SSO Keycloak (ex: `youssef.benali` / `Pulse@Collab26`) |
 | Traefik Dashboard   | https://traefik.pulse.local      | Basic Auth (voir `.env`)                              |
 | Keycloak Admin      | https://auth.pulse.local/admin   | `admin` / `PulseRH_AdminKC_2026Secure`                |
 | Prometheus          | https://prometheus.pulse.local   | aucune                                                 |

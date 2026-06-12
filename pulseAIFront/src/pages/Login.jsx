@@ -1,10 +1,16 @@
-import { Shield, Users, ArrowRight, Sparkles } from 'lucide-react';
+import { Shield, Sparkles } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { ROLES, ROLE_META } from '../config/roles';
+import { ROLE_META } from '../config/roles';
+import { Navigate } from 'react-router-dom';
 import logo from '../LOGO 512PX.png';
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, isAuthenticated, role } = useAuth();
+  
+  // Si déjà connecté, on redirige vers l'accueil ou le tableau de bord
+  if (isAuthenticated && role) {
+    return <Navigate to={ROLE_META[role]?.home || '/'} replace />;
+  }
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-light text-brand-dark">
@@ -28,55 +34,26 @@ export default function Login() {
           <p className="max-w-md text-lg text-brand-secondary/70">
             La solution IA de nouvelle génération pour anticiper le désengagement et optimiser le pilotage de vos ressources humaines.
           </p>
-          <div className="space-y-4 pt-6">
-            <div className="flex items-center gap-3 text-brand-secondary/80">
-              <div className="grid h-10 w-10 place-items-center rounded-full border border-brand-secondary/20 bg-brand-light">
-                <Shield size={20} className="text-brand-secondary" />
-              </div>
-              <span>Connexion sécurisée via Keycloak (simulée)</span>
-            </div>
-            <div className="flex items-center gap-3 text-brand-secondary/80">
-              <div className="grid h-10 w-10 place-items-center rounded-full border border-brand-secondary/20 bg-brand-light">
-                <Users size={20} className="text-brand-secondary" />
-              </div>
-              <span>Espaces adaptés à chaque profil</span>
-            </div>
-          </div>
         </div>
 
-        {/* Role picker */}
-        <div className="rounded-3xl border border-brand-secondary/15 bg-white p-6 shadow-sm md:p-8">
+        {/* Login Box */}
+        <div className="rounded-3xl border border-brand-secondary/15 bg-white p-6 shadow-sm md:p-8 text-center">
           <div className="mb-8">
-            <h2 className="mb-2 text-2xl font-bold text-brand-dark">Simulateur d'accès</h2>
+            <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-brand-secondary/10 mb-4">
+              <Shield size={32} className="text-brand-secondary" />
+            </div>
+            <h2 className="mb-2 text-2xl font-bold text-brand-dark">Authentification Sécurisée</h2>
             <p className="text-sm text-brand-secondary/70">
-              Pour ce prototype, sélectionnez le rôle que vous souhaitez tester.
+              Veuillez vous connecter avec votre compte d'entreprise via Keycloak.
             </p>
           </div>
 
-          <div className="space-y-3">
-            {ROLES.map((name) => {
-              const meta = ROLE_META[name];
-              const Icon = meta.icon;
-              return (
-                <button
-                  key={name}
-                  onClick={() => login(name)}
-                  className="group flex w-full items-center justify-between rounded-xl border border-brand-secondary/20 bg-brand-light p-4 transition-all duration-300 hover:border-brand-secondary/30 hover:bg-white"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-secondary text-white shadow-sm">
-                      <Icon size={24} />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-lg font-semibold text-brand-dark transition-colors group-hover:text-brand-secondary">{name}</div>
-                      <div className="text-xs text-brand-secondary/70">{meta.desc}</div>
-                    </div>
-                  </div>
-                  <ArrowRight size={20} className="text-brand-secondary/80 transition-all group-hover:translate-x-1 group-hover:text-brand-dark" />
-                </button>
-              );
-            })}
-          </div>
+          <button
+            onClick={() => login()}
+            className="w-full rounded-xl bg-brand-secondary px-4 py-3 font-semibold text-white transition hover:bg-brand-secondary/90 shadow-lg shadow-brand-secondary/20"
+          >
+            Se connecter avec Keycloak
+          </button>
         </div>
       </div>
     </div>

@@ -42,6 +42,14 @@ http:
       tls: {}
       middlewares:
         - security-headers
+    frontend:
+      rule: "Host(`ai.pulse.local`)"
+      entryPoints:
+        - websecure
+      service: frontend-service
+      tls: {}
+      middlewares:
+        - security-headers
 
   services:
     keycloak-service:
@@ -60,6 +68,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://wazuh-dashboard:5601"
+    frontend-service:
+      loadBalancer:
+        servers:
+          - url: "http://pulse_frontend:5173"
 
   middlewares:
     traefik-auth:

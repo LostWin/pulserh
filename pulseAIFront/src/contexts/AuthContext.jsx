@@ -1,57 +1,45 @@
-import { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ROLE_META } from '../config/roles';
+import { createContext, useContext } from 'react';
+import { useKeycloak } from '@react-keycloak/web';
 
 const AuthContext = createContext();
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
 
-/** Read a persisted session from localStorage (synchronous, runs once on mount). */
-function readStoredSession() {
-  try {
-    const storedUser = localStorage.getItem('yuser');
-    const storedRole = localStorage.getItem('yrole');
-    if (storedUser && storedRole && ROLE_META[storedRole]) {
-      return { user: JSON.parse(storedUser), role: storedRole };
-    }
-  } catch {
-    localStorage.removeItem('yuser');
-    localStorage.removeItem('yrole');
-  }
-  return { user: null, role: null };
-}
-
 export const AuthProvider = ({ children }) => {
-  const [session, setSession] = useState(readStoredSession);
-  const navigate = useNavigate();
-  const { user, role } = session;
+  const { keycloak, initialized } = useKeycloak();
 
-  const login = (selectedRole) => {
-    const meta = ROLE_META[selectedRole];
-    if (!meta) return;
+  if (!initialized) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-brand-light">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand-secondary/20 border-t-brand-secondary" />
+      </div>
+    );
+  }
 
-    const dummyUser = {
-      name: `${selectedRole} Démo`,
-      email: `${selectedRole.toLowerCase()}@ydays.com`,
-      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedRole)}&background=2563eb&color=fff&bold=true`,
+  const login = () => keycloak.login();
+  const logout = () => keycloak.logout({ redirectUri: window.location.origin });
+
+  let user = null;
+  let role = null;
+
+  if (keycloak.authenticated) {
+    user = {
+      name: keycloak.tokenParsed?.preferred_username || keycloak.tokenParsed?.name || "Utilisateur",
+      email: keycloak.tokenParsed?.email,
+      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(keycloak.tokenParsed?.preferred_username || 'U')}&background=2563eb&color=fff&bold=true`,
     };
 
-    setSession({ user: dummyUser, role: selectedRole });
-    localStorage.setItem('yuser', JSON.stringify(dummyUser));
-    localStorage.setItem('yrole', selectedRole);
-    navigate(meta.home);
-  };
-
-  const logout = () => {
-    setSession({ user: null, role: null });
-    localStorage.removeItem('yuser');
-    localStorage.removeItem('yrole');
-    navigate('/login');
-  };
+    // Logique pour définir le rôle principal en fonction de roles de Keycloak
+    const roles = keycloak.realmAccess?.roles || [];
+    if (roles.includes('admin')) role = 'Admin';
+    else if (roles.includes('director')) role = 'Direction';
+    else if (roles.includes('hr')) role = 'RH'; 
+    else if (roles.includes('manager')) role = 'Manager';
+    else role = 'Collaborateur'; 
+  }
 
   return (
-    <AuthContext.Provider value={{ user, role, login, logout }}>
+    <AuthContext.Provider value={{ user, role, login, logout, isAuthenticated: keycloak.authenticated }}>
       {children}
     </AuthContext.Provider>
   );
