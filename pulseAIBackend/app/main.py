@@ -39,7 +39,34 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     # --- Startup ---
     logger.info("Initializing connection pools (DB, Redis, MinIO, Qdrant)...")
-    logger.info("Loading embedding models into memory...")
+    
+    # Initialiser le service d'embedding
+    try:
+        from app.services.embedding_service import embedding_service
+        await embedding_service.initialize()
+        logger.info("EmbeddingService initialisé avec succès")
+    except Exception as e:
+        logger.error(f"Erreur lors de l'initialisation de l'EmbeddingService : {e}")
+    
+    # Initialiser la connexion Qdrant et la collection
+    try:
+        from app.services.rag_service import rag_service
+        await rag_service.initialize()
+        logger.info("RAGService (Qdrant) initialisé avec succès")
+    except Exception as e:
+        logger.error(f"Erreur lors de l'initialisation du RAGService : {e}")
+    
+    # Vérifier la connectivité LLM
+    try:
+        from app.services.llm_client import llm_client
+        is_healthy = await llm_client.health_check()
+        if is_healthy:
+            logger.info("LLM health check : OK")
+        else:
+            logger.warning("LLM health check : ÉCHEC (le LLM n'est pas accessible, les requêtes chat échoueront)")
+    except Exception as e:
+        logger.warning(f"LLM health check ignoré : {e}")
+    
     yield
     # --- Shutdown ---
     logger.info("Closing connection pools...")
@@ -257,6 +284,10 @@ Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 # ═══════════════════════════════════════════════════════════════════════════
 # Routeurs
 # ═══════════════════════════════════════════════════════════════════════════
+from app.routers import (
+    auth, chat, documents, employees, departments,
+    workflows, predictions, alerts, dashboard, admin, health, imports, audit
+)
 
 app.include_router(health.router)
 app.include_router(auth.router)
@@ -269,3 +300,5 @@ app.include_router(predictions.router)
 app.include_router(alerts.router)
 app.include_router(dashboard.router)
 app.include_router(admin.router)
+app.include_router(imports.router)
+app.include_router(audit.router)

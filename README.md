@@ -16,35 +16,55 @@ Projet Y‑Days 2026 – Ynov Campus Maroc
 
 ---
 
-## 🏗️ Architecture (vue textuelle)
+## 🏗️ Architecture Globale (Pulse AI + Sécurité)
 
-```
+**Pulse AI** est une plateforme RH de nouvelle génération qui combine l'intelligence artificielle et l'automatisation pour transformer la gestion des ressources humaines, tout en garantissant un niveau de sécurité militaire grâce à Wazuh et Keycloak.
+
+```text
 Internet (HTTPS)
 │
 ▼
-┌─────────────────────────────────┐
-│         Traefik v3.1            │
-│   Reverse proxy + TLS           │
-│   (traefik.pulse.local)         │
-└───────┬─────────────┬───────────┘
-        │             │
-        ▼             ▼
-┌──────────────┐  ┌──────────────────────────────┐
-│   Keycloak   │  │     Services applicatifs      │
-│  OIDC / SAML │  │                               │
-│  Port 8080   │  │  Grafana        (port 3000)   │
-│  (interne)   │  │  Wazuh Dashboard(port 5601)   │
-└──────┬───────┘  │  Prometheus     (port 9090)   │
-       │          └──────────────────────────────┘
-       │                        │
-       ▼                        ▼
-┌──────────────┐  ┌───────────────────────────┐
-│  PostgreSQL  │  │ Wazuh Indexer (OpenSearch)│
-│  (multi-BDD) │  │ Wazuh Manager             │
-└──────────────┘  │ (règles + logs)           │
-                  └───────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│                      Traefik v3.1                       │
+│    Reverse proxy + TLS (Auto-routing via domaines)      │
+│  (ai, api, auth, traefik, prometheus, grafana, wazuh)   │
+└─┬─────────────────────┬───────────────────────┬────────┘
+  │                     │                       │
+  ▼                     ▼                       ▼
+┌──────────────┐  ┌────────────────────┐  ┌────────────────────────┐
+│  Frontend    │  │    Pulse AI API    │  │  Services Applicatifs  │
+│ (React/Vite) │  │  (FastAPI / RAG)   │  │                        │
+│ ai.pulse...  │  │   api.pulse...     │  │  - Grafana (port 3000) │
+└──────┬───────┘  └────────┬───────────┘  │  - Wazuh Dash (5601)   │
+       │                   │              │  - Prometheus (9090)   │
+       │                   │              └────────────┬───────────┘
+       │                   ▼                           │
+       │          ┌───────────────────┐                │
+       │          │ LLM, RAG, Workflows│                │
+       │          │ Alerting, Docs     │                │
+       │          └────┬──────┬───────┘                │
+       ▼               ▼      ▼                        ▼
+┌──────────────┐  ┌────────┐ ┌────────┐   ┌────────────────────────┐
+│   Keycloak   │  │ Redis  │ │ Qdrant │   │  Wazuh Indexer /       │
+│  (SSO / IAM) │  │(Cache) │ │(Vector)│   │  Wazuh Manager         │
+│ auth.pulse...│  └────────┘ └────────┘   │  (Règles de sécurité)  │
+└──────┬───────┘                          └────────────────────────┘
+       │               ▲
+       ▼               │
+┌──────────────────────┴┐    ┌─────────┐
+│      PostgreSQL       │    │  MinIO  │
+│  (multi-DB : Keycloak,│    │(Storage)│
+│   Backend AI)         │    └─────────┘
+└───────────────────────┘
 ```
 
+### 🧩 Composants Clés
+- **Frontend (Pulse RH)** : Interface utilisateur (React/Vite)
+- **Pulse AI Backend** : API REST asynchrone (FastAPI) pilotant le chatbot RH (RAG), les prédictions ML, et les workflows agentiques.
+- **Keycloak** : Gestion des identités (IAM) et Single Sign-On (SSO).
+- **PostgreSQL / Redis** : Stockage relationnel et cache distribué.
+- **Qdrant / MinIO** : Base de données vectorielle (pour le RAG) et stockage de fichiers S3-compatible (documents RH).
+- **Wazuh / Grafana** : SIEM pour la sécurité et monitoring système.
 ---
 
 ## 🚀 Démarrage rapide

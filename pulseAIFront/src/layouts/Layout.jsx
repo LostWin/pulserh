@@ -1,6 +1,6 @@
 import { useState, Suspense } from 'react';
 import { Outlet, Navigate, NavLink, useLocation, Link } from 'react-router-dom';
-import { LogOut, Menu, X, Settings, HelpCircle } from 'lucide-react';
+import { LogOut, Menu, X, Settings, HelpCircle, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { SIDEBAR_LINKS } from '../config/roles';
 import { cn } from '../lib/utils';
@@ -27,13 +27,34 @@ function Brand() {
   );
 }
 
-function SidebarContent({ role, links, onLogout, onNavigate }) {
+function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleTheme }) {
+  const isDark = theme === 'dark';
+
+  const linkClass = (isActive) => cn(
+    'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
+    isActive
+      ? 'bg-brand-secondary text-white shadow-lg shadow-brand-secondary/20'
+      : isDark
+        ? 'text-white/75 hover:bg-white/8 hover:text-white'
+        : 'text-brand-dark/75 hover:bg-brand-secondary/10 hover:text-brand-secondary'
+  );
+
+  const bottomBtnClass = cn(
+    'flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
+    isDark
+      ? 'text-white/75 hover:bg-white/8 hover:text-white'
+      : 'text-brand-dark/75 hover:bg-brand-secondary/10 hover:text-brand-secondary'
+  );
+
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
       {/* Role section */}
-      <div className="mx-3 mb-2 mt-1 rounded-lg bg-white/5 px-3 py-2">
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-white/40">Espace</div>
-        <div className="text-sm font-semibold text-white">{role}</div>
+      <div className={cn(
+        "mx-3 mb-2 mt-1 rounded-lg px-3 py-2 transition-colors duration-150",
+        isDark ? "bg-white/5" : "bg-brand-light"
+      )}>
+        <div className={cn("text-[10px] font-semibold uppercase tracking-widest", isDark ? "text-white/40" : "text-brand-secondary/60")}>Espace</div>
+        <div className={cn("text-sm font-semibold", isDark ? "text-white" : "text-brand-dark")}>{role}</div>
       </div>
 
       {/* Main nav */}
@@ -43,14 +64,7 @@ function SidebarContent({ role, links, onLogout, onNavigate }) {
             key={name}
             to={path}
             onClick={onNavigate}
-            className={({ isActive }) =>
-              cn(
-                'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
-                isActive
-                  ? 'bg-brand-secondary text-white shadow-lg shadow-brand-secondary/20'
-                  : 'text-white/75 hover:bg-white/8 hover:text-white',
-              )
-            }
+            className={({ isActive }) => linkClass(isActive)}
           >
             <Icon size={17} />
             <span>{name}</span>
@@ -58,12 +72,24 @@ function SidebarContent({ role, links, onLogout, onNavigate }) {
         ))}
       </nav>
 
-      {/* Bottom section: Settings, Support, Logout */}
-      <div className="border-t border-white/10 px-3 py-3 space-y-0.5">
+      {/* Bottom section: Theme Switcher, Settings, Support, Logout */}
+      <div className={cn(
+        "border-t px-3 py-3 space-y-0.5 transition-colors duration-150",
+        isDark ? "border-white/10" : "border-brand-secondary/10"
+      )}>
+        {/* Theme switcher button (above Settings) */}
+        <button
+          onClick={onToggleTheme}
+          className={bottomBtnClass}
+        >
+          {isDark ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} className="text-brand-secondary" />}
+          <span>Thème : {isDark ? 'Clair' : 'Sombre'}</span>
+        </button>
+
         <Link
           to="#"
           onClick={onNavigate}
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white/75 transition-all hover:bg-white/8 hover:text-white"
+          className={bottomBtnClass}
         >
           <Settings size={17} />
           <span>Settings</span>
@@ -71,14 +97,17 @@ function SidebarContent({ role, links, onLogout, onNavigate }) {
         <Link
           to="#"
           onClick={onNavigate}
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white/75 transition-all hover:bg-white/8 hover:text-white"
+          className={bottomBtnClass}
         >
           <HelpCircle size={17} />
           <span>Support</span>
         </Link>
         <button
           onClick={onLogout}
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white/55 transition-all hover:bg-white/8 hover:text-white"
+          className={cn(
+            "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
+            isDark ? "text-white/55 hover:bg-white/8 hover:text-white" : "text-brand-dark/55 hover:bg-brand-secondary/10 hover:text-brand-secondary"
+          )}
         >
           <LogOut size={17} />
           <span>Déconnexion</span>
@@ -93,23 +122,42 @@ export default function Layout() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Initialize theme: default to dark sidebar (original style)
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('pulse-theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+    return 'dark';
+  });
+
+  const toggleTheme = () => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('pulse-theme', next);
+      return next;
+    });
+  };
+
   if (!user || !role) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
   const links = SIDEBAR_LINKS[role] || [];
   const title = location.pathname.split('/').filter(Boolean).pop()?.replace(/-/g, ' ') || '';
+  const isDark = theme === 'dark';
 
   return (
     <div className="flex h-screen overflow-hidden bg-brand-light text-brand-dark">
 
       {/* ── Desktop sidebar ── */}
-      <aside className="z-20 hidden w-60 shrink-0 flex-col bg-brand-dark md:flex">
+      <aside className={cn(
+        "z-20 hidden w-60 shrink-0 flex-col md:flex transition-all duration-150",
+        isDark ? "bg-brand-dark" : "bg-white border-r border-brand-secondary/10"
+      )}>
         {/* Logo */}
-        <div className="border-b border-white/10">
+        <div className={cn("border-b", isDark ? "border-white/10" : "border-brand-secondary/10")}>
           <Brand />
         </div>
-        <SidebarContent role={role} links={links} onLogout={logout} />
+        <SidebarContent role={role} links={links} onLogout={logout} theme={theme} onToggleTheme={toggleTheme} />
       </aside>
 
       {/* ── Mobile drawer ── */}
@@ -123,15 +171,16 @@ export default function Layout() {
         />
         <aside
           className={cn(
-            'absolute left-0 top-0 flex h-full w-64 flex-col bg-brand-dark transition-transform duration-300',
+            'absolute left-0 top-0 flex h-full w-64 flex-col transition-all duration-300',
+            isDark ? "bg-brand-dark" : "bg-white border-r border-brand-secondary/10",
             mobileOpen ? 'translate-x-0' : '-translate-x-full',
           )}
         >
-          <div className="flex items-center justify-between border-b border-white/10">
+          <div className={cn("flex items-center justify-between border-b", isDark ? "border-white/10" : "border-brand-secondary/10")}>
             <Brand />
             <button
               onClick={() => setMobileOpen(false)}
-              className="mr-4 text-white/60 hover:text-white"
+              className={cn("mr-4", isDark ? "text-white/60 hover:text-white" : "text-brand-secondary/60 hover:text-brand-secondary")}
             >
               <X size={20} />
             </button>
@@ -140,6 +189,8 @@ export default function Layout() {
             role={role}
             links={links}
             onLogout={logout}
+            theme={theme}
+            onToggleTheme={toggleTheme}
             onNavigate={() => setMobileOpen(false)}
           />
         </aside>

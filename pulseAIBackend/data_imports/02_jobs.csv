@@ -1,0 +1,29 @@
+id,title,level,description
+job-1,Directeur RH,Executive,Poste de Directeur RH au sein du département Ressources Humaines.
+job-2,HR Business Partner,Senior,Poste de HR Business Partner au sein du département Ressources Humaines.
+job-3,Chargé de Recrutement,Mid,Poste de Chargé de Recrutement au sein du département Ressources Humaines.
+job-4,Gestionnaire de Paie,Mid,Poste de Gestionnaire de Paie au sein du département Ressources Humaines.
+job-5,Office Manager,Junior,Poste de Office Manager au sein du département Ressources Humaines.
+job-6,Directeur Technique,Executive,Poste de Directeur Technique au sein du département IT & Engineering.
+job-7,Lead Développeur,Senior,Poste de Lead Développeur au sein du département IT & Engineering.
+job-8,Développeur Backend,Mid,Poste de Développeur Backend au sein du département IT & Engineering.
+job-9,Développeur Frontend,Mid,Poste de Développeur Frontend au sein du département IT & Engineering.
+job-10,Ingénieur DevOps,Senior,Poste de Ingénieur DevOps au sein du département IT & Engineering.
+job-11,QA Tester,Junior,Poste de QA Tester au sein du département IT & Engineering.
+job-12,Data Scientist,Mid,Poste de Data Scientist au sein du département IT & Engineering.
+job-13,Directeur Financier,Executive,Poste de Directeur Financier au sein du département Finance & Comptabilité.
+job-14,Contrôleur de Gestion,Senior,Poste de Contrôleur de Gestion au sein du département Finance & Comptabilité.
+job-15,Comptable,Mid,Poste de Comptable au sein du département Finance & Comptabilité.
+job-16,Analyste Financier,Junior,Poste de Analyste Financier au sein du département Finance & Comptabilité.
+job-17,Directeur Marketing,Executive,Poste de Directeur Marketing au sein du département Marketing & Communication.
+job-18,Product Marketing Manager,Senior,Poste de Product Marketing Manager au sein du département Marketing & Communication.
+job-19,Community Manager,Junior,Poste de Community Manager au sein du département Marketing & Communication.
+job-20,Content Creator,Mid,Poste de Content Creator au sein du département Marketing & Communication.
+job-21,SEO Specialist,Mid,Poste de SEO Specialist au sein du département Marketing & Communication.
+job-22,Directeur Commercial,Executive,Poste de Directeur Commercial au sein du département Ventes.
+job-23,Key Account Manager,Senior,Poste de Key Account Manager au sein du département Ventes.
+job-24,Commercial B2B,Mid,Poste de Commercial B2B au sein du département Ventes.
+job-25,SDR,Junior,Poste de SDR au sein du département Ventes.
+job-26,Directeur Général,Executive,Poste de Directeur Général au sein du département Direction Générale.
+job-27,COO,Executive,Poste de COO au sein du département Direction Générale.
+job-28,Assistant de Direction,Mid,Poste de Assistant de Direction au sein du département Direction Générale.

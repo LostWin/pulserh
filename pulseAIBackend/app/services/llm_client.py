@@ -1,23 +1,15 @@
 """
 Client LLM pour Pulse AI.
 
-Interface unifiée pour appeler un LLM (vLLM, OpenAI, ou compatible).
-Supporte le streaming, le chat multi-tour et le contrôle de la génération.
-
-Backends supportés (à configurer via LLM_API_URL) :
-  - vLLM local : http://localhost:8000/v1
-  - OpenAI     : https://api.openai.com/v1
-  - Ollama     : http://localhost:11434/v1
-
-Dépendances attendues :
-  - httpx (client HTTP async)
-  - openai (SDK officiel, compatible vLLM)
-
-À implémenter par : Équipe IA / Infrastructure
+Interface unifiée pour appeler un LLM via le SDK OpenAI.
+Supporte OpenRouter (défaut), Ollama, vLLM, et tout backend compatible OpenAI.
 """
 
 import logging
+import json
 from typing import AsyncIterator, Optional
+
+from openai import AsyncOpenAI
 
 from app.config import settings
 
@@ -26,75 +18,81 @@ logger = logging.getLogger("pulse.services.llm")
 
 class LLMClient:
     """
-    Client pour les appels au LLM (vLLM / OpenAI / compatible).
-
+    Client pour les appels au LLM via le SDK OpenAI (compatible OpenRouter, Ollama, vLLM).
+    
     Fournit une interface unifiée pour la génération de texte,
-    avec support du streaming et du chat multi-tour.
-
-    Usage :
-        llm = LLMClient()
-        response = await llm.generate("Résume ce document : ...")
-        async for chunk in llm.stream("Explique-moi le processus de ..."):
-            print(chunk, end="")
+    avec support du streaming, du chat multi-tour et du tool-calling.
     """
 
     def __init__(
         self,
-        api_url: str | None = None,
-        model: str = "mistral-7b-instruct",
-        api_key: str | None = None,
+        provider: str = None,
+        model: str = None,
+        api_key: str = None,
+        api_url: str = None,
     ):
         """
         Initialiser le client LLM.
-
-        À implémenter :
-            from openai import AsyncOpenAI
-            self.client = AsyncOpenAI(
-                base_url=api_url or settings.LLM_API_URL,
-                api_key=api_key or "not-needed"  # vLLM n'exige pas de clé
-            )
-
-        Args:
-            api_url: URL de l'API LLM. Défaut : settings.LLM_API_URL.
-            model: Nom du modèle à utiliser.
-            api_key: Clé API (requis pour OpenAI, optionnel pour vLLM).
+        
+        Auto-configure le base_url selon le provider :
+        - openrouter → https://openrouter.ai/api/v1
+        - ollama → http://localhost:11434/v1
         """
-        self.api_url = api_url or settings.LLM_API_URL
-        self.model = model
-        self.api_key = api_key
-        self.client = None  # À remplacer par AsyncOpenAI
-        logger.info(
-            f"LLMClient initialized (stub mode) | "
-            f"api_url={self.api_url}, model={self.model}"
+        self.provider = provider or settings.LLM_PROVIDER
+        self.model = model or settings.LLM_MODEL
+        self.api_key = api_key or settings.LLM_API_KEY
+        
+        # Déterminer le base_url selon le provider
+        if api_url:
+            self.api_url = api_url
+        elif self.provider == "openrouter":
+            self.api_url = "https://openrouter.ai/api/v1"
+        elif self.provider == "ollama":
+            self.api_url = settings.OLLAMA_BASE_URL
+        else:
+            self.api_url = settings.LLM_API_URL
+        
+        # Initialisation du client OpenAI (SDK compatible)
+        extra_headers = {}
+        if self.provider == "openrouter":
+            extra_headers = {
+                "HTTP-Referer": "https://pulse-rh.ai",
+                "X-Title": "PulseRH AI Assistant",
+            }
+        
+        self.client = AsyncOpenAI(
+            base_url=self.api_url,
+            api_key=self.api_key or "not-needed",
+            default_headers=extra_headers if extra_headers else None,
         )
+        
+        logger.info(
+            f"LLMClient initialisé | provider={self.provider}, "
+            f"model={self.model}, api_url={self.api_url}"
+        )
+
+    def reconfigure(self, provider: str, model: str, api_key: str = None):
+        """Reconfigurer le client LLM dynamiquement (appelé depuis l'admin)."""
+        logger.info(f"Reconfiguration du LLMClient : provider={provider}, model={model}")
+        self.__init__(provider=provider, model=model, api_key=api_key)
 
     async def generate(
         self,
         prompt: str,
         temperature: float = 0.2,
         max_tokens: int = 500,
-        system_prompt: str | None = None,
-        stop: list[str] | None = None,
+        system_prompt: str = None,
+        stop: list[str] = None,
     ) -> str:
-        """
-        Générer une réponse complète (non-streaming).
+        """Générer une réponse complète (non-streaming)."""
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
 
-        Args:
-            prompt: Le prompt utilisateur.
-            temperature: Contrôle de la créativité (0.0 = déterministe, 1.0 = créatif).
-            max_tokens: Nombre maximum de tokens à générer.
-            system_prompt: Instruction système optionnelle (personnalité, guardrails).
-            stop: Séquences d'arrêt pour stopper la génération.
-
-        Returns:
-            Le texte généré par le LLM.
-
-        À implémenter :
-            messages = []
-            if system_prompt:
-                messages.append({"role": "system", "content": system_prompt})
-            messages.append({"role": "user", "content": prompt})
-
+        logger.info(f"LLM generate() appelé | model={self.model}, prompt_len={len(prompt)}")
+        
+        try:
             response = await self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -102,42 +100,30 @@ class LLMClient:
                 max_tokens=max_tokens,
                 stop=stop,
             )
-            return response.choices[0].message.content
-
-        Raises:
-            NotImplementedError: Ce service est un stub.
-        """
-        raise NotImplementedError(
-            "LLMClient.generate() n'est pas encore implémenté. "
-            f"Configurer le backend LLM à l'adresse : {self.api_url}"
-        )
+            content = response.choices[0].message.content or ""
+            tokens = response.usage.total_tokens if response.usage else 0
+            logger.info(f"LLM generate() terminé | tokens={tokens}")
+            return content
+        except Exception as e:
+            logger.error(f"Erreur LLM generate() : {e}")
+            raise
 
     async def stream(
         self,
         prompt: str,
         temperature: float = 0.2,
         max_tokens: int = 500,
-        system_prompt: str | None = None,
+        system_prompt: str = None,
     ) -> AsyncIterator[str]:
-        """
-        Générer une réponse en streaming (Server-Sent Events).
+        """Générer une réponse en streaming (SSE)."""
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
 
-        Utile pour l'interface chat en temps réel.
-
-        Args:
-            prompt: Le prompt utilisateur.
-            temperature: Contrôle de la créativité.
-            max_tokens: Nombre maximum de tokens.
-            system_prompt: Instruction système optionnelle.
-
-        Yields:
-            Fragments de texte au fur et à mesure de la génération.
-
-        À implémenter :
-            messages = [{"role": "user", "content": prompt}]
-            if system_prompt:
-                messages.insert(0, {"role": "system", "content": system_prompt})
-
+        logger.info(f"LLM stream() appelé | model={self.model}")
+        
+        try:
             stream = await self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -146,18 +132,11 @@ class LLMClient:
                 stream=True,
             )
             async for chunk in stream:
-                delta = chunk.choices[0].delta.content
-                if delta:
-                    yield delta
-
-        Raises:
-            NotImplementedError: Ce service est un stub.
-        """
-        raise NotImplementedError(
-            "LLMClient.stream() n'est pas encore implémenté."
-        )
-        # yield is needed to make this an async generator
-        yield ""  # noqa: unreachable
+                if chunk.choices and chunk.choices[0].delta.content:
+                    yield chunk.choices[0].delta.content
+        except Exception as e:
+            logger.error(f"Erreur LLM stream() : {e}")
+            raise
 
     async def chat(
         self,
@@ -165,42 +144,91 @@ class LLMClient:
         temperature: float = 0.2,
         max_tokens: int = 500,
     ) -> str:
-        """
-        Conversation multi-tour avec historique complet.
+        """Conversation multi-tour avec historique complet."""
+        logger.info(f"LLM chat() appelé | model={self.model}, messages_count={len(messages)}")
+        
+        try:
+            response = await self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens,
+            )
+            return response.choices[0].message.content or ""
+        except Exception as e:
+            logger.error(f"Erreur LLM chat() : {e}")
+            raise
 
-        Args:
-            messages: Liste de messages au format OpenAI :
-                [
-                    {"role": "system", "content": "Tu es un assistant RH..."},
-                    {"role": "user", "content": "Bonjour"},
-                    {"role": "assistant", "content": "Bonjour ! Comment puis-je..."},
-                    {"role": "user", "content": "Comment poser un congé ?"},
+    async def chat_with_tools(
+        self,
+        messages: list[dict],
+        tools: list[dict],
+        temperature: float = 0.2,
+        max_tokens: int = 1000,
+    ) -> dict:
+        """
+        Appel LLM avec tool-calling (function calling).
+        
+        Retourne un dict avec :
+        - "content": str ou None (réponse texte)
+        - "tool_calls": list ou None (appels d'outils demandés par l'IA)
+        - "usage": dict avec total_tokens
+        """
+        logger.info(f"LLM chat_with_tools() | model={self.model}, tools_count={len(tools)}")
+        
+        try:
+            response = await self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                tools=tools,
+                tool_choice="auto",
+                temperature=temperature,
+                max_tokens=max_tokens,
+            )
+            
+            choice = response.choices[0]
+            result = {
+                "content": choice.message.content,
+                "tool_calls": None,
+                "usage": {
+                    "total_tokens": response.usage.total_tokens if response.usage else 0,
+                },
+            }
+            
+            if choice.message.tool_calls:
+                result["tool_calls"] = [
+                    {
+                        "id": tc.id,
+                        "function": {
+                            "name": tc.function.name,
+                            "arguments": tc.function.arguments,
+                        },
+                    }
+                    for tc in choice.message.tool_calls
                 ]
-            temperature: Contrôle de la créativité.
-            max_tokens: Nombre maximum de tokens.
-
-        Returns:
-            La réponse du LLM au dernier message.
-
-        Raises:
-            NotImplementedError: Ce service est un stub.
-        """
-        raise NotImplementedError(
-            "LLMClient.chat() n'est pas encore implémenté."
-        )
+                logger.info(
+                    f"L'IA a demandé {len(result['tool_calls'])} appel(s) d'outils : "
+                    f"{[tc['function']['name'] for tc in result['tool_calls']]}"
+                )
+            
+            return result
+        except Exception as e:
+            logger.error(f"Erreur LLM chat_with_tools() : {e}")
+            # Si le modèle ne supporte pas le tool-calling, fallback sur le chat classique
+            if "tool" in str(e).lower() or "function" in str(e).lower():
+                logger.warning("Le modèle ne supporte pas le tool-calling, fallback sur chat()")
+                content = await self.chat(messages, temperature, max_tokens)
+                return {"content": content, "tool_calls": None, "usage": {"total_tokens": 0}}
+            raise
 
     async def health_check(self) -> bool:
-        """
-        Vérifier que le backend LLM est accessible.
-
-        Returns:
-            True si le LLM répond, False sinon.
-        """
+        """Vérifier que le backend LLM est accessible."""
         try:
-            # À implémenter : GET {api_url}/health ou models endpoint
-            logger.warning("LLMClient.health_check() stub — returning False")
-            return False
-        except Exception:
+            response = await self.client.models.list()
+            logger.info(f"LLM health check OK | {len(response.data)} modèle(s) disponibles")
+            return True
+        except Exception as e:
+            logger.warning(f"LLM health check échoué : {e}")
             return False
 
 

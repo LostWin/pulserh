@@ -22,6 +22,8 @@ volumes:
   wazuh_indexer_data:
   wazuh_manager_data:
   wazuh_manager_logs:
+  minio_data:
+  qdrant_data:
 
 services:
 
@@ -386,3 +388,81 @@ services:
       - VITE_KEYCLOAK_URL=https://auth.pulse.local
       - VITE_KEYCLOAK_REALM=pulse
       - VITE_KEYCLOAK_CLIENT=pulse-web
+
+  # =========================================================
+  # PULSE AI BACKEND (FastAPI)
+  # =========================================================
+  backend:
+    build:
+      context: ./pulseAIBackend
+      dockerfile: Dockerfile
+    container_name: pulse_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./pulseAIBackend:/app
+    expose:
+      - "8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+      minio:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    networks:
+      - pulse_public
+      - pulse_data
+      - pulse_internal
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # =========================================================
+  # MINIO (Object Storage)
+  # =========================================================
+  minio:
+    image: minio/minio:latest
+    container_name: pulse_minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    expose:
+      - "9000"
+      - "9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - pulse_data
+      - pulse_internal
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =========================================================
+  # QDRANT (Vector Database)
+  # =========================================================
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: pulse_qdrant
+    restart: unless-stopped
+    expose:
+      - "6333"
+      - "6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - pulse_data
+      - pulse_internal

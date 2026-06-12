@@ -1,22 +1,13 @@
 """
 Service d'embedding vectoriel pour Pulse AI.
 
-Responsable de la conversion de texte en vecteurs denses
-pour la recherche sémantique dans Qdrant.
-
-Modèle recommandé :
-  - sentence-transformers/all-MiniLM-L6-v2 (384 dimensions, rapide)
-  - sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 (multilingue FR/EN)
-
-Dépendances attendues :
-  - sentence-transformers
-  - torch (CPU ou GPU selon l'infra)
-
-À implémenter par : Équipe IA / NLP
+Supporte deux backends :
+  - fastembed (local, léger ~100MB, par défaut)
+  - OpenAI/OpenRouter API (distant, nécessite une clé API)
 """
 
 import logging
-from typing import Optional
+from typing import Optional, List
 
 from app.config import settings
 
@@ -26,57 +17,67 @@ logger = logging.getLogger("pulse.services.embedding")
 class EmbeddingService:
     """
     Service d'encodage de texte en vecteurs denses (embeddings).
-
-    Charge un modèle sentence-transformers en mémoire au démarrage
-    et fournit des méthodes sync/async pour encoder du texte.
-
-    Usage :
-        embedding_svc = EmbeddingService()
-        vector = await embedding_svc.encode("Comment poser un congé ?")
-        vectors = await embedding_svc.encode_batch(["texte 1", "texte 2"])
+    
+    Utilise fastembed par défaut (léger, pas de torch).
+    Peut basculer sur l'API OpenAI/OpenRouter en alternative.
     """
 
-    # Dimension des vecteurs produits (dépend du modèle choisi)
-    VECTOR_DIMENSION: int = 384  # all-MiniLM-L6-v2
+    VECTOR_DIMENSION: int = 384  # BAAI/bge-small-en-v1.5
 
-    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
-        """
-        Charger le modèle sentence-transformers en mémoire.
-
-        À implémenter :
-            from sentence_transformers import SentenceTransformer
-            self.model = SentenceTransformer(model_name)
-
-        Args:
-            model_name: Nom du modèle HuggingFace à charger.
-        """
-        self.model_name = model_name
-        self.model = None  # À remplacer par le modèle chargé
+    def __init__(self, provider: str = None, model_name: str = None):
+        self.provider = provider or settings.EMBEDDING_PROVIDER
+        self.model_name = model_name or settings.EMBEDDING_MODEL
+        self.model = None
+        self._openai_client = None
         logger.info(
-            f"EmbeddingService initialized (stub mode) | model={model_name}"
+            f"EmbeddingService initializing | provider={self.provider}, model={self.model_name}"
         )
+
+    async def initialize(self):
+        """Charger le modèle d'embedding en mémoire (appelé au startup)."""
+        if self.provider == "fastembed":
+            try:
+                from fastembed import TextEmbedding
+                self.model = TextEmbedding(model_name=self.model_name)
+                # Déterminer la dimension réelle via un test
+                test_embedding = list(self.model.embed(["test"]))[0]
+                self.VECTOR_DIMENSION = len(test_embedding)
+                logger.info(
+                    f"Modèle fastembed chargé avec succès | "
+                    f"model={self.model_name}, dim={self.VECTOR_DIMENSION}"
+                )
+            except ImportError:
+                logger.error("fastembed non installé. Fallback vers le mode stub.")
+            except Exception as e:
+                logger.error(f"Erreur lors du chargement de fastembed : {e}")
+        elif self.provider == "openai":
+            try:
+                from openai import AsyncOpenAI
+                self._openai_client = AsyncOpenAI(
+                    base_url=settings.LLM_API_URL,
+                    api_key=settings.LLM_API_KEY or "not-needed"
+                )
+                self.VECTOR_DIMENSION = 1536  # text-embedding-3-small
+                logger.info("EmbeddingService configuré via l'API OpenAI/OpenRouter")
+            except Exception as e:
+                logger.error(f"Erreur lors de l'initialisation du client OpenAI pour embeddings : {e}")
+        else:
+            logger.warning(f"Provider d'embedding inconnu : {self.provider}")
 
     async def encode(self, text: str) -> list[float]:
-        """
-        Encoder un texte unique en vecteur dense.
-
-        Args:
-            text: Le texte à encoder.
-
-        Returns:
-            Liste de floats de dimension VECTOR_DIMENSION.
-
-        À implémenter :
-            embedding = self.model.encode(text, normalize_embeddings=True)
-            return embedding.tolist()
-
-        Raises:
-            NotImplementedError: Ce service est un stub.
-        """
-        raise NotImplementedError(
-            "EmbeddingService.encode() n'est pas encore implémenté. "
-            "Installer sentence-transformers et charger le modèle."
-        )
+        """Encoder un texte unique en vecteur dense."""
+        if self.provider == "fastembed" and self.model:
+            embeddings = list(self.model.embed([text]))
+            return embeddings[0].tolist()
+        elif self.provider == "openai" and self._openai_client:
+            response = await self._openai_client.embeddings.create(
+                model=self.model_name,
+                input=text
+            )
+            return response.data[0].embedding
+        else:
+            logger.warning("EmbeddingService.encode() appelé sans modèle chargé — retour vecteur zéro")
+            return [0.0] * self.VECTOR_DIMENSION
 
     async def encode_batch(
         self,
@@ -84,35 +85,23 @@ class EmbeddingService:
         batch_size: int = 32,
         show_progress: bool = False,
     ) -> list[list[float]]:
-        """
-        Encoder un batch de textes en vecteurs denses.
-
-        Optimisé pour l'indexation de documents (plus efficace que
-        des appels individuels à encode()).
-
-        Args:
-            texts: Liste de textes à encoder.
-            batch_size: Taille des batches pour l'inférence.
-            show_progress: Afficher une barre de progression.
-
-        Returns:
-            Liste de vecteurs (un par texte).
-
-        À implémenter :
-            embeddings = self.model.encode(
-                texts,
-                batch_size=batch_size,
-                normalize_embeddings=True,
-                show_progress_bar=show_progress
-            )
-            return embeddings.tolist()
-
-        Raises:
-            NotImplementedError: Ce service est un stub.
-        """
-        raise NotImplementedError(
-            "EmbeddingService.encode_batch() n'est pas encore implémenté."
-        )
+        """Encoder un batch de textes en vecteurs denses."""
+        if self.provider == "fastembed" and self.model:
+            embeddings = list(self.model.embed(texts, batch_size=batch_size))
+            return [e.tolist() for e in embeddings]
+        elif self.provider == "openai" and self._openai_client:
+            results = []
+            for i in range(0, len(texts), batch_size):
+                batch = texts[i:i + batch_size]
+                response = await self._openai_client.embeddings.create(
+                    model=self.model_name,
+                    input=batch
+                )
+                results.extend([d.embedding for d in response.data])
+            return results
+        else:
+            logger.warning("EmbeddingService.encode_batch() appelé sans modèle chargé")
+            return [[0.0] * self.VECTOR_DIMENSION for _ in texts]
 
     def get_dimension(self) -> int:
         """Retourne la dimension des vecteurs produits par le modèle."""

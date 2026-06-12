@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}ATTESTATION D'EMPLOI{% endblock %}
+
+{% block content %}
+<p>Je soussigné, représentant légal de l'entreprise PulseRH, atteste par la présente que :</p>
+<br>
+<p><b>M/Mme {{ employee.first_name }} {{ employee.last_name }}</b>,</p>
+<p>a été embauché(e) dans notre société depuis le <b>{{ employee.hire_date }}</b>.</p>
+<br>
+<p>L'intéressé(e) exerce actuellement les fonctions de <b>{{ employee.job_title }}</b> 
+au sein du département <b>{{ employee.department_name }}</b>.</p>
+<br>
+<p>Il/Elle n'est actuellement ni en période d'essai, ni en préavis de départ, et n'a fait l'objet d'aucune 
+mesure de licenciement à ce jour.</p>
+<br>
+<p>Cette attestation est délivrée pour servir et valoir ce que de droit.</p>
+{% endblock %}

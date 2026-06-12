@@ -1,16 +1,9 @@
-import { useState } from 'react';
-import { FileText, Download, Trash2, Upload, Search, Eye } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { FileText, Download, Trash2, Upload, Search, Eye, X } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { api } from '../../lib/api';
 
 const TYPES = ['Tous', 'Contrat', 'Fiche de paie', 'Attestation', 'Avenant'];
-const INITIAL_DOCS = [
-  { id: 1, name: 'Contrat CDI — Alex Dupont', type: 'Contrat', employee: 'Alex Dupont', date: '12 jan. 2023', size: '234 Ko' },
-  { id: 2, name: 'Bulletin de paie — Mai 2026', type: 'Fiche de paie', employee: 'Alex Dupont', date: '31 mai 2026', size: '89 Ko' },
-  { id: 3, name: 'Attestation employeur — Camille Laurent', type: 'Attestation', employee: 'Camille Laurent', date: '8 juin 2026', size: '45 Ko' },
-  { id: 4, name: 'Avenant télétravail — Yanis Moreau', type: 'Avenant', employee: 'Yanis Moreau', date: '2 juin 2026', size: '112 Ko' },
-  { id: 5, name: 'Bulletin de paie — Avril 2026', type: 'Fiche de paie', employee: 'Sofia Nguyen', date: '30 avr. 2026', size: '91 Ko' },
-  { id: 6, name: 'Contrat CDD — Lucas Bernard', type: 'Contrat', employee: 'Lucas Bernard', date: '15 mars 2026', size: '198 Ko' },
-];
 const TYPE_COLORS = {
   'Contrat': { bg: '#dbeafe', color: '#1d4ed8' },
   'Fiche de paie': { bg: '#dcfce7', color: '#15803d' },
@@ -22,24 +15,76 @@ export default function DocumentsRH() {
   const [search, setSearch] = useState('');
   const [activeType, setActiveType] = useState('Tous');
   const [uploading, setUploading] = useState(false);
-  const [docs, setDocs] = useState(INITIAL_DOCS);
+  const [docs, setDocs] = useState([]);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [selectedType, setSelectedType] = useState('Contrat');
+  const fileInputRef = useRef(null);
+
+  const fetchDocs = async () => {
+    try {
+      const data = await api.get('/documents');
+      setDocs(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDocs();
+  }, []);
 
   const filtered = docs.filter((d) =>
     (activeType === 'Tous' || d.type === activeType) &&
-    (d.name.toLowerCase().includes(search.toLowerCase()) || d.employee.toLowerCase().includes(search.toLowerCase()))
+    (d.name.toLowerCase().includes(search.toLowerCase()) || (d.uploaded_by && d.uploaded_by.toLowerCase().includes(search.toLowerCase())))
   );
 
-  const handleDelete = (id) => setDocs((prev) => prev.filter((d) => d.id !== id));
+  const handleDelete = async (id) => {
+    if (!window.confirm("Supprimer ce document ?")) return;
+    try {
+      await api.delete(`/documents/${id}`);
+      fetchDocs();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  const simulateUpload = () => {
+  const handleDownload = async (doc) => {
+    try {
+      const blob = await api.get(`/documents/${doc.id}/download`, { responseType: 'blob' });
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', doc.name);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (err) {
+      console.error("Erreur téléchargement", err);
+    }
+  };
+
+  const handleUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
     setUploading(true);
-    setTimeout(() => {
-      setDocs((prev) => [{
-        id: Date.now(), name: 'Nouveau document.pdf', type: 'Attestation', employee: 'Tous',
-        date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }), size: '—',
-      }, ...prev]);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('doc_type', selectedType);
+
+    try {
+      await api.post('/documents/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setShowUploadModal(false);
+      fetchDocs();
+    } catch (err) {
+      console.error(err);
+      alert("Erreur lors de l'upload");
+    } finally {
       setUploading(false);
-    }, 1500);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
   };
 
   return (
@@ -49,9 +94,9 @@ export default function DocumentsRH() {
           <h1 className="text-2xl font-bold text-brand-dark">Documents RH</h1>
           <p className="mt-1 text-sm text-brand-secondary/70">Gérez les documents administratifs de tous les collaborateurs.</p>
         </div>
-        <button onClick={simulateUpload} disabled={uploading}
+        <button onClick={() => setShowUploadModal(true)} disabled={uploading}
           className="flex items-center gap-2 rounded-xl bg-brand-secondary px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-brand-dark transition-colors disabled:opacity-60">
-          <Upload size={15} />{uploading ? 'Upload…' : 'Ajouter un document'}
+          <Upload size={15} />Ajouter un document
         </button>
       </div>
 
@@ -96,13 +141,12 @@ export default function DocumentsRH() {
                   <td className="px-5 py-3">
                     <span className="rounded-full px-2.5 py-1 text-xs font-semibold" style={{ backgroundColor: tc.bg, color: tc.color }}>{doc.type}</span>
                   </td>
-                  <td className="px-5 py-3 text-brand-secondary/70">{doc.employee}</td>
-                  <td className="px-5 py-3 text-brand-secondary/70">{doc.date}</td>
+                  <td className="px-5 py-3 text-brand-secondary/70">{doc.uploaded_by || 'Système'}</td>
+                  <td className="px-5 py-3 text-brand-secondary/70">{new Date(doc.created_at).toLocaleDateString()}</td>
                   <td className="px-5 py-3 text-brand-secondary/70">{doc.size}</td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-1">
-                      <button className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors"><Eye size={14} /></button>
-                      <button className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors"><Download size={14} /></button>
+                      <button onClick={() => handleDownload(doc)} className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors"><Download size={14} /></button>
                       <button onClick={() => handleDelete(doc.id)} className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-warning/10 text-brand-secondary/50 hover:text-brand-warning transition-colors"><Trash2 size={14} /></button>
                     </div>
                   </td>
@@ -115,6 +159,47 @@ export default function DocumentsRH() {
           </tbody>
         </table>
       </div>
+
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark/40 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl animate-fade-in-up">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-brand-dark">Ajouter un document</h3>
+              <button onClick={() => setShowUploadModal(false)} className="text-brand-secondary hover:text-brand-dark">
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-brand-dark mb-1">Type de document</label>
+                <select 
+                  value={selectedType} 
+                  onChange={(e) => setSelectedType(e.target.value)}
+                  className="w-full rounded-xl border border-brand-secondary/20 bg-white px-4 py-2.5 text-sm outline-none focus:border-brand-secondary"
+                >
+                  {TYPES.filter(t => t !== 'Tous').map(t => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-brand-dark mb-1">Fichier (PDF, DOCX, etc.)</label>
+                <input 
+                  type="file" 
+                  ref={fileInputRef}
+                  onChange={handleUpload}
+                  className="block w-full text-sm text-brand-secondary file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-brand-secondary/10 file:text-brand-secondary hover:file:bg-brand-secondary/20 cursor-pointer"
+                />
+              </div>
+
+              {uploading && <p className="text-sm font-medium text-brand-secondary animate-pulse">Upload en cours...</p>}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

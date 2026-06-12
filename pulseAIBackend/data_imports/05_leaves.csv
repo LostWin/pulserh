@@ -1,0 +1,988 @@
+id,employee_id,start_date,end_date,leave_type,status,reason
+d306a8d4-4fd9-4498-8faf-5dcc9526ed44,emp-1,2025-08-11,2025-08-22,Maladie,Approuvé,Généré automatiquement
+e24f6356-848a-44f4-af36-bff485203c2a,emp-2,2026-02-13,2026-02-27,Maladie,Approuvé,Généré automatiquement
+f7e038da-bb00-4ac3-95c1-ee5181a7d946,emp-4,2025-11-11,2025-11-16,Maladie,En attente,Généré automatiquement
+a9d2001b-ce43-4479-bc98-c6fd16422b69,emp-4,2025-08-31,2025-09-14,Autres,Approuvé,Généré automatiquement
+a3a26aa7-54ff-40e2-b20d-78799ba25a66,emp-5,2025-07-23,2025-08-03,Congés Payés,Approuvé,Généré automatiquement
+60367c1c-ee88-4f20-9692-f6e45d41a112,emp-5,2026-06-02,2026-06-08,Maladie,Rejeté,Généré automatiquement
+c622411b-f0cd-48cf-a50c-c63097beac3d,emp-5,2025-06-30,2025-07-14,Raisons personnelles,En attente,Généré automatiquement
+6683a57e-b54b-4e14-90a3-d20d90d5e136,emp-6,2026-05-22,2026-05-31,Raisons personnelles,Approuvé,Généré automatiquement
+0e85e8ff-3d16-4e2f-a473-5a24328e1467,emp-6,2025-12-06,2025-12-18,Maladie,Approuvé,Généré automatiquement
+46f22558-cf73-4f3a-9e04-0143876438ac,emp-6,2025-10-02,2025-10-14,Raisons personnelles,Approuvé,Généré automatiquement
+44f39b9f-1735-451b-976f-0e72b19da77d,emp-8,2026-04-24,2026-04-25,Autres,En attente,Généré automatiquement
+b29983ed-1440-4cbf-995a-aced2f152623,emp-8,2025-10-02,2025-10-04,Autres,Approuvé,Généré automatiquement
+4514cee0-ee88-413b-9452-b9368bc338f3,emp-8,2026-05-10,2026-05-24,Raisons personnelles,Approuvé,Généré automatiquement
+2eec21ee-12b4-4f15-873f-9b67f74285cc,emp-8,2026-03-28,2026-04-03,Maladie,Approuvé,Généré automatiquement
+5cfe3d68-998d-4925-b6d0-550ad3a8e3ae,emp-9,2026-02-24,2026-03-02,Raisons personnelles,Approuvé,Généré automatiquement
+7a02f60f-3c84-4c53-875e-6a80751c2a38,emp-11,2025-08-29,2025-09-05,Maladie,Approuvé,Généré automatiquement
+d2ad5813-13dd-4089-aa70-7e21b2e8f803,emp-11,2026-05-22,2026-05-31,Congés Payés,En attente,Généré automatiquement
+1e2c3081-6149-41ce-a3b1-8b9b4601fee2,emp-12,2025-06-18,2025-06-27,Autres,Rejeté,Généré automatiquement
+4add5fc9-b7eb-4267-b650-bfb691656950,emp-12,2026-05-22,2026-06-04,Raisons personnelles,Rejeté,Généré automatiquement
+ff4adc7d-4bf7-4966-8461-602681106768,emp-13,2026-01-02,2026-01-06,Congés Payés,En attente,Généré automatiquement
+74371d96-91db-4e28-8b79-38d5faba40fc,emp-13,2026-03-16,2026-03-21,Autres,Approuvé,Généré automatiquement
+35ad3aa3-7022-4f3b-8b52-81aa350463e0,emp-13,2025-08-07,2025-08-11,Raisons personnelles,Approuvé,Généré automatiquement
+da7dd294-755a-4372-afda-cc3a2a2737d3,emp-14,2025-10-11,2025-10-19,Maladie,Approuvé,Généré automatiquement
+a4fa65b4-effe-4f84-9ccc-2a99cbfeb56b,emp-14,2025-12-26,2026-01-07,Maladie,Approuvé,Généré automatiquement
+a4f7436e-0731-44b1-8a45-c20f863409bf,emp-14,2026-03-28,2026-04-07,Maternité/Paternité,En attente,Généré automatiquement
+3c519e37-e339-48bd-a93d-8c6d5fae7ddc,emp-15,2026-04-14,2026-04-16,Maternité/Paternité,Approuvé,Généré automatiquement
+bdf59a0d-1667-4a3a-8ca6-13587e1864ab,emp-16,2026-02-02,2026-02-11,Maternité/Paternité,Approuvé,Généré automatiquement
+925ddbfc-5eda-4732-9871-b1a14bd58504,emp-16,2026-02-13,2026-02-24,Autres,Approuvé,Généré automatiquement
+121c64d1-6734-4540-862e-3d148a5617d1,emp-16,2025-12-02,2025-12-04,Raisons personnelles,Approuvé,Généré automatiquement
+db02494c-62c8-480a-8fd5-dd43f0e80cf3,emp-17,2026-06-02,2026-06-16,Autres,Approuvé,Généré automatiquement
+b274b4d9-e12e-4604-a910-0e210f3347dd,emp-17,2026-01-11,2026-01-12,Raisons personnelles,En attente,Généré automatiquement
+dd7e10d2-58dc-44f1-bb25-16f87275d145,emp-18,2025-09-12,2025-09-17,Maladie,Rejeté,Généré automatiquement
+299277d8-453e-44b6-abe0-8b5a820d2bfa,emp-18,2026-02-10,2026-02-17,Autres,Approuvé,Généré automatiquement
+b1f950c9-f780-40b6-b585-0426c9dd0287,emp-18,2025-10-22,2025-10-28,Maternité/Paternité,Approuvé,Généré automatiquement
+bf5756c4-888e-4fc0-830b-ffa1c4d21c97,emp-18,2025-10-25,2025-11-01,Autres,Approuvé,Généré automatiquement
+3cb01a24-def0-44a1-be7e-2ef65981d402,emp-19,2026-03-20,2026-03-23,Maternité/Paternité,Approuvé,Généré automatiquement
+86d43bb4-a071-4199-a0e0-6767d2292006,emp-19,2025-06-14,2025-06-16,Congés Payés,Approuvé,Généré automatiquement
+909e47c6-f911-4e6b-a088-4f41409b9a0d,emp-19,2025-09-04,2025-09-17,Raisons personnelles,Approuvé,Généré automatiquement
+04dd1e27-2658-4843-96e1-37c17660ea6a,emp-20,2026-05-14,2026-05-28,Autres,Approuvé,Généré automatiquement
+26efc696-c3e3-4e9e-b9ad-d4ffe334d0a3,emp-20,2025-10-16,2025-10-23,Autres,Approuvé,Généré automatiquement
+6b5073c1-d4ad-45b2-9de7-618aed574f8a,emp-22,2025-11-19,2025-11-21,Maternité/Paternité,Approuvé,Généré automatiquement
+898f03f3-7afd-4d4b-b1d1-ef2a630caa39,emp-22,2026-06-10,2026-06-21,Maladie,Approuvé,Généré automatiquement
+1a449637-b57f-4769-b13d-52d5b7ac4580,emp-22,2025-11-18,2025-11-23,Congés Payés,Approuvé,Généré automatiquement
+b9e9446e-b3b0-4e79-8c2b-fa4f0a03f308,emp-22,2026-05-22,2026-06-05,Autres,Approuvé,Généré automatiquement
+3bd3bddd-2e79-4fdf-9eba-3c58b4af45ca,emp-23,2025-07-20,2025-07-29,Raisons personnelles,Approuvé,Généré automatiquement
+aa5f63a7-172e-44fe-b3ce-efb397dd4b5f,emp-24,2026-05-04,2026-05-05,Maternité/Paternité,Approuvé,Généré automatiquement
+a57ba2c2-8349-4153-8d70-b5755f03744c,emp-24,2026-03-22,2026-03-26,Raisons personnelles,Approuvé,Généré automatiquement
+d63d14cc-2259-4d35-a66e-4d5e1ae5814f,emp-25,2026-01-14,2026-01-24,Maternité/Paternité,Approuvé,Généré automatiquement
+d9c07171-56d2-41d6-84f6-4719916f675f,emp-25,2026-01-21,2026-02-03,Maladie,Approuvé,Généré automatiquement
+55583ede-46fc-4a6e-9ade-ff0beddf75aa,emp-25,2025-07-23,2025-08-04,Raisons personnelles,Approuvé,Généré automatiquement
+21ecece5-3c2e-48f7-b805-ed1766a198f2,emp-26,2026-01-02,2026-01-14,Congés Payés,En attente,Généré automatiquement
+d13c0017-d8de-4ddb-8f0f-0e2ddaea3482,emp-28,2025-09-14,2025-09-17,Maternité/Paternité,Approuvé,Généré automatiquement
+7f1201c6-71e9-4a96-a426-6c033963d3d3,emp-28,2025-06-16,2025-06-20,Congés Payés,Approuvé,Généré automatiquement
+9c765fdf-6660-436b-8d2f-c6b608a25a3c,emp-28,2026-05-07,2026-05-21,Congés Payés,Approuvé,Généré automatiquement
+ad4025d3-cda2-4b29-ba59-e37756283363,emp-28,2025-08-28,2025-08-30,Raisons personnelles,Approuvé,Généré automatiquement
+212ed794-dab2-41d2-83d7-6e7880889383,emp-30,2025-06-23,2025-06-25,Autres,Approuvé,Généré automatiquement
+7f3afdf1-b1e9-46e3-ab92-e7049fc6d764,emp-30,2025-08-19,2025-08-29,Maternité/Paternité,Approuvé,Généré automatiquement
+f8e8fd48-da8e-4d41-88c0-40ab8cff9acd,emp-34,2025-12-22,2026-01-02,Maladie,Approuvé,Généré automatiquement
+d4123902-cfea-4105-a72f-814deb18fd06,emp-34,2025-12-07,2025-12-17,Congés Payés,En attente,Généré automatiquement
+65daca4d-6e6b-4430-881b-0c8e93ad4ed0,emp-34,2025-08-19,2025-08-25,Maladie,Approuvé,Généré automatiquement
+8ea7ceef-264b-48f0-8679-f1b091e6d2ea,emp-35,2025-10-05,2025-10-11,Congés Payés,Rejeté,Généré automatiquement
+337eec64-3925-4c47-8ca5-971aeab89b05,emp-36,2025-09-20,2025-09-25,Maladie,Approuvé,Généré automatiquement
+0cb5b13f-ef12-4a56-907e-a7df40c267a7,emp-36,2025-10-30,2025-11-06,Autres,Approuvé,Généré automatiquement
+3ecd286f-b894-43cb-a701-c4f6a3f2c193,emp-36,2025-06-30,2025-07-08,Congés Payés,Rejeté,Généré automatiquement
+43dc8fc8-8599-40cc-aa4d-4f1b906519ca,emp-36,2026-02-13,2026-02-21,Autres,Approuvé,Généré automatiquement
+2c93dda3-6c80-460c-9a0b-5cdeea5b8e2f,emp-37,2025-07-05,2025-07-10,Congés Payés,Approuvé,Généré automatiquement
+2c48c8eb-7ae8-4c05-9ff8-2c26d6872f34,emp-37,2026-02-05,2026-02-15,Maternité/Paternité,Approuvé,Généré automatiquement
+e14f2d23-bd4a-42e9-a4db-60d9c2d38f0a,emp-37,2025-07-29,2025-08-10,Autres,Approuvé,Généré automatiquement
+4b14f2ef-cae9-4c39-b80e-8837535ccd32,emp-37,2025-12-08,2025-12-19,Autres,Approuvé,Généré automatiquement
+66921e15-530a-4933-a5cf-a1939d8b2ab7,emp-38,2025-12-31,2026-01-12,Congés Payés,Approuvé,Généré automatiquement
+cd05e326-fd25-40b4-8efb-d01ad4f44f7c,emp-38,2025-12-08,2025-12-19,Raisons personnelles,Approuvé,Généré automatiquement
+a4f73303-3ed2-492b-b2e2-be68d84e1386,emp-38,2026-05-28,2026-06-11,Maladie,Approuvé,Généré automatiquement
+6a30d113-8499-4f35-b16f-202dbdbe639d,emp-39,2025-12-30,2026-01-03,Autres,Approuvé,Généré automatiquement
+06814e76-119f-4915-bdc9-0baaeccb0bbb,emp-40,2026-01-28,2026-02-06,Congés Payés,Rejeté,Généré automatiquement
+b9e28ba5-6e39-49f4-9b1b-222f20e13475,emp-40,2026-04-03,2026-04-14,Autres,Approuvé,Généré automatiquement
+094e3486-8355-4e61-8ad3-dabe8981b5d1,emp-40,2025-07-20,2025-07-29,Maladie,Approuvé,Généré automatiquement
+832f6f63-d27f-4ce6-afd7-97687a83bc5c,emp-41,2026-02-27,2026-03-10,Maternité/Paternité,Rejeté,Généré automatiquement
+ee2fa7a3-960d-45f5-8034-bf8f5f7aae2e,emp-42,2025-09-30,2025-10-06,Autres,Approuvé,Généré automatiquement
+ab5f0028-d248-467f-ad3e-25d56c7da54c,emp-43,2026-02-11,2026-02-20,Congés Payés,Approuvé,Généré automatiquement
+e794fe74-e091-409c-8027-5e9372e53f30,emp-43,2026-05-30,2026-06-04,Maternité/Paternité,Approuvé,Généré automatiquement
+b04ff3d8-31ee-4b61-9740-1b8769bebb0c,emp-44,2026-02-14,2026-02-28,Maladie,Approuvé,Généré automatiquement
+9ae4be35-1318-4930-9a4c-5c87e0b2b222,emp-45,2026-01-05,2026-01-15,Congés Payés,En attente,Généré automatiquement
+5a483d49-5d87-4ebe-9c78-e962ca78710a,emp-45,2025-10-06,2025-10-15,Autres,Approuvé,Généré automatiquement
+802ee0a8-199e-40a9-98ce-9b533eccb899,emp-45,2025-10-28,2025-11-09,Congés Payés,Approuvé,Généré automatiquement
+93cc518b-d3d3-477b-acec-391dba64c6c7,emp-45,2025-08-31,2025-09-14,Maternité/Paternité,En attente,Généré automatiquement
+ac5b6772-ba6c-4041-8095-1e750f8934cb,emp-47,2026-01-08,2026-01-19,Maternité/Paternité,Approuvé,Généré automatiquement
+b1f146cb-a520-4da8-8695-f751853d50da,emp-47,2025-09-26,2025-09-28,Congés Payés,Approuvé,Généré automatiquement
+11229283-5c14-4cdb-aba5-50c289ae97e6,emp-48,2025-08-27,2025-08-29,Raisons personnelles,Approuvé,Généré automatiquement
+bbad7fc1-4508-4e88-805f-862499ce9b9b,emp-48,2025-11-17,2025-11-23,Autres,Approuvé,Généré automatiquement
+511b730b-582b-4116-89e5-4679ecfb601a,emp-48,2026-05-13,2026-05-14,Maladie,Approuvé,Généré automatiquement
+0d41803a-8aaa-41dc-a2a6-5f235f7abaa4,emp-48,2026-04-30,2026-05-12,Maternité/Paternité,Rejeté,Généré automatiquement
+f27be246-c4b7-4659-a4c2-03201e895cf6,emp-50,2026-04-12,2026-04-16,Maladie,En attente,Généré automatiquement
+85a990e9-f96a-4fd3-886e-79fae248d2ca,emp-50,2025-11-05,2025-11-07,Maternité/Paternité,Rejeté,Généré automatiquement
+ef4a31e8-4909-41d6-a37b-c27a4051bded,emp-51,2025-09-23,2025-09-28,Congés Payés,Approuvé,Généré automatiquement
+c412da4c-9377-4caf-b0da-11aa2785ecd9,emp-51,2026-05-17,2026-05-23,Maternité/Paternité,Rejeté,Généré automatiquement
+f9bde7a0-ab6c-4fdc-a1d2-4be324d19e30,emp-52,2025-06-20,2025-06-27,Autres,Approuvé,Généré automatiquement
+c3fe9bbd-6a75-4eaa-8157-741c45a64784,emp-52,2025-10-26,2025-11-06,Autres,Approuvé,Généré automatiquement
+ee22c29b-74fb-4ae6-ba05-2fa8db93e29d,emp-52,2026-03-09,2026-03-12,Maternité/Paternité,Rejeté,Généré automatiquement
+fc4582a8-1a35-4301-ac14-6b4102df9072,emp-52,2025-10-12,2025-10-24,Congés Payés,En attente,Généré automatiquement
+062e78da-5aa7-4c88-b356-bd6ad7de682f,emp-53,2026-02-28,2026-03-11,Autres,Approuvé,Généré automatiquement
+f28565f8-3db8-4204-9a7f-d70766680989,emp-53,2025-09-17,2025-09-28,Maladie,Approuvé,Généré automatiquement
+59ab7de9-a625-4824-b034-f286b257e5b9,emp-55,2025-06-16,2025-06-24,Raisons personnelles,Approuvé,Généré automatiquement
+ec138319-10f0-4d60-a005-f2cc57df6923,emp-55,2025-09-05,2025-09-07,Maternité/Paternité,En attente,Généré automatiquement
+eeec158f-0805-48a4-9874-739f15b9bd35,emp-56,2025-08-30,2025-08-31,Maternité/Paternité,Approuvé,Généré automatiquement
+80c42ab4-c141-49a7-81e4-d403fd397f9b,emp-56,2025-10-10,2025-10-21,Autres,Approuvé,Généré automatiquement
+3bb0d7cd-75c9-4b34-b0c7-223786320a9d,emp-56,2025-09-11,2025-09-25,Raisons personnelles,Approuvé,Généré automatiquement
+79382cf1-c1ab-4b05-95f2-dccd921663c2,emp-57,2025-10-07,2025-10-11,Autres,Approuvé,Généré automatiquement
+6da471f7-9d1f-4e33-b4fa-30ec3a266796,emp-57,2026-05-16,2026-05-25,Maladie,Approuvé,Généré automatiquement
+4edf17fb-dd93-4efd-9733-fb56f1aa5a8a,emp-57,2026-03-29,2026-03-30,Maternité/Paternité,Approuvé,Généré automatiquement
+af6e5ddd-7541-43f6-a82a-7beda426b7fe,emp-57,2026-02-26,2026-03-07,Congés Payés,Rejeté,Généré automatiquement
+082d73d4-fb14-4f30-ac72-19d0a5133040,emp-58,2025-08-20,2025-09-02,Raisons personnelles,En attente,Généré automatiquement
+ef8a88b0-852a-41b2-954c-147d84e50298,emp-58,2026-02-03,2026-02-11,Maladie,Rejeté,Généré automatiquement
+58752fc5-d692-4e16-b56c-ae3f3362df7e,emp-58,2025-11-10,2025-11-20,Maternité/Paternité,Approuvé,Généré automatiquement
+fb53e2bd-0886-409d-be6f-bfed747eb418,emp-58,2025-10-27,2025-11-02,Maladie,En attente,Généré automatiquement
+603008fc-e61b-4d4e-911e-3600f0399070,emp-60,2025-11-24,2025-11-28,Maternité/Paternité,Approuvé,Généré automatiquement
+7542cbc9-0b17-4fb9-bf47-0baa8c81017d,emp-62,2026-03-22,2026-03-31,Autres,En attente,Généré automatiquement
+15dc268e-4a6a-4505-8efd-2e28be6a0b24,emp-62,2025-06-26,2025-07-02,Congés Payés,Approuvé,Généré automatiquement
+0ff3a670-f800-4cfb-9b82-37c2329587c8,emp-62,2026-01-02,2026-01-03,Raisons personnelles,Approuvé,Généré automatiquement
+50511827-d48d-4c1a-acd1-7dba8e13015b,emp-62,2026-02-15,2026-02-24,Congés Payés,En attente,Généré automatiquement
+91e8bc48-cb2a-488b-bed0-161cce1aaadb,emp-63,2025-12-27,2026-01-05,Maladie,Approuvé,Généré automatiquement
+22eb2a8b-0e37-43c0-a924-58cc16db80b3,emp-63,2025-09-22,2025-10-05,Maternité/Paternité,Approuvé,Généré automatiquement
+9c80394a-4051-4416-9f9c-8c10a60b0ea7,emp-63,2026-05-24,2026-06-01,Maternité/Paternité,Approuvé,Généré automatiquement
+72d848d2-75f1-49d5-8b71-04fd79749c72,emp-63,2025-10-07,2025-10-18,Autres,Approuvé,Généré automatiquement
+adf7fe56-d5cd-4e6a-ab02-d422e408e2b2,emp-64,2026-04-09,2026-04-13,Congés Payés,Approuvé,Généré automatiquement
+f81d1edb-83cb-4def-be84-2a67469b1543,emp-64,2026-01-07,2026-01-09,Congés Payés,Rejeté,Généré automatiquement
+cf7352e9-5f12-49fd-8338-ed49757cbdae,emp-64,2026-03-25,2026-04-05,Maternité/Paternité,Approuvé,Généré automatiquement
+3a30a899-2404-4fd3-9c0f-8286fa2b19f0,emp-64,2025-12-30,2026-01-07,Raisons personnelles,Approuvé,Généré automatiquement
+0c14d4d9-06f2-47ee-9787-f0faab023632,emp-65,2025-11-30,2025-12-09,Congés Payés,En attente,Généré automatiquement
+e968325b-dece-4a28-ae13-9692b2e31ce6,emp-65,2025-07-16,2025-07-19,Maladie,Rejeté,Généré automatiquement
+8d8b0a9f-d5da-4b4f-9333-5db0827f8db8,emp-65,2026-01-19,2026-01-31,Congés Payés,En attente,Généré automatiquement
+5209481a-6320-4a4b-9b1a-3909b20a698a,emp-65,2026-02-10,2026-02-17,Maladie,En attente,Généré automatiquement
+afef8b13-8471-4b8d-9dc8-28cb0db07b38,emp-66,2026-04-22,2026-04-24,Autres,Approuvé,Généré automatiquement
+93397a18-37fd-464b-befb-5bd6be95558d,emp-66,2026-02-25,2026-03-07,Congés Payés,Approuvé,Généré automatiquement
+d200086a-d22f-4b3d-ae4e-55319ee2d407,emp-66,2025-10-24,2025-11-02,Congés Payés,Approuvé,Généré automatiquement
+56f67dbc-5cd1-4654-96b5-fb3b128d214a,emp-67,2025-09-05,2025-09-12,Congés Payés,En attente,Généré automatiquement
+69fb9e79-13c9-4f8e-9549-714964d1ea6e,emp-67,2026-03-13,2026-03-23,Autres,Approuvé,Généré automatiquement
+a4686d5d-9aee-4495-bf10-11fadcfb931b,emp-67,2026-05-07,2026-05-20,Autres,Approuvé,Généré automatiquement
+8a1e0d0d-9e9d-4e74-8393-dcb3bee64bc3,emp-67,2025-09-07,2025-09-18,Raisons personnelles,Approuvé,Généré automatiquement
+509fd506-b3ca-44c0-b4a2-6444888fc6fd,emp-68,2025-11-23,2025-12-05,Raisons personnelles,Approuvé,Généré automatiquement
+b839bd83-efcc-4a9c-a764-86ebb49eee95,emp-69,2025-12-18,2026-01-01,Maternité/Paternité,Approuvé,Généré automatiquement
+f3b891a4-c4bd-4f09-8016-5f39036926b8,emp-69,2026-02-28,2026-03-13,Autres,Approuvé,Généré automatiquement
+7afb128e-1015-4fd3-8ce4-b4c103755c1d,emp-69,2025-09-21,2025-10-02,Congés Payés,Approuvé,Généré automatiquement
+1e0149f1-9c6c-41fe-8f36-4d6675df5a80,emp-70,2025-07-04,2025-07-14,Maternité/Paternité,Approuvé,Généré automatiquement
+1dc45368-127f-4787-8cf5-c177815b0480,emp-70,2026-03-03,2026-03-07,Maladie,Approuvé,Généré automatiquement
+2634f939-3983-41be-bd15-aa14ab11fa4b,emp-71,2025-09-07,2025-09-19,Maternité/Paternité,Approuvé,Généré automatiquement
+26522d74-db2c-4055-93ac-c42d5718be6d,emp-71,2026-04-10,2026-04-16,Congés Payés,Approuvé,Généré automatiquement
+7f406e50-7896-44ac-90a8-4ceb13d61ab6,emp-72,2025-09-02,2025-09-13,Maladie,Approuvé,Généré automatiquement
+7916394c-319b-4ff1-83b6-aec464f7791f,emp-72,2026-04-18,2026-04-26,Autres,Approuvé,Généré automatiquement
+a84fefe7-5735-4a0d-8261-a433cdbb889c,emp-72,2025-07-18,2025-07-28,Maternité/Paternité,Approuvé,Généré automatiquement
+635d6083-f0a4-4cfd-b5dd-fd35d5c39e8d,emp-72,2026-05-11,2026-05-21,Autres,Approuvé,Généré automatiquement
+dfcdb742-d7d0-41e5-8b7e-3ac805ccbdba,emp-73,2025-10-18,2025-10-28,Raisons personnelles,Approuvé,Généré automatiquement
+948fc5f0-a0c3-443d-a4bd-b6c9aaee1f19,emp-73,2026-01-15,2026-01-22,Maladie,Approuvé,Généré automatiquement
+3501835f-ea29-4d96-814e-f3f77810845d,emp-73,2025-10-31,2025-11-04,Raisons personnelles,Approuvé,Généré automatiquement
+1d059457-4328-48b5-af18-29d3d6354f1f,emp-75,2025-12-23,2025-12-30,Congés Payés,Approuvé,Généré automatiquement
+2d7afd5c-b158-4d1c-829d-0a458476f15f,emp-75,2025-09-23,2025-10-02,Autres,Approuvé,Généré automatiquement
+5f6d53fb-7dbf-4c59-9536-eb7c32cc9983,emp-76,2025-11-13,2025-11-17,Congés Payés,Approuvé,Généré automatiquement
+4d512a06-a3b6-45f2-93b1-dbb293ad13d1,emp-76,2025-09-07,2025-09-20,Maternité/Paternité,Approuvé,Généré automatiquement
+e413bcda-6ed8-41e4-9883-c0b856d708c8,emp-77,2026-05-18,2026-05-28,Maladie,Approuvé,Généré automatiquement
+ff65e1b8-82a5-4f47-8857-c4add7831548,emp-77,2025-10-14,2025-10-28,Congés Payés,Approuvé,Généré automatiquement
+a142cc09-2170-4a62-88f1-e8118cbc506e,emp-77,2025-12-03,2025-12-04,Maternité/Paternité,Approuvé,Généré automatiquement
+754f82ce-b93b-40cd-9c63-4d94b4ac1dd4,emp-78,2026-03-23,2026-04-06,Congés Payés,Approuvé,Généré automatiquement
+1e0b8bd0-b867-466f-b252-90471cf1d5a9,emp-78,2025-12-18,2025-12-25,Maladie,Approuvé,Généré automatiquement
+112704a2-2807-489e-87b4-4d1d75e8c853,emp-78,2026-04-13,2026-04-14,Raisons personnelles,Approuvé,Généré automatiquement
+96481e21-8ed4-4fc9-ab53-da7360e31f66,emp-80,2025-06-29,2025-07-09,Maladie,En attente,Généré automatiquement
+5c687016-8956-4266-8530-dded36029cee,emp-81,2026-02-22,2026-03-07,Maternité/Paternité,Approuvé,Généré automatiquement
+6d87fd95-0607-472e-9ab0-c49dd7e6932c,emp-82,2025-11-13,2025-11-24,Congés Payés,Approuvé,Généré automatiquement
+60732f83-683a-45df-9a34-e856e1b2fd73,emp-82,2025-09-08,2025-09-13,Maternité/Paternité,Approuvé,Généré automatiquement
+64fa3247-731c-4d26-ac67-2fb7d1fc1cf3,emp-82,2025-09-07,2025-09-15,Autres,Approuvé,Généré automatiquement
+afaa889c-a011-4ef0-9848-d7e2fd68ea5e,emp-82,2025-09-07,2025-09-12,Maladie,Approuvé,Généré automatiquement
+45157816-e9af-4543-9733-599c19aed29f,emp-83,2025-07-04,2025-07-09,Raisons personnelles,En attente,Généré automatiquement
+b342d715-b31d-4437-85a0-3b9de8afa769,emp-83,2026-03-02,2026-03-13,Maladie,Approuvé,Généré automatiquement
+edb0d4f4-c087-4b5a-bcf7-57c361a7bf3b,emp-83,2025-11-27,2025-12-03,Maternité/Paternité,Approuvé,Généré automatiquement
+034b91d3-6f06-422d-95e1-89bc27b8097d,emp-84,2026-03-30,2026-04-12,Congés Payés,Approuvé,Généré automatiquement
+fce7a9e2-8fb3-4bc2-8578-403b634d581e,emp-84,2025-07-03,2025-07-15,Autres,Approuvé,Généré automatiquement
+14d5013f-07d7-446f-8e36-b69581732a82,emp-84,2025-06-13,2025-06-17,Raisons personnelles,Approuvé,Généré automatiquement
+2cb39535-ef51-4cb5-af36-18a2f2029834,emp-85,2026-05-22,2026-05-27,Maternité/Paternité,Approuvé,Généré automatiquement
+c9ac198a-d961-47fc-baf6-658056360c47,emp-85,2026-04-03,2026-04-14,Raisons personnelles,Approuvé,Généré automatiquement
+1e897dc1-2ff7-473d-bfd1-4b6588b511c2,emp-85,2026-04-20,2026-04-25,Raisons personnelles,Rejeté,Généré automatiquement
+cbfb5847-cb59-4980-8de9-f33935076f29,emp-85,2026-05-29,2026-06-02,Maladie,Approuvé,Généré automatiquement
+d6deeef5-821c-4ce6-ad48-0e24cbb2fd09,emp-86,2026-02-02,2026-02-03,Congés Payés,Rejeté,Généré automatiquement
+17fa0152-a56f-4574-88bf-7fe4391ed21d,emp-88,2026-05-08,2026-05-21,Maladie,Approuvé,Généré automatiquement
+8bd6ee4f-ec03-47e1-9f4d-bc2b0cab684d,emp-88,2025-09-24,2025-09-29,Maternité/Paternité,En attente,Généré automatiquement
+0b46d9b6-fcfb-45f8-8112-21e01008e543,emp-88,2025-09-19,2025-09-28,Congés Payés,Approuvé,Généré automatiquement
+8283ddf3-c44d-4d4d-918b-4a2e83e5e0de,emp-88,2025-06-15,2025-06-17,Maladie,Approuvé,Généré automatiquement
+96b4e772-72ef-4ff0-b40a-735719330f28,emp-90,2025-09-25,2025-10-06,Autres,Approuvé,Généré automatiquement
+e1fc46d3-ff21-4666-a3aa-8fcc30402219,emp-91,2026-06-04,2026-06-05,Congés Payés,Approuvé,Généré automatiquement
+ce62effa-f2d3-4e5a-a0ac-a11bbe4eb6c6,emp-91,2026-01-17,2026-01-31,Congés Payés,Approuvé,Généré automatiquement
+d7b7104e-4921-4621-91e9-f07fcdaf7d04,emp-92,2026-03-21,2026-03-24,Raisons personnelles,En attente,Généré automatiquement
+ccb02478-cfc3-4d2e-8e83-b73875384763,emp-92,2025-07-06,2025-07-12,Autres,Rejeté,Généré automatiquement
+3d3f67df-1efc-42b8-8c51-5da55975c866,emp-93,2026-01-20,2026-01-28,Raisons personnelles,Approuvé,Généré automatiquement
+3db76e18-7d3c-419d-b416-2c0223993845,emp-93,2025-10-02,2025-10-16,Autres,Approuvé,Généré automatiquement
+86b86e8e-c692-4e4c-a78d-f40a39a1e82e,emp-95,2026-05-05,2026-05-07,Maladie,En attente,Généré automatiquement
+f52ae7e0-cc32-4d09-8da7-ceb9732c2872,emp-95,2026-03-02,2026-03-06,Autres,Approuvé,Généré automatiquement
+3539b0f4-94c5-43cc-9e84-4e2d9ea0187a,emp-97,2025-12-03,2025-12-10,Autres,Approuvé,Généré automatiquement
+50888f17-c478-4bef-9222-6955d5fc2f74,emp-97,2025-09-10,2025-09-18,Maternité/Paternité,Approuvé,Généré automatiquement
+e32f4c07-f909-4718-aa9d-b17f3f4282c3,emp-97,2026-06-02,2026-06-13,Autres,En attente,Généré automatiquement
+667a4f91-3037-4996-8bbf-6f055f4c36fb,emp-99,2026-06-06,2026-06-10,Raisons personnelles,Approuvé,Généré automatiquement
+10b0d2de-36db-412a-800a-7c99ab760306,emp-99,2025-09-17,2025-09-25,Raisons personnelles,Approuvé,Généré automatiquement
+dd95a6cb-53cc-40d3-a15c-c8a0d3d36e52,emp-100,2025-11-09,2025-11-12,Autres,Approuvé,Généré automatiquement
+d2a2915a-a222-4aa3-988f-0da2f5d5bbf6,emp-103,2025-07-31,2025-08-14,Raisons personnelles,Approuvé,Généré automatiquement
+7788f3b3-0901-4619-b45b-88eef4fe7807,emp-103,2026-03-02,2026-03-03,Autres,Approuvé,Généré automatiquement
+20d5e52d-38c5-4cd1-a3fb-a3bac22ecc16,emp-103,2025-12-04,2025-12-07,Congés Payés,Approuvé,Généré automatiquement
+c04c0f5b-e5f6-4d8d-9973-8d8226fc172d,emp-103,2026-04-03,2026-04-09,Congés Payés,Approuvé,Généré automatiquement
+b595a08f-74fb-4020-9330-f8517106f9ce,emp-104,2025-11-01,2025-11-08,Maternité/Paternité,Approuvé,Généré automatiquement
+8023c0ea-960b-444c-83d2-01e1cdf180da,emp-104,2026-04-16,2026-04-30,Maternité/Paternité,Approuvé,Généré automatiquement
+9af61780-5d4d-463f-ba21-d0332309c668,emp-105,2025-06-28,2025-07-02,Autres,Approuvé,Généré automatiquement
+f1f6db12-96a4-4138-8557-c253d095901b,emp-105,2025-12-09,2025-12-23,Maternité/Paternité,Approuvé,Généré automatiquement
+1f9fe98f-7912-49ac-a9cf-77d4911ba7b7,emp-105,2025-07-12,2025-07-21,Maladie,Approuvé,Généré automatiquement
+05736817-f67f-4cbf-899f-057c1c8e0202,emp-106,2025-09-16,2025-09-26,Raisons personnelles,Approuvé,Généré automatiquement
+5206effe-7c9c-4f37-a3b4-a829e12a7786,emp-107,2025-12-05,2025-12-18,Congés Payés,Approuvé,Généré automatiquement
+5f503091-a80a-45b1-877b-157689a4420a,emp-107,2025-09-03,2025-09-09,Maladie,Approuvé,Généré automatiquement
+f3d8f2f1-ef6a-40cf-938d-164b130c5b68,emp-107,2025-07-22,2025-07-26,Congés Payés,Approuvé,Généré automatiquement
+78e50dcf-3091-4087-8633-f82aa20c83a0,emp-109,2026-01-24,2026-01-26,Congés Payés,Approuvé,Généré automatiquement
+47232b15-d042-4142-bb70-2d3ec898fbfb,emp-110,2025-07-04,2025-07-10,Maladie,Approuvé,Généré automatiquement
+d8e02602-565f-499f-9cc9-5647b61ef274,emp-111,2026-03-25,2026-03-26,Maternité/Paternité,Approuvé,Généré automatiquement
+6515d13e-958b-4601-84b4-18b0c12f55ab,emp-111,2026-02-21,2026-02-27,Maladie,Approuvé,Généré automatiquement
+4d97f0cb-2976-4da0-a815-4a5b9c930ea6,emp-112,2025-10-27,2025-11-03,Maladie,Approuvé,Généré automatiquement
+f2be40bc-1859-4e9e-8609-7df2d8836e49,emp-112,2025-07-17,2025-07-27,Maternité/Paternité,En attente,Généré automatiquement
+a374170b-0e97-496b-9247-4f97af20383e,emp-112,2025-10-29,2025-11-04,Raisons personnelles,Approuvé,Généré automatiquement
+4b1cd52c-84eb-4cb7-8ace-a575446b0ae9,emp-112,2025-08-12,2025-08-24,Congés Payés,Approuvé,Généré automatiquement
+a3dbf3ff-66bd-46da-9587-72401561ec98,emp-113,2026-06-03,2026-06-08,Maladie,Approuvé,Généré automatiquement
+9f3b2a45-2d3f-4f0d-b5e9-9c8ca12fc31d,emp-114,2026-03-31,2026-04-10,Maternité/Paternité,Approuvé,Généré automatiquement
+cd9ffa52-90df-41b6-8433-1d1c360fc05c,emp-114,2026-02-24,2026-02-25,Autres,Approuvé,Généré automatiquement
+51ffc18f-15ae-4e58-9349-8a6998fd886b,emp-114,2026-05-16,2026-05-24,Autres,Approuvé,Généré automatiquement
+192ec1fc-2a65-49d7-b395-d7c73c34d9a0,emp-115,2025-10-01,2025-10-02,Congés Payés,Approuvé,Généré automatiquement
+d0544778-9deb-4dfa-84ca-82a2a39e75fb,emp-115,2026-04-22,2026-05-02,Raisons personnelles,Approuvé,Généré automatiquement
+65d122cb-98d9-4557-b537-0802991d0e13,emp-115,2026-04-09,2026-04-20,Maladie,Approuvé,Généré automatiquement
+ede49368-341d-4e6a-b62a-ba581bcf50af,emp-116,2025-09-21,2025-10-03,Raisons personnelles,Approuvé,Généré automatiquement
+ae9960da-ea30-4374-96c6-128a40a0e820,emp-117,2026-03-04,2026-03-16,Maladie,En attente,Généré automatiquement
+9acae5db-0b97-4124-bfe0-a76a11395f11,emp-117,2025-09-21,2025-10-04,Raisons personnelles,Approuvé,Généré automatiquement
+f3517ccc-ff1e-47cd-8430-2e0348df40cb,emp-117,2025-09-11,2025-09-15,Maternité/Paternité,Approuvé,Généré automatiquement
+0f2a3b50-a301-4cf5-92e1-a8da9a2bb047,emp-117,2025-07-22,2025-08-04,Maternité/Paternité,Approuvé,Généré automatiquement
+464b4faa-a5ad-432e-a6a0-0616bd01efea,emp-118,2026-06-03,2026-06-04,Autres,Approuvé,Généré automatiquement
+cde445a4-69cc-4114-a633-7e534ccf9216,emp-118,2025-09-10,2025-09-18,Autres,Approuvé,Généré automatiquement
+f3fd99c7-8506-4b34-ab90-f71ef8b41a50,emp-118,2025-11-02,2025-11-06,Congés Payés,Approuvé,Généré automatiquement
+5a91bac3-2313-40e2-8e74-22ba27ffd359,emp-119,2026-03-18,2026-03-19,Autres,Approuvé,Généré automatiquement
+0a92ef76-a1e1-47da-9192-a3af02be1aba,emp-119,2025-09-24,2025-10-01,Autres,Approuvé,Généré automatiquement
+4cd40bd3-1bb1-4b1d-ae26-db2703c6fcdf,emp-119,2026-03-03,2026-03-08,Autres,Approuvé,Généré automatiquement
+37f2e8f7-c22f-40aa-a9cb-b6de4f55e558,emp-119,2025-12-03,2025-12-09,Maladie,Approuvé,Généré automatiquement
+688a2d34-70b0-4d9b-9890-7ad6da43eb89,emp-121,2026-05-26,2026-05-29,Congés Payés,Approuvé,Généré automatiquement
+16cd26d7-19cd-4ec0-9422-6678db8c16b4,emp-121,2025-11-10,2025-11-13,Congés Payés,Approuvé,Généré automatiquement
+76192125-c5f9-4e3b-b236-d9ef138f9fdd,emp-121,2026-01-06,2026-01-16,Autres,Approuvé,Généré automatiquement
+ff22c8bf-5e29-4517-89d1-e69066afa74d,emp-123,2026-02-25,2026-03-10,Maternité/Paternité,Approuvé,Généré automatiquement
+41b95897-bc40-4f92-9a0d-e7c96f8098c5,emp-125,2026-04-24,2026-05-05,Autres,Approuvé,Généré automatiquement
+ca2249b4-834f-4fba-bfa7-8b21bd60605c,emp-125,2026-01-25,2026-02-07,Congés Payés,Approuvé,Généré automatiquement
+cdd43e0a-b311-497f-9a5e-0f90e8ad9ead,emp-125,2026-02-06,2026-02-15,Maladie,Approuvé,Généré automatiquement
+3d3553c8-1452-470b-8e6a-60491d136a4e,emp-126,2025-08-13,2025-08-17,Maternité/Paternité,Approuvé,Généré automatiquement
+7b796d98-773f-4a82-9175-50aa75588824,emp-127,2025-09-01,2025-09-15,Maternité/Paternité,Approuvé,Généré automatiquement
+c62790b8-7123-41ea-a145-131e5cd4a541,emp-127,2026-03-30,2026-04-11,Maternité/Paternité,Approuvé,Généré automatiquement
+6abc7643-034d-43cb-99d5-402f54e61259,emp-127,2025-09-06,2025-09-18,Congés Payés,Approuvé,Généré automatiquement
+5ab3ec3a-2171-4d62-83eb-79aa88e91f6c,emp-127,2025-09-10,2025-09-20,Maladie,Approuvé,Généré automatiquement
+06d9405a-792c-423f-94e6-fe9d50fc6ea4,emp-128,2026-01-21,2026-01-26,Maladie,Approuvé,Généré automatiquement
+aadd2a71-88fe-45eb-86a9-d896d183e67d,emp-128,2026-05-27,2026-06-04,Maladie,Approuvé,Généré automatiquement
+83a9242c-e2b6-49f7-839b-1626657231d5,emp-128,2026-03-18,2026-03-24,Autres,Approuvé,Généré automatiquement
+f50fc835-dce8-4a7d-abdf-095a13f941f4,emp-129,2026-02-24,2026-02-25,Maladie,Rejeté,Généré automatiquement
+d09bce07-f2bd-453f-8a06-2d445ded030a,emp-130,2025-06-26,2025-07-02,Maladie,Approuvé,Généré automatiquement
+8d7e0178-3f6b-46af-9c56-5390be117321,emp-130,2025-09-29,2025-10-03,Autres,En attente,Généré automatiquement
+6f3895bb-7243-4bba-9b02-57f5c917a69b,emp-132,2025-07-07,2025-07-21,Raisons personnelles,Approuvé,Généré automatiquement
+6498042c-ffca-4701-8b66-ae2d9c389047,emp-132,2025-10-20,2025-10-25,Maladie,Approuvé,Généré automatiquement
+19d7aab9-66c3-45ea-aee6-a724f3d32326,emp-132,2025-11-24,2025-12-03,Raisons personnelles,Approuvé,Généré automatiquement
+8f53370b-7039-4652-9cf6-28450b1f5478,emp-133,2026-01-11,2026-01-20,Raisons personnelles,Approuvé,Généré automatiquement
+9405d63f-9f37-407e-a3f5-86b8e18f0ac1,emp-133,2026-03-12,2026-03-26,Autres,Approuvé,Généré automatiquement
+8abc113c-be4a-49a9-aca4-30811a3e11d5,emp-134,2025-10-02,2025-10-13,Maternité/Paternité,Approuvé,Généré automatiquement
+2da87f5e-9927-415b-bffa-09f2a28f2aae,emp-134,2026-02-06,2026-02-07,Maternité/Paternité,Approuvé,Généré automatiquement
+7887ae2f-8ba5-4237-ad8d-cd00499e3c23,emp-134,2025-11-02,2025-11-15,Autres,Approuvé,Généré automatiquement
+699aaf21-9e5a-43f7-9ad9-f2c7e6be1e34,emp-135,2026-03-11,2026-03-25,Raisons personnelles,Approuvé,Généré automatiquement
+04a87c30-39d7-4c29-88fc-8c6b9511aeb8,emp-136,2026-04-03,2026-04-12,Congés Payés,Approuvé,Généré automatiquement
+e3aacc2e-b9b0-4ce0-b1bc-ee4e94664997,emp-136,2026-04-10,2026-04-22,Maladie,Approuvé,Généré automatiquement
+8eca862a-505b-4037-98bc-ae7184a827f6,emp-136,2025-07-10,2025-07-16,Autres,En attente,Généré automatiquement
+a8517cfc-570b-4457-9080-450f4d63d21b,emp-137,2026-04-24,2026-05-05,Autres,Approuvé,Généré automatiquement
+dd640c43-3920-4efb-bd9f-821a9d2ba3dd,emp-137,2025-07-25,2025-08-02,Raisons personnelles,Approuvé,Généré automatiquement
+86eaa141-b7eb-4f89-a483-14e711d30418,emp-137,2026-02-22,2026-02-24,Maternité/Paternité,Approuvé,Généré automatiquement
+772d35b5-0463-477e-8852-17da6d261df4,emp-138,2026-03-08,2026-03-21,Maternité/Paternité,Approuvé,Généré automatiquement
+09d9a8c9-541a-4140-a12b-96488888a6ba,emp-138,2025-09-24,2025-10-06,Maternité/Paternité,Approuvé,Généré automatiquement
+ae5d1775-4650-40a1-858c-10b2dac75d43,emp-138,2025-08-10,2025-08-24,Raisons personnelles,Approuvé,Généré automatiquement
+56ab4838-fe5f-48f2-a3bf-07abbd9129c9,emp-139,2025-10-11,2025-10-23,Raisons personnelles,En attente,Généré automatiquement
+97546e48-4cdb-409c-96fa-64ea1516e273,emp-141,2026-01-17,2026-01-25,Maternité/Paternité,En attente,Généré automatiquement
+f85f7d5c-6ebf-45ac-b6fa-a705bb6ae298,emp-141,2026-02-07,2026-02-18,Maternité/Paternité,Approuvé,Généré automatiquement
+b43e1e62-b1ba-4c22-b3f1-7b07f51411e3,emp-141,2026-06-01,2026-06-06,Autres,En attente,Généré automatiquement
+a4ae2af1-9b05-4b53-aac9-e5677aff64d3,emp-141,2026-01-03,2026-01-16,Raisons personnelles,Approuvé,Généré automatiquement
+e9e47dd7-cc1b-4fb3-912d-328977f6533e,emp-142,2026-04-12,2026-04-17,Congés Payés,Approuvé,Généré automatiquement
+6febeef3-e1a2-4927-9183-93e6c9cf219f,emp-143,2026-02-25,2026-02-26,Congés Payés,Approuvé,Généré automatiquement
+4def770a-32b8-476a-a303-dabd1b5a1873,emp-143,2025-06-25,2025-07-02,Maternité/Paternité,Approuvé,Généré automatiquement
+bca58aa9-ebfb-455a-9602-38e8883dc4d6,emp-143,2025-11-27,2025-11-28,Maladie,Approuvé,Généré automatiquement
+ef96935e-0e95-4608-ba99-24df267e45fb,emp-143,2026-02-01,2026-02-11,Raisons personnelles,Approuvé,Généré automatiquement
+caea7695-cc25-41ad-bdb8-cf8a94f25552,emp-144,2025-11-19,2025-11-23,Autres,Approuvé,Généré automatiquement
+807dc0e5-1e3a-4ac9-9ab6-a0765b081e20,emp-144,2026-05-16,2026-05-20,Raisons personnelles,Approuvé,Généré automatiquement
+ad2de1c9-2f28-4dfa-9a5d-523fb13dd339,emp-144,2025-08-19,2025-08-22,Congés Payés,Approuvé,Généré automatiquement
+bc8a6f48-292b-4f5a-8d56-00aef9809768,emp-144,2026-02-10,2026-02-14,Maladie,Approuvé,Généré automatiquement
+f6665e5f-ca63-48de-99d3-aa1b3eb4dd5b,emp-145,2026-04-04,2026-04-16,Autres,Approuvé,Généré automatiquement
+070ef5ab-035a-4491-8e64-5993d4838800,emp-145,2026-06-02,2026-06-10,Maternité/Paternité,Approuvé,Généré automatiquement
+a806f00e-7638-466b-948d-dcb7ac09c1f5,emp-145,2026-02-20,2026-02-24,Maladie,Approuvé,Généré automatiquement
+1493c7d3-df59-4fef-a608-ae085307cb85,emp-145,2026-03-11,2026-03-25,Maladie,Approuvé,Généré automatiquement
+27752196-f7c8-4237-b42d-cf2f4724e710,emp-146,2025-06-18,2025-06-28,Maternité/Paternité,En attente,Généré automatiquement
+f53a4add-1a90-4215-89e4-292cd3864b23,emp-146,2025-12-08,2025-12-21,Maladie,Approuvé,Généré automatiquement
+6234e6f3-3887-4ae9-adb9-d3ca94c0aa36,emp-146,2026-04-17,2026-04-22,Congés Payés,Approuvé,Généré automatiquement
+bd2aef5a-e51a-498a-b56a-8fe8553a1627,emp-147,2025-06-28,2025-07-07,Raisons personnelles,Rejeté,Généré automatiquement
+322e198a-a6e4-4c64-a6b8-e48b8720c749,emp-147,2026-03-11,2026-03-22,Raisons personnelles,Approuvé,Généré automatiquement
+ef22f33a-3b1a-417d-b84c-9d1383650d8f,emp-147,2025-06-15,2025-06-23,Autres,Approuvé,Généré automatiquement
+6628e33e-50bc-43cf-8571-88d226be41e7,emp-148,2026-03-03,2026-03-12,Maternité/Paternité,Approuvé,Généré automatiquement
+4a09ccd6-9f8a-485c-868a-105b3e7d7bbd,emp-150,2025-09-18,2025-10-01,Raisons personnelles,Approuvé,Généré automatiquement
+cfe89d7b-9594-49a7-9c92-3e096b700673,emp-150,2025-06-22,2025-07-01,Raisons personnelles,Rejeté,Généré automatiquement
+f80b49ff-feaf-468f-995c-390ece3e6727,emp-150,2026-02-04,2026-02-15,Congés Payés,Approuvé,Généré automatiquement
+3b409858-da6e-45b9-9b23-e012513d823c,emp-151,2025-09-15,2025-09-24,Maladie,En attente,Généré automatiquement
+56a2e595-2b91-4892-8278-becf40a59c73,emp-152,2026-05-02,2026-05-16,Congés Payés,Approuvé,Généré automatiquement
+0639a2c8-43d5-4a55-9c94-15035442f1f7,emp-152,2025-10-18,2025-10-25,Raisons personnelles,Approuvé,Généré automatiquement
+7fe587bc-28fe-4282-bf17-536d102515f3,emp-152,2025-06-14,2025-06-23,Autres,Approuvé,Généré automatiquement
+8b53ee8f-c91a-4aa4-a315-10d49fa4994c,emp-154,2026-05-15,2026-05-21,Raisons personnelles,En attente,Généré automatiquement
+a0cbc205-d219-4261-a728-21f541c212aa,emp-154,2025-10-10,2025-10-13,Congés Payés,Approuvé,Généré automatiquement
+318acc37-114f-45a5-8425-a047333b0435,emp-155,2025-09-17,2025-09-22,Raisons personnelles,En attente,Généré automatiquement
+79a69bcb-087c-4dad-b9bd-0b59fed04855,emp-155,2025-10-07,2025-10-20,Congés Payés,En attente,Généré automatiquement
+08300db3-1c96-4d38-a3ea-0711fccf565e,emp-155,2026-03-15,2026-03-23,Maladie,Approuvé,Généré automatiquement
+dff822e7-58bf-43ad-bd5f-a639094ec63b,emp-157,2025-11-19,2025-12-03,Maladie,En attente,Généré automatiquement
+c0ac275b-4675-4d40-bcbd-05333aa70c45,emp-157,2026-03-26,2026-04-08,Maternité/Paternité,Approuvé,Généré automatiquement
+6cd2ee3c-e569-47bb-a501-a3e4e6996ffa,emp-157,2025-06-19,2025-06-20,Raisons personnelles,Approuvé,Généré automatiquement
+f6b57c59-5258-49f4-bee0-6004dba11a30,emp-158,2026-01-06,2026-01-09,Congés Payés,Approuvé,Généré automatiquement
+aba4a396-c78c-4a8d-aa1f-dcea3f3450f8,emp-158,2026-03-03,2026-03-08,Raisons personnelles,Rejeté,Généré automatiquement
+218d2223-9115-46ab-91c8-e8914d7aea76,emp-158,2025-07-10,2025-07-11,Autres,Approuvé,Généré automatiquement
+184da607-465e-49a3-9f0a-ad6d1f1d209a,emp-159,2025-12-01,2025-12-12,Autres,Approuvé,Généré automatiquement
+2887603e-4034-4aff-be5e-44dafd691a9e,emp-159,2026-05-14,2026-05-28,Maternité/Paternité,Approuvé,Généré automatiquement
+4ebc6208-ebd9-4644-8dd8-2e68dbf690c0,emp-159,2026-01-04,2026-01-16,Autres,En attente,Généré automatiquement
+b4dfecbd-9718-4bb3-8a85-55b4620a5db6,emp-162,2025-07-07,2025-07-12,Raisons personnelles,En attente,Généré automatiquement
+e40f210a-c54b-4104-be5e-a20793e8af01,emp-162,2026-01-05,2026-01-09,Raisons personnelles,Approuvé,Généré automatiquement
+92b0e966-7fae-4860-84d3-04b9f41310ae,emp-162,2025-08-01,2025-08-09,Autres,En attente,Généré automatiquement
+916f355f-b114-458d-b023-7e93b46d39c0,emp-163,2026-02-05,2026-02-14,Autres,Approuvé,Généré automatiquement
+b48bb246-a34a-444d-bdb7-77c7621e1a42,emp-163,2026-05-17,2026-05-29,Raisons personnelles,En attente,Généré automatiquement
+43252d1d-1597-4f6e-8b7e-c9242b9acf3a,emp-164,2025-10-07,2025-10-11,Maternité/Paternité,Approuvé,Généré automatiquement
+48a92c4b-0b4b-4074-a7a5-512352ae0edc,emp-164,2025-09-29,2025-10-05,Congés Payés,Approuvé,Généré automatiquement
+3ddceda7-1d63-4b5f-acfe-319bcaded0f1,emp-164,2025-11-21,2025-11-22,Raisons personnelles,Approuvé,Généré automatiquement
+d786e788-7638-45b6-aad7-82b29a3b344f,emp-164,2025-08-04,2025-08-10,Autres,Approuvé,Généré automatiquement
+d33adcc2-b426-4504-8936-1e84336b9a6b,emp-165,2026-06-11,2026-06-17,Maternité/Paternité,Approuvé,Généré automatiquement
+11cdfbfe-7405-446b-bc59-c348e05a76e1,emp-165,2025-08-25,2025-09-01,Maternité/Paternité,Approuvé,Généré automatiquement
+19f663e4-1b19-4c54-9298-aaa366d14340,emp-165,2025-12-17,2025-12-24,Maternité/Paternité,En attente,Généré automatiquement
+c3372636-f618-4d7d-8333-15fe81217be7,emp-167,2026-02-05,2026-02-14,Raisons personnelles,Approuvé,Généré automatiquement
+ca50d5f9-b5ae-4abd-a551-08982dbe746a,emp-168,2025-06-21,2025-07-01,Raisons personnelles,Approuvé,Généré automatiquement
+37ff27a0-482a-4176-bfef-f20aca4b5ae5,emp-168,2026-02-11,2026-02-13,Maternité/Paternité,Approuvé,Généré automatiquement
+d215b631-2a57-4674-b69e-990cd96c8c68,emp-168,2026-02-18,2026-03-04,Autres,Approuvé,Généré automatiquement
+71455a0d-b352-40d0-bd4e-8d8b6a9f99bd,emp-169,2025-11-23,2025-12-07,Autres,Approuvé,Généré automatiquement
+c612ecef-6746-4fb4-9fa1-2e1cdbcf26a7,emp-169,2026-03-27,2026-03-31,Maternité/Paternité,Approuvé,Généré automatiquement
+cf9587bb-8eac-41d0-9ff3-35ca2d09473c,emp-170,2026-01-10,2026-01-14,Maladie,Approuvé,Généré automatiquement
+af7851fe-c161-4fa0-abca-f88ddb1c0e03,emp-170,2025-09-16,2025-09-20,Congés Payés,En attente,Généré automatiquement
+d0f940d1-f33b-4c60-9e4f-10cbf4cf8f34,emp-170,2025-11-23,2025-12-03,Maladie,Approuvé,Généré automatiquement
+3662f19f-f6b2-4ad0-b81d-57102d958f1b,emp-170,2026-03-28,2026-04-08,Congés Payés,Approuvé,Généré automatiquement
+dec49936-1d0a-46e3-ab05-0109a778ec38,emp-171,2025-08-01,2025-08-06,Maladie,En attente,Généré automatiquement
+cd8f6fac-d5a4-4028-a9a7-05a834bcba96,emp-171,2026-01-19,2026-01-30,Raisons personnelles,Approuvé,Généré automatiquement
+9396c26d-96e9-4bb0-b7ce-305126568528,emp-171,2026-01-13,2026-01-15,Maladie,En attente,Généré automatiquement
+bf5c1eab-10c2-443d-b75e-53e3884b5bae,emp-174,2025-09-26,2025-10-10,Maladie,Approuvé,Généré automatiquement
+e0dd2b8d-f98b-4723-be24-714d735631da,emp-175,2026-04-09,2026-04-22,Autres,Approuvé,Généré automatiquement
+50642f41-e99c-4a96-b5c7-81756a353a02,emp-175,2025-10-07,2025-10-12,Congés Payés,Approuvé,Généré automatiquement
+cc98680e-e98d-4e2a-ba28-790f537932cc,emp-175,2026-04-04,2026-04-07,Raisons personnelles,Approuvé,Généré automatiquement
+7f06eb3b-4e7e-4824-9f16-22df44f7aa56,emp-175,2025-10-10,2025-10-20,Congés Payés,Approuvé,Généré automatiquement
+a1d5980b-4a9d-43a3-b779-a6e46cd09d95,emp-176,2025-09-30,2025-10-11,Maternité/Paternité,En attente,Généré automatiquement
+889628fd-d52b-4e65-a77e-b575ead86e1f,emp-177,2025-07-19,2025-07-21,Maternité/Paternité,Approuvé,Généré automatiquement
+320b756d-8d34-4acb-9ea7-9f93ad9ff741,emp-177,2025-12-24,2026-01-03,Raisons personnelles,Approuvé,Généré automatiquement
+2f996a6d-056f-49b0-b68a-0085a56e4cab,emp-178,2025-06-15,2025-06-26,Autres,En attente,Généré automatiquement
+be8d1364-b225-4acb-ba5a-0a9f6a9f3672,emp-178,2025-11-23,2025-12-06,Congés Payés,Approuvé,Généré automatiquement
+350bff9b-7c34-497a-9ca1-84bfb68f4727,emp-178,2026-03-27,2026-04-09,Autres,En attente,Généré automatiquement
+93f0cb4d-39eb-430b-a2da-78d83352ef5d,emp-180,2025-10-12,2025-10-26,Congés Payés,Approuvé,Généré automatiquement
+6b8449bd-6edd-4c09-b571-f9063db9e31f,emp-181,2026-04-28,2026-05-02,Maladie,Approuvé,Généré automatiquement
+b069c204-c269-42ae-afe7-dd9a84c4bc30,emp-181,2026-06-08,2026-06-16,Maladie,Approuvé,Généré automatiquement
+3078b2da-86bf-484c-ad16-e9ea954d4713,emp-184,2025-10-04,2025-10-08,Maternité/Paternité,Approuvé,Généré automatiquement
+1ac8819a-1228-4979-ac51-32f1c77e567d,emp-185,2025-11-11,2025-11-12,Maladie,Approuvé,Généré automatiquement
+f42cd105-86f8-42a1-9705-7c93ccce69fa,emp-185,2026-05-29,2026-05-31,Congés Payés,Approuvé,Généré automatiquement
+dff4d251-fb60-400d-a5ea-ae321d0c90f5,emp-185,2026-01-10,2026-01-24,Congés Payés,En attente,Généré automatiquement
+1df419e9-6baa-4070-b4b2-8def87e632da,emp-185,2025-10-18,2025-10-25,Congés Payés,Approuvé,Généré automatiquement
+18d529c1-505e-4911-a5d2-e3aa588c42c2,emp-186,2025-06-18,2025-06-26,Autres,Approuvé,Généré automatiquement
+0c02c504-655f-432e-aef6-fa40b2db3f61,emp-186,2026-05-16,2026-05-20,Maternité/Paternité,Approuvé,Généré automatiquement
+8eea7029-594d-496f-9628-5e3ad10014b1,emp-186,2025-07-25,2025-08-03,Maladie,Approuvé,Généré automatiquement
+8dfe6852-e065-4dd5-8861-731ef8752d84,emp-187,2025-11-08,2025-11-11,Maternité/Paternité,Rejeté,Généré automatiquement
+313ae7e7-841b-48a5-887c-a43f0f0311d1,emp-187,2026-02-14,2026-02-18,Raisons personnelles,Approuvé,Généré automatiquement
+c5665b06-0a20-45c7-8575-e0b02eebb3a4,emp-187,2026-01-20,2026-01-29,Maternité/Paternité,Approuvé,Généré automatiquement
+49f52a80-f64f-46fb-96d4-d8daa9f59e4a,emp-188,2025-12-04,2025-12-11,Maladie,En attente,Généré automatiquement
+e185da4e-3bab-4b6e-acfa-056e4c27b012,emp-188,2025-10-20,2025-10-26,Autres,Approuvé,Généré automatiquement
+e20a4533-65a3-4ff8-9365-a804215f8117,emp-188,2025-06-12,2025-06-24,Maladie,Approuvé,Généré automatiquement
+2687785d-6790-4e4f-80a4-aaa81f07a7df,emp-189,2025-12-10,2025-12-18,Maladie,Approuvé,Généré automatiquement
+e9b63d1e-a8f3-4331-bbf0-2c0e76e086f8,emp-189,2025-08-05,2025-08-17,Congés Payés,Rejeté,Généré automatiquement
+38ab0cc0-83b2-4877-8f9b-b43b962015e4,emp-190,2025-06-22,2025-06-27,Autres,En attente,Généré automatiquement
+29bba497-f7b8-40f6-846f-3c8304151aa9,emp-190,2025-10-30,2025-11-10,Maladie,Approuvé,Généré automatiquement
+3dbe97c4-3b6c-48e1-80a0-107547ca38ef,emp-190,2025-12-20,2025-12-24,Maternité/Paternité,En attente,Généré automatiquement
+8dc19e77-f244-43b2-afdd-3b8ac5bf6de6,emp-191,2025-06-18,2025-06-30,Maladie,Approuvé,Généré automatiquement
+2afb52a7-772f-44f8-b48c-054bcd97fac2,emp-191,2025-06-22,2025-07-02,Autres,Approuvé,Généré automatiquement
+cbc5a2e6-c29f-4ed6-bfc6-4ef680847447,emp-192,2026-02-23,2026-03-07,Maternité/Paternité,En attente,Généré automatiquement
+efe8df15-3e41-49a3-b753-f38d4a2cb52b,emp-192,2026-02-07,2026-02-21,Raisons personnelles,Approuvé,Généré automatiquement
+82ce3c22-3686-402b-90e7-aa53a35dadd5,emp-192,2026-01-25,2026-01-31,Raisons personnelles,Approuvé,Généré automatiquement
+b7595ef1-2bf7-42d6-a07a-dd22018331ff,emp-192,2025-09-30,2025-10-11,Raisons personnelles,Approuvé,Généré automatiquement
+25dce37e-1c20-4669-9f7c-7fd9a831f15f,emp-193,2025-09-20,2025-10-01,Autres,Approuvé,Généré automatiquement
+45552eeb-f48e-4541-84a8-d8b88d815e4d,emp-194,2026-04-21,2026-05-03,Maladie,Approuvé,Généré automatiquement
+1f33d88a-0894-4b29-aeeb-364de7d23a1f,emp-194,2025-10-26,2025-10-28,Maladie,Approuvé,Généré automatiquement
+b15c9869-f993-4429-89ab-4c77681df27a,emp-196,2025-10-27,2025-11-07,Maternité/Paternité,En attente,Généré automatiquement
+882fb7b6-88a3-4856-bcc9-84cbfa7e5b09,emp-197,2026-06-03,2026-06-13,Raisons personnelles,Approuvé,Généré automatiquement
+6e854118-590f-42d6-ad0e-1bcaac947f41,emp-198,2026-04-26,2026-04-27,Maternité/Paternité,Approuvé,Généré automatiquement
+9ef35448-e54b-433d-9490-d46046b68269,emp-198,2025-07-07,2025-07-12,Autres,Approuvé,Généré automatiquement
+093d0007-eda2-4fcb-930c-85beaf1d37b2,emp-198,2025-12-23,2026-01-05,Maladie,En attente,Généré automatiquement
+7bfacfdf-d349-48a6-98f6-a65e3525a9ba,emp-200,2026-05-25,2026-06-01,Raisons personnelles,Approuvé,Généré automatiquement
+09aadfa4-f4ab-423b-9886-034e30cf2d4a,emp-200,2025-11-04,2025-11-11,Maladie,En attente,Généré automatiquement
+ea0978f1-6e3e-4e10-b868-8d365bbbf2fb,emp-200,2025-08-16,2025-08-30,Autres,Approuvé,Généré automatiquement
+a92a4f43-de4a-4cc2-9559-df824807a025,emp-200,2026-05-13,2026-05-21,Congés Payés,Approuvé,Généré automatiquement
+38130bfd-d516-4d61-b055-49e063e70998,emp-201,2025-07-04,2025-07-18,Maternité/Paternité,Approuvé,Généré automatiquement
+ca1161ce-1c3d-4d7f-8aed-fdb2f6f6157c,emp-201,2025-10-13,2025-10-27,Maternité/Paternité,Approuvé,Généré automatiquement
+d8c2d199-7e4c-4855-beb2-fef8c42b5761,emp-201,2025-10-04,2025-10-09,Raisons personnelles,Approuvé,Généré automatiquement
+68e62710-5ff3-4f0f-8d11-ce3f1d6a3c2c,emp-202,2025-09-30,2025-10-08,Raisons personnelles,Approuvé,Généré automatiquement
+0b858002-a0dc-44d7-a91e-d35b5391fd13,emp-203,2025-09-11,2025-09-22,Congés Payés,Approuvé,Généré automatiquement
+4b69de51-8d02-42ae-abda-6afaa0990bd8,emp-204,2025-08-27,2025-09-06,Congés Payés,Approuvé,Généré automatiquement
+f38dee36-3cec-44cf-ad24-170e4c983084,emp-204,2026-01-24,2026-02-06,Congés Payés,Approuvé,Généré automatiquement
+37284176-b4f9-4d90-8ebe-d2a4ea64fc36,emp-204,2025-09-10,2025-09-20,Autres,Approuvé,Généré automatiquement
+1634da06-4d8f-4948-97cb-bc413d8e0f1a,emp-205,2026-01-18,2026-01-28,Autres,Approuvé,Généré automatiquement
+bf54009c-d1b9-4b2c-9998-1bf4f83154ab,emp-207,2025-09-03,2025-09-11,Maternité/Paternité,Approuvé,Généré automatiquement
+d2713a0d-af9a-4311-b196-95cc9e20fbb5,emp-207,2025-12-15,2025-12-25,Autres,Approuvé,Généré automatiquement
+bf7fb50c-24a3-435d-b560-4f7c3e9bdda0,emp-207,2025-07-13,2025-07-21,Congés Payés,Approuvé,Généré automatiquement
+ed5e2ac6-62fa-4226-bf66-60cd520cfdbf,emp-207,2025-12-09,2025-12-11,Maternité/Paternité,Approuvé,Généré automatiquement
+2236b0a6-242f-4e46-96dc-725d458a76d4,emp-208,2025-07-18,2025-07-29,Congés Payés,Approuvé,Généré automatiquement
+0143f609-172b-4417-bdfc-02d68a4da3a1,emp-208,2026-02-12,2026-02-16,Maternité/Paternité,Approuvé,Généré automatiquement
+0acd86bf-2ef9-4980-9408-3850594a142e,emp-208,2026-06-11,2026-06-22,Congés Payés,En attente,Généré automatiquement
+9f24a03b-c7b6-4aaa-bc5c-0ebd5f4bc6d6,emp-208,2026-03-25,2026-03-28,Maladie,Approuvé,Généré automatiquement
+7a819365-d881-42e9-bb4b-0b7879ed89b5,emp-209,2025-09-02,2025-09-16,Raisons personnelles,Approuvé,Généré automatiquement
+8a54972f-1af8-4602-9375-f7d0fff94333,emp-209,2025-09-10,2025-09-24,Autres,Approuvé,Généré automatiquement
+ccdf7e12-6bbd-4271-9f13-1f4a8c2e44af,emp-209,2025-12-13,2025-12-20,Congés Payés,Approuvé,Généré automatiquement
+a20c45d2-0d9d-4b4a-8920-e794d6194e5e,emp-209,2026-03-28,2026-04-11,Congés Payés,Approuvé,Généré automatiquement
+1a0536d3-6bbf-4adb-a839-5aa763702dc4,emp-210,2026-06-05,2026-06-09,Maternité/Paternité,En attente,Généré automatiquement
+8ccbe471-29a6-4413-964b-6530d8231a65,emp-210,2025-07-30,2025-08-13,Congés Payés,Approuvé,Généré automatiquement
+19b4b693-098d-4374-87c5-83a035cb8be2,emp-210,2025-08-27,2025-09-10,Congés Payés,Approuvé,Généré automatiquement
+607f52ad-494d-4bfd-94dc-83e2cb0307c8,emp-211,2026-04-05,2026-04-16,Congés Payés,Approuvé,Généré automatiquement
+9a16a25c-6519-4b5e-ab27-fdffd66f6b91,emp-213,2025-12-26,2026-01-03,Congés Payés,Approuvé,Généré automatiquement
+a9ecc33f-a0e2-4429-8b58-57a85233a772,emp-213,2026-05-18,2026-05-27,Raisons personnelles,Approuvé,Généré automatiquement
+19b98013-b3c6-463f-a2ae-66ca4b6e11a5,emp-213,2026-05-15,2026-05-27,Raisons personnelles,Rejeté,Généré automatiquement
+172b2804-37f0-4ac3-9902-d8d0da311e5b,emp-213,2026-01-04,2026-01-12,Autres,Approuvé,Généré automatiquement
+82ca742d-b58e-4f0a-896a-2778e317850f,emp-214,2026-02-18,2026-02-24,Congés Payés,Approuvé,Généré automatiquement
+defe90d8-cf90-4495-a23c-b715a3db4aa5,emp-214,2026-01-22,2026-01-24,Autres,Rejeté,Généré automatiquement
+d0695d85-d1b0-4a58-b57a-54f2b82e0075,emp-214,2025-08-06,2025-08-13,Raisons personnelles,En attente,Généré automatiquement
+48b1cfd0-7a86-495e-91c7-0c3779cb6398,emp-215,2025-12-22,2025-12-25,Raisons personnelles,En attente,Généré automatiquement
+e49e9db6-8d6e-4160-976c-b9a47e770730,emp-215,2025-09-21,2025-09-25,Maladie,Approuvé,Généré automatiquement
+b234aaa6-d873-4d5f-b010-33fc5eb6dfc8,emp-215,2025-09-15,2025-09-21,Raisons personnelles,Approuvé,Généré automatiquement
+2392b4ea-a07a-4650-902f-88130d21c114,emp-216,2026-05-24,2026-05-30,Congés Payés,Approuvé,Généré automatiquement
+5cfb15de-01f2-4049-afce-c6135923005a,emp-216,2026-04-21,2026-05-04,Maladie,Rejeté,Généré automatiquement
+a5695992-19c4-4bf1-90f9-39d8e9493898,emp-216,2025-10-26,2025-11-02,Congés Payés,Approuvé,Généré automatiquement
+c7f7c317-0cd2-4bdb-afd0-44cafa59ed8d,emp-216,2026-05-27,2026-06-03,Maternité/Paternité,Approuvé,Généré automatiquement
+705ac8c5-fb12-46e5-9367-a143c497e480,emp-217,2026-04-05,2026-04-17,Autres,En attente,Généré automatiquement
+1ebcae4c-7036-430e-9e9b-c0f4be1529cb,emp-217,2025-11-08,2025-11-18,Maladie,Approuvé,Généré automatiquement
+a21d4bde-f6a7-492a-8b2a-605f30f1b153,emp-217,2025-11-07,2025-11-13,Autres,Approuvé,Généré automatiquement
+a0c10ab0-b19b-4b21-836d-6f89831646f3,emp-218,2026-03-29,2026-04-09,Raisons personnelles,En attente,Généré automatiquement
+7cdfa7cd-aa63-43fe-9307-fe78633e0c9e,emp-220,2026-01-03,2026-01-07,Raisons personnelles,Rejeté,Généré automatiquement
+c26eb978-e3e5-4e5e-9218-b92b43cf9f28,emp-220,2025-10-09,2025-10-18,Maternité/Paternité,Approuvé,Généré automatiquement
+4b9ad487-78a1-46c6-b80e-ec79c7e05b2c,emp-221,2025-07-24,2025-07-31,Congés Payés,En attente,Généré automatiquement
+808b2ad8-d615-4d89-a4c9-d0e8c44e56eb,emp-221,2025-07-24,2025-07-25,Maladie,Approuvé,Généré automatiquement
+9e4b97e3-f767-4fe3-a896-74561bcfa56a,emp-223,2025-08-17,2025-08-20,Congés Payés,Approuvé,Généré automatiquement
+8937b4a8-276b-4b7d-81ff-a38233545a44,emp-223,2026-03-20,2026-03-24,Raisons personnelles,Approuvé,Généré automatiquement
+cd6a945e-3e1b-44de-9858-5c40de69b4bb,emp-223,2025-11-10,2025-11-12,Autres,Approuvé,Généré automatiquement
+cc504f9f-7640-47b2-839d-0c7008b490cb,emp-223,2026-01-02,2026-01-04,Maladie,Approuvé,Généré automatiquement
+ac2d713c-bd31-4601-bacf-5a2a506c42a7,emp-224,2026-01-03,2026-01-08,Maternité/Paternité,En attente,Généré automatiquement
+d67778e9-5568-46e5-8026-89e86b731139,emp-226,2025-10-01,2025-10-04,Congés Payés,En attente,Généré automatiquement
+dd6976f3-e12c-4224-b4c3-a5f992e76100,emp-226,2025-08-17,2025-08-27,Autres,Approuvé,Généré automatiquement
+69ebbf3a-0ab8-4da4-be92-79ff019801fd,emp-226,2025-09-30,2025-10-03,Autres,Approuvé,Généré automatiquement
+46185e62-1da1-4794-9a0e-921923de8a38,emp-226,2026-02-03,2026-02-15,Maladie,Approuvé,Généré automatiquement
+a53a05d4-58ea-4956-8013-bd7f6ccc6784,emp-227,2025-10-18,2025-10-26,Maladie,Approuvé,Généré automatiquement
+9c430f8c-bb07-447b-83e5-3c1b3bf125ec,emp-227,2025-10-22,2025-11-04,Maladie,Approuvé,Généré automatiquement
+885bf577-98c4-4fdc-b6e2-52311eb7c74a,emp-227,2026-03-05,2026-03-11,Congés Payés,Approuvé,Généré automatiquement
+935a7f79-66fd-42fe-a261-2913b2cce2e9,emp-229,2026-04-28,2026-05-08,Maternité/Paternité,Approuvé,Généré automatiquement
+4b92da1a-42dc-47ad-8524-f7d43ecead8e,emp-230,2025-09-02,2025-09-14,Maternité/Paternité,Approuvé,Généré automatiquement
+9ab41195-8fb3-4d50-b5cd-d686be395af9,emp-231,2025-08-24,2025-09-06,Autres,Approuvé,Généré automatiquement
+0a7ee788-8a70-4e5e-8583-7cc1e4e13d05,emp-232,2026-03-12,2026-03-26,Congés Payés,Approuvé,Généré automatiquement
+87484a37-2652-4d7a-b0f0-1495dff29e29,emp-233,2025-10-20,2025-11-02,Congés Payés,Approuvé,Généré automatiquement
+01823717-692c-4f65-b9de-32ed9e5b621e,emp-233,2026-05-13,2026-05-27,Raisons personnelles,Approuvé,Généré automatiquement
+c01cf171-e395-4fd7-b2b8-6422e2968274,emp-235,2026-03-26,2026-03-27,Raisons personnelles,En attente,Généré automatiquement
+0b461a25-6ac0-4358-96bb-881e793938c7,emp-235,2026-06-10,2026-06-18,Congés Payés,Approuvé,Généré automatiquement
+b2258b81-43c9-4246-802e-62ee72d1c61a,emp-237,2025-08-22,2025-08-27,Congés Payés,Approuvé,Généré automatiquement
+c5b4f2dc-1ec0-484e-a83f-bb6e2d2cb7f5,emp-237,2026-02-26,2026-03-01,Maladie,Approuvé,Généré automatiquement
+d830698e-6d8d-466f-8c48-b3ade20b20de,emp-237,2025-12-15,2025-12-23,Congés Payés,Approuvé,Généré automatiquement
+39f43838-1e51-444d-a53b-97b4de5a6b3d,emp-237,2025-11-19,2025-11-30,Congés Payés,En attente,Généré automatiquement
+b867d561-19ff-49d1-951e-c97f16483bb8,emp-238,2025-07-26,2025-08-03,Maternité/Paternité,Approuvé,Généré automatiquement
+46a6d2eb-110b-4cbe-b7d1-9dc568bce434,emp-238,2025-09-06,2025-09-17,Congés Payés,En attente,Généré automatiquement
+50101579-8547-4064-ae28-79dd6e4c2c8b,emp-238,2026-01-02,2026-01-10,Autres,Approuvé,Généré automatiquement
+66380cf4-ce00-431e-b1df-ec68b695b3eb,emp-238,2026-04-08,2026-04-19,Maladie,Approuvé,Généré automatiquement
+e3082165-e8e4-4685-acbc-9c952627b4c8,emp-239,2025-10-14,2025-10-24,Autres,Approuvé,Généré automatiquement
+c0e9565e-8b6e-4c53-9a3a-8404a80ea36e,emp-239,2025-08-29,2025-09-06,Autres,Approuvé,Généré automatiquement
+15684789-3f21-4ac7-bb2e-c1dd084f8088,emp-240,2025-09-21,2025-10-05,Congés Payés,Approuvé,Généré automatiquement
+b9e7ef8c-d453-4f3d-9de7-a3f33982b890,emp-240,2025-06-19,2025-06-26,Congés Payés,Approuvé,Généré automatiquement
+150d98f2-5864-4e07-a72c-99bc9c9c961c,emp-240,2025-07-01,2025-07-04,Maladie,Approuvé,Généré automatiquement
+c63cb672-6ac0-423b-838f-acf99be5ab75,emp-240,2025-07-08,2025-07-16,Autres,Approuvé,Généré automatiquement
+cfe22876-d9f6-4f06-81c1-e8e5b8e63aae,emp-241,2025-08-22,2025-08-28,Maternité/Paternité,Approuvé,Généré automatiquement
+f830be75-a85b-44f1-94cf-909bfeb44284,emp-242,2025-12-03,2025-12-11,Autres,Approuvé,Généré automatiquement
+ccc04c6d-9608-4aee-b115-82723bf30bf8,emp-242,2026-03-06,2026-03-07,Maternité/Paternité,En attente,Généré automatiquement
+075410b1-397b-4dab-b255-97019b8208a8,emp-243,2026-01-24,2026-02-07,Autres,Approuvé,Généré automatiquement
+e1e88caa-d802-41a5-bfc8-a8fe97a2c17e,emp-243,2025-12-20,2025-12-31,Autres,Approuvé,Généré automatiquement
+656d7218-4b56-44e1-ae25-dc865a64b064,emp-244,2025-06-24,2025-07-03,Congés Payés,Approuvé,Généré automatiquement
+fb2293dd-98c3-4779-abda-5a975d48285d,emp-244,2025-10-11,2025-10-17,Raisons personnelles,Approuvé,Généré automatiquement
+71054036-9d3c-4412-8163-bdeb0d96c136,emp-245,2025-07-24,2025-07-30,Raisons personnelles,En attente,Généré automatiquement
+aa03845e-b7f8-4134-87ac-f86b283835c6,emp-245,2026-02-17,2026-02-21,Maladie,Approuvé,Généré automatiquement
+572c7101-3b56-4b49-825c-2f9d0583e7af,emp-247,2025-11-22,2025-12-01,Maternité/Paternité,Approuvé,Généré automatiquement
+4d836bac-ab6a-4df1-b1c4-461d3f2bf780,emp-247,2026-02-11,2026-02-12,Autres,Approuvé,Généré automatiquement
+19df1faf-12b3-47df-be32-63f3a443a25e,emp-247,2026-01-08,2026-01-18,Raisons personnelles,En attente,Généré automatiquement
+956beeff-ad24-4ec8-b86f-1d8c1e8fb4ab,emp-249,2026-01-31,2026-02-04,Raisons personnelles,En attente,Généré automatiquement
+13ce3211-ea10-4b24-8df2-4c64a29a1242,emp-249,2025-10-19,2025-10-31,Raisons personnelles,Approuvé,Généré automatiquement
+df4bb727-c5f2-415b-952d-1935f0bdf0cc,emp-250,2026-03-10,2026-03-16,Autres,En attente,Généré automatiquement
+1e69f3fc-e9a8-488c-bf31-81ab19ec8088,emp-250,2026-03-12,2026-03-18,Congés Payés,Approuvé,Généré automatiquement
+19b73047-8259-4108-8310-0b0643aa4985,emp-250,2025-08-07,2025-08-11,Maladie,Approuvé,Généré automatiquement
+3446dd30-0a17-44ab-8b64-4262465f2d77,emp-250,2026-01-10,2026-01-18,Autres,Rejeté,Généré automatiquement
+143a7c67-f9fa-4c9a-b0b3-1bcc4926081d,emp-251,2026-05-01,2026-05-04,Raisons personnelles,Approuvé,Généré automatiquement
+3b54993c-119d-4590-8a13-8eee42131c8c,emp-251,2025-07-24,2025-07-29,Raisons personnelles,Approuvé,Généré automatiquement
+cc676c3e-b569-4610-a8c5-b08fbd4e2251,emp-252,2025-09-19,2025-09-30,Congés Payés,Rejeté,Généré automatiquement
+66e74e8d-5893-4faa-8246-a42206e719fb,emp-252,2026-01-21,2026-01-28,Maladie,En attente,Généré automatiquement
+8866fa02-24d8-4b95-b82b-5c52530bfcc3,emp-253,2026-04-28,2026-05-03,Raisons personnelles,Approuvé,Généré automatiquement
+17bca6a4-af1b-4d87-b5a6-14412d7465f5,emp-253,2026-03-07,2026-03-08,Raisons personnelles,Approuvé,Généré automatiquement
+35c25ae0-1930-4965-9c4f-60dbfbf5f79a,emp-254,2025-10-10,2025-10-17,Maladie,Approuvé,Généré automatiquement
+ad777b08-64f5-4580-813e-3a4519fa483f,emp-254,2026-03-13,2026-03-18,Congés Payés,Approuvé,Généré automatiquement
+d4d83005-0fc3-4032-b171-0fd9ace7fe5f,emp-254,2025-12-08,2025-12-14,Maternité/Paternité,Approuvé,Généré automatiquement
+ed6b4c4c-cc30-434c-838c-d284c48dae80,emp-254,2025-10-28,2025-11-10,Maladie,Approuvé,Généré automatiquement
+591915e5-c4c9-4119-b4ee-a6b1000bd13c,emp-255,2026-01-26,2026-01-31,Maternité/Paternité,Approuvé,Généré automatiquement
+d1776435-5e32-4779-acc8-db1a71527624,emp-256,2025-09-05,2025-09-09,Autres,Approuvé,Généré automatiquement
+d043a2d5-f94f-46d5-9e4f-b3891eacd413,emp-256,2025-09-24,2025-09-27,Congés Payés,Approuvé,Généré automatiquement
+748c6a43-128d-47d6-812a-8dea0877dde2,emp-257,2026-01-06,2026-01-20,Congés Payés,Approuvé,Généré automatiquement
+25584cd3-6b4b-4866-b902-408ac0d0e0c7,emp-257,2026-03-02,2026-03-03,Raisons personnelles,Approuvé,Généré automatiquement
+21bc06a5-fff6-4beb-908a-5cbb0854a633,emp-257,2025-11-20,2025-11-30,Raisons personnelles,Approuvé,Généré automatiquement
+b32c64e5-3962-4246-9d67-f16e501d3252,emp-257,2026-01-22,2026-01-27,Autres,Approuvé,Généré automatiquement
+5b561863-4679-4767-b395-ed7e6a3295e2,emp-258,2025-10-01,2025-10-05,Maladie,Approuvé,Généré automatiquement
+e6066fd6-6ab9-492d-9f16-bd653cefbcf3,emp-258,2025-09-04,2025-09-06,Raisons personnelles,Approuvé,Généré automatiquement
+320aa473-fed2-4f7c-97f7-30f9410b8ccd,emp-259,2025-07-07,2025-07-08,Maternité/Paternité,Approuvé,Généré automatiquement
+1c776c0e-eb12-49f0-bb67-d993d2ec50ed,emp-260,2026-02-27,2026-03-13,Autres,Approuvé,Généré automatiquement
+37a6d65c-3ba1-4eee-9164-5f0a4081b19e,emp-260,2025-11-28,2025-12-10,Autres,Approuvé,Généré automatiquement
+c363803a-b98e-4501-8063-cd015e79e9b6,emp-260,2026-03-01,2026-03-10,Congés Payés,Approuvé,Généré automatiquement
+6c38fe6b-1744-4e6c-8890-c30fc05b55ef,emp-261,2025-11-16,2025-11-27,Maladie,En attente,Généré automatiquement
+199400f0-0745-4792-b117-ea0f6ef9b4c2,emp-261,2026-05-06,2026-05-10,Raisons personnelles,Approuvé,Généré automatiquement
+a7574d4b-43ce-49f1-8dfa-89bd84a52d2c,emp-262,2025-09-02,2025-09-07,Raisons personnelles,Approuvé,Généré automatiquement
+094cabc9-e66d-42a6-b45c-a8b50220ab45,emp-262,2026-04-27,2026-04-28,Maternité/Paternité,Approuvé,Généré automatiquement
+1fa5a2c0-397b-478c-826c-5d165eed05bc,emp-263,2025-10-30,2025-11-12,Raisons personnelles,Approuvé,Généré automatiquement
+38566494-4620-426e-b72b-9c64e2765421,emp-263,2025-11-17,2025-11-30,Autres,Approuvé,Généré automatiquement
+816ff6f2-e89a-423e-9ba1-a78aad49daa5,emp-263,2026-03-06,2026-03-11,Autres,Approuvé,Généré automatiquement
+52d9f8db-53ae-4369-a98a-913e874cf5dc,emp-263,2026-01-31,2026-02-10,Congés Payés,Approuvé,Généré automatiquement
+fc7c53c8-a982-477a-acea-ec66ced8fd5e,emp-264,2025-06-13,2025-06-16,Autres,Approuvé,Généré automatiquement
+be191ac4-7d5e-4b35-967f-e04b7dbf7648,emp-264,2025-08-20,2025-08-30,Autres,Approuvé,Généré automatiquement
+28a6a6b5-ca36-426a-8aba-f73f7854d141,emp-264,2026-01-20,2026-01-23,Maternité/Paternité,Approuvé,Généré automatiquement
+404681fb-8306-46ae-854b-ba48af44ee6c,emp-265,2025-10-29,2025-10-30,Raisons personnelles,Approuvé,Généré automatiquement
+da97c282-3c4c-4dfc-8943-bb19b1f4d03a,emp-265,2026-01-11,2026-01-25,Raisons personnelles,En attente,Généré automatiquement
+2f45d662-739a-40af-9771-f46bf3239897,emp-265,2025-10-31,2025-11-09,Maternité/Paternité,Approuvé,Généré automatiquement
+4a8026bd-5efb-4c3c-b8db-e3e83780fc9e,emp-265,2026-05-15,2026-05-24,Raisons personnelles,Approuvé,Généré automatiquement
+d69eb999-99ef-45e1-8eef-e79975720d38,emp-266,2026-03-02,2026-03-11,Autres,Approuvé,Généré automatiquement
+f6c320a5-d844-48e7-aa84-e2c14b092b4e,emp-268,2025-09-21,2025-09-25,Autres,Approuvé,Généré automatiquement
+ad7cd310-0d41-4b11-b6bc-8d0aeb18e52d,emp-269,2025-11-19,2025-11-29,Raisons personnelles,Approuvé,Généré automatiquement
+a209cf9b-6ae1-4259-b445-261f008a0ae8,emp-269,2026-05-12,2026-05-24,Maternité/Paternité,Approuvé,Généré automatiquement
+a0297294-ed82-48ef-bbe1-501fc9dfdd8b,emp-269,2025-09-24,2025-10-07,Congés Payés,Approuvé,Généré automatiquement
+90bcc0ad-558f-4b88-b8e6-c4d9d8b31abb,emp-269,2026-05-18,2026-05-29,Raisons personnelles,Approuvé,Généré automatiquement
+d9049f07-b96f-4121-b788-765f3f7b1250,emp-270,2026-02-17,2026-02-28,Maladie,Approuvé,Généré automatiquement
+7d4121ba-cde8-415a-bfe4-77df2202d19b,emp-270,2026-01-31,2026-02-06,Raisons personnelles,Approuvé,Généré automatiquement
+2193ff84-a0d2-480e-8be8-9214001094f8,emp-270,2026-06-04,2026-06-11,Autres,En attente,Généré automatiquement
+5566b483-9ff4-48c4-861d-fc773d330e9a,emp-270,2025-07-07,2025-07-18,Autres,Approuvé,Généré automatiquement
+cb4705ba-769c-4207-87f2-aa5a7597fac0,emp-272,2026-05-08,2026-05-13,Maladie,Approuvé,Généré automatiquement
+5623c001-4813-4da4-a38e-b16f1cc6fc0c,emp-273,2026-04-09,2026-04-18,Autres,Approuvé,Généré automatiquement
+f6f11aa6-af39-4d3f-a9ba-3d30a5389b36,emp-273,2025-09-26,2025-10-07,Raisons personnelles,Approuvé,Généré automatiquement
+187d3e04-7d78-4198-9f8c-ffaff22aebee,emp-274,2025-09-19,2025-09-23,Maternité/Paternité,Approuvé,Généré automatiquement
+b0b37cbc-8164-41a6-a7ed-dcda8508a70d,emp-274,2026-02-02,2026-02-15,Autres,Approuvé,Généré automatiquement
+3b5a192b-7b2b-41cc-878f-37a6da866ddb,emp-274,2025-10-16,2025-10-22,Congés Payés,En attente,Généré automatiquement
+fc5585b4-46ab-49f0-91c7-215c9c1af8f8,emp-275,2026-04-28,2026-05-01,Maternité/Paternité,Approuvé,Généré automatiquement
+621d916c-7603-4961-9a9d-053d7e43ab99,emp-275,2025-07-29,2025-07-30,Raisons personnelles,Approuvé,Généré automatiquement
+85308deb-b16b-4f31-84ed-7aa3660a12bd,emp-275,2025-11-05,2025-11-19,Autres,Approuvé,Généré automatiquement
+cb322521-33bd-4ab8-aa33-2dfbd28bf13b,emp-275,2026-05-10,2026-05-14,Autres,Rejeté,Généré automatiquement
+46b3e543-24bc-4a07-82ac-1668c6ca36d8,emp-276,2025-06-22,2025-06-24,Autres,Approuvé,Généré automatiquement
+f6ec6410-257f-4f9f-b645-8dc0f0b06233,emp-276,2025-08-23,2025-09-06,Maladie,Approuvé,Généré automatiquement
+db39a5c2-d5a2-410c-a0a8-71906bf9bfef,emp-276,2025-08-08,2025-08-20,Congés Payés,Approuvé,Généré automatiquement
+85bf6db7-88d8-426a-90df-4208c899e249,emp-276,2025-11-05,2025-11-16,Raisons personnelles,Approuvé,Généré automatiquement
+15bb5c46-7617-4578-850d-5d3e5f6c3fc0,emp-277,2025-08-12,2025-08-17,Maladie,Approuvé,Généré automatiquement
+e549e1be-590c-4203-897a-7cab8fb06026,emp-277,2025-08-13,2025-08-27,Raisons personnelles,Approuvé,Généré automatiquement
+c876b5e1-a7fd-491b-9976-fccce1046745,emp-277,2025-08-18,2025-08-31,Congés Payés,Approuvé,Généré automatiquement
+48b02571-342f-4815-aee2-cc273c8605c1,emp-277,2025-11-13,2025-11-19,Maternité/Paternité,Approuvé,Généré automatiquement
+09750470-70fe-4ea0-af65-1fe8d98a213c,emp-278,2026-01-27,2026-02-05,Autres,Approuvé,Généré automatiquement
+41ad38f2-74c5-4e98-9b35-0474eacc0034,emp-278,2025-08-20,2025-09-02,Raisons personnelles,Approuvé,Généré automatiquement
+8007b6e3-1a76-4576-be05-e6873ca309bc,emp-278,2025-09-28,2025-10-10,Maternité/Paternité,Approuvé,Généré automatiquement
+e6fd1072-8b7d-4155-a3f8-b7697bc1a004,emp-278,2025-09-28,2025-10-01,Raisons personnelles,Approuvé,Généré automatiquement
+8ade2166-fc36-41a3-a882-12a467008e6a,emp-279,2025-09-23,2025-09-26,Autres,Approuvé,Généré automatiquement
+e47f9b1f-7047-45e2-830d-0e5b5f9ef37e,emp-279,2025-09-13,2025-09-15,Raisons personnelles,Approuvé,Généré automatiquement
+7df95c80-730e-4d06-8c00-71dbbbae8d2d,emp-280,2025-06-22,2025-07-03,Maladie,Approuvé,Généré automatiquement
+cabf6250-2c09-4187-96c5-55eb9d880072,emp-280,2026-04-02,2026-04-08,Raisons personnelles,Approuvé,Généré automatiquement
+bdcf43c5-a9e9-4ee6-9476-adb89e5b66a8,emp-281,2025-06-15,2025-06-26,Raisons personnelles,En attente,Généré automatiquement
+90cb550d-00c6-4578-a15c-fcf3e14a696d,emp-281,2026-02-16,2026-02-17,Maladie,Approuvé,Généré automatiquement
+5760793e-30e1-40fa-b022-f747d4a1fc3f,emp-281,2025-07-07,2025-07-19,Congés Payés,Approuvé,Généré automatiquement
+533555c3-7506-4ad9-86ad-252b8946ae0c,emp-282,2026-05-05,2026-05-14,Maladie,Approuvé,Généré automatiquement
+da52fa01-dc90-491b-90ca-62b1648eb38b,emp-282,2026-05-01,2026-05-12,Raisons personnelles,Approuvé,Généré automatiquement
+50323a6b-ef81-406e-9b9b-1be67ff35011,emp-283,2026-04-23,2026-04-29,Maternité/Paternité,En attente,Généré automatiquement
+205cab0f-b9f7-4370-b02a-464e0df39b27,emp-283,2025-10-12,2025-10-23,Autres,Approuvé,Généré automatiquement
+2ae73749-a389-4bad-b971-5a5925590f52,emp-283,2025-11-13,2025-11-22,Maternité/Paternité,Rejeté,Généré automatiquement
+56ef8bea-4126-468c-9b3d-04c8132007a3,emp-284,2025-09-17,2025-09-22,Maladie,Approuvé,Généré automatiquement
+0a9f1585-ace8-4bdd-9a49-856ad6d87546,emp-284,2025-12-05,2025-12-18,Congés Payés,En attente,Généré automatiquement
+d1cd15c9-05f2-482a-8bd4-49889ef2008c,emp-285,2025-11-13,2025-11-25,Congés Payés,Approuvé,Généré automatiquement
+a8d373ce-ea26-4f6c-8c4a-0257baa4adec,emp-285,2026-05-11,2026-05-13,Congés Payés,Approuvé,Généré automatiquement
+d54ef6b2-26a8-48b6-a140-491606b74feb,emp-286,2026-03-11,2026-03-21,Raisons personnelles,Approuvé,Généré automatiquement
+0e0571d8-a7c5-4086-b26c-19ff09db1a22,emp-286,2025-07-29,2025-08-02,Congés Payés,Approuvé,Généré automatiquement
+2006bb5a-99ce-4cbc-904f-8b9504e19b3b,emp-286,2026-04-11,2026-04-14,Maternité/Paternité,Approuvé,Généré automatiquement
+36038c29-a4db-4bc3-afe5-0289f4deaf61,emp-290,2025-10-04,2025-10-10,Autres,Approuvé,Généré automatiquement
+c0ed6b81-bd5d-480d-93b5-ed9e7bbc55cd,emp-291,2026-06-10,2026-06-22,Raisons personnelles,Approuvé,Généré automatiquement
+1db3325a-d0a6-47ec-a751-a6ef4f79addb,emp-292,2025-12-31,2026-01-04,Autres,Approuvé,Généré automatiquement
+227111a8-1df5-4015-9b88-0dc1c0163ecd,emp-292,2025-07-10,2025-07-24,Maladie,Approuvé,Généré automatiquement
+84d43a80-aaa5-4365-b278-9bc085ff3fc5,emp-292,2026-02-01,2026-02-04,Congés Payés,Approuvé,Généré automatiquement
+9fbaf8ce-e14d-4aff-8e50-8a4da9fca18f,emp-293,2025-06-25,2025-06-27,Congés Payés,Approuvé,Généré automatiquement
+f0160ad4-bc3c-4867-b338-dfa8dabf8c1d,emp-294,2026-02-03,2026-02-06,Raisons personnelles,Approuvé,Généré automatiquement
+994cfa61-9a48-476b-ab2e-621ef5e2ca82,emp-295,2025-11-26,2025-12-06,Maternité/Paternité,Approuvé,Généré automatiquement
+fd8fde8f-e9d2-4e59-8190-6ae9cdac1bab,emp-296,2025-09-20,2025-10-02,Autres,Approuvé,Généré automatiquement
+5f099f93-fbc3-46ec-ac0b-d3e75bdc4674,emp-296,2025-10-04,2025-10-11,Maternité/Paternité,Approuvé,Généré automatiquement
+152d0337-f9d0-4b79-8dfc-0f074d295a4c,emp-296,2026-04-28,2026-05-07,Autres,Approuvé,Généré automatiquement
+2a1a5c29-0b6d-4d60-87fb-03a83c87fc0a,emp-296,2026-02-15,2026-02-18,Maternité/Paternité,En attente,Généré automatiquement
+5cfd9ffb-21d6-4776-aebe-72f36b4a13f8,emp-297,2026-02-10,2026-02-22,Raisons personnelles,En attente,Généré automatiquement
+8379f3f6-8453-40ad-a067-e095954bdc6f,emp-297,2026-04-29,2026-05-06,Maladie,Approuvé,Généré automatiquement
+d83c95d6-4227-46e7-8d1a-cb74b92e1b6a,emp-299,2025-10-03,2025-10-10,Maternité/Paternité,Approuvé,Généré automatiquement
+f5a4c899-ac6f-4b0c-bdb3-c9559dacd6d1,emp-299,2025-08-28,2025-09-05,Raisons personnelles,Approuvé,Généré automatiquement
+69ee673c-70c0-4351-be1c-2eaa2af59df6,emp-299,2025-12-10,2025-12-21,Maladie,Approuvé,Généré automatiquement
+bdb03e3a-00c8-46cd-a6cb-3ca2a9396f5f,emp-301,2025-07-23,2025-07-24,Autres,Approuvé,Généré automatiquement
+815fbcf9-201a-48ee-93fa-8204d6c8ebf4,emp-302,2025-11-25,2025-11-27,Maladie,Approuvé,Généré automatiquement
+e861d2b9-7e4f-45c6-97db-043b75e86217,emp-302,2026-04-11,2026-04-25,Raisons personnelles,Approuvé,Généré automatiquement
+bad5f874-b6f4-4b7a-9721-827d48b09cd6,emp-302,2026-03-18,2026-03-20,Autres,Approuvé,Généré automatiquement
+b3c958e9-b7c4-4954-865d-e2dc0c79511f,emp-303,2026-05-22,2026-06-02,Congés Payés,En attente,Généré automatiquement
+6edc79e0-39ad-4657-a313-4647fdfa7562,emp-303,2025-12-03,2025-12-08,Autres,Approuvé,Généré automatiquement
+6c53c9dc-64f7-4133-8001-933a34b2208a,emp-304,2025-11-25,2025-12-05,Raisons personnelles,Approuvé,Généré automatiquement
+ae4ffdfa-40a4-4d59-acd3-1bb5afa65317,emp-305,2026-04-05,2026-04-19,Maladie,Approuvé,Généré automatiquement
+6d2ef017-554d-492f-b9b0-ce5da54dfa0e,emp-305,2025-08-09,2025-08-11,Maladie,Approuvé,Généré automatiquement
+46650809-e9f2-4e4b-aac7-bd629c68506d,emp-305,2025-06-20,2025-06-22,Maternité/Paternité,En attente,Généré automatiquement
+2f89fd8f-3c84-4275-917b-8b9fc652504d,emp-305,2025-12-21,2025-12-28,Autres,En attente,Généré automatiquement
+641201a1-b141-47d8-bb61-f57d21e36e3b,emp-306,2026-03-06,2026-03-20,Maladie,Approuvé,Généré automatiquement
+4edc7374-f877-4b42-a8b4-776bf2a73017,emp-306,2025-10-04,2025-10-10,Maternité/Paternité,En attente,Généré automatiquement
+d30782b6-f4aa-40ff-b78e-4476cce26469,emp-306,2025-08-15,2025-08-25,Raisons personnelles,Approuvé,Généré automatiquement
+0c119789-2d2a-4d8b-9033-2b40caf43bb5,emp-307,2026-03-19,2026-03-31,Raisons personnelles,Approuvé,Généré automatiquement
+25d180da-7fa2-4e9e-a243-188385d3d416,emp-307,2025-08-28,2025-08-30,Congés Payés,En attente,Généré automatiquement
+e1432e1d-796b-4324-8335-69c91e0aa90c,emp-307,2025-10-08,2025-10-14,Congés Payés,En attente,Généré automatiquement
+2ab362ae-e798-407f-aeb1-f2b49826753e,emp-308,2026-04-30,2026-05-10,Raisons personnelles,En attente,Généré automatiquement
+2d73114d-df81-4e8b-9b82-39a0783518dd,emp-310,2025-11-23,2025-12-07,Autres,Approuvé,Généré automatiquement
+d8caaddf-a5f0-48e7-b943-7ebed8d525c0,emp-311,2025-12-08,2025-12-17,Congés Payés,Approuvé,Généré automatiquement
+4b291786-0aba-4394-9fba-a2654f29bd8d,emp-311,2025-09-22,2025-10-05,Autres,Approuvé,Généré automatiquement
+384a0891-7c40-4d6a-844c-357a7d4585fa,emp-312,2026-01-11,2026-01-12,Maladie,En attente,Généré automatiquement
+a44e4ca7-32f4-4550-b4a7-e8fd5330432f,emp-312,2025-07-20,2025-07-30,Congés Payés,Approuvé,Généré automatiquement
+cadbbfbd-36d8-40de-a727-f45675411c56,emp-312,2026-02-05,2026-02-14,Maladie,Approuvé,Généré automatiquement
+e3e7bff8-d12a-4ece-9d1a-29c5f23bfc7c,emp-313,2026-02-06,2026-02-14,Autres,Approuvé,Généré automatiquement
+dfc711ea-9b33-4342-bbe2-a6d6e3a4bf25,emp-315,2025-11-30,2025-12-08,Raisons personnelles,Approuvé,Généré automatiquement
+b11075c7-3404-4dc4-b610-68bc61ea1451,emp-316,2025-11-05,2025-11-09,Raisons personnelles,En attente,Généré automatiquement
+04b807b7-b013-46f9-ae7e-a6094b4104f3,emp-316,2026-04-12,2026-04-13,Autres,Approuvé,Généré automatiquement
+b4e0969b-6b63-485c-b224-12145c6a4783,emp-317,2025-07-04,2025-07-12,Congés Payés,Approuvé,Généré automatiquement
+f753bbe7-3730-437c-9c15-9970fc7b632b,emp-318,2025-12-22,2026-01-04,Maternité/Paternité,Approuvé,Généré automatiquement
+011997cc-bf26-4313-978a-af3a1a19df41,emp-318,2026-02-15,2026-02-26,Maternité/Paternité,Approuvé,Généré automatiquement
+169eaed4-09e9-4477-930d-12cfeaf26d15,emp-319,2025-11-24,2025-12-01,Maladie,Approuvé,Généré automatiquement
+0dc1a22a-74d5-4921-a019-7015db658e6e,emp-319,2026-01-27,2026-02-08,Maternité/Paternité,Approuvé,Généré automatiquement
+f75bb78a-13fe-4758-975d-0e2ca2306cfa,emp-320,2025-12-20,2025-12-23,Autres,En attente,Généré automatiquement
+e23d77ec-6dfd-4102-8119-2f6d76794435,emp-321,2025-06-22,2025-06-24,Raisons personnelles,En attente,Généré automatiquement
+8e5e9bec-973e-4591-a6ff-1979b2c5b38c,emp-321,2026-02-04,2026-02-15,Congés Payés,En attente,Généré automatiquement
+18e31fcd-f8de-4dac-ad9a-58624cecbef0,emp-321,2025-07-30,2025-08-12,Autres,Approuvé,Généré automatiquement
+bddea16e-6a48-44fa-9381-93ff287bd131,emp-321,2025-07-13,2025-07-16,Congés Payés,Approuvé,Généré automatiquement
+b2af82d6-f006-411e-a626-31701f63b966,emp-323,2025-08-28,2025-09-02,Raisons personnelles,Approuvé,Généré automatiquement
+255afa18-fa55-435b-87de-cda465712305,emp-323,2025-09-06,2025-09-07,Congés Payés,Approuvé,Généré automatiquement
+044c8753-0e86-4c70-868c-c140b5114671,emp-323,2026-04-02,2026-04-09,Maladie,En attente,Généré automatiquement
+5ccb1f54-e74c-4ea2-9d98-e19d3ec31bdd,emp-325,2026-04-26,2026-05-07,Maternité/Paternité,Approuvé,Généré automatiquement
+7b8b00d8-bd69-4f0b-a1d1-996f75b3c278,emp-325,2025-09-11,2025-09-16,Autres,En attente,Généré automatiquement
+67e0f2fd-f1f4-4b7f-8507-1131c334ad55,emp-326,2026-04-28,2026-05-06,Maternité/Paternité,Approuvé,Généré automatiquement
+82b5c4f8-0f57-4689-a645-35a9e1261c32,emp-326,2025-11-07,2025-11-17,Maladie,Rejeté,Généré automatiquement
+f36ec449-5faa-4cb6-a66b-596565c8392c,emp-326,2025-09-22,2025-10-01,Raisons personnelles,Approuvé,Généré automatiquement
+ab1ffd29-9662-4820-8b3b-27dea0eba88e,emp-326,2025-10-23,2025-11-05,Congés Payés,Approuvé,Généré automatiquement
+723fbbb8-cb81-4526-8042-d767871223b6,emp-327,2026-04-20,2026-04-27,Congés Payés,Approuvé,Généré automatiquement
+0a95db62-890e-4c4f-bc73-fd5665269c37,emp-327,2025-11-06,2025-11-15,Raisons personnelles,Approuvé,Généré automatiquement
+3f939e97-0eaf-4a53-95de-37941a5ea90e,emp-327,2025-09-14,2025-09-23,Maternité/Paternité,Approuvé,Généré automatiquement
+0c1ab4e3-40e0-4b45-a9cd-9a895e420515,emp-327,2026-02-10,2026-02-19,Raisons personnelles,Approuvé,Généré automatiquement
+0d0a880f-4a1a-45be-ab1a-d6b4689d17ba,emp-328,2025-08-03,2025-08-12,Raisons personnelles,Approuvé,Généré automatiquement
+a2ae0cd8-140f-4f6a-a73c-9362b2ba2866,emp-329,2025-10-05,2025-10-14,Autres,Approuvé,Généré automatiquement
+7a1096e6-ab71-490b-896d-73015fce1050,emp-329,2026-06-01,2026-06-06,Maladie,Approuvé,Généré automatiquement
+8283e009-80fe-4a33-bfef-1d194149c2a9,emp-329,2025-09-01,2025-09-05,Autres,Approuvé,Généré automatiquement
+10a74aa2-ac25-4c5b-89c5-67fe19b2fd9e,emp-329,2025-12-14,2025-12-16,Autres,Rejeté,Généré automatiquement
+119b5495-d2ad-4358-883d-368dc62c15e3,emp-330,2026-05-31,2026-06-11,Congés Payés,Approuvé,Généré automatiquement
+4de23bb1-6041-45a5-810c-a0459529f05d,emp-330,2025-10-07,2025-10-10,Maladie,En attente,Généré automatiquement
+cb6d5400-f205-4081-9f4b-469d3855f8fa,emp-330,2026-04-29,2026-05-02,Raisons personnelles,Approuvé,Généré automatiquement
+e9829cac-0675-4a90-ae52-27acc113f238,emp-330,2026-05-19,2026-05-27,Raisons personnelles,Approuvé,Généré automatiquement
+ff058873-6fd1-4162-afb8-1574167eaa11,emp-331,2025-08-18,2025-08-22,Raisons personnelles,Approuvé,Généré automatiquement
+bb7a977b-5167-4ba5-9a22-60c3b94d164a,emp-332,2026-01-18,2026-01-31,Raisons personnelles,En attente,Généré automatiquement
+14b90b3f-0389-4c92-9619-2717d43b4e62,emp-332,2025-06-19,2025-06-28,Congés Payés,Approuvé,Généré automatiquement
+12e37a08-4822-45a2-8a99-d07126e1adf1,emp-332,2025-10-07,2025-10-17,Raisons personnelles,Approuvé,Généré automatiquement
+1d88a59e-1015-4a10-9160-b049ef273b4b,emp-332,2025-11-24,2025-12-07,Congés Payés,Approuvé,Généré automatiquement
+a10b9359-3e9b-472e-afad-ac196886f638,emp-333,2026-01-03,2026-01-10,Autres,Approuvé,Généré automatiquement
+a977552f-3c7b-4ad2-9870-d440790356e8,emp-333,2025-08-16,2025-08-30,Maternité/Paternité,En attente,Généré automatiquement
+6e43f74a-d474-4f4c-9a40-0d6119a4421a,emp-334,2026-05-04,2026-05-12,Maternité/Paternité,Approuvé,Généré automatiquement
+2d5bd3ed-606f-4bc0-b01b-1a7c7d10c173,emp-334,2025-12-01,2025-12-11,Congés Payés,Approuvé,Généré automatiquement
+c2f49e71-b633-4ed8-8860-7646b9f5fd46,emp-337,2026-06-03,2026-06-04,Maternité/Paternité,Approuvé,Généré automatiquement
+b29a5ea6-43ac-4b0a-8617-89642e6c8993,emp-337,2025-09-22,2025-10-01,Autres,Approuvé,Généré automatiquement
+635c65a0-202b-4757-b6b6-034bd86c75ec,emp-337,2025-11-24,2025-12-07,Autres,Approuvé,Généré automatiquement
+7483b638-fc54-4fd0-b110-f82b0ee8a730,emp-340,2025-09-15,2025-09-24,Raisons personnelles,En attente,Généré automatiquement
+2a649ada-23bc-464a-9028-fd9e4573d21e,emp-341,2026-03-03,2026-03-07,Maladie,Approuvé,Généré automatiquement
+ecf57145-667c-475b-b366-fdf68b44a836,emp-341,2025-06-27,2025-07-03,Congés Payés,Approuvé,Généré automatiquement
+f6a13fad-8dcc-4d61-a82c-16ee764e8170,emp-341,2026-06-04,2026-06-18,Maladie,Approuvé,Généré automatiquement
+093ed077-e297-404a-8f93-7dba0d976559,emp-342,2025-12-23,2026-01-06,Maternité/Paternité,En attente,Généré automatiquement
+66179ce3-03b1-450c-8590-a9f4747db76c,emp-342,2026-05-16,2026-05-30,Maladie,En attente,Généré automatiquement
+24c9ae24-1ec9-4715-a7da-13c7b4759903,emp-343,2025-07-02,2025-07-08,Maternité/Paternité,Approuvé,Généré automatiquement
+70e401bc-4597-4f4b-8a36-9bc3557c37b6,emp-343,2026-02-20,2026-03-03,Maternité/Paternité,Approuvé,Généré automatiquement
+4be1110d-17db-48dd-9631-8240e037dc31,emp-343,2025-09-03,2025-09-13,Congés Payés,Approuvé,Généré automatiquement
+b0390c7d-63d2-47bf-97e8-dc4be6cca977,emp-344,2025-08-25,2025-08-26,Congés Payés,Approuvé,Généré automatiquement
+d3168481-65e6-4d44-9a70-32507050dbcd,emp-344,2025-11-24,2025-12-03,Maladie,Approuvé,Généré automatiquement
+e751930f-809d-4eb7-abe4-0dc8e60b08e4,emp-344,2026-01-07,2026-01-18,Autres,Approuvé,Généré automatiquement
+03ed8ed5-83db-49c4-9028-28597d174a29,emp-346,2026-05-02,2026-05-13,Raisons personnelles,Approuvé,Généré automatiquement
+e09dd2fc-b12c-4b41-aff7-c5450de76985,emp-346,2025-09-07,2025-09-20,Raisons personnelles,Approuvé,Généré automatiquement
+55164965-79f2-4c34-aa33-487fd2d20c58,emp-347,2025-08-30,2025-09-04,Maladie,Approuvé,Généré automatiquement
+cbf0b49b-be7a-4de7-9bec-2819685ed895,emp-347,2025-08-05,2025-08-09,Congés Payés,Approuvé,Généré automatiquement
+b966cf31-aaac-45c9-a3b1-680c4a943a85,emp-350,2026-03-06,2026-03-19,Maladie,Approuvé,Généré automatiquement
+1ecdff56-d1f8-4b7d-a46a-690f75e51f44,emp-350,2025-09-20,2025-09-29,Raisons personnelles,En attente,Généré automatiquement
+83a74203-4f52-4f45-bfe3-5171aa1e65d6,emp-350,2025-09-13,2025-09-22,Raisons personnelles,Approuvé,Généré automatiquement
+2050ab1b-2dcd-492f-8062-27502024aaf0,emp-350,2025-06-24,2025-07-03,Autres,Rejeté,Généré automatiquement
+9e7c39f4-fe79-4905-b576-be34e3e8afac,emp-352,2025-07-04,2025-07-12,Maternité/Paternité,Approuvé,Généré automatiquement
+76294ee8-c63e-4aa1-b7b4-354ac452778d,emp-352,2026-02-20,2026-02-28,Maladie,Approuvé,Généré automatiquement
+af9b7d95-0470-4e8c-bb87-8b8e416d986c,emp-352,2026-01-06,2026-01-11,Maladie,Approuvé,Généré automatiquement
+ea544009-218d-4aea-b2b4-52b797647064,emp-355,2026-04-06,2026-04-13,Autres,Approuvé,Généré automatiquement
+4ec96cc2-0b3f-448d-a0c5-90764c77d13b,emp-355,2026-01-26,2026-01-31,Maladie,Approuvé,Généré automatiquement
+a468482a-644b-4ff4-9b6c-65c5c3ec7af5,emp-356,2026-05-19,2026-05-20,Autres,Approuvé,Généré automatiquement
+4f1922ae-531c-45d6-9577-cd8bb01fca2c,emp-358,2025-06-12,2025-06-18,Maladie,Approuvé,Généré automatiquement
+07f86d28-0ec7-4dc5-9b21-161280d42933,emp-358,2026-02-21,2026-03-02,Autres,En attente,Généré automatiquement
+d736151c-8436-4c5d-9f9c-0bbbce0e40f2,emp-358,2026-01-01,2026-01-06,Maladie,Approuvé,Généré automatiquement
+b6436cb0-0049-44ac-b64b-aaaefa942819,emp-358,2026-03-14,2026-03-27,Raisons personnelles,Approuvé,Généré automatiquement
+38ec66d3-b09f-4b59-b2e4-5836c7c0e13a,emp-359,2025-07-19,2025-07-20,Maternité/Paternité,Approuvé,Généré automatiquement
+2b6d219f-4ccb-4b4c-8d18-d9af35c5d5f2,emp-359,2025-11-29,2025-12-10,Autres,Approuvé,Généré automatiquement
+1a638b80-fbe7-41dc-80fb-2d17666d6090,emp-360,2025-10-28,2025-10-31,Raisons personnelles,Approuvé,Généré automatiquement
+7861b214-b0fb-4044-a670-43d0d0099598,emp-361,2026-03-02,2026-03-05,Congés Payés,Approuvé,Généré automatiquement
+85d1c2de-29ff-44da-bf0a-f7ddda02233c,emp-361,2026-04-16,2026-04-27,Maternité/Paternité,Approuvé,Généré automatiquement
+1f01fdf0-d8ae-4a27-b30f-3f8e0bba5c58,emp-361,2026-01-24,2026-02-06,Maternité/Paternité,Approuvé,Généré automatiquement
+9d5a2c32-7d76-4362-b1a3-36a67386946c,emp-363,2026-05-11,2026-05-24,Autres,Approuvé,Généré automatiquement
+de2965ea-2d99-433d-bf9e-7453256bf3fc,emp-363,2025-08-03,2025-08-17,Autres,Approuvé,Généré automatiquement
+5007ae7c-aa02-43a6-86e6-4343bcc26b0e,emp-364,2025-08-26,2025-09-07,Maladie,Approuvé,Généré automatiquement
+3c614e00-d1d6-42ac-8f61-672273a820c7,emp-364,2025-06-23,2025-07-02,Maternité/Paternité,Approuvé,Généré automatiquement
+18cc466e-18e0-41b6-abbf-76138bdc6a19,emp-364,2025-11-08,2025-11-12,Maladie,Approuvé,Généré automatiquement
+a6f0c43d-b474-4442-aea6-7a5d1bef1e35,emp-364,2026-04-08,2026-04-22,Congés Payés,Approuvé,Généré automatiquement
+9758f2eb-e930-43fa-a911-decc4d009f2d,emp-365,2025-10-04,2025-10-10,Maternité/Paternité,En attente,Généré automatiquement
+33ef2a4c-75b4-43e5-996f-a806bceab93f,emp-366,2026-04-08,2026-04-22,Maternité/Paternité,Approuvé,Généré automatiquement
+e2d9bc5c-db77-479d-a7ba-175c7452617a,emp-366,2026-01-17,2026-01-28,Congés Payés,En attente,Généré automatiquement
+fab41930-180f-45fa-b4fb-df84da721ca0,emp-366,2025-08-10,2025-08-22,Raisons personnelles,En attente,Généré automatiquement
+d79445f3-5abc-4e1d-b932-8a5cfc074097,emp-366,2025-11-04,2025-11-05,Autres,Rejeté,Généré automatiquement
+ac11d80c-59e5-4ef2-b444-9299a5a994a7,emp-367,2026-02-15,2026-02-20,Maternité/Paternité,Approuvé,Généré automatiquement
+05cb2605-3e99-4a90-9cca-9abea19759f2,emp-367,2026-04-17,2026-04-19,Maladie,Approuvé,Généré automatiquement
+59087fba-3ef9-45e0-b6fc-334cf5246c2c,emp-368,2026-03-21,2026-04-01,Raisons personnelles,Approuvé,Généré automatiquement
+77605564-646f-49a0-b38f-1708fc8754fc,emp-371,2025-06-22,2025-07-02,Maternité/Paternité,En attente,Généré automatiquement
+73278195-8c7f-48c3-bb1e-a6ef1f50dbb3,emp-371,2025-11-03,2025-11-10,Maternité/Paternité,Approuvé,Généré automatiquement
+6fa47aa2-532a-43ea-8ed8-8ce11785ea7d,emp-371,2025-09-05,2025-09-10,Autres,Approuvé,Généré automatiquement
+4dd0bc79-875e-4674-b078-d5f860011bb0,emp-371,2026-06-06,2026-06-07,Maladie,Approuvé,Généré automatiquement
+c2981ca1-0519-4155-9451-0531c499e154,emp-372,2025-08-27,2025-08-31,Maladie,Approuvé,Généré automatiquement
+94a96d58-1b25-40c0-a045-42e119548010,emp-372,2026-02-04,2026-02-05,Autres,Approuvé,Généré automatiquement
+ebf57cfa-6be4-4ea6-b9a7-d39fbb7f9803,emp-372,2026-02-07,2026-02-08,Congés Payés,Approuvé,Généré automatiquement
+f3c2a77a-c844-4224-9fdc-d8ef6ff27282,emp-373,2026-04-24,2026-04-30,Congés Payés,Approuvé,Généré automatiquement
+c06dedbb-a924-4c57-92e3-937697b9bb7a,emp-373,2026-01-18,2026-01-31,Maladie,Approuvé,Généré automatiquement
+41b5155f-8988-4fc1-894d-255331617c3f,emp-374,2025-08-26,2025-09-02,Autres,Rejeté,Généré automatiquement
+7fc80cbc-36b5-40e3-83ef-777809eb3ca8,emp-374,2025-11-10,2025-11-21,Maternité/Paternité,Approuvé,Généré automatiquement
+61a6432c-0696-4088-83f9-fa064de0bd3d,emp-374,2026-01-27,2026-02-08,Maternité/Paternité,Approuvé,Généré automatiquement
+2b25ed82-e991-4b64-be0c-e909f59f1afb,emp-375,2026-03-16,2026-03-23,Maternité/Paternité,En attente,Généré automatiquement
+e99b856c-6ac7-4488-8203-9f79d0050288,emp-376,2025-10-03,2025-10-05,Maternité/Paternité,Approuvé,Généré automatiquement
+31c4a0bd-0a9c-466d-933a-4b102ff38f93,emp-376,2025-07-15,2025-07-26,Maternité/Paternité,Approuvé,Généré automatiquement
+7f8ddb5b-237e-46a4-aa95-cc6fd047d63e,emp-376,2025-10-08,2025-10-11,Autres,Approuvé,Généré automatiquement
+8f626ee5-f818-4b86-8fdd-397b30b65535,emp-376,2025-09-02,2025-09-11,Raisons personnelles,En attente,Généré automatiquement
+cb3b6d2d-8622-4f31-90c6-c726d757e5b1,emp-377,2026-06-11,2026-06-16,Maternité/Paternité,Approuvé,Généré automatiquement
+848e4023-e8a9-4005-bc0a-d268feb7aa4b,emp-377,2025-09-21,2025-09-22,Congés Payés,Approuvé,Généré automatiquement
+23c11408-9dff-4e13-a48d-2cb69bba97a1,emp-377,2025-07-08,2025-07-14,Autres,Approuvé,Généré automatiquement
+2c8c2276-c187-431f-9248-b0b336f15e70,emp-377,2026-05-16,2026-05-20,Maladie,Approuvé,Généré automatiquement
+0ec88438-9c0c-4dfa-be3e-04f5e4539bf1,emp-378,2026-02-06,2026-02-13,Autres,Approuvé,Généré automatiquement
+5fb4f91f-dacb-4119-8830-ee7187ca67fe,emp-379,2026-03-31,2026-04-07,Maladie,Approuvé,Généré automatiquement
+8c8f3a83-665b-427f-a487-82f15f57b197,emp-379,2025-09-12,2025-09-14,Autres,Approuvé,Généré automatiquement
+04399ae2-3490-4534-baaf-80e0712bda57,emp-379,2025-09-02,2025-09-13,Autres,En attente,Généré automatiquement
+3cea2320-9756-4c3f-b722-763031947689,emp-379,2025-12-27,2026-01-01,Autres,Approuvé,Généré automatiquement
+d9bbcbd4-ccfe-40c3-b51c-c1a227ac571c,emp-380,2026-02-28,2026-03-02,Maladie,Approuvé,Généré automatiquement
+3aad6b6b-6330-49c7-b58a-7f01a0e828b3,emp-380,2025-06-25,2025-06-28,Autres,Approuvé,Généré automatiquement
+ea298cee-77be-4581-b574-e9ba0c517335,emp-380,2026-05-22,2026-05-30,Congés Payés,Approuvé,Généré automatiquement
+e71b3010-8f39-40a0-a0ef-532ad970f197,emp-380,2025-08-31,2025-09-09,Autres,Rejeté,Généré automatiquement
+049a0266-24f0-4555-bfd4-510aef028e16,emp-382,2025-07-29,2025-07-30,Maladie,Approuvé,Généré automatiquement
+db605f82-39ab-4a02-9a50-7f2b0b7a015a,emp-382,2025-09-24,2025-09-27,Maternité/Paternité,Approuvé,Généré automatiquement
+d5e6ecf4-18d7-47fb-99cd-ace05620b17b,emp-382,2025-08-22,2025-09-01,Maladie,Approuvé,Généré automatiquement
+49590fb2-c465-4b5a-b7c9-17fbfd2328a7,emp-382,2026-02-08,2026-02-22,Maternité/Paternité,Approuvé,Généré automatiquement
+07048335-0b5f-4145-86b7-795cf5bacd15,emp-383,2025-06-16,2025-06-23,Autres,Approuvé,Généré automatiquement
+8289e064-8d6d-4ed0-af93-48143a3a9bc3,emp-383,2026-04-23,2026-05-03,Autres,Approuvé,Généré automatiquement
+78621a38-7165-4553-bffb-7cf0e292bb04,emp-383,2025-10-14,2025-10-28,Maternité/Paternité,En attente,Généré automatiquement
+44ed9913-f21d-4dba-81f1-6468d2263728,emp-383,2026-04-21,2026-05-02,Maternité/Paternité,Approuvé,Généré automatiquement
+5a5316e4-0c3c-4e4c-bf29-ab8014e36fec,emp-384,2026-02-22,2026-03-08,Maladie,Approuvé,Généré automatiquement
+d763b75d-a004-4df0-b74e-9c5e447ad658,emp-384,2025-08-30,2025-09-05,Autres,Approuvé,Généré automatiquement
+86a29580-7174-4320-a1a5-52b132e0cd2a,emp-384,2026-05-28,2026-05-30,Maternité/Paternité,Approuvé,Généré automatiquement
+eb67bbe9-c414-4013-9740-18248f29ad82,emp-384,2025-08-20,2025-08-24,Autres,En attente,Généré automatiquement
+504257ba-3df9-483d-8bd7-74f1acca3044,emp-386,2025-07-28,2025-08-07,Congés Payés,Rejeté,Généré automatiquement
+88e91847-9599-40b0-ba51-d1d44f8bbae8,emp-386,2025-08-05,2025-08-16,Raisons personnelles,En attente,Généré automatiquement
+1442f32e-d1eb-4bbd-b36f-5033dfa3a2d3,emp-386,2025-12-10,2025-12-17,Raisons personnelles,Approuvé,Généré automatiquement
+1d72b92c-8b9c-47ae-b350-1e915626a77a,emp-387,2026-03-06,2026-03-20,Autres,Approuvé,Généré automatiquement
+12f75ea7-74cb-4b33-bfe1-3cf289bc97a6,emp-388,2026-05-30,2026-06-10,Maladie,Approuvé,Généré automatiquement
+c3ea7f28-122e-4997-a94a-231dc72edf45,emp-390,2026-04-26,2026-04-27,Maladie,Approuvé,Généré automatiquement
+7da7d334-6ca3-4856-b2e0-34ad0ed98c21,emp-390,2026-05-07,2026-05-16,Congés Payés,En attente,Généré automatiquement
+377fc0e1-dbc4-4684-97bc-6d03c2d4fe70,emp-395,2025-10-31,2025-11-07,Maladie,Approuvé,Généré automatiquement
+f0970879-f93a-4108-875c-69a4e7df9770,emp-395,2026-05-25,2026-05-26,Maladie,En attente,Généré automatiquement
+6ca9b074-d835-4bd4-9a07-92858bbec352,emp-395,2025-10-11,2025-10-17,Raisons personnelles,Approuvé,Généré automatiquement
+463b590e-3477-455e-946a-ca5cf95eb766,emp-396,2025-07-13,2025-07-18,Maladie,Approuvé,Généré automatiquement
+b1568ae2-6765-49ea-95c0-e7322d8149ac,emp-396,2026-01-17,2026-01-20,Autres,Rejeté,Généré automatiquement
+134092f6-d3ab-4e75-b74d-ecc14f937410,emp-398,2026-05-19,2026-05-26,Congés Payés,Approuvé,Généré automatiquement
+b25cbc12-2e43-49c9-8a9a-42847e56b4f2,emp-398,2025-07-29,2025-07-31,Autres,Approuvé,Généré automatiquement
+b494039c-3c40-4c6e-adb1-ac05fae87028,emp-399,2025-10-11,2025-10-25,Autres,Approuvé,Généré automatiquement
+740a911b-dbc4-419c-88a9-cd85b91909d8,emp-399,2025-12-13,2025-12-27,Raisons personnelles,Approuvé,Généré automatiquement
+c8ed78ff-848e-452d-af23-b81bae26d13b,emp-399,2025-07-15,2025-07-17,Maladie,Approuvé,Généré automatiquement
+5a40f5e6-5f11-4af0-b43c-d2ba15b4df74,emp-401,2026-01-03,2026-01-14,Autres,Rejeté,Généré automatiquement
+bdf1b56a-2ab1-4927-a7de-0b58caf5be4a,emp-401,2026-05-13,2026-05-21,Maladie,Approuvé,Généré automatiquement
+7f388b53-af2e-42d0-81dd-860a0811c0d9,emp-401,2026-05-11,2026-05-17,Congés Payés,En attente,Généré automatiquement
+a26a69fe-c396-4125-84a2-4774e2b5a6f9,emp-402,2026-01-05,2026-01-19,Raisons personnelles,Approuvé,Généré automatiquement
+f6d67617-b5c4-4f76-94be-8642de2f371d,emp-402,2025-08-21,2025-08-26,Congés Payés,Approuvé,Généré automatiquement
+23dfb79b-0027-4e21-8db4-85576dc8cbd2,emp-402,2025-08-14,2025-08-18,Maladie,En attente,Généré automatiquement
+26310818-bac5-4411-9013-66c21031f80a,emp-402,2026-03-13,2026-03-16,Raisons personnelles,Approuvé,Généré automatiquement
+df5cc3f5-179b-4c3a-80a7-89556b6029e6,emp-403,2026-03-01,2026-03-09,Congés Payés,En attente,Généré automatiquement
+397af470-4279-4b58-a678-8d17748a5cbb,emp-403,2026-04-08,2026-04-09,Maladie,Approuvé,Généré automatiquement
+78d9ca30-3280-4e6d-a238-3d4132b558ac,emp-404,2025-08-14,2025-08-23,Maladie,Approuvé,Généré automatiquement
+8efb9fc0-4a6b-4ac9-a7f4-f918c84277f5,emp-404,2026-02-22,2026-03-08,Raisons personnelles,Approuvé,Généré automatiquement
+5a9c1ff9-e524-42d8-869c-83286b9e6dee,emp-404,2026-03-22,2026-03-27,Maternité/Paternité,Approuvé,Généré automatiquement
+9e602f7e-74e6-4394-ab0e-365723e9fd27,emp-406,2026-03-08,2026-03-20,Maternité/Paternité,Approuvé,Généré automatiquement
+ed04ad5b-2b23-42f8-b46f-3fc4a9a23bc4,emp-407,2025-12-20,2025-12-31,Maternité/Paternité,Approuvé,Généré automatiquement
+884fa154-96ac-4e31-9601-044fcf3ffba6,emp-407,2026-01-24,2026-02-06,Maternité/Paternité,Approuvé,Généré automatiquement
+4f34e190-e4dc-419d-9273-69bf9f0428a9,emp-407,2025-09-02,2025-09-13,Maladie,Approuvé,Généré automatiquement
+faf989c0-2634-425c-b73d-e8f014aca8b4,emp-408,2026-02-28,2026-03-05,Maladie,Approuvé,Généré automatiquement
+afad6d74-7b0d-4dbd-a5f1-a97ce3fac2f8,emp-409,2025-09-07,2025-09-18,Maternité/Paternité,Approuvé,Généré automatiquement
+aca9c617-b30b-4d72-b853-039979b60fd6,emp-409,2026-04-08,2026-04-13,Congés Payés,Approuvé,Généré automatiquement
+ad7d7a32-986f-4663-8c89-373e6f6dbabb,emp-412,2026-01-08,2026-01-17,Raisons personnelles,Approuvé,Généré automatiquement
+0791a9c4-a126-40a0-b52b-fbbd4886f947,emp-412,2025-11-09,2025-11-11,Raisons personnelles,Approuvé,Généré automatiquement
+8eb44a3a-165b-48b9-8e0a-e17ca1238acd,emp-412,2026-06-05,2026-06-11,Congés Payés,En attente,Généré automatiquement
+a4d4cb47-bc76-4bb4-a91e-78537b3e445d,emp-413,2026-02-21,2026-02-24,Maladie,En attente,Généré automatiquement
+4a72b4db-61c6-4971-a770-d275762e18ff,emp-413,2025-11-24,2025-12-02,Maladie,Approuvé,Généré automatiquement
+e938ecb3-896e-42b2-81bb-1a21aec1ebdc,emp-413,2025-11-17,2025-11-25,Maternité/Paternité,Approuvé,Généré automatiquement
+dee4da3b-7094-4719-ae45-fb94e809a887,emp-413,2026-04-30,2026-05-14,Maladie,Approuvé,Généré automatiquement
+88a25791-6904-4d3c-bf5e-dd205352594e,emp-414,2026-01-05,2026-01-14,Congés Payés,Approuvé,Généré automatiquement
+d613a6aa-636b-4bbe-9986-f1102483209a,emp-414,2025-08-30,2025-09-05,Autres,Approuvé,Généré automatiquement
+18008291-1f5f-46c7-a6a5-866758743ef7,emp-415,2026-03-19,2026-03-31,Autres,Approuvé,Généré automatiquement
+1271ec50-cf3c-4ad4-80a3-bdb641fd8781,emp-416,2025-08-19,2025-08-26,Raisons personnelles,Approuvé,Généré automatiquement
+a4659e95-2077-4b9f-a6e3-e58074d6f229,emp-416,2025-10-05,2025-10-06,Maternité/Paternité,Approuvé,Généré automatiquement
+01430ef8-bbe0-4f07-b4e7-2c5102868c2f,emp-416,2025-06-19,2025-06-27,Autres,Rejeté,Généré automatiquement
+e9a2c588-77a7-43bd-a7c0-d901f9263205,emp-418,2026-03-09,2026-03-14,Raisons personnelles,Approuvé,Généré automatiquement
+e2d61540-ac8d-4d60-b99c-af2c4723c4de,emp-418,2025-08-30,2025-09-01,Maternité/Paternité,Approuvé,Généré automatiquement
+48a2f623-30a8-4d96-9581-24b2201f6e99,emp-419,2025-09-20,2025-09-21,Maladie,Rejeté,Généré automatiquement
+3d0904d1-d0d2-4341-a558-bcccd994062d,emp-419,2026-02-15,2026-02-21,Congés Payés,Approuvé,Généré automatiquement
+cc1cffc1-3b7c-446f-8acd-6db25a7f1d7f,emp-419,2025-11-02,2025-11-10,Autres,En attente,Généré automatiquement
+596971cf-484e-4fb3-8926-a3a3e3a27d95,emp-419,2026-06-11,2026-06-17,Maternité/Paternité,Approuvé,Généré automatiquement
+7831697d-d5e2-48e1-a079-df0ba8a46bf0,emp-420,2026-05-11,2026-05-12,Congés Payés,Rejeté,Généré automatiquement
+28b95ab0-3b2b-4b0a-9fc0-c8a2bc4a5201,emp-420,2026-02-20,2026-03-03,Autres,Approuvé,Généré automatiquement
+5e86e5ac-29c8-4c2f-bbe2-7cca389cb223,emp-421,2026-05-04,2026-05-06,Raisons personnelles,Approuvé,Généré automatiquement
+01c5fe43-4ad1-44d4-b12c-884d5bda8ce7,emp-421,2025-06-16,2025-06-21,Congés Payés,Approuvé,Généré automatiquement
+7a73656e-52ea-48d6-9e96-e79433bf8e17,emp-421,2026-02-10,2026-02-21,Maternité/Paternité,Approuvé,Généré automatiquement
+778a9698-d2f9-40a3-88f5-4718e51cc956,emp-421,2025-11-02,2025-11-14,Congés Payés,Approuvé,Généré automatiquement
+0aac0638-0e26-4bf2-a7a3-bd3698e76ac7,emp-422,2025-07-17,2025-07-25,Maternité/Paternité,Approuvé,Généré automatiquement
+10f054cd-7146-4180-94c5-a5405aa05437,emp-422,2025-11-17,2025-11-20,Maternité/Paternité,Approuvé,Généré automatiquement
+0d414108-2e44-4516-85ac-64226a04f52b,emp-422,2026-06-07,2026-06-19,Congés Payés,Approuvé,Généré automatiquement
+46c046af-cfde-4f28-98e7-910f0ea1cbd5,emp-424,2025-12-24,2025-12-27,Raisons personnelles,Approuvé,Généré automatiquement
+98c7fc96-92eb-455e-a557-d4a0d2ac4e3e,emp-424,2026-02-16,2026-03-01,Autres,En attente,Généré automatiquement
+82877482-ee01-4257-b9ba-14c960fd798c,emp-424,2026-04-23,2026-04-28,Maladie,Approuvé,Généré automatiquement
+bf35d84e-eb58-44f6-8003-8a7951373c98,emp-424,2025-12-10,2025-12-13,Congés Payés,Approuvé,Généré automatiquement
+3d28ea18-a118-44a8-9fa8-089f66f6c57f,emp-425,2025-10-15,2025-10-22,Raisons personnelles,Approuvé,Généré automatiquement
+5f367046-9746-4c71-a0a6-132753f933f7,emp-426,2025-10-02,2025-10-06,Maternité/Paternité,Rejeté,Généré automatiquement
+a3a0f590-0622-4763-bba0-f41367068761,emp-427,2026-06-09,2026-06-17,Congés Payés,Approuvé,Généré automatiquement
+926d9904-a8bc-4ea9-be26-dcc23d6cf9c0,emp-427,2025-07-15,2025-07-24,Congés Payés,Approuvé,Généré automatiquement
+3a28a3f1-8b54-42a9-97a1-34e88ba89929,emp-428,2025-08-22,2025-09-05,Maternité/Paternité,Approuvé,Généré automatiquement
+11078bf9-4860-4daa-97ad-9883d9a7d42a,emp-429,2026-01-06,2026-01-15,Autres,Approuvé,Généré automatiquement
+c90be5d3-69f8-482e-81ff-735c33c03489,emp-429,2026-05-09,2026-05-13,Raisons personnelles,Approuvé,Généré automatiquement
+43d509cd-f18b-49a3-b0e1-826ad2b26008,emp-429,2026-05-06,2026-05-19,Maladie,Approuvé,Généré automatiquement
+0796e0a2-f068-426e-a1a7-5b5f246d8e6b,emp-429,2025-07-15,2025-07-28,Maternité/Paternité,En attente,Généré automatiquement
+26734a5e-c56b-44aa-a114-712444019258,emp-432,2026-02-21,2026-02-27,Maternité/Paternité,Approuvé,Généré automatiquement
+b62065c2-e892-464e-93a7-8409936919e4,emp-432,2026-03-26,2026-03-27,Autres,Approuvé,Généré automatiquement
+87b28472-af04-47aa-a900-cc103298480b,emp-432,2026-05-11,2026-05-25,Raisons personnelles,En attente,Généré automatiquement
+abaaf990-1dc6-41cb-8807-9a0b7b080a11,emp-432,2025-10-19,2025-10-31,Raisons personnelles,Approuvé,Généré automatiquement
+0c93a3de-de99-44ed-8d01-808b42901c48,emp-433,2025-09-21,2025-09-26,Maladie,Approuvé,Généré automatiquement
+75ad12b1-a917-45ad-a502-f423fbbca2e0,emp-433,2026-03-24,2026-04-04,Maternité/Paternité,Approuvé,Généré automatiquement
+85f93096-806a-4f82-8cad-c7f219aca19b,emp-434,2026-03-13,2026-03-20,Maternité/Paternité,Approuvé,Généré automatiquement
+026c03f2-723d-4654-9e60-3d369eb59869,emp-434,2026-01-29,2026-02-02,Maladie,En attente,Généré automatiquement
+d185394d-8d61-4869-b95e-22072f385ae6,emp-434,2025-07-05,2025-07-18,Maladie,Approuvé,Généré automatiquement
+a0a645ac-a9db-4996-ad54-ecff0380b547,emp-434,2026-02-02,2026-02-08,Maternité/Paternité,Approuvé,Généré automatiquement
+22126645-b191-46da-aca7-6ccf4931fb7a,emp-435,2025-09-08,2025-09-15,Maladie,Approuvé,Généré automatiquement
+e906bac3-82de-40e3-b831-fc3f4aeccbeb,emp-436,2025-10-08,2025-10-15,Maladie,Approuvé,Généré automatiquement
+1e099f4d-60bb-416d-aee0-4d9abdd89574,emp-437,2025-11-29,2025-12-13,Raisons personnelles,Approuvé,Généré automatiquement
+a0457686-ad71-4801-add5-f02c689984d4,emp-437,2025-07-04,2025-07-05,Maladie,En attente,Généré automatiquement
+e54debef-d3ed-47d5-b281-33f2fb0de462,emp-437,2025-11-30,2025-12-10,Maladie,Approuvé,Généré automatiquement
+51c010c4-a167-4b82-9bf4-50a12e3f47c2,emp-438,2026-01-21,2026-02-02,Maladie,Approuvé,Généré automatiquement
+caffbbe2-82f2-441d-9088-1088ff38d650,emp-438,2025-11-02,2025-11-12,Congés Payés,Approuvé,Généré automatiquement
+11c18d4e-043f-4ca0-9bd9-91255a6187b3,emp-439,2026-05-08,2026-05-09,Autres,En attente,Généré automatiquement
+40f7bd76-396f-4f1f-b25c-0928e7deb134,emp-439,2025-09-29,2025-10-10,Congés Payés,Approuvé,Généré automatiquement
+8898b4b4-8055-4b69-a32c-903d40e0cf86,emp-439,2025-07-01,2025-07-11,Congés Payés,Approuvé,Généré automatiquement
+7c60350d-0efa-47f5-ad7b-93362dbe648c,emp-440,2026-02-06,2026-02-11,Maladie,Rejeté,Généré automatiquement
+9dc699e8-055d-4c7b-b55a-feba6b2298c4,emp-440,2025-12-22,2025-12-27,Autres,Rejeté,Généré automatiquement
+71a281ba-acf0-436c-b9aa-6c339f47fcce,emp-440,2025-12-14,2025-12-27,Maternité/Paternité,Approuvé,Généré automatiquement
+955fb6f0-01da-4347-9f24-c1ab6cb2f405,emp-440,2026-05-14,2026-05-15,Raisons personnelles,Approuvé,Généré automatiquement
+c5de16e1-0fe2-445a-bbb9-afb0b8da4380,emp-441,2026-01-02,2026-01-06,Maternité/Paternité,Approuvé,Généré automatiquement
+cba015b6-8a6a-4045-b756-cbcc793cba81,emp-441,2026-03-27,2026-04-03,Raisons personnelles,Approuvé,Généré automatiquement
+d7a0265e-9662-4eb3-b774-2163a0537640,emp-441,2026-03-28,2026-04-09,Autres,Approuvé,Généré automatiquement
+1341f3d1-3eaa-4dbd-9ca3-805f5aeb5b7d,emp-443,2026-05-17,2026-05-29,Maladie,Approuvé,Généré automatiquement
+c23c3b15-6a49-42b8-9311-c8784476f512,emp-444,2025-12-17,2025-12-29,Maternité/Paternité,En attente,Généré automatiquement
+830e4893-7c5e-4344-b76d-45653998c3bc,emp-444,2025-10-19,2025-10-21,Raisons personnelles,Approuvé,Généré automatiquement
+db836aad-c8af-4ada-841f-2c61dd7adfeb,emp-444,2025-11-29,2025-12-01,Maladie,Approuvé,Généré automatiquement
+464b6bff-83bd-4119-ab58-caf52ee60909,emp-444,2025-10-27,2025-11-06,Congés Payés,Approuvé,Généré automatiquement
+ab133f60-8be4-43b2-9fd8-042430936c48,emp-445,2025-08-06,2025-08-11,Maternité/Paternité,En attente,Généré automatiquement
+f57ce59a-e837-4915-92a5-4b6f72ef24c8,emp-445,2026-03-27,2026-04-09,Autres,Approuvé,Généré automatiquement
+3804bbdd-6365-4cb5-9044-0c4b50414cf1,emp-445,2026-06-09,2026-06-10,Maladie,Approuvé,Généré automatiquement
+916e2b3d-d62f-43a2-8afe-e0811712efd9,emp-445,2026-04-19,2026-04-22,Raisons personnelles,Approuvé,Généré automatiquement
+5f930f1b-c119-4f85-a8a9-c12bebffffb6,emp-446,2026-04-11,2026-04-24,Congés Payés,Approuvé,Généré automatiquement
+6eca9802-93d2-4917-84a1-42a2e90c97c0,emp-447,2026-02-18,2026-02-21,Maladie,Approuvé,Généré automatiquement
+0bd41ec5-f452-4e51-b1ec-f228c4bb7bda,emp-447,2026-06-07,2026-06-17,Maternité/Paternité,Approuvé,Généré automatiquement
+d1132251-8098-4f11-b011-887e85de1a1b,emp-447,2025-07-20,2025-07-30,Maternité/Paternité,Approuvé,Généré automatiquement
+6100fbd5-fc32-406a-b339-b13b3f419b64,emp-447,2025-08-16,2025-08-22,Raisons personnelles,Approuvé,Généré automatiquement
+c3783726-f925-4229-ad46-94aaedcc9ed7,emp-448,2025-11-27,2025-12-11,Autres,En attente,Généré automatiquement
+2b7564cd-010d-4f25-b338-678f172e13e4,emp-448,2025-12-08,2025-12-16,Congés Payés,Approuvé,Généré automatiquement
+69131f03-cbfb-43b6-b453-4546cf41e3c4,emp-448,2025-07-12,2025-07-24,Maternité/Paternité,Approuvé,Généré automatiquement
+571abe63-159c-415d-b2e8-ef91688b80dd,emp-448,2026-02-06,2026-02-12,Maternité/Paternité,Approuvé,Généré automatiquement
+e1319076-667c-4fcf-b440-3aed693ea4ea,emp-449,2025-09-05,2025-09-10,Raisons personnelles,Approuvé,Généré automatiquement
+f64b36a7-6c87-4cec-b9c3-587ee48691af,emp-449,2026-06-11,2026-06-17,Maternité/Paternité,Rejeté,Généré automatiquement
+203e88db-6f97-4eed-b550-2877462c44ca,emp-449,2025-06-18,2025-06-20,Maladie,Approuvé,Généré automatiquement
+8a51a5cf-53ea-4413-9a15-344b2c65b8f9,emp-449,2025-07-14,2025-07-25,Maladie,Approuvé,Généré automatiquement
+60b57a51-db09-42e4-be94-88112ffc5e40,emp-450,2026-03-23,2026-03-25,Congés Payés,Approuvé,Généré automatiquement
+894f602d-fed3-44c3-917b-7882e13f69cb,emp-452,2025-07-01,2025-07-05,Congés Payés,En attente,Généré automatiquement
+0f1e58a3-4ccb-4d15-9472-2978337bc0a6,emp-452,2025-07-03,2025-07-11,Maladie,Approuvé,Généré automatiquement
+ceaa8ec5-fd1e-4604-90c3-7722ee7bd296,emp-452,2025-09-19,2025-09-30,Maladie,En attente,Généré automatiquement
+adee57c6-3c98-40c5-9113-a3286dab61af,emp-452,2026-03-01,2026-03-07,Maternité/Paternité,En attente,Généré automatiquement
+5b8d8f18-8ee2-442e-85ae-f30b964d34a2,emp-455,2026-04-18,2026-05-01,Maladie,Approuvé,Généré automatiquement
+003909c0-ebc6-4be7-8add-e5cd1632fc1a,emp-455,2025-12-26,2026-01-05,Autres,Approuvé,Généré automatiquement
+ea785524-b890-48be-a670-8cd4c00e3574,emp-455,2025-07-25,2025-08-02,Maternité/Paternité,En attente,Généré automatiquement
+2c4f3706-2b4e-4ef2-9adb-6a838bb9782a,emp-456,2026-02-26,2026-03-04,Raisons personnelles,Approuvé,Généré automatiquement
+1f521a5a-af25-4e06-b429-dc01248bcbe7,emp-456,2025-09-17,2025-09-23,Maladie,En attente,Généré automatiquement
+75d18d1c-1b1e-49c1-ae37-c334773f4989,emp-456,2026-03-16,2026-03-25,Raisons personnelles,En attente,Généré automatiquement
+00ff41fd-06fe-4d2e-bcb9-8fe07c69061d,emp-457,2025-07-08,2025-07-20,Maternité/Paternité,Approuvé,Généré automatiquement
+ae97cde4-78a7-495b-839b-cea66f7c1712,emp-457,2026-05-25,2026-05-29,Congés Payés,Approuvé,Généré automatiquement
+4f69afa9-0269-4b75-bf54-6e3acbc33b67,emp-457,2025-12-17,2025-12-30,Maladie,Approuvé,Généré automatiquement
+bb22b725-57ea-4f83-a974-147973f71d7e,emp-458,2025-06-12,2025-06-21,Raisons personnelles,Approuvé,Généré automatiquement
+242fec96-a28f-4536-a847-9b8a7d3a6484,emp-458,2025-10-10,2025-10-22,Autres,Approuvé,Généré automatiquement
+19d5c71e-0966-4528-ba97-6a2ebd23b08f,emp-460,2025-09-23,2025-10-02,Maternité/Paternité,Approuvé,Généré automatiquement
+54514c20-6241-477a-8359-c67b51e9dcb8,emp-460,2026-04-29,2026-05-01,Congés Payés,Approuvé,Généré automatiquement
+35dd4f51-a6e7-4810-bc3d-3892d54813a8,emp-460,2025-12-23,2025-12-29,Raisons personnelles,Approuvé,Généré automatiquement
+bb59a899-d2d5-4b2c-af65-87482c980544,emp-461,2025-06-18,2025-07-01,Congés Payés,Approuvé,Généré automatiquement
+05319ee1-c9db-4fb6-95bc-80342b0c0725,emp-461,2025-07-30,2025-08-11,Maladie,Approuvé,Généré automatiquement
+18164673-343f-4c36-aaa4-7be11edd23bf,emp-461,2025-09-25,2025-09-27,Congés Payés,Approuvé,Généré automatiquement
+6f9c310f-3786-47d3-a6b3-148729234643,emp-462,2026-03-31,2026-04-13,Maternité/Paternité,Approuvé,Généré automatiquement
+ada2164a-d2cb-42c8-9c0b-eef4b9ac0e09,emp-462,2025-10-13,2025-10-26,Maternité/Paternité,Approuvé,Généré automatiquement
+5d25827d-fa5a-458f-b21c-c3d5cbc1b195,emp-462,2026-01-16,2026-01-21,Maladie,Approuvé,Généré automatiquement
+99565194-4260-4940-b456-bbfd6ab32fa5,emp-463,2025-07-05,2025-07-14,Congés Payés,Approuvé,Généré automatiquement
+a6774477-9974-4f40-9f58-5944a003a2c0,emp-463,2025-10-16,2025-10-26,Autres,Rejeté,Généré automatiquement
+01a8646b-07c0-4be9-be24-09008593ceda,emp-463,2025-06-14,2025-06-16,Maladie,Approuvé,Généré automatiquement
+b0667df9-454c-4daf-9a18-1fafc3e1ecb7,emp-464,2025-11-26,2025-12-10,Raisons personnelles,Approuvé,Généré automatiquement
+04554a93-546a-41cb-885e-82752f555ea7,emp-464,2025-08-30,2025-09-04,Maternité/Paternité,Approuvé,Généré automatiquement
+83b1d683-f2a0-49de-855b-78704ebfc100,emp-464,2026-04-04,2026-04-10,Raisons personnelles,Approuvé,Généré automatiquement
+f4901973-a8dc-4473-9758-427963145fd9,emp-464,2025-07-10,2025-07-22,Raisons personnelles,Approuvé,Généré automatiquement
+522dd5fc-84df-42e7-8f28-906603e771ee,emp-466,2025-08-10,2025-08-22,Raisons personnelles,Approuvé,Généré automatiquement
+92bcc05c-6cc7-4ea6-a92b-38071a8c23c6,emp-466,2026-02-07,2026-02-17,Raisons personnelles,En attente,Généré automatiquement
+308a5d8b-70a6-407f-955a-57024b021264,emp-466,2025-12-21,2025-12-27,Raisons personnelles,Rejeté,Généré automatiquement
+1cfd2999-e69a-4dc8-9df9-fe9ba3346e69,emp-467,2025-12-30,2025-12-31,Maternité/Paternité,Approuvé,Généré automatiquement
+5260a24e-40df-4827-935a-c3e6319d280f,emp-467,2026-04-21,2026-04-23,Maternité/Paternité,Approuvé,Généré automatiquement
+42f71874-da8c-430f-93a7-306052bbb4f8,emp-468,2025-12-16,2025-12-25,Autres,Approuvé,Généré automatiquement
+3e3ee04a-db33-4adc-afe9-97a507a1227f,emp-468,2026-06-10,2026-06-21,Autres,Approuvé,Généré automatiquement
+8b809145-140f-4107-8bda-31cae99c5757,emp-468,2026-04-09,2026-04-10,Raisons personnelles,Approuvé,Généré automatiquement
+2c31e774-17c3-4ba9-8cae-859d7447181e,emp-468,2025-08-02,2025-08-16,Maladie,En attente,Généré automatiquement
+a84bbc79-770f-45d0-af68-cc8d8b4541a2,emp-470,2026-03-15,2026-03-27,Maladie,Approuvé,Généré automatiquement
+20d04398-6d2a-4f8e-839d-810083adf393,emp-470,2026-05-16,2026-05-21,Raisons personnelles,Approuvé,Généré automatiquement
+b521437d-78cd-45c4-a9fc-557757d09fa0,emp-470,2025-10-01,2025-10-08,Maladie,Approuvé,Généré automatiquement
+d35aa178-7f32-4a3a-90d2-99944bb2fe77,emp-471,2025-11-29,2025-12-10,Raisons personnelles,Approuvé,Généré automatiquement
+ae4cbed6-1c15-448b-8507-8e5474e9a3c2,emp-471,2025-09-02,2025-09-13,Autres,Approuvé,Généré automatiquement
+90f6d01d-9fef-4c5c-ac09-1d8d33d8e1d6,emp-471,2025-11-21,2025-11-22,Maladie,Approuvé,Généré automatiquement
+da07ebad-b56e-4dde-936d-b3d210341366,emp-472,2026-04-12,2026-04-14,Autres,Approuvé,Généré automatiquement
+00fec59d-3032-4a36-ad22-8e807a884fd9,emp-473,2025-06-12,2025-06-20,Autres,Approuvé,Généré automatiquement
+8c3f90e2-cb14-4fb2-bd4d-5e10d3d4320a,emp-474,2026-03-05,2026-03-14,Raisons personnelles,Approuvé,Généré automatiquement
+d4cb05bd-6238-46a4-8e74-33c66f1a8f2b,emp-474,2026-05-09,2026-05-20,Congés Payés,Approuvé,Généré automatiquement
+a9587aef-9778-410c-8d40-cbae2d154967,emp-474,2025-08-01,2025-08-09,Autres,Approuvé,Généré automatiquement
+912c48a1-f723-4243-b6fa-51c2112ea579,emp-476,2025-06-29,2025-07-13,Maternité/Paternité,Approuvé,Généré automatiquement
+81cd6c4e-55de-4c07-b99b-06058f067c52,emp-476,2025-08-04,2025-08-18,Maternité/Paternité,En attente,Généré automatiquement
+e775495c-8d85-4d70-9f37-b1ec774411fb,emp-478,2026-05-13,2026-05-25,Autres,Approuvé,Généré automatiquement
+c4fc8bbd-d4c3-4fc5-a04d-07a8c46cdd2c,emp-478,2025-07-23,2025-07-29,Congés Payés,Approuvé,Généré automatiquement
+bcf31841-c329-4f87-bd9e-2b5b98bc5a5c,emp-478,2026-01-08,2026-01-14,Raisons personnelles,Approuvé,Généré automatiquement
+ccb7245f-66c8-4acc-9b7c-d5ed2229d860,emp-479,2025-10-20,2025-11-02,Maladie,Approuvé,Généré automatiquement
+778d4b1f-06ae-4e70-95c6-9e3c8361e293,emp-480,2026-03-28,2026-03-29,Raisons personnelles,Approuvé,Généré automatiquement
+9d058744-5b8e-491c-ac5d-a49ac5d386f5,emp-480,2026-03-26,2026-03-30,Autres,Approuvé,Généré automatiquement
+69a65834-af78-4aee-beac-6a8aad2d6eee,emp-483,2026-02-22,2026-03-08,Autres,Approuvé,Généré automatiquement
+71b13f5f-5061-4736-8b19-2e78fc1adb8a,emp-483,2026-02-22,2026-02-25,Maternité/Paternité,Approuvé,Généré automatiquement
+50881fa1-00e3-4ded-afcc-a9b824363880,emp-483,2025-10-29,2025-11-07,Maternité/Paternité,Approuvé,Généré automatiquement
+4f2ad561-4b08-4e57-b3aa-a7598888d17d,emp-484,2026-03-08,2026-03-12,Autres,Approuvé,Généré automatiquement
+d350805d-bb1a-49d6-95bb-e682f7f6fadb,emp-484,2026-02-12,2026-02-22,Maladie,Approuvé,Généré automatiquement
+e7b4cd1a-dab7-4ff2-8fa3-74e4db8816a4,emp-485,2026-01-06,2026-01-19,Congés Payés,Approuvé,Généré automatiquement
+04cfcb6c-4218-4ebc-8c3d-35657782a091,emp-485,2025-08-26,2025-09-03,Raisons personnelles,Approuvé,Généré automatiquement
+26a28616-a618-4195-a09a-4a4b35625fb2,emp-485,2026-04-13,2026-04-16,Maladie,Approuvé,Généré automatiquement
+b0889098-57a1-4a03-9f8c-df7c17cd2d60,emp-486,2026-04-15,2026-04-25,Congés Payés,Rejeté,Généré automatiquement
+238276c1-efd0-4391-a9fc-6c1078740e4f,emp-486,2025-09-14,2025-09-17,Congés Payés,Approuvé,Généré automatiquement
+1fa07b7d-c2f8-4932-8fc6-fd31edbeca46,emp-487,2025-08-29,2025-09-02,Autres,Approuvé,Généré automatiquement
+6632d53c-7cac-45c2-a0b9-d4044f60ed4e,emp-487,2026-05-02,2026-05-09,Autres,Approuvé,Généré automatiquement
+1d89cf0f-9aba-4d4d-9427-93154e4e679a,emp-488,2025-07-21,2025-07-29,Raisons personnelles,En attente,Généré automatiquement
+7f844cc1-6bdf-430f-a3a3-f5d2f5354cba,emp-489,2026-05-24,2026-06-03,Raisons personnelles,Approuvé,Généré automatiquement
+0aa26393-3aff-4e76-9804-2b690118565b,emp-489,2026-05-08,2026-05-18,Congés Payés,Rejeté,Généré automatiquement
+5ef493f4-eff1-4eb6-85db-b7a09d5cda5e,emp-489,2025-11-20,2025-11-23,Raisons personnelles,Approuvé,Généré automatiquement
+d520457d-9899-4636-a906-7d8657e62a28,emp-489,2025-06-17,2025-06-28,Autres,En attente,Généré automatiquement
+d0c596bb-cbcb-499b-96d5-ccafcca114a8,emp-490,2025-09-18,2025-09-25,Maladie,Approuvé,Généré automatiquement
+d505f6d8-462f-4eb1-adbc-21dd2bab24ea,emp-490,2026-02-25,2026-02-27,Autres,Approuvé,Généré automatiquement
+8d32f313-4978-4628-ace3-6cbbc84e9e41,emp-490,2025-07-06,2025-07-13,Maladie,Approuvé,Généré automatiquement
+c3eb46f9-bab4-4f40-9d42-f3e4ed594d96,emp-491,2025-07-08,2025-07-12,Autres,Rejeté,Généré automatiquement
+fa7c257a-8e32-4d53-9aef-12e23cceb441,emp-491,2025-10-24,2025-11-06,Maladie,Approuvé,Généré automatiquement
+ccf67785-357a-4dc3-b96d-3d1d74e4c970,emp-491,2026-02-04,2026-02-17,Maladie,Approuvé,Généré automatiquement
+9ecc74c8-d71a-4345-821e-f7f8c5f7ef17,emp-492,2025-08-17,2025-08-24,Raisons personnelles,Approuvé,Généré automatiquement
+1170c93f-b3d1-469c-b276-e80b97264cc3,emp-493,2026-01-02,2026-01-05,Maladie,Approuvé,Généré automatiquement
+43698c56-9f66-4702-a914-9156bbbeb409,emp-497,2026-05-22,2026-06-05,Raisons personnelles,Approuvé,Généré automatiquement
+4b5b6d56-ffde-4589-a8b6-82a0ce2d4357,emp-497,2026-05-18,2026-05-24,Maternité/Paternité,Approuvé,Généré automatiquement
+5a5ec914-7d50-4a72-a2fd-fbdc21c0f1a1,emp-498,2026-02-06,2026-02-14,Maladie,Approuvé,Généré automatiquement
+b4da4f5e-0a51-4fc1-84c4-85984cbe0fe4,emp-498,2025-11-11,2025-11-13,Maternité/Paternité,Approuvé,Généré automatiquement
+aca4892c-bc3a-484e-97ab-1b28ca0cc220,emp-498,2026-05-07,2026-05-18,Congés Payés,En attente,Généré automatiquement
+d5382661-ee64-4477-9a90-79ac454d79da,emp-498,2025-10-19,2025-10-27,Raisons personnelles,Approuvé,Généré automatiquement
+f522b1e1-013f-4131-be1d-da12973c0aca,emp-499,2026-04-26,2026-05-10,Autres,Approuvé,Généré automatiquement
+9add88fd-9cc2-44ae-a2e8-5eb41a7cc1c1,emp-499,2025-08-06,2025-08-20,Autres,Approuvé,Généré automatiquement
+0b91af16-c36e-436e-993e-02361eeb8470,emp-499,2026-04-04,2026-04-06,Raisons personnelles,Approuvé,Généré automatiquement
+9c7347c1-61f9-457c-8b30-71a2159b0b20,emp-499,2026-05-10,2026-05-16,Congés Payés,Approuvé,Généré automatiquement

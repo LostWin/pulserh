@@ -1,6 +1,10 @@
 import logging
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select, func
+from app.database import get_db
+from app.models.domain import Department, Employee
 
 from app.schemas.department import DepartmentCreate, DepartmentUpdate, DepartmentResponse
 from app.schemas.employee import EmployeeResponse
@@ -10,9 +14,42 @@ router = APIRouter(prefix="/departments", tags=["Departments"])
 logger = logging.getLogger(__name__)
 
 @router.get("/", response_model=List[DepartmentResponse], dependencies=[Depends(require_any_role("hr", "manager", "director"))])
-def list_departments():
+async def list_departments(db: AsyncSession = Depends(get_db)):
     """Liste de tous les départements"""
-    return []
+    # Fetch departments
+    query = select(Department)
+    result = await db.execute(query)
+    departments_db = result.scalars().all()
+    
+    # We also need employee counts and manager emails. 
+    # For simplicity, we just fetch all employees.
+    emp_query = select(Employee)
+    emp_result = await db.execute(emp_query)
+    all_employees = emp_result.scalars().all()
+    
+    emp_map = {emp.id: emp for emp in all_employees}
+    
+    dept_counts = {}
+    for emp in all_employees:
+        if emp.department_id:
+            dept_counts[emp.department_id] = dept_counts.get(emp.department_id, 0) + 1
+            
+    items = []
+    for dept in departments_db:
+        manager_name = None
+        if dept.manager_id and dept.manager_id in emp_map:
+            emp = emp_map[dept.manager_id]
+            manager_name = f"{emp.first_name} {emp.last_name}"
+            
+        items.append(
+            DepartmentResponse(
+                id=dept.id,
+                name=dept.name,
+                employee_count=dept_counts.get(dept.id, 0),
+                manager=manager_name
+            )
+        )
+    return items
 
 @router.get("/{id}", response_model=DepartmentResponse, dependencies=[Depends(require_hr)])
 def get_department(id: str):

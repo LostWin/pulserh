@@ -16,7 +16,7 @@ WORKDIR /app
 
 # Installer les dépendances système nécessaires (compilation de certains packages)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc libpq-dev && \
+    apt-get install -y --no-install-recommends gcc libpq-dev libcairo2-dev pkg-config python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
@@ -32,7 +32,7 @@ WORKDIR /app
 
 # Installer uniquement les libs runtime (pas les headers de compilation)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libpq5 curl && \
+    apt-get install -y --no-install-recommends libpq5 curl libcairo2 pango1.0-tools && \
     rm -rf /var/lib/apt/lists/*
 
 # Copier les packages Python installés depuis le stage précédent

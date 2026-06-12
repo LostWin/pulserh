@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document RH - PulseRH</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm 2cm 3cm 2cm;
+            @frame header {
+                -pdf-frame-content: header_content;
+                top: 1cm;
+                margin-left: 2cm;
+                margin-right: 2cm;
+                height: 3cm;
+            }
+            @frame footer {
+                -pdf-frame-content: footer_content;
+                bottom: 1cm;
+                margin-left: 2cm;
+                margin-right: 2cm;
+                height: 2cm;
+            }
+        }
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 11pt;
+            color: #334155;
+            line-height: 1.5;
+        }
+        .header {
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #0f172a;
+        }
+        .footer {
+            text-align: center;
+            font-size: 9pt;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+        .title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #0f172a;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .content {
+            text-align: justify;
+        }
+        .signature-section {
+            margin-top: 60px;
+            text-align: right;
+            font-style: italic;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+    <div id="header_content">
+        <div class="header">
+            <span class="logo">PulseRH</span>
+        </div>
+    </div>
+    
+    <div id="footer_content">
+        <div class="footer">
+            PulseRH SAS - 123 Avenue de l'Innovation, 75001 Paris - SIRET 123456789
+        </div>
+    </div>
+
+    <h1 class="title">{% block title %}{% endblock %}</h1>
+    
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <div class="signature-section">
+        <p>Fait à Paris, le {{ date }}</p>
+        <p>La Direction des Ressources Humaines<br><strong>PulseRH</strong></p>
+    </div>
+</body>
+</html>

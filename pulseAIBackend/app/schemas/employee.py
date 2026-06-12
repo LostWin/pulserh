@@ -39,6 +39,10 @@ class EmployeeUpdate(BaseModel):
 class EmployeeResponse(EmployeeBase):
     id: str = Field(..., description="ID unique généré par le système", json_schema_extra={"example": "emp-12345"})
     salary: Optional[float] = Field(None, description="Salaire brut annuel (masqué si l'utilisateur n'a pas les droits HR)", json_schema_extra={"example": 45000.0})
+    phone: Optional[str] = Field(None, description="Numéro de téléphone")
+    hire_date: Optional[str] = Field(None, description="Date d'embauche formatisée")
+    manager_name: Optional[str] = Field(None, description="Nom complet du manager")
+    leave_balance: Optional[str] = Field(None, description="Solde de congés restant")
 
 class EmployeeListResponse(BaseModel):
     items: List[EmployeeResponse] = Field(..., description="Liste des employés correspondant aux critères")

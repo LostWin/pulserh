@@ -21,6 +21,7 @@ const Equipe = lazy(() => import('./pages/manager/Equipe'));
 const Predictions = lazy(() => import('./pages/manager/Predictions'));
 const ManagerAlertes = lazy(() => import('./pages/manager/Alertes'));
 const ManagerEntretiens = lazy(() => import('./pages/manager/Entretiens'));
+const EmployeeProfileView = lazy(() => import('./pages/EmployeeProfileView'));
 
 // ── RH ─────────────────────────────────────────────────────────────────────
 const RhDashboard = lazy(() => import('./pages/rh/Dashboard'));
@@ -69,6 +70,7 @@ export default function App() {
             <Route element={<ProtectedRoute section="manager" />}>
               <Route path="/manager/dashboard" element={<ManagerDashboard />} />
               <Route path="/manager/equipe" element={<Equipe />} />
+              <Route path="/manager/equipe/:id" element={<EmployeeProfileView />} />
               <Route path="/manager/predictions" element={<Predictions />} />
               <Route path="/manager/alertes" element={<ManagerAlertes />} />
               <Route path="/manager/entretiens" element={<ManagerEntretiens />} />
@@ -79,6 +81,7 @@ export default function App() {
               <Route path="/rh/dashboard" element={<RhDashboard />} />
               <Route path="/rh/import" element={<ImportDonnees />} />
               <Route path="/rh/employes" element={<Employes />} />
+              <Route path="/rh/employes/:id" element={<EmployeeProfileView />} />
               <Route path="/rh/departements" element={<Departements />} />
               <Route path="/rh/documents" element={<DocumentsRH />} />
               <Route path="/rh/workflows" element={<Workflows />} />

@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
-import { Search, Download, UserPlus, ArrowUpRight, ArrowDownRight } from 'lucide-react';
-import { employees } from '../../data/mockData';
+import { useMemo, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Download, UserPlus, ArrowUpRight, ArrowDownRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { api } from '../../lib/api';
 import { cn, riskMeta, engagementBar } from '../../lib/utils';
 import PageHeader from '../../components/PageHeader';
 import Card from '../../components/ui/Card';
@@ -16,28 +17,78 @@ const RISK_FILTERS = [
 ];
 
 export default function Employes() {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [dept, setDept] = useState('all');
   const [risk, setRisk] = useState('all');
+  const [dbEmployees, setDbEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 15;
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await api.get('/employees/?page_size=500'); // Added trailing slash
+        // Mapping DB format to the UI format
+        const mapped = response.items.map(emp => {
+          // Mock data for missing metrics
+          const hash = emp.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+          const engagement = 50 + (hash % 50);
+          const risks = ['low', 'medium', 'high'];
+          const riskLevel = risks[hash % 3];
+          const delta = (hash % 20) - 10;
+          
+          return {
+            id: emp.id,
+            name: `${emp.first_name} ${emp.last_name}`,
+            title: emp.contract_type || 'Collaborateur', // Temporarily mapped to contract_type
+            department: emp.department || 'Non assigné',
+            risk: riskLevel,
+            engagement: engagement,
+            delta: delta,
+            lastActive: 'Il y a ' + ((hash % 5) + 1) + 'h'
+          };
+        });
+        setDbEmployees(mapped);
+      } catch (err) {
+        console.error("Failed to fetch employees", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEmployees();
+  }, []);
 
   const departments = useMemo(
-    () => ['all', ...Array.from(new Set(employees.map((e) => e.department)))],
-    [],
+    () => ['all', ...Array.from(new Set(dbEmployees.map((e) => e.department)))],
+    [dbEmployees],
   );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return employees.filter((e) => {
+    const result = dbEmployees.filter((e) => {
       const matchesQuery = !q || e.name.toLowerCase().includes(q) || e.title.toLowerCase().includes(q);
       const matchesDept = dept === 'all' || e.department === dept;
       const matchesRisk = risk === 'all' || e.risk === risk;
       return matchesQuery && matchesDept && matchesRisk;
     });
-  }, [query, dept, risk]);
+    // Reset to page 1 when filters change
+    setCurrentPage(1);
+    return result;
+  }, [query, dept, risk, dbEmployees]);
+
+  const totalPages = Math.ceil(filtered.length / pageSize);
+  const paginated = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, currentPage, pageSize]);
 
   return (
     <div className="animate-fade-in-up space-y-6">
-      <PageHeader title="Employés" subtitle={`${employees.length} collaborateurs · ${filtered.length} affichés`}>
+      <PageHeader title="Employés" subtitle={`${dbEmployees.length} collaborateurs · ${filtered.length} affichés`}>
         <button className="inline-flex items-center gap-2 rounded-xl border border-brand-secondary/20 bg-white px-3 py-2 text-sm font-medium text-brand-dark shadow-sm transition-colors hover:bg-brand-light">
           <Download size={16} /> Exporter
         </button>
@@ -101,11 +152,15 @@ export default function Employes() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {filtered.map((emp) => {
+              {paginated.map((emp) => {
                 const meta = riskMeta(emp.risk);
                 const up = emp.delta >= 0;
                 return (
-                  <tr key={emp.id} className="transition-colors hover:bg-brand-light/70">
+                  <tr 
+                    key={emp.id} 
+                    onClick={() => navigate(`/rh/employes/${emp.id}`)}
+                    className="transition-colors hover:bg-brand-light/70 cursor-pointer"
+                  >
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-3">
                         <Avatar name={emp.name} size="sm" />
@@ -137,7 +192,39 @@ export default function Employes() {
           </table>
         </div>
 
-        {filtered.length === 0 && (
+        {/* Pagination controls */}
+        {!loading && filtered.length > 0 && (
+          <div className="flex items-center justify-between border-t border-brand-secondary/10 bg-brand-light/30 px-5 py-3">
+            <p className="text-xs font-medium text-brand-secondary/70">
+              Affichage de {(currentPage - 1) * pageSize + 1} à {Math.min(currentPage * pageSize, filtered.length)} sur {filtered.length} collaborateurs
+            </p>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="rounded-lg border border-brand-secondary/20 bg-white p-1.5 text-brand-secondary/70 shadow-sm transition-colors hover:bg-brand-light disabled:opacity-50"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <span className="text-xs font-medium text-brand-dark">
+                Page {currentPage} / {totalPages || 1}
+              </span>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages || totalPages === 0}
+                className="rounded-lg border border-brand-secondary/20 bg-white p-1.5 text-brand-secondary/70 shadow-sm transition-colors hover:bg-brand-light disabled:opacity-50"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {loading ? (
+          <div className="py-16 text-center">
+            <p className="text-sm font-medium text-brand-secondary/80">Chargement des données en cours...</p>
+          </div>
+        ) : filtered.length === 0 && (
           <div className="py-16 text-center">
             <p className="text-sm font-medium text-brand-secondary/80">Aucun collaborateur ne correspond à ces critères.</p>
             <button

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}AUTORISATION DE TÉLÉTRAVAIL{% endblock %}
+
+{% block content %}
+<p>Conformément à la politique de l'entreprise PulseRH, la Direction autorise par la présente :</p>
+<br>
+<p><b>M/Mme {{ employee.first_name }} {{ employee.last_name }}</b></p>
+<br>
+<p>à bénéficier du dispositif de télétravail régulier, à hauteur de <b>{{ custom_fields.get('days_per_week', 2) }} jours par semaine</b>.
+Cette organisation du travail est soumise au respect des horaires habituels et au maintien 
+de la communication avec l'équipe du département <b>{{ employee.department_name }}</b>.</p>
+<br>
+<p>L'entreprise s'assure que le collaborateur dispose du matériel nécessaire à l'exécution de ses missions à distance.</p>
+{% endblock %}

@@ -50,6 +50,15 @@ http:
       tls: {}
       middlewares:
         - security-headers
+    backend:
+      rule: "Host(`api.pulse.local`)"
+      entryPoints:
+        - websecure
+      service: backend-service
+      tls: {}
+      middlewares:
+        - security-headers
+        - rate-limit
 
   services:
     keycloak-service:
@@ -72,6 +81,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://pulse_frontend:5173"
+    backend-service:
+      loadBalancer:
+        servers:
+          - url: "http://pulse_backend:8000"
 
   middlewares:
     traefik-auth:

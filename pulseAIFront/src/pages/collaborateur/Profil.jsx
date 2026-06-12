@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   User, Award, Briefcase, TrendingUp, Star,
   ChevronRight, Download, Edit2, Save, X,
-  MapPin, Lock, Camera, CheckCircle2, Shield,
+  MapPin, Lock, Camera, CheckCircle2, Shield, RefreshCw
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { api } from '../../lib/api';
 
 // ─── Static mock data (from mockData context) ─────────────────────────────
 const SKILLS = [
@@ -123,6 +124,7 @@ export default function Profil() {
   // Edit mode
   const [editing,  setEditing]  = useState(false);
   const [saved,    setSaved]    = useState(false);
+  const [loading,  setLoading]  = useState(true);
 
   // Editable states
   const [personal,     setPersonal]     = useState(INITIAL_PERSONAL);
@@ -138,6 +140,45 @@ export default function Profil() {
   const [draftAvatar,       setDraftAvatar]       = useState(avatarSrc);
 
   const fileRef = useRef(null);
+
+  useEffect(() => {
+    async function loadProfile() {
+      try {
+        const data = await api.get('/employees/me');
+        if (data) {
+          const personalData = {
+            fullName: `${data.first_name} ${data.last_name}`,
+            birthDate: '14 mars 1996', // Par défaut
+            email: data.email,
+            address: '12 bis Rue de l\'Innovation, 75008 Paris, France', // Par défaut
+            phone: data.phone || '+33 6 12 34 56 78',
+          };
+          
+          const profData = {
+            employeeId: data.id,
+            joinDate: data.hire_date || '12 janv. 2023',
+            department: data.department || 'Non assigné',
+            contractType: data.contract_type || 'CDI',
+            salary: data.salary ? `${data.salary.toLocaleString('fr-FR')} € / an` : 'Confidentiel',
+            leaveBalance: data.leave_balance || '30 / 30 jours',
+            managerName: data.manager_name || 'Sarah Jenkins'
+          };
+          
+          setPersonal(personalData);
+          setDraftPersonal(personalData);
+          setProfessional(profData);
+          setDraftProfessional(profData);
+          setAvatarSrc(`https://ui-avatars.com/api/?name=${encodeURIComponent(personalData.fullName)}&background=1F524B&color=fff&size=80`);
+          setDraftAvatar(`https://ui-avatars.com/api/?name=${encodeURIComponent(personalData.fullName)}&background=1F524B&color=fff&size=80`);
+        }
+      } catch (err) {
+        console.error("Erreur de chargement du profil", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProfile();
+  }, [user]);
 
   // ── Permission helpers ────────────────────────────────────────────────
   const canEditPersonalField = (key) =>
@@ -162,13 +203,23 @@ export default function Profil() {
     setSaved(false);
   };
 
-  const saveEdit = () => {
-    setPersonal({ ...draftPersonal });
-    setProfessional({ ...draftProfessional });
-    setAvatarSrc(draftAvatar);
-    setEditing(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3500);
+  const saveEdit = async () => {
+    try {
+      if (!isRhOrAdmin && draftPersonal.phone !== personal.phone) {
+        await api.post('/employees/me/change-request', {
+          field: 'phone',
+          new_value: draftPersonal.phone
+        });
+      }
+      setPersonal({ ...draftPersonal });
+      setProfessional({ ...draftProfessional });
+      setAvatarSrc(draftAvatar);
+      setEditing(false);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3500);
+    } catch (err) {
+      console.error("Erreur de sauvegarde", err);
+    }
   };
 
   const cancelEdit = () => {
@@ -220,6 +271,15 @@ export default function Profil() {
   const P  = editing ? draftPersonal     : personal;
   const PR = editing ? draftProfessional : professional;
   const AV = editing ? draftAvatar       : avatarSrc;
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-brand-secondary/50">
+        <RefreshCw className="animate-spin text-brand-secondary mb-4" size={36} />
+        <p className="text-sm font-semibold">Chargement du profil...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="animate-fade-in-up space-y-5">
@@ -490,11 +550,11 @@ export default function Profil() {
               <SectionLabel>Manager</SectionLabel>
               <div className="flex items-center gap-2 mt-2">
                 <div className="h-8 w-8 rounded-full bg-brand-secondary/20 flex items-center justify-center text-xs font-bold text-brand-secondary shrink-0">
-                  SJ
+                  {(PR.managerName || 'Sarah Jenkins').split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-brand-dark">Sarah Jenkins</p>
-                  <p className="text-[10px] text-brand-secondary/50">Engineering Lead</p>
+                  <p className="text-sm font-medium text-brand-dark">{PR.managerName || 'Sarah Jenkins'}</p>
+                  <p className="text-[10px] text-brand-secondary/50">Manager Direct</p>
                 </div>
               </div>
             </div>

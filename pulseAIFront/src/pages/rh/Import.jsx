@@ -1,61 +1,129 @@
-import { useState, useRef } from 'react';
-import { Upload, FileText, CheckCircle, XCircle, Clock, AlertTriangle, Trash2, Eye } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Upload, FileText, CheckCircle, XCircle, AlertTriangle, Info } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { api } from '../../lib/api';
 
-const HISTORY = [
-  { id: 1, file: 'employes_juin_2026.csv', date: '11 juin 2026, 09:14', status: 'success', rows: 247, user: 'I. Garcia' },
-  { id: 2, file: 'contrats_Q2.xlsx', date: '5 juin 2026, 14:32', status: 'success', rows: 89, user: 'I. Garcia' },
-  { id: 3, file: 'paie_mai_2026.csv', date: '1 juin 2026, 08:57', status: 'error', rows: 0, user: 'M. Dupuis' },
-  { id: 4, file: 'formations_S1.xlsx', date: '28 mai 2026, 11:20', status: 'success', rows: 34, user: 'I. Garcia' },
-];
-
-const STATUS_BADGE = {
-  success: 'bg-brand-secondary/10 text-brand-secondary',
-  error: 'bg-brand-warning/10 text-brand-warning',
-  pending: 'bg-brand-dark/10 text-brand-dark',
+const IMPORT_TYPES = {
+  departments: { id: 'departments', label: 'Départements' },
+  jobs: { id: 'jobs', label: 'Postes (Jobs)' },
+  employees: { id: 'employees', label: 'Employés' },
+  contracts: { id: 'contracts', label: 'Contrats' },
+  leaves: { id: 'leaves', label: 'Congés (Leaves)' },
+  projects: { id: 'projects', label: 'Projets' },
+  tasks: { id: 'tasks', label: 'Tâches' },
+  attendances: { id: 'attendances', label: 'Présences (Attendances)' },
 };
-const STATUS_LABEL = { success: 'Succès', error: 'Erreur', pending: 'En attente' };
-const STATUS_ICON = { success: CheckCircle, error: XCircle, pending: Clock };
 
 export default function ImportDonnees() {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState(null);
-  const [progress, setProgress] = useState(0);
+  const [detectedType, setDetectedType] = useState(null);
   const [importing, setImporting] = useState(false);
-  const [done, setDone] = useState(false);
+  const [report, setReport] = useState(null);
+  const [error, setError] = useState(null);
+  const [history, setHistory] = useState([]);
   const inputRef = useRef();
+
+  const fetchHistory = async () => {
+    try {
+      const data = await api.get('/imports/history');
+      setHistory(data);
+    } catch (err) {
+      console.error("Erreur lors de la récupération de l'historique :", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  const detectFileType = (csvHeader) => {
+    const header = csvHeader.toLowerCase();
+    if (header.includes('first_name') && header.includes('last_name')) return 'employees';
+    if (header.includes('title') && header.includes('level')) return 'jobs';
+    if (header.includes('check_in')) return 'attendances';
+    if (header.includes('salary')) return 'contracts';
+    if (header.includes('type') && header.includes('start_date') && header.includes('end_date')) return 'leaves';
+    if (header.includes('deadline')) return 'projects';
+    if (header.includes('project_id') && header.includes('title')) return 'tasks';
+    if (header.includes('name') && header.includes('manager_id')) return 'departments';
+    return null; // Unknown type
+  };
+
+  const processFile = (f) => {
+    if (!f) return;
+    setFile(f);
+    setReport(null);
+    setError(null);
+    setDetectedType(null);
+
+    // Read the first line of the file to detect columns
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target.result;
+      const firstLine = text.split('\n')[0];
+      const type = detectFileType(firstLine);
+      
+      if (type) {
+        setDetectedType(type);
+      } else {
+        setError("Impossible de déterminer automatiquement le type de données. Vérifiez les en-têtes du fichier CSV.");
+        setFile(null);
+      }
+    };
+    reader.onerror = () => setError("Erreur de lecture du fichier.");
+    // Read only the first 500 bytes to be fast
+    reader.readAsText(f.slice(0, 500));
+  };
 
   const handleDrop = (e) => {
     e.preventDefault();
     setDragging(false);
-    const f = e.dataTransfer.files[0];
-    if (f) { setFile(f); setDone(false); setProgress(0); }
+    processFile(e.dataTransfer.files[0]);
   };
 
   const handleFile = (e) => {
-    const f = e.target.files[0];
-    if (f) { setFile(f); setDone(false); setProgress(0); }
+    processFile(e.target.files[0]);
   };
 
-  const startImport = () => {
-    if (!file || importing) return;
+  const startImport = async () => {
+    if (!file || !detectedType || importing) return;
     setImporting(true);
-    setProgress(0);
-    const interval = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 100) { clearInterval(interval); setImporting(false); setDone(true); return 100; }
-        return p + Math.random() * 12;
-      });
-    }, 200);
+    setReport(null);
+    setError(null);
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      // Utilisation du wrapper API centralisé
+      const data = await api.post(`/imports/${detectedType}`, formData);
+      setReport(data);
+      
+      // Recharger l'historique depuis la BDD
+      await fetchHistory();
+    } catch (err) {
+      setError(err.message);
+      // Recharger l'historique pour inclure l'erreur si elle a été sauvegardée
+      await fetchHistory();
+    } finally {
+      setImporting(false);
+    }
   };
 
-  const reset = () => { setFile(null); setProgress(0); setDone(false); };
+  const reset = () => { 
+    setFile(null); 
+    setDetectedType(null);
+    setReport(null); 
+    setError(null); 
+    if (inputRef.current) inputRef.current.value = '';
+  };
 
   return (
     <div className="animate-fade-in-up space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-brand-dark">Import de données</h1>
-        <p className="mt-1 text-sm text-brand-secondary/70">Importez des fichiers CSV ou Excel pour mettre à jour la base employés.</p>
+        <p className="mt-1 text-sm text-brand-secondary/70">Le système détecte automatiquement le type d'entité grâce aux colonnes du CSV.</p>
       </div>
 
       {/* Drop zone */}
@@ -70,7 +138,7 @@ export default function ImportDonnees() {
           file && 'cursor-default',
         )}
       >
-        <input ref={inputRef} type="file" accept=".csv,.xlsx,.xls" className="hidden" onChange={handleFile} />
+        <input ref={inputRef} type="file" accept=".csv" className="hidden" onChange={handleFile} />
         {file ? (
           <>
             <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-secondary/10">
@@ -80,34 +148,51 @@ export default function ImportDonnees() {
               <p className="font-semibold text-brand-dark">{file.name}</p>
               <p className="text-sm text-brand-secondary/60">{(file.size / 1024).toFixed(1)} Ko</p>
             </div>
-            {/* Progress */}
-            {(importing || done) && (
-              <div className="w-full max-w-sm">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-brand-secondary/70">{done ? 'Import terminé' : 'Import en cours…'}</span>
-                  <span className="text-xs font-bold text-brand-secondary">{Math.round(progress)}%</span>
+            
+            {importing && (
+              <div className="flex items-center gap-2 text-sm text-brand-secondary font-medium">
+                <div className="h-4 w-4 rounded-full border-2 border-brand-secondary border-t-transparent animate-spin" />
+                Importation en cours...
+              </div>
+            )}
+
+            {!importing && detectedType && !report && !error && (
+              <div className="mt-4 flex flex-col items-center max-w-md w-full gap-4">
+                <div className="w-full rounded-xl bg-brand-secondary/5 border border-brand-secondary/20 p-4">
+                  <h3 className="font-semibold text-brand-dark flex items-center gap-2">
+                    <CheckCircle size={18} className="text-brand-secondary" />
+                    Type détecté : {IMPORT_TYPES[detectedType].label}
+                  </h3>
+                  <div className="mt-3 flex gap-2 items-start text-xs text-brand-secondary/80 bg-white p-3 rounded-lg border border-brand-secondary/10">
+                    <Info size={16} className="text-brand-secondary shrink-0 mt-0.5" />
+                    <p>
+                      <strong>Stratégie de mise à jour (Upsert) :</strong><br/>
+                      Si un ID du fichier n'existe pas, la ligne sera créée. S'il existe déjà, la ligne correspondante sera entièrement mise à jour avec les nouvelles données du fichier.
+                    </p>
+                  </div>
                 </div>
-                <div className="h-2 rounded-full bg-brand-light overflow-hidden">
-                  <div className="h-full rounded-full bg-brand-secondary transition-all duration-200" style={{ width: `${progress}%` }} />
+
+                <div className="flex gap-3 mt-2 w-full justify-center">
+                  <button onClick={startImport} className="rounded-xl bg-brand-secondary px-8 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-dark transition-colors">
+                    Confirmer l'import
+                  </button>
+                  <button onClick={reset} className="rounded-xl border border-brand-secondary/20 px-6 py-2.5 text-sm font-medium text-brand-secondary hover:bg-brand-light transition-colors">
+                    Annuler
+                  </button>
                 </div>
               </div>
             )}
-            {done && (
-              <div className="flex items-center gap-2 rounded-xl bg-brand-secondary/10 px-4 py-2">
-                <CheckCircle size={16} className="text-brand-secondary" />
-                <span className="text-sm font-medium text-brand-secondary">Fichier importé avec succès !</span>
+
+            {error && (
+              <div className="mt-4 flex w-full max-w-md items-start gap-3 rounded-xl bg-brand-warning/10 p-4 text-left">
+                <XCircle size={20} className="text-brand-warning shrink-0" />
+                <div>
+                  <h4 className="text-sm font-bold text-brand-warning">Échec de l'import</h4>
+                  <p className="mt-1 text-xs text-brand-warning/80">{error}</p>
+                  <button onClick={reset} className="mt-3 rounded-lg border border-brand-warning/30 px-4 py-1.5 text-xs font-semibold text-brand-warning hover:bg-brand-warning/20">Réessayer</button>
+                </div>
               </div>
             )}
-            <div className="flex gap-3">
-              {!importing && !done && (
-                <button onClick={startImport} className="rounded-xl bg-brand-secondary px-5 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-dark transition-colors">
-                  Lancer l'import
-                </button>
-              )}
-              <button onClick={reset} className="rounded-xl border border-brand-secondary/20 px-5 py-2 text-sm font-medium text-brand-secondary hover:bg-brand-light transition-colors">
-                Changer de fichier
-              </button>
-            </div>
           </>
         ) : (
           <>
@@ -115,54 +200,113 @@ export default function ImportDonnees() {
               <Upload size={28} className="text-brand-secondary" />
             </div>
             <div className="text-center">
-              <p className="font-semibold text-brand-dark">Glissez votre fichier ici</p>
-              <p className="text-sm text-brand-secondary/60">ou cliquez pour parcourir · CSV, XLSX, XLS</p>
+              <p className="font-semibold text-brand-dark">Glissez votre fichier CSV ici</p>
+              <p className="text-sm text-brand-secondary/60">Le système détectera automatiquement le type de données.</p>
             </div>
           </>
         )}
       </div>
 
-      {/* History */}
-      <div className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-brand-secondary/10">
-          <h2 className="font-semibold text-brand-dark">Historique des imports</h2>
-          <span className="rounded-full bg-brand-light px-2.5 py-0.5 text-xs font-semibold text-brand-secondary">{HISTORY.length} imports</span>
+      {/* Rapport d'import */}
+      {report && (
+        <div className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm overflow-hidden animate-fade-in-up">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-brand-secondary/10 bg-brand-light/20">
+            <h2 className="font-semibold text-brand-dark flex items-center gap-2">
+              <CheckCircle size={18} className="text-brand-secondary" />
+              Rapport de traitement ({IMPORT_TYPES[detectedType]?.label})
+            </h2>
+            <button onClick={reset} className="text-xs font-semibold text-brand-secondary hover:underline">Nouvel import</button>
+          </div>
+          
+          <div className="p-5 grid grid-cols-3 gap-4">
+            <div className="rounded-xl bg-brand-light/30 p-4 text-center">
+              <p className="text-sm font-semibold text-brand-secondary/70">Lignes lues</p>
+              <p className="text-3xl font-bold text-brand-dark mt-1">{report.processed}</p>
+            </div>
+            <div className="rounded-xl bg-brand-secondary/10 p-4 text-center">
+              <p className="text-sm font-semibold text-brand-secondary/70">Créés / Mis à jour</p>
+              <p className="text-3xl font-bold text-brand-secondary mt-1">{report.created + report.updated}</p>
+            </div>
+            <div className={cn("rounded-xl p-4 text-center", report.errors.length > 0 ? "bg-brand-warning/10" : "bg-brand-light/30")}>
+              <p className={cn("text-sm font-semibold", report.errors.length > 0 ? "text-brand-warning/70" : "text-brand-secondary/70")}>Erreurs</p>
+              <p className={cn("text-3xl font-bold mt-1", report.errors.length > 0 ? "text-brand-warning" : "text-brand-dark")}>{report.errors.length}</p>
+            </div>
+          </div>
+
+          {report.errors.length > 0 && (
+            <div className="border-t border-brand-secondary/10">
+              <div className="px-5 py-3 bg-brand-warning/5 border-b border-brand-warning/10 flex items-center gap-2">
+                <AlertTriangle size={16} className="text-brand-warning" />
+                <h3 className="text-sm font-bold text-brand-warning">Détails des erreurs de validation</h3>
+              </div>
+              <ul className="max-h-64 overflow-y-auto divide-y divide-brand-secondary/5 p-2">
+                {report.errors.map((err, idx) => (
+                  <li key={idx} className="px-4 py-2 text-sm flex gap-3 items-start">
+                    <span className="font-mono text-xs bg-brand-warning/10 text-brand-warning px-2 py-0.5 rounded">Ligne {err.line}</span>
+                    <span className="text-brand-dark/80">{err.error}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-        <table className="w-full text-sm">
-          <thead className="bg-brand-light/60">
-            <tr>
-              {['Fichier', 'Date', 'Lignes', 'Par', 'Statut', ''].map((h) => (
-                <th key={h} className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-widest text-brand-secondary/50">{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-brand-secondary/5">
-            {HISTORY.map((row) => {
-              const Icon = STATUS_ICON[row.status];
-              return (
-                <tr key={row.id} className="hover:bg-brand-light/40 transition-colors">
-                  <td className="px-5 py-3 font-medium text-brand-dark flex items-center gap-2">
-                    <FileText size={14} className="text-brand-secondary/60" />{row.file}
-                  </td>
-                  <td className="px-5 py-3 text-brand-secondary/70">{row.date}</td>
-                  <td className="px-5 py-3 text-brand-secondary/70">{row.rows > 0 ? row.rows : '—'}</td>
-                  <td className="px-5 py-3 text-brand-secondary/70">{row.user}</td>
-                  <td className="px-5 py-3">
-                    <span className={cn('inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold', STATUS_BADGE[row.status])}>
-                      <Icon size={11} />{STATUS_LABEL[row.status]}
-                    </span>
-                  </td>
-                  <td className="px-5 py-3">
-                    <div className="flex items-center gap-1">
-                      <button className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors"><Eye size={14} /></button>
-                      <button className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-warning/10 text-brand-secondary/50 hover:text-brand-warning transition-colors"><Trash2 size={14} /></button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      )}
+
+      {/* Historique des imports */}
+      <div className="rounded-2xl border border-brand-secondary/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-brand-dark mb-4">Historique de session</h2>
+        <div className="space-y-3">
+          {history.length === 0 ? (
+            <p className="text-sm text-brand-secondary/60">Aucun import n'a été effectué lors de cette session.</p>
+          ) : (
+            history.map((item) => (
+              <div 
+                key={item.id} 
+                onClick={() => {
+                  if (item.full_report) {
+                    setDetectedType(item.entity_type);
+                    setReport(item.full_report);
+                    setError(null);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  } else if (item.status === 'error') {
+                    setError("Cet import a échoué. Aucun rapport détaillé disponible.");
+                    setReport(null);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+                className={cn(
+                  "flex items-center justify-between rounded-xl border border-brand-secondary/10 bg-brand-light/20 p-4 transition-colors",
+                  (item.full_report || item.status === 'error') ? "cursor-pointer hover:bg-brand-light/40" : ""
+                )}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={cn(
+                    "grid h-10 w-10 place-items-center rounded-lg",
+                    item.status === 'success' && "bg-green-100 text-green-600",
+                    item.status === 'error' && "bg-red-100 text-red-600",
+                    item.status === 'warning' && "bg-orange-100 text-orange-600"
+                  )}>
+                    {item.status === 'success' ? <CheckCircle size={20} /> : item.status === 'warning' ? <AlertTriangle size={20} /> : <XCircle size={20} />}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-brand-dark">{item.filename}</p>
+                    <p className="text-xs font-medium text-brand-secondary/60">
+                      {item.entity_type ? IMPORT_TYPES[item.entity_type]?.label : 'Inconnu'} • {item.processed_lines} lignes lues ({item.error_count} erreurs) • Importé par {item.author_name || 'Inconnu'}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-brand-dark">
+                    {item.status === 'success' ? 'Réussi' : item.status === 'warning' ? 'Partiel' : 'Échoué'}
+                  </p>
+                  <p className="text-xs font-medium text-brand-secondary/60">
+                    {new Date(item.created_at).toLocaleDateString()} {new Date(item.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

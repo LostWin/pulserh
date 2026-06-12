@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}CERTIFICAT DE SALAIRE{% endblock %}
+
+{% block content %}
+<p>La Direction de l'entreprise PulseRH certifie que :</p>
+<br>
+<p><b>M/Mme {{ employee.first_name }} {{ employee.last_name }}</b>,</p>
+<p>perçoit actuellement une rémunération brute annuelle de <b>{{ salary }} €</b> 
+(soit <b>{{ monthly_salary }} €</b> bruts par mois), 
+dans le cadre de ses fonctions de <b>{{ employee.job_title }}</b>.</p>
+<br>
+<p>Ce document est délivré à la demande de l'intéressé(e) pour faire valoir ses droits.</p>
+{% endblock %}

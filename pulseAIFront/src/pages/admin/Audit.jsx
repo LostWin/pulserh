@@ -1,43 +1,47 @@
-import { useState } from 'react';
-import { Search, Download, Filter, Shield, User, Database, LogIn, Upload, AlertTriangle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Download, Filter, Shield, User, Database, LogIn, Upload, AlertTriangle, Eye } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { api } from '../../lib/api';
 
-const AUDIT_TYPES = ['Tous', 'auth', 'export', 'security', 'ai', 'system'];
+const AUDIT_TYPES = ['Tous', 'auth', 'export', 'security', 'ai', 'system', 'access'];
 
-const AUDIT_LOGS = [
-  { id: 1, user: 'i.garcia@pulse-rh.ai', action: 'a exporté la liste des employés (247 enregistrements)', type: 'export', ip: '192.168.1.12', time: 'Aujourd\'hui, 09:14', critical: false },
-  { id: 2, user: 'admin@pulse-rh.ai', action: 'a modifié le rôle Keycloak de n.petit@pulse-rh.ai', type: 'security', ip: '192.168.1.1', time: 'Aujourd\'hui, 08:47', critical: true },
-  { id: 3, user: 'Moteur IA', action: 'a recalculé les scores de risque (127 employés)', type: 'ai', ip: 'interne', time: 'Aujourd\'hui, 08:00', critical: false },
-  { id: 4, user: 'c.laurent@pulse-rh.ai', action: 's\'est connecté depuis un nouvel appareil', type: 'auth', ip: '78.192.34.11', time: 'Hier, 18:32', critical: false },
-  { id: 5, user: 'admin@pulse-rh.ai', action: 'a forcé la recalibration du modèle IA', type: 'ai', ip: '192.168.1.1', time: 'Hier, 11:02', critical: false },
-  { id: 6, user: 'Système', action: 'sauvegarde quotidienne effectuée (2.3 Go)', type: 'system', ip: 'interne', time: 'Hier, 03:00', critical: false },
-  { id: 7, user: 'a.dupont@pulse-rh.ai', action: 'a tenté d\'accéder à /admin/securite sans autorisation', type: 'security', ip: '192.168.1.45', time: 'Il y a 2 j, 23:47', critical: true },
-  { id: 8, user: 'i.garcia@pulse-rh.ai', action: 'a importé 89 contrats depuis contrats_Q2.xlsx', type: 'export', ip: '192.168.1.12', time: 'Il y a 6 j, 14:32', critical: false },
-];
-
-const TYPE_ICONS = { auth: LogIn, export: Upload, security: Shield, ai: Database, system: Database };
+const TYPE_ICONS = { auth: LogIn, export: Upload, security: Shield, ai: Database, system: Database, access: Eye };
 const TYPE_COLORS = {
   auth: { bg: '#dbeafe', color: '#1d4ed8' },
   export: { bg: '#dcfce7', color: '#15803d' },
   security: { bg: '#fee2e2', color: '#b91c1c' },
   ai: { bg: '#ede9fe', color: '#7c3aed' },
   system: { bg: '#f3f4f6', color: '#374151' },
+  access: { bg: '#ffedd5', color: '#c2410c' }
 };
 
 export default function Audit() {
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('Tous');
   const [onlyCritical, setOnlyCritical] = useState(false);
+  const [logs, setLogs] = useState([]);
 
-  const filtered = AUDIT_LOGS.filter((l) =>
-    (typeFilter === 'Tous' || l.type === typeFilter) &&
+  useEffect(() => {
+    const fetchLogs = async () => {
+      try {
+        const data = await api.get('/audit');
+        setLogs(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchLogs();
+  }, []);
+
+  const filtered = logs.filter((l) =>
+    (typeFilter === 'Tous' || l.log_type === typeFilter) &&
     (!onlyCritical || l.critical) &&
-    (l.user.toLowerCase().includes(search.toLowerCase()) || l.action.toLowerCase().includes(search.toLowerCase()))
+    (l.user_email.toLowerCase().includes(search.toLowerCase()) || l.action.toLowerCase().includes(search.toLowerCase()))
   );
 
   const exportCSV = () => {
     const header = 'Utilisateur,Action,Type,IP,Date\n';
-    const rows = filtered.map((l) => `"${l.user}","${l.action}","${l.type}","${l.ip}","${l.time}"`).join('\n');
+    const rows = filtered.map((l) => `"${l.user_email}","${l.action}","${l.log_type}","${l.ip_address}","${new Date(l.timestamp).toLocaleString()}"`).join('\n');
     const blob = new Blob([header + rows], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = 'audit_log.csv'; a.click();
@@ -60,10 +64,10 @@ export default function Audit() {
       {/* KPIs */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
-          { label: 'Total', val: AUDIT_LOGS.length },
-          { label: 'Critiques', val: AUDIT_LOGS.filter((l) => l.critical).length },
-          { label: 'Sécurité', val: AUDIT_LOGS.filter((l) => l.type === 'security').length },
-          { label: 'Exports', val: AUDIT_LOGS.filter((l) => l.type === 'export').length },
+          { label: 'Total', val: logs.length },
+          { label: 'Critiques', val: logs.filter((l) => l.critical).length },
+          { label: 'Sécurité', val: logs.filter((l) => l.log_type === 'security').length },
+          { label: 'Accès', val: logs.filter((l) => l.log_type === 'access').length },
         ].map((k) => (
           <div key={k.label} className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm px-5 py-4">
             <div className="text-2xl font-bold text-brand-dark">{k.val}</div>
@@ -105,8 +109,8 @@ export default function Audit() {
           </thead>
           <tbody className="divide-y divide-brand-secondary/5">
             {filtered.map((log) => {
-              const tc = TYPE_COLORS[log.type] || { bg: '#f3f4f6', color: '#374151' };
-              const Icon = TYPE_ICONS[log.type] || Database;
+              const tc = TYPE_COLORS[log.log_type] || { bg: '#f3f4f6', color: '#374151' };
+              const Icon = TYPE_ICONS[log.log_type] || Database;
               return (
                 <tr key={log.id} className={cn('hover:bg-brand-light/40 transition-colors', log.critical && 'bg-red-50/30')}>
                   <td className="px-5 py-3">
@@ -114,18 +118,18 @@ export default function Audit() {
                       <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-secondary/10">
                         <User size={12} className="text-brand-secondary" />
                       </div>
-                      <span className="font-medium text-brand-dark">{log.user}</span>
+                      <span className="font-medium text-brand-dark">{log.user_email}</span>
                       {log.critical && <AlertTriangle size={13} className="text-brand-warning shrink-0" />}
                     </div>
                   </td>
                   <td className="px-5 py-3 text-brand-secondary/70 max-w-[280px]">{log.action}</td>
                   <td className="px-5 py-3">
                     <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold" style={{ backgroundColor: tc.bg, color: tc.color }}>
-                      <Icon size={10} />{log.type}
+                      <Icon size={10} />{log.log_type}
                     </span>
                   </td>
-                  <td className="px-5 py-3 font-mono text-xs text-brand-secondary/60">{log.ip}</td>
-                  <td className="px-5 py-3 text-brand-secondary/50 text-xs">{log.time}</td>
+                  <td className="px-5 py-3 font-mono text-xs text-brand-secondary/60">{log.ip_address}</td>
+                  <td className="px-5 py-3 text-brand-secondary/50 text-xs">{new Date(log.timestamp).toLocaleString()}</td>
                 </tr>
               );
             })}

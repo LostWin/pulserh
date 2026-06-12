@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Users, Heart, AlertTriangle, ArrowUpRight, ArrowDownRight, CalendarClock } from 'lucide-react';
 import { employees } from '../../data/mockData';
 import { cn, riskMeta, engagementBar } from '../../lib/utils';
@@ -17,6 +18,7 @@ const FILTERS = [
 ];
 
 export default function Equipe() {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState('all');
   const team = employees;
   const avg = Math.round(team.reduce((s, e) => s + e.engagement, 0) / team.length);
@@ -88,7 +90,10 @@ export default function Equipe() {
                 <button className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-brand-dark py-2 text-xs font-medium text-white transition-colors hover:bg-brand-dark">
                   <CalendarClock size={14} /> Entretien
                 </button>
-                <button className="flex-1 rounded-xl border border-brand-secondary/20 py-2 text-xs font-medium text-brand-secondary transition-colors hover:bg-brand-light">
+                <button 
+                  onClick={() => navigate(`/manager/equipe/${emp.id}`)}
+                  className="flex-1 rounded-xl border border-brand-secondary/20 py-2 text-xs font-medium text-brand-secondary transition-colors hover:bg-brand-light"
+                >
                   Profil
                 </button>
               </div>
