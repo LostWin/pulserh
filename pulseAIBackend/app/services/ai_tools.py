@@ -420,60 +420,122 @@ async def get_recent_attendances(db: AsyncSession, user_id: str, user_roles: lis
 
 
 async def generate_document_tool(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, document_type: str = "attestation_travail", **kwargs) -> str:
-    """Générer un document RH via le DocumentGenerator."""
+    """Générer un document RH dynamique via le DocumentGenerator."""
     logger.info(f"Outil generate_document() appelé | user_id={user_id}, type={document_type}")
     
     from app.services.document_generator import document_generator
     from app.services.secure_document_storage import secure_document_storage
+    from app.models.domain import DocumentType
+    
+    doc_type_obj = (await db.execute(select(DocumentType).filter(DocumentType.code == document_type))).scalar_one_or_none()
+    if not doc_type_obj:
+        return json.dumps({"error": f"Type de document inconnu: {document_type}."}, ensure_ascii=False)
+        
+    if doc_type_obj.allowed_roles and len(doc_type_obj.allowed_roles) > 0:
+        has_access = any(r in doc_type_obj.allowed_roles for r in user_roles) or "admin" in user_roles
+        if not has_access:
+            return json.dumps({"error": f"ACCES_REFUSE: Vos rôles ({', '.join(user_roles)}) ne sont pas autorisés à générer ce type de document."}, ensure_ascii=False)
     
     emp_query = select(Employee).options(
         selectinload(Employee.department),
         selectinload(Employee.job),
-        selectinload(Employee.contracts)
+        selectinload(Employee.contracts),
+        selectinload(Employee.leaves),
+        selectinload(Employee.manager)
     ).filter(
         (Employee.user_id == user_id) | (Employee.id == user_id)
     )
-    emp_result = await db.execute(emp_query)
-    emp = emp_result.scalar_one_or_none()
+    emp = (await db.execute(emp_query)).scalar_one_or_none()
     
     if not emp:
-        return json.dumps({"error": "Employé non trouvé, impossible de générer le document"}, ensure_ascii=False)
+        return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
+        
+    contract_obj = emp.contracts[0] if emp.contracts else None
     
-    salary = 0
-    if emp.contracts and len(emp.contracts) > 0:
-        salary = emp.contracts[0].salary
-    
-    context = {
+    # Construire la payload de base
+    raw_payload = {
         "employee": {
             "first_name": emp.first_name,
             "last_name": emp.last_name,
-            "hire_date": emp.hire_date.strftime("%d/%m/%Y") if emp.hire_date else "N/A",
-            "job_title": emp.job.title if emp.job else "Collaborateur",
-            "department_name": emp.department.name if emp.department else "N/A",
+            "email": emp.email,
+            "phone": emp.phone,
+            "address": emp.address if hasattr(emp, 'address') else "Adresse non renseignée",
+            "hire_date": str(emp.hire_date) if emp.hire_date else ""
         },
-        "salary": f"{salary:,.2f}".replace(",", " "),
-        "monthly_salary": f"{(salary / 12):,.2f}".replace(",", " "),
+        "contract": {
+            "type": contract_obj.contract_type if contract_obj else "CDI",
+            "start_date": str(contract_obj.start_date) if contract_obj and contract_obj.start_date else "",
+            "end_date": str(contract_obj.end_date) if contract_obj and contract_obj.end_date else "",
+            "salary": contract_obj.salary if contract_obj else 0,
+            "status": "Actif" if contract_obj and getattr(contract_obj, "is_active", True) else "Inactif"
+        },
+        "job": {
+            "title": emp.job.title if emp.job else "Poste non défini",
+            "department": emp.department.name if emp.department else "Département non défini"
+        },
+        "manager": {
+            "first_name": emp.manager.first_name if emp.manager else "",
+            "last_name": emp.manager.last_name if emp.manager else "",
+            "email": emp.manager.email if emp.manager else ""
+        }
+    }
+    
+    # Application du DAC sur tout l'employé
+    filtered_payload = await _apply_tool_access(db, resource="employee", scope="self", payload=raw_payload, user_roles=user_roles)
+    
+    # Vérifier que les variables requises sont bien lisibles
+    for req_var in doc_type_obj.required_variables:
+        parts = req_var.split(".")
+        if len(parts) == 2:
+            group, key = parts
+            group_visibility = filtered_payload.get("_field_visibility", {}).get(group, "visible")
+            if isinstance(group_visibility, dict):
+                visibility = group_visibility.get(key, "visible")
+            else:
+                visibility = group_visibility
+                
+            if visibility != "visible":
+                return json.dumps({"error": f"ACCES_REFUSE: La variable '{req_var}' est requise pour générer ce document, mais vous n'avez pas les droits de la lire."}, ensure_ascii=False)
+                
+    # Extraire les objets filtrés pour le context Jinja2
+    context = {
+        "employee": filtered_payload.get("employee", raw_payload["employee"]),
+        "contract": filtered_payload.get("contract", raw_payload["contract"]),
+        "job": filtered_payload.get("job", raw_payload["job"]),
+        "manager": filtered_payload.get("manager", raw_payload["manager"]),
+        "salary_formatted": f"{raw_payload['contract']['salary']:,.2f}".replace(",", " "),
+        "monthly_salary_formatted": f"{(raw_payload['contract']['salary'] / 12):,.2f}".replace(",", " ") if isinstance(raw_payload['contract']['salary'], (int, float)) else "N/A",
     }
     
     try:
-        filename, pdf_bytes = document_generator.create_pdf_bytes(doc_type=document_type, context=context)
+        filename, pdf_bytes = await document_generator.create_pdf_bytes(db=db, doc_type_code=document_type, context=context)
         storage_uri = secure_document_storage.upload_bytes(pdf_bytes, filename, "generated")
 
+        status = "pending" if doc_type_obj.responsible_role else "validated"
+        
         db.add(Document(
             name=filename,
             type=document_type,
             size=_format_file_size(len(pdf_bytes)),
             file_path=storage_uri,
-            uploaded_by="Moteur de génération IA",
+            uploaded_by=f"IA pour {emp.first_name} {emp.last_name}",
             allowed_roles=["collaborator", "hr", "admin"],
+            status=status,
+            employee_id=emp.id,
+            document_type_id=doc_type_obj.id
         ))
         await db.commit()
 
+        msg = f"Le document '{doc_type_obj.name}' a été généré avec succès."
+        if status == "pending":
+            msg += f" Il est actuellement en attente de validation par le service ({doc_type_obj.responsible_role})."
+            
         return json.dumps({
             "success": True,
             "document_type": document_type,
             "file_name": filename,
-            "message": f"Le document '{document_type}' a été généré avec succès. Il est disponible dans l'onglet Documents.",
+            "status": status,
+            "message": msg,
         }, ensure_ascii=False)
     except Exception as e:
         logger.error(f"Erreur lors de la génération du document : {e}")
@@ -755,3 +817,30 @@ async def execute_tool(tool_name: str, arguments: dict, db: AsyncSession, user_i
             details_json={"tool": tool_name, "error": str(e)}
         )
         return json.dumps({"error": f"Erreur lors de l'exécution de l'outil : {str(e)}"}, ensure_ascii=False)
+
+import copy
+
+async def get_dynamic_tool_definitions(db: AsyncSession) -> list[dict]:
+    tools = copy.deepcopy(TOOL_DEFINITIONS)
+    
+    from app.models.domain import DocumentType
+    result = await db.execute(select(DocumentType))
+    doc_types = result.scalars().all()
+    
+    if not doc_types:
+        return tools
+        
+    available_codes = [dt.code for dt in doc_types]
+    names_list = ", ".join([f"{dt.name} (code: {dt.code})" for dt in doc_types])
+    
+    for tool in tools:
+        if tool.get("function", {}).get("name") == "generate_document":
+            desc = f"Générer un document RH officiel pour l'employé connecté. Types disponibles : {names_list}"
+            tool["function"]["description"] = desc
+            
+            params = tool["function"].get("parameters", {}).get("properties", {}).get("document_type", {})
+            params["enum"] = available_codes
+            params["description"] = f"Le type de document à générer. Utilisez l'un des codes suivants : {', '.join(available_codes)}"
+            break
+            
+    return tools

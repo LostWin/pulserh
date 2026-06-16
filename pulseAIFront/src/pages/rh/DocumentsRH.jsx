@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { FileText, Download, Trash2, Upload, Search, Eye, X, Plus, ShieldCheck, History, LoaderCircle } from 'lucide-react';
+import { FileText, Download, Trash2, Upload, Search, Eye, X, Plus, ShieldCheck, History, LoaderCircle, CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { api } from '../../lib/api';
 
-const TYPES = ['Tous', 'Contrat', 'Fiche de paie', 'Attestation', 'Avenant'];
+const TYPES = ['Tous', 'Contrat', 'Fiche de paie', 'Attestation', 'Avenant', 'Politique RH', 'Règlement'];
 const TYPE_COLORS = {
   'Contrat': { bg: '#dbeafe', color: '#1d4ed8' },
   'Fiche de paie': { bg: '#dcfce7', color: '#15803d' },
   'Attestation': { bg: '#ede9fe', color: '#7c3aed' },
   'Avenant': { bg: '#ffedd5', color: '#c2410c' },
+  'Politique RH': { bg: '#d1fae5', color: '#065f46' },
+  'Règlement': { bg: '#fef3c7', color: '#92400e' },
 };
 const ALLOWED_DOCUMENT_EXTENSIONS = ['.pdf', '.doc', '.docx', '.odt', '.ott', '.rtf', '.pages'];
 const DOCUMENT_ACCEPT = ALLOWED_DOCUMENT_EXTENSIONS.join(',');
@@ -91,6 +93,24 @@ export default function DocumentsRH() {
     if (!window.confirm("Supprimer ce document ?")) return;
     try {
       await api.delete(`/documents/${id}`);
+      fetchDocs();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleValidate = async (id) => {
+    try {
+      await api.put(`/documents/${id}/validate`);
+      fetchDocs();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleReject = async (id) => {
+    try {
+      await api.put(`/documents/${id}/reject`);
       fetchDocs();
     } catch (err) {
       console.error(err);
@@ -270,10 +290,10 @@ export default function DocumentsRH() {
         </div>
       </div>
 
-      <div className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm overflow-x-auto">
+        <table className="w-full text-sm min-w-max">
           <thead className="bg-brand-light/60">
-            <tr>{['Document', 'Type', 'Collaborateur', 'Date', 'Taille', 'Actions'].map((h) => (
+            <tr>{['Document', 'Type', 'Collaborateur', 'Statut', 'Date', 'Taille', 'Actions'].map((h) => (
               <th key={h} className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-widest text-brand-secondary/50">{h}</th>
             ))}</tr>
           </thead>
@@ -294,10 +314,16 @@ export default function DocumentsRH() {
                     <span className="rounded-full px-2.5 py-1 text-xs font-semibold" style={{ backgroundColor: tc.bg, color: tc.color }}>{doc.type}</span>
                   </td>
                   <td className="px-5 py-3 text-brand-secondary/70">{doc.uploaded_by || 'Système'}</td>
+                  <td className="px-5 py-3">
+                    {doc.status === 'pending' ? <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">En attente</span> :
+                     doc.status === 'rejected' ? <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">Rejeté</span> :
+                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Validé</span>}
+                  </td>
                   <td className="px-5 py-3 text-brand-secondary/70">{new Date(doc.created_at).toLocaleDateString()}</td>
                   <td className="px-5 py-3 text-brand-secondary/70">{doc.size}</td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-1">
+
                       <button
                         onClick={() => handlePreview(doc)}
                         disabled={!doc.name.toLowerCase().endsWith('.pdf')}
@@ -306,7 +332,7 @@ export default function DocumentsRH() {
                       >
                         <Eye size={14} />
                       </button>
-                      <button onClick={() => handleDownload(doc)} className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors"><Download size={14} /></button>
+                      <button onClick={() => handleDownload(doc)} disabled={doc.status !== 'validated'} className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors disabled:opacity-40" title={doc.status !== 'validated' ? "Validation requise pour télécharger" : "Télécharger"}><Download size={14} /></button>
                       <button onClick={() => openDrawer(doc)} className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/50 hover:text-brand-secondary transition-colors"><Plus size={14} /></button>
                       <button onClick={() => handleDelete(doc.id)} className="grid h-7 w-7 place-items-center rounded-lg hover:bg-brand-warning/10 text-brand-secondary/50 hover:text-brand-warning transition-colors"><Trash2 size={14} /></button>
                     </div>
@@ -435,6 +461,24 @@ export default function DocumentsRH() {
               </div>
             ) : (
               <div className="space-y-6 px-6 py-6">
+                {drawerDoc.status === 'pending' && (
+                  <section className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                    <div className="mb-4 flex items-center gap-2">
+                      <ShieldCheck size={16} className="text-amber-600" />
+                      <h4 className="text-sm font-bold text-amber-800">Validation Requise</h4>
+                    </div>
+                    <p className="mb-4 text-sm text-amber-700">Ce document est en attente de validation RH. Vous devez l'approuver avant qu'il ne puisse être téléchargé par le collaborateur.</p>
+                    <div className="flex items-center gap-3">
+                      <button onClick={() => { handleValidate(drawerDoc.id); closeDrawer(); }} className="flex items-center gap-2 rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700">
+                        <CheckCircle size={16} /> Valider le document
+                      </button>
+                      <button onClick={() => { handleReject(drawerDoc.id); closeDrawer(); }} className="flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700">
+                        <XCircle size={16} /> Rejeter
+                      </button>
+                    </div>
+                  </section>
+                )}
+                
                 <section className="rounded-2xl border border-brand-secondary/10 bg-brand-light/30 p-4">
                   <div className="mb-4 flex items-center gap-2">
                     <ShieldCheck size={16} className="text-brand-secondary" />

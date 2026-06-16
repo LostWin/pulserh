@@ -125,6 +125,7 @@ async def _serialize_document(
         "file_path": document.file_path,
         "uploaded_by": document.uploaded_by,
         "created_at": document.created_at,
+        "status": document.status,
         "allowed_roles": normalize_roles(document.allowed_roles or []),
         "rag_enabled": document.rag_enabled,
         "rag_status": document.rag_status,
@@ -416,6 +417,9 @@ async def download_document(id: str, db: AsyncSession = Depends(get_db), current
     if not secure_document_storage.exists(doc.file_path):
         raise HTTPException(status_code=404, detail="Le fichier n'existe plus")
 
+    if doc.status == "pending" and "hr" not in current_user.roles and "admin" not in current_user.roles:
+        raise HTTPException(status_code=403, detail="Validation RH requise pour télécharger ce document.")
+
     await log_document_event(
         db,
         document=doc,
@@ -438,3 +442,35 @@ async def delete_document(id: str, db: AsyncSession = Depends(get_db)):
     await db.delete(doc)
     await db.commit()
     return {"message": "Document supprimé"}
+
+# ---- NEW ENDPOINTS FOR VALIDATION WORKFLOW ----
+
+@router.put("/{document_id}/validate")
+async def validate_document(
+    document_id: str,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(require_hr),
+):
+    doc = await get_document_or_404(db, document_id)
+    if doc.status != "pending":
+        raise HTTPException(status_code=400, detail="Document is not pending validation")
+        
+    doc.status = "validated"
+    await log_document_event(db, doc, current_user.email, ["hr"], "validation", {"action": "validated"})
+    await db.commit()
+    return {"status": "success", "message": "Document validated successfully"}
+
+@router.put("/{document_id}/reject")
+async def reject_document(
+    document_id: str,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(require_hr),
+):
+    doc = await get_document_or_404(db, document_id)
+    if doc.status != "pending":
+        raise HTTPException(status_code=400, detail="Document is not pending validation")
+        
+    doc.status = "rejected"
+    await log_document_event(db, doc, current_user.email, ["hr"], "validation", {"action": "rejected"})
+    await db.commit()
+    return {"status": "success", "message": "Document rejected successfully"}
