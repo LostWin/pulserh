@@ -19,6 +19,9 @@ else
   echo "[init] Realm pulse imported successfully."
 fi
 
+echo "[init] Applying login theme pulseai..."
+/opt/keycloak/bin/kcadm.sh update realms/pulse -s loginTheme=pulseai
+
 echo "[init] Verifying users..."
 /opt/keycloak/bin/kcadm.sh get users -r pulse \
   --fields username,enabled 2>/dev/null | grep username || echo "No users found"

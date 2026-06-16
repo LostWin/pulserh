@@ -2,6 +2,7 @@
   "id" : "5a75f407-61ee-4479-869b-1a3d46d2c9f3",
   "realm" : "pulse",
   "displayName" : "Pulse RH",
+  "loginTheme" : "pulseai",
   "notBefore" : 0,
   "defaultSignatureAlgorithm" : "RS256",
   "revokeRefreshToken" : false,

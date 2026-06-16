@@ -65,6 +65,10 @@ Internet (HTTPS)
 - **PostgreSQL / Redis** : Stockage relationnel et cache distribué.
 - **Qdrant / MinIO** : Base de données vectorielle (pour le RAG) et stockage de fichiers S3-compatible (documents RH).
 - **Wazuh / Grafana** : SIEM pour la sécurité et monitoring système.
+
+### 🛡️ Résilience et Rate Limiting (Fail-Open)
+Pulse AI intègre un mécanisme de **Rate Limiting via Redis** (Token Bucket, 100 requêtes globales / minute, 30 requêtes sur /chat).
+En cas de défaillance du cache Redis, la plateforme adopte un comportement **Fail-Open** (dégradé mais accepté) : le rate limiting est temporairement ignoré pour ne pas bloquer l'usage RH vital de l'entreprise. Cet état dégradé est visible en temps réel dans l'interface de supervision de l'administrateur technique.
 ---
 
 ## 🚀 Démarrage rapide

@@ -133,7 +133,10 @@ services:
   # KEYCLOAK
   # =========================================================
   keycloak:
-    image: quay.io/keycloak/keycloak:25.0
+    build:
+      context: ./keycloak
+      dockerfile: Dockerfile
+    image: pulse-keycloak:25.0
     container_name: pulse_keycloak
     restart: unless-stopped
     ports:
@@ -162,6 +165,9 @@ services:
           KC_PROXY_HEADERS: xforwarded
           KC_HEALTH_ENABLED: "true"
           KC_METRICS_ENABLED: "true"
+          KC_SPI_THEME_STATIC_MAX_AGE: "-1"
+          KC_SPI_THEME_CACHE_THEMES: "false"
+          KC_SPI_THEME_CACHE_TEMPLATES: "false"
           KC_LOG_LEVEL: INFO
           TZ: Africa/Casablanca
     command: start
@@ -263,6 +269,7 @@ services:
     environment:
       OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g -Dcom.amazon.dlic.auth.http.jwt.keybyoidc.KeySetRetriever.sslValidate=false"
       bootstrap.memory_lock: "true"
+      bootstrap.system_call_filter: "false"
       TZ: Africa/Casablanca
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
       WAZUH_INDEXER_PASSWORD: ${WAZUH_INDEXER_PASSWORD}

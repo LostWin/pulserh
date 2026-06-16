@@ -16,7 +16,6 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-import os
 from app.models import Base
 from app.config import settings
 

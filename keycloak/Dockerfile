@@ -1,4 +1,5 @@
 FROM quay.io/keycloak/keycloak:25.0
 USER root
-RUN microdnf install -y curl && microdnf clean all
+COPY themes /opt/keycloak/themes
+RUN chown -R keycloak:keycloak /opt/keycloak/themes
 USER keycloak

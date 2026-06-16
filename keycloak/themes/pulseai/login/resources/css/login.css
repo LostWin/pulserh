@@ -1,0 +1,317 @@
+:root {
+  --pulse-bg: #ECECE9;
+  --pulse-card: #ffffff;
+  --pulse-text: #202020;
+  --pulse-muted: rgba(31, 82, 75, 0.72);
+  --pulse-primary: #1F524B;
+  --pulse-primary-dark: #202020;
+  --pulse-primary-soft: rgba(31, 82, 75, 0.1);
+  --pulse-border: rgba(31, 82, 75, 0.12);
+  --pulse-shadow: 0 20px 60px rgba(32, 32, 32, 0.08);
+  --pulse-danger-bg: #fde7e0;
+  --pulse-danger-text: #DF4931;
+  --pulse-success-bg: rgba(31, 82, 75, 0.12);
+  --pulse-success-text: #1F524B;
+  --pulse-info-bg: rgba(31, 82, 75, 0.1);
+  --pulse-info-text: #1F524B;
+  --pulse-warning-bg: #fde7e0;
+  --pulse-warning-text: #DF4931;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.pulse-login-body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--pulse-bg);
+  color: var(--pulse-text);
+}
+
+body.pulse-login-body,
+body.pulse-login-body a,
+body.pulse-login-body button,
+body.pulse-login-body input,
+body.pulse-login-body label,
+body.pulse-login-body p,
+body.pulse-login-body h1,
+body.pulse-login-body h2,
+body.pulse-login-body h3,
+body.pulse-login-body span,
+body.pulse-login-body div {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.pulse-login-body a {
+  color: var(--pulse-primary-dark);
+}
+
+.pulse-login-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.pulse-login-glow {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  min-width: 320px;
+  min-height: 320px;
+  border-radius: 9999px;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.pulse-login-glow-left {
+  top: -10%;
+  left: -10%;
+  background: rgba(31, 82, 75, 0.2);
+}
+
+.pulse-login-glow-right {
+  right: -10%;
+  bottom: -10%;
+  background: rgba(31, 82, 75, 0.1);
+}
+
+.pulse-login-grid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  align-items: center;
+}
+
+.pulse-brand-panel {
+  padding: 8px;
+}
+
+.pulse-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.pulse-brand-logo {
+  width: min(320px, 42vw);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.12));
+}
+
+.pulse-brand-title {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.pulse-brand-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(31, 82, 75, 0.8);
+  font-weight: 500;
+}
+
+.pulse-brand-copy {
+  max-width: 560px;
+  margin: 28px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--pulse-muted);
+}
+
+.pulse-login-card {
+  background: var(--pulse-card);
+  border: 1px solid var(--pulse-border);
+  border-radius: 28px;
+  box-shadow: var(--pulse-shadow);
+  padding: 36px 32px;
+}
+
+.pulse-login-card-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.pulse-shield-badge {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: var(--pulse-primary-soft);
+  font-size: 1.75rem;
+}
+
+.pulse-login-card-header h2 {
+  margin: 0 0 10px;
+  font-size: 1.85rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.pulse-login-card-header p {
+  margin: 0;
+  color: var(--pulse-muted);
+  font-size: 0.95rem;
+}
+
+.pulse-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pulse-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--pulse-text);
+}
+
+.pulse-field input {
+  width: 100%;
+  border: 1px solid rgba(31, 82, 75, 0.18);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  color: var(--pulse-text);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pulse-field input:focus {
+  border-color: var(--pulse-primary);
+  box-shadow: 0 0 0 4px rgba(31, 82, 75, 0.12);
+}
+
+.pulse-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--pulse-muted);
+}
+
+.pulse-checkbox input {
+  accent-color: var(--pulse-primary);
+}
+
+.pulse-login-button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 15px 18px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--pulse-primary);
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 16px 30px rgba(31, 82, 75, 0.22);
+}
+
+.pulse-login-button:hover,
+.pulse-login-button:focus {
+  background: var(--pulse-primary-dark);
+  transform: translateY(-1px);
+}
+
+.pulse-login-help {
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+.pulse-login-help a {
+  color: var(--pulse-primary-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.pulse-login-help a:hover {
+  text-decoration: underline;
+}
+
+.pulse-alert {
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.pulse-alert-error {
+  background: var(--pulse-danger-bg);
+  color: var(--pulse-danger-text);
+}
+
+.pulse-alert-success {
+  background: var(--pulse-success-bg);
+  color: var(--pulse-success-text);
+}
+
+.pulse-alert-info {
+  background: var(--pulse-info-bg);
+  color: var(--pulse-info-text);
+}
+
+.pulse-alert-warning {
+  background: var(--pulse-warning-bg);
+  color: var(--pulse-warning-text);
+}
+
+@media (max-width: 960px) {
+  .pulse-login-grid {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+  }
+
+  .pulse-brand-panel {
+    text-align: center;
+  }
+
+  .pulse-brand-lockup {
+    flex-direction: column;
+  }
+
+  .pulse-brand-copy {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .pulse-login-shell {
+    padding: 16px;
+  }
+
+  .pulse-login-card {
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+
+  .pulse-brand-title {
+    font-size: 1.75rem;
+  }
+
+  .pulse-brand-copy {
+    font-size: 1rem;
+  }
+}
