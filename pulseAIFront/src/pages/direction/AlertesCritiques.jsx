@@ -1,14 +1,7 @@
 import { useState } from 'react';
-import { ShieldAlert, CheckCircle, Clock, ArrowUp, X } from 'lucide-react';
+import { CheckCircle, ArrowUp, X } from 'lucide-react';
 import { cn } from '../../lib/utils';
-
-const INITIAL_ALERTS = [
-  { id: 1, priority: 'P1', title: 'Risque de départ massif — Ventes', dept: 'Ventes', impact: '3 commerciaux clés', time: '1 h', status: 'open', detail: '3 Account Executives affichent un score d\'engagement sous 55%. Coût de remplacement estimé : 180 k€. Action immédiate recommandée.' },
-  { id: 2, priority: 'P1', title: 'Non-conformité RGPD détectée', dept: 'IT', impact: 'Données de 42 employés', time: '3 h', status: 'open', detail: 'Des données personnelles non chiffrées ont été détectées dans un bucket S3 non sécurisé. Mesure corrective urgente requise.' },
-  { id: 3, priority: 'P2', title: 'Dépassement budget formation', dept: 'Engineering', impact: '120% du budget Q2', time: '1 j', status: 'in_progress', detail: 'Le département Engineering a dépassé son budget formation de 20%. Validation exceptionnelle requise de la Direction.' },
-  { id: 4, priority: 'P2', title: 'Turnover Ventes > 15%', dept: 'Ventes', impact: '4 départs en 60 jours', time: '2 j', status: 'in_progress', detail: 'Le taux de turnover du département Ventes atteint 15.3% sur les 60 derniers jours, soit le double de la moyenne secteur.' },
-  { id: 5, priority: 'P3', title: 'Charge de travail anormale détectée', dept: 'Support', impact: '3 collaborateurs', time: '3 j', status: 'resolved', detail: 'L\'IA a détecté des patterns d\'heures supplémentaires anormaux sur 3 agents du Support. Entretiens planifiés.' },
-];
+import { useNotifications } from '../../hooks/useNotifications';
 
 const PRIORITY_CONFIG = {
   P1: { label: 'Critique', bg: '#fee2e2', color: '#b91c1c', border: 'border-red-200', row: 'bg-red-50/40' },
@@ -22,11 +15,26 @@ const STATUS_CONFIG = {
 };
 
 export default function AlertesCritiques() {
-  const [alerts, setAlerts] = useState(INITIAL_ALERTS);
+  const { notifications, updateNotification, markAsRead } = useNotifications();
   const [selected, setSelected] = useState(null);
 
-  const resolve = (id) => setAlerts((p) => p.map((a) => a.id === id ? { ...a, status: 'resolved' } : a));
-  const escalate = (id) => setAlerts((p) => p.map((a) => a.id === id ? { ...a, status: 'in_progress' } : a));
+  const alerts = notifications;
+
+  const resolve = (id) => {
+    updateNotification(id, { status: 'resolved', read: true });
+    markAsRead(id);
+    if (selected?.id === id) {
+      setSelected((current) => current ? { ...current, status: 'resolved', read: true } : current);
+    }
+  };
+
+  const escalate = (id) => {
+    updateNotification(id, { status: 'in_progress', read: true });
+    markAsRead(id);
+    if (selected?.id === id) {
+      setSelected((current) => current ? { ...current, status: 'in_progress', read: true } : current);
+    }
+  };
 
   const open = alerts.filter((a) => a.status === 'open').length;
   const inProgress = alerts.filter((a) => a.status === 'in_progress').length;
@@ -76,9 +84,9 @@ export default function AlertesCritiques() {
                   <td className="px-4 py-3 font-semibold text-brand-dark max-w-[220px]">
                     <button onClick={() => setSelected(a)} className="hover:underline text-left">{a.title}</button>
                   </td>
-                  <td className="px-4 py-3 text-brand-secondary/70">{a.dept}</td>
+                  <td className="px-4 py-3 text-brand-secondary/70">{a.department}</td>
                   <td className="px-4 py-3 text-brand-secondary/70 text-xs">{a.impact}</td>
-                  <td className="px-4 py-3 text-brand-secondary/50 text-xs">Il y a {a.time}</td>
+                  <td className="px-4 py-3 text-brand-secondary/50 text-xs">{a.time}</td>
                   <td className="px-4 py-3">
                     <span className={cn('rounded-full px-2.5 py-1 text-xs font-medium', sc.bg)}>{sc.label}</span>
                   </td>
@@ -121,9 +129,9 @@ export default function AlertesCritiques() {
               </div>
               <button onClick={() => setSelected(null)} className="grid h-8 w-8 place-items-center rounded-lg hover:bg-brand-light text-brand-secondary/60 shrink-0"><X size={16} /></button>
             </div>
-            <p className="text-sm text-brand-dark/80 leading-relaxed mb-5">{selected.detail}</p>
+            <p className="text-sm text-brand-dark/80 leading-relaxed mb-5">{selected.message}</p>
             <div className="grid grid-cols-2 gap-3 text-xs text-brand-secondary/60 mb-5">
-              <div><span className="block font-semibold uppercase tracking-wider text-brand-secondary/40 mb-0.5">Département</span>{selected.dept}</div>
+              <div><span className="block font-semibold uppercase tracking-wider text-brand-secondary/40 mb-0.5">Département</span>{selected.department}</div>
               <div><span className="block font-semibold uppercase tracking-wider text-brand-secondary/40 mb-0.5">Impact</span>{selected.impact}</div>
             </div>
             {selected.status !== 'resolved' && (

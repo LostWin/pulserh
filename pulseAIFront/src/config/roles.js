@@ -50,8 +50,9 @@ export const SIDEBAR_LINKS = {
   RH: [
     { name: 'Dashboard', path: '/rh/dashboard', icon: LayoutDashboard },
     { name: 'Import Données', path: '/rh/import', icon: Upload },
-    { name: 'Employés', path: '/rh/employes', icon: Users },
     { name: 'Départements', path: '/rh/departements', icon: GitMerge },
+    { name: 'Employés', path: '/rh/employes', icon: Users },
+    { name: 'Carrières', path: '/rh/carrieres', icon: TrendingUp },
     { name: 'Documents', path: '/rh/documents', icon: FileText },
     { name: 'Workflows', path: '/rh/workflows', icon: CheckSquare },
     { name: 'Alertes', path: '/rh/alertes', icon: ShieldAlert },
@@ -68,6 +69,7 @@ export const SIDEBAR_LINKS = {
     { name: 'Keycloak', path: '/admin/keycloak', icon: Users },
     { name: 'Sécurité', path: '/admin/securite', icon: Shield },
     { name: 'Config IA', path: '/admin/config-ia', icon: Cpu },
+    { name: 'Data Access', path: '/admin/data-access', icon: ShieldAlert },
     { name: 'Audit', path: '/admin/audit', icon: FileText },
   ],
 };

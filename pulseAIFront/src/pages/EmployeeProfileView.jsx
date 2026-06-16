@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { api } from '../lib/api';
+import FieldVisibilityBadge from '../components/ui/FieldVisibilityBadge';
 
 function Card({ children, className = '' }) {
   return (
@@ -23,11 +24,12 @@ function SectionLabel({ children }) {
   );
 }
 
-function FieldRow({ label, value }) {
+function FieldRow({ label, value, visibility }) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-1.5">
         <SectionLabel>{label}</SectionLabel>
+        <FieldVisibilityBadge visibility={visibility} />
       </div>
       <div className="w-full rounded-xl border border-transparent bg-transparent text-sm font-medium text-brand-dark p-0">
         {value || 'Non renseigné'}
@@ -72,6 +74,7 @@ export default function EmployeeProfileView() {
   }
 
   const fullName = `${employee.first_name} ${employee.last_name}`;
+  const fieldVisibility = employee._field_visibility || {};
   const avatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=1F524B&color=fff&size=80`;
 
   return (
@@ -180,10 +183,10 @@ export default function EmployeeProfileView() {
                 <h2 className="text-sm font-bold text-brand-dark">Informations Personnelles</h2>
               </div>
               <div className="space-y-4">
-                <FieldRow label="Nom Complet" value={fullName} />
-                <FieldRow label="Email Professionnel" value={employee.email} />
+                <FieldRow label="Nom Complet" value={fullName} visibility={fieldVisibility.first_name} />
+                <FieldRow label="Email Professionnel" value={employee.email} visibility={fieldVisibility.email} />
                 <FieldRow label="Date de naissance" value="Non renseignée" />
-                <FieldRow label="Téléphone" value="Non renseigné" />
+                <FieldRow label="Téléphone" value={employee.phone || 'Non renseigné'} visibility={fieldVisibility.phone} />
               </div>
             </Card>
 
@@ -195,12 +198,11 @@ export default function EmployeeProfileView() {
                 <h2 className="text-sm font-bold text-brand-dark">Informations Professionnelles</h2>
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                <FieldRow label="Poste" value={employee.contract_type} />
-                <FieldRow label="Département" value={employee.department} />
-                <FieldRow label="Date d'embauche" value="Non renseignée" />
+                <FieldRow label="Poste" value={employee.contract_type} visibility={fieldVisibility.contract_type} />
+                <FieldRow label="Département" value={employee.department} visibility={fieldVisibility.department} />
+                <FieldRow label="Date d'embauche" value={employee.hire_date || 'Non renseignée'} visibility={fieldVisibility.hire_date} />
                 <FieldRow label="Type de contrat" value={employee.contract_type} />
-                {isHr && <FieldRow label="Salaire Annuel" value={employee.salary ? `${employee.salary} €` : 'Non renseigné'} />}
-                {!isHr && <FieldRow label="Salaire Annuel" value="*** Masqué ***" />}
+                <FieldRow label="Salaire Annuel" value={employee.salary ? `${employee.salary} €` : 'Non renseigné'} visibility={fieldVisibility.salary} />
               </div>
               <div className="mt-3 flex items-center gap-1.5">
                 <MapPin size={12} className="text-brand-secondary/60" />

@@ -19,19 +19,20 @@ export default function Audit() {
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('Tous');
   const [onlyCritical, setOnlyCritical] = useState(false);
+  const [period, setPeriod] = useState('7d');
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const data = await api.get('/audit');
+        const data = await api.get(`/audit?period=${period}`);
         setLogs(data);
       } catch (err) {
         console.error(err);
       }
     };
     fetchLogs();
-  }, []);
+  }, [period]);
 
   const filtered = logs.filter((l) =>
     (typeFilter === 'Tous' || l.log_type === typeFilter) &&
@@ -92,6 +93,15 @@ export default function Audit() {
             </button>
           ))}
         </div>
+        <select
+          value={period}
+          onChange={(e) => setPeriod(e.target.value)}
+          className="rounded-xl border border-brand-secondary/20 bg-white px-3 py-2 text-xs text-brand-secondary outline-none focus:border-brand-secondary"
+        >
+          <option value="1d">Dernières 24h</option>
+          <option value="7d">Derniers 7 jours</option>
+          <option value="30d">Derniers 30 jours</option>
+        </select>
         <button onClick={() => setOnlyCritical(!onlyCritical)}
           className={cn('flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium transition-colors',
             onlyCritical ? 'bg-brand-warning text-white' : 'bg-white border border-brand-secondary/20 text-brand-secondary/70 hover:border-brand-secondary/40')}>

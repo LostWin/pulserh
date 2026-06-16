@@ -1,75 +1,100 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Brain, Lightbulb, ChevronRight } from 'lucide-react';
-import { employees } from '../../data/mockData';
+
+import { api } from '../../lib/api';
 import { cn, riskMeta } from '../../lib/utils';
 import PageHeader from '../../components/PageHeader';
 import Card, { CardHeader } from '../../components/ui/Card';
 import Badge from '../../components/ui/Badge';
 import Avatar from '../../components/ui/Avatar';
+import FieldVisibilityBadge from '../../components/ui/FieldVisibilityBadge';
 
-const FACTORS = ['Charge de travail', 'Reconnaissance', "Perspectives d'évolution", "Ambiance d'équipe", 'Rémunération', 'Équilibre vie pro/perso'];
-
-const RECO = {
-  'Charge de travail': 'Rééquilibrer la charge et envisager de déléguer certaines missions prioritaires.',
-  'Reconnaissance': 'Instaurer un feedback régulier et valoriser publiquement les réussites.',
-  "Perspectives d'évolution": "Co-construire un plan de développement et de mobilité interne.",
-  "Ambiance d'équipe": "Organiser un point d'équipe et renforcer les moments collectifs.",
-  'Rémunération': 'Étudier un ajustement salarial ou une prime de performance.',
-  'Équilibre vie pro/perso': 'Proposer davantage de flexibilité (télétravail, horaires aménagés).',
-};
-
-function predictedRisk(emp) {
-  const penalty = emp.delta < 0 ? Math.abs(emp.delta) : 0;
-  return Math.round(Math.min(95, Math.max(5, 100 - emp.engagement - penalty * 0.5)));
-}
-
-function factorsFor(emp) {
-  const risk = predictedRisk(emp);
-  return FACTORS.map((label, i) => {
-    const seed = (emp.id * 37 + i * 101) % 100;
-    const value = Math.round(Math.min(95, Math.max(8, (seed / 100) * risk * 1.3)));
-    return { label, value };
-  }).sort((a, b) => b.value - a.value);
-}
-
-function factorColor(v) {
-  if (v >= 60) return 'bg-brand-danger';
-  if (v >= 35) return 'bg-brand-danger/10';
+function factorColor(value) {
+  if (value >= 60) return 'bg-brand-danger';
+  if (value >= 35) return 'bg-brand-danger/10';
   return 'bg-brand-secondary';
 }
 
 export default function Predictions() {
-  const ranked = [...employees].sort((a, b) => predictedRisk(b) - predictedRisk(a));
-  const [selectedId, setSelectedId] = useState(ranked[0].id);
-  const selected = ranked.find((e) => e.id === selectedId) || ranked[0];
-  const factors = factorsFor(selected);
-  const risk = predictedRisk(selected);
-  const meta = riskMeta(selected.risk);
+  const [dashboard, setDashboard] = useState(null);
+  const [detail, setDetail] = useState(null);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let mounted = true;
+    const load = async () => {
+      try {
+        const data = await api.get('/dashboard/manager-summary');
+        if (mounted) setDashboard(data);
+      } catch (err) {
+        if (mounted) setError(err.message || 'Impossible de charger les prédictions.');
+      }
+    };
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const ranked = useMemo(() => [...(dashboard?.team || [])].sort((left, right) => right.risk_score - left.risk_score), [dashboard]);
+  const [selectedId, setSelectedId] = useState(null);
+
+  useEffect(() => {
+    if (!selectedId && ranked[0]?.id) {
+      setSelectedId(ranked[0].id);
+    }
+  }, [ranked, selectedId]);
+
+  const selected = ranked.find((employee) => employee.id === selectedId) || ranked[0];
+  const enrichedSelected = detail && selected && detail.employee_id === selected.id
+    ? {
+      ...selected,
+      risk_score: detail._field_visibility?.score === 'hidden' ? null : (typeof detail.score === 'number' ? detail.score : selected.risk_score),
+      recommendation: detail._field_visibility?.recommendation === 'hidden' ? 'Contenu masqué par la politique DAC.' : (detail.recommendation ?? selected.recommendation),
+      factors: detail._field_visibility?.factors === 'hidden' ? [] : (detail.factors ?? selected.factors),
+      _field_visibility: detail._field_visibility || {},
+    }
+    : selected;
+  const factors = enrichedSelected?.factors || [];
+  const meta = enrichedSelected ? riskMeta(enrichedSelected.risk) : riskMeta('low');
+
+  useEffect(() => {
+    let mounted = true;
+    const loadDetail = async () => {
+      if (!selected?.id) return;
+      try {
+        const data = await api.get(`/predict/risk/${selected.id}`);
+        if (mounted) setDetail(data);
+      } catch (err) {
+        if (mounted) setDetail(null);
+      }
+    };
+    loadDetail();
+    return () => {
+      mounted = false;
+    };
+  }, [selected?.id]);
 
   return (
     <div className="animate-fade-in-up space-y-6">
       <PageHeader title="Prédictions IA" subtitle="Risque de départ estimé et facteurs explicatifs par collaborateur" />
+      {error ? <div className="rounded-xl bg-white p-4 text-sm text-brand-warning">{error}</div> : null}
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {/* Ranked list */}
         <Card className="lg:col-span-1">
-          <CardHeader title="Classement par risque" subtitle="Détecté par le modèle prédictif" icon={Brain} />
+          <CardHeader title="Classement par risque" subtitle="Détecté par le moteur backend" icon={Brain} />
           <ul className="max-h-[28rem] divide-y divide-slate-100 overflow-y-auto">
-            {ranked.map((emp) => {
-              const r = predictedRisk(emp);
-              const active = emp.id === selectedId;
+            {ranked.map((employee) => {
+              const active = employee.id === selectedId;
               return (
-                <li key={emp.id}>
-                  <button
-                    onClick={() => setSelectedId(emp.id)}
-                    className={cn('flex w-full items-center gap-3 px-4 py-3 text-left transition-colors', active ? 'bg-brand-light' : 'hover:bg-brand-light')}
-                  >
-                    <Avatar name={emp.name} size="sm" />
+                <li key={employee.id}>
+                  <button onClick={() => setSelectedId(employee.id)} className={cn('flex w-full items-center gap-3 px-4 py-3 text-left transition-colors', active ? 'bg-brand-light' : 'hover:bg-brand-light')}>
+                    <Avatar name={employee.name} size="sm" />
                     <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-medium text-brand-dark">{emp.name}</div>
-                      <div className="truncate text-xs text-brand-secondary/70">{emp.department}</div>
+                      <div className="truncate text-sm font-medium text-brand-dark">{employee.name}</div>
+                      <div className="truncate text-xs text-brand-secondary/70">{employee.department}</div>
                     </div>
-                    <span className={cn('text-sm font-bold', r >= 60 ? 'text-brand-danger' : r >= 35 ? 'text-brand-danger/10' : 'text-brand-secondary')}>{r}%</span>
+                    <span className={cn('text-sm font-bold', employee.risk_score >= 60 ? 'text-brand-danger' : employee.risk_score >= 35 ? 'text-brand-danger/10' : 'text-brand-secondary')}>{employee.risk_score}%</span>
                     <ChevronRight size={16} className={cn('shrink-0', active ? 'text-brand-secondary' : 'text-brand-secondary/40')} />
                   </button>
                 </li>
@@ -78,50 +103,73 @@ export default function Predictions() {
           </ul>
         </Card>
 
-        {/* Detail */}
-        <Card className="lg:col-span-2">
-          <div className="flex flex-col gap-4 border-b border-brand-secondary/10 p-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <Avatar name={selected.name} size="lg" />
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-brand-dark">{selected.name}</h3>
-                  <Badge variant={meta.badge} dot>{meta.label}</Badge>
+        {enrichedSelected ? (
+          <Card className="lg:col-span-2">
+            <div className="flex flex-col gap-4 border-b border-brand-secondary/10 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <Avatar name={enrichedSelected.name} size="lg" />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-brand-dark">{enrichedSelected.name}</h3>
+                    <Badge variant={meta.badge} dot>{meta.label}</Badge>
+                  </div>
+                  <p className="text-sm text-brand-secondary/80">{enrichedSelected.title} · {enrichedSelected.department} · {enrichedSelected.tenure}</p>
+                  {enrichedSelected.focus_objective_title ? (
+                    <p className="mt-1 text-xs text-brand-secondary/65">
+                      Objectif prioritaire: <span className="font-medium text-brand-dark">{enrichedSelected.focus_objective_title}</span>
+                      {typeof enrichedSelected.focus_objective_progress_pct === 'number' ? ` · ${enrichedSelected.focus_objective_progress_pct}%` : ''}
+                    </p>
+                  ) : null}
                 </div>
-                <p className="text-sm text-brand-secondary/80">{selected.title} · {selected.department} · {selected.tenure}</p>
+              </div>
+              <div className="text-center">
+                <div className={cn('text-4xl font-black tracking-tight', enrichedSelected.risk_score >= 60 ? 'text-brand-danger' : enrichedSelected.risk_score >= 35 ? 'text-brand-danger/10' : 'text-brand-secondary')}>
+                  {typeof enrichedSelected.risk_score === 'number' ? `${enrichedSelected.risk_score}%` : '—'}
+                </div>
+                <div className="text-xs text-brand-secondary/70">risque de départ (12 mois)</div>
+                <div className="mt-2 flex justify-center">
+                  <FieldVisibilityBadge visibility={enrichedSelected?._field_visibility?.score} />
+                </div>
+                <div className="mt-2 text-xs text-brand-secondary/70">
+                  Perf. {typeof enrichedSelected.performance_score === 'number' ? `${enrichedSelected.performance_score.toFixed(1)}/5` : '—'}
+                </div>
               </div>
             </div>
-            <div className="text-center">
-              <div className={cn('text-4xl font-black tracking-tight', risk >= 60 ? 'text-brand-danger' : risk >= 35 ? 'text-brand-danger/10' : 'text-brand-secondary')}>{risk}%</div>
-              <div className="text-xs text-brand-secondary/70">risque de départ (12 mois)</div>
-            </div>
-          </div>
 
-          <div className="p-5">
-            <h4 className="mb-4 text-sm font-semibold text-brand-dark">Facteurs contributifs</h4>
-            <div className="space-y-3">
-              {factors.map((f) => (
-                <div key={f.label}>
-                  <div className="mb-1 flex items-center justify-between text-sm">
-                    <span className="text-brand-secondary">{f.label}</span>
-                    <span className="font-semibold text-brand-dark">{f.value}%</span>
+            <div className="p-5">
+              <div className="mb-4 flex items-center gap-2">
+                <h4 className="text-sm font-semibold text-brand-dark">Facteurs contributifs</h4>
+                <FieldVisibilityBadge visibility={enrichedSelected?._field_visibility?.factors} />
+              </div>
+              <div className="space-y-3">
+                {factors.map((factor) => (
+                  <div key={factor.label}>
+                    <div className="mb-1 flex items-center justify-between text-sm">
+                      <span className="text-brand-secondary">{factor.label}</span>
+                      <span className="font-semibold text-brand-dark">{factor.value}%</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-brand-light">
+                      <div className={cn('h-full rounded-full transition-all duration-500', factorColor(factor.value))} style={{ width: `${factor.value}%` }} />
+                    </div>
                   </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-brand-light">
-                    <div className={cn('h-full rounded-full transition-all duration-500', factorColor(f.value))} style={{ width: `${f.value}%` }} />
+                ))}
+              </div>
+
+              <div className="mt-5 flex gap-3 rounded-xl border border-brand-secondary/20 bg-brand-light/60 p-4">
+                <Lightbulb size={20} className="shrink-0 text-brand-secondary" />
+                  <div>
+                    <div className="text-sm font-semibold text-brand-dark">Recommandation du backend</div>
+                  <div className="mt-1 flex items-center gap-2">
+                    <FieldVisibilityBadge visibility={enrichedSelected?._field_visibility?.recommendation} />
+                    <p className="text-sm text-brand-secondary/80">{enrichedSelected.recommendation}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="mt-5 flex gap-3 rounded-xl border border-brand-secondary/20 bg-brand-light/60 p-4">
-              <Lightbulb size={20} className="shrink-0 text-brand-secondary" />
-              <div>
-                <div className="text-sm font-semibold text-brand-dark">Recommandation de l'IA</div>
-                <p className="mt-0.5 text-sm text-brand-secondary/80">{RECO[factors[0].label]}</p>
               </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        ) : (
+          <Card className="lg:col-span-2 p-6 text-sm text-brand-secondary/70">Aucune donnée disponible pour le moment.</Card>
+        )}
       </div>
     </div>
   );

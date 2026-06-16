@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Search, Download, UserPlus, ArrowUpRight, ArrowDownRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { api } from '../../lib/api';
 import { cn, riskMeta, engagementBar } from '../../lib/utils';
@@ -18,6 +18,7 @@ const RISK_FILTERS = [
 
 export default function Employes() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const [dept, setDept] = useState('all');
   const [risk, setRisk] = useState('all');
@@ -32,24 +33,22 @@ export default function Employes() {
     const fetchEmployees = async () => {
       try {
         const response = await api.get('/employees/?page_size=500'); // Added trailing slash
-        // Mapping DB format to the UI format
-        const mapped = response.items.map(emp => {
-          // Mock data for missing metrics
-          const hash = emp.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-          const engagement = 50 + (hash % 50);
-          const risks = ['low', 'medium', 'high'];
-          const riskLevel = risks[hash % 3];
-          const delta = (hash % 20) - 10;
-          
+          const mapped = response.items.map(emp => {
           return {
             id: emp.id,
             name: `${emp.first_name} ${emp.last_name}`,
-            title: emp.contract_type || 'Collaborateur', // Temporarily mapped to contract_type
+            title: emp.job_title || emp.contract_type || 'Collaborateur',
             department: emp.department || 'Non assigné',
-            risk: riskLevel,
-            engagement: engagement,
-            delta: delta,
-            lastActive: 'Il y a ' + ((hash % 5) + 1) + 'h'
+            risk: emp.risk_level || 'low',
+            engagement: emp.engagement_score || 0,
+            delta: emp.trend_delta || 0,
+            lastActive: emp.last_active_label || 'Aujourd’hui',
+            projectCount: emp.project_count || 0,
+            performanceScore: emp.performance_score || 0,
+            focusObjectiveTitle: emp.focus_objective_title || '',
+            focusObjectiveProgressPct: emp.focus_objective_progress_pct ?? null,
+            benefitsStatus: emp.benefits_status || '—',
+            mobilityStatus: emp.mobility_status || 'none',
           };
         });
         setDbEmployees(mapped);
@@ -62,6 +61,16 @@ export default function Employes() {
     fetchEmployees();
   }, []);
 
+  useEffect(() => {
+    const selectedDepartment = searchParams.get('department');
+    if (!selectedDepartment) {
+      setDept('all');
+      return;
+    }
+
+    setDept(selectedDepartment);
+  }, [searchParams]);
+
   const departments = useMemo(
     () => ['all', ...Array.from(new Set(dbEmployees.map((e) => e.department)))],
     [dbEmployees],
@@ -69,16 +78,40 @@ export default function Employes() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const result = dbEmployees.filter((e) => {
+    return dbEmployees.filter((e) => {
       const matchesQuery = !q || e.name.toLowerCase().includes(q) || e.title.toLowerCase().includes(q);
       const matchesDept = dept === 'all' || e.department === dept;
       const matchesRisk = risk === 'all' || e.risk === risk;
       return matchesQuery && matchesDept && matchesRisk;
     });
-    // Reset to page 1 when filters change
-    setCurrentPage(1);
-    return result;
   }, [query, dept, risk, dbEmployees]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query, dept, risk, dbEmployees]);
+
+  useEffect(() => {
+    if (dept === 'all') {
+      setSearchParams((currentParams) => {
+        if (!currentParams.get('department')) {
+          return currentParams;
+        }
+        const nextParams = new URLSearchParams(currentParams);
+        nextParams.delete('department');
+        return nextParams;
+      }, { replace: true });
+      return;
+    }
+
+    setSearchParams((currentParams) => {
+      if (currentParams.get('department') === dept) {
+        return currentParams;
+      }
+      const nextParams = new URLSearchParams(currentParams);
+      nextParams.set('department', dept);
+      return nextParams;
+    }, { replace: true });
+  }, [dept, setSearchParams]);
 
   const totalPages = Math.ceil(filtered.length / pageSize);
   const paginated = useMemo(() => {
@@ -167,6 +200,12 @@ export default function Employes() {
                         <div>
                           <div className="font-medium text-brand-dark">{emp.name}</div>
                           <div className="text-xs text-brand-secondary/70">{emp.title}</div>
+                          {emp.focusObjectiveTitle ? (
+                            <div className="mt-1 text-[11px] text-brand-secondary/55">
+                              Objectif: {emp.focusObjectiveTitle}
+                              {typeof emp.focusObjectiveProgressPct === 'number' ? ` · ${emp.focusObjectiveProgressPct}%` : ''}
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </td>
@@ -184,7 +223,15 @@ export default function Employes() {
                       </span>
                     </td>
                     <td className="px-5 py-3"><Badge variant={meta.badge} dot>{meta.label}</Badge></td>
-                    <td className="px-5 py-3 text-xs text-brand-secondary/70">{emp.lastActive}</td>
+                    <td className="px-5 py-3 text-xs text-brand-secondary/70">
+                      <div>{emp.lastActive}</div>
+                      <div className="mt-1 text-[11px] text-brand-secondary/50">
+                        {emp.projectCount} projet(s) actif(s) · Perf. {emp.performanceScore ? emp.performanceScore.toFixed(1) : '—'}/5
+                      </div>
+                      <div className="mt-1 text-[11px] text-brand-secondary/45">
+                        Benefits: {emp.benefitsStatus} · Mobilité: {emp.mobilityStatus}
+                      </div>
+                    </td>
                   </tr>
                 );
               })}

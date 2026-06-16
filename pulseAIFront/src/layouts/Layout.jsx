@@ -1,10 +1,12 @@
-import { useState, Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Outlet, Navigate, NavLink, useLocation, Link } from 'react-router-dom';
 import { LogOut, Menu, X, Settings, HelpCircle, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { SIDEBAR_LINKS } from '../config/roles';
 import { cn } from '../lib/utils';
+import { api } from '../lib/api';
 import Avatar from '../components/ui/Avatar';
+import NotificationCenter from '../components/NotificationCenter';
 import logo from '../LOGO 512PX.png';
 
 function PageLoader() {
@@ -29,6 +31,7 @@ function Brand() {
 
 function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleTheme }) {
   const isDark = theme === 'dark';
+  const displayRole = role === 'RH' ? 'Ressources Humaine' : role;
 
   const linkClass = (isActive) => cn(
     'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
@@ -54,7 +57,7 @@ function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleThem
         isDark ? "bg-white/5" : "bg-brand-light"
       )}>
         <div className={cn("text-[10px] font-semibold uppercase tracking-widest", isDark ? "text-white/40" : "text-brand-secondary/60")}>Espace</div>
-        <div className={cn("text-sm font-semibold", isDark ? "text-white" : "text-brand-dark")}>{role}</div>
+        <div className={cn("text-sm font-semibold", isDark ? "text-white" : "text-brand-dark")}>{displayRole}</div>
       </div>
 
       {/* Main nav */}
@@ -87,7 +90,7 @@ function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleThem
         </button>
 
         <Link
-          to="#"
+          to="/settings"
           onClick={onNavigate}
           className={bottomBtnClass}
         >
@@ -121,6 +124,7 @@ export default function Layout() {
   const { user, role, logout } = useAuth();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileAvatar, setProfileAvatar] = useState(null);
 
   // Initialize theme: default to dark sidebar (original style)
   const [theme, setTheme] = useState(() => {
@@ -128,6 +132,26 @@ export default function Layout() {
     if (saved === 'dark' || saved === 'light') return saved;
     return 'dark';
   });
+
+  useEffect(() => {
+    let mounted = true;
+    const loadSettings = async () => {
+      try {
+        const settings = await api.get('/users/me/settings');
+        if (!mounted) return;
+        if (settings?.avatar_data_url) setProfileAvatar(settings.avatar_data_url);
+        if (!localStorage.getItem('pulse-theme') && settings?.theme) {
+          setTheme(settings.theme);
+        }
+      } catch (error) {
+        console.error('Impossible de charger les préférences utilisateur', error);
+      }
+    };
+    loadSettings();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const toggleTheme = () => {
     setTheme(prev => {
@@ -210,12 +234,15 @@ export default function Layout() {
             </button>
             <div className="text-base font-semibold capitalize text-brand-dark">{title}</div>
           </div>
-          <div className="flex items-center gap-3 rounded-full border border-brand-secondary/10 bg-brand-light py-1.5 pl-3 pr-1.5">
-            <div className="hidden text-right sm:block">
-              <div className="text-sm font-semibold leading-tight text-brand-dark">{user.name}</div>
-              <div className="text-xs leading-tight text-brand-secondary/80">{role}</div>
+          <div className="flex items-center gap-3">
+            <NotificationCenter />
+            <div className="flex items-center gap-3 rounded-full border border-brand-secondary/10 bg-brand-light py-1.5 pl-3 pr-1.5">
+              <div className="hidden text-right sm:block">
+                <div className="text-sm font-semibold leading-tight text-brand-dark">{user.name}</div>
+                <div className="text-xs leading-tight text-brand-secondary/80">{role}</div>
+              </div>
+              <Avatar name={user.name} src={profileAvatar || user.avatar} size="sm" />
             </div>
-            <Avatar name={user.name} src={user.avatar} size="sm" />
           </div>
         </header>
 

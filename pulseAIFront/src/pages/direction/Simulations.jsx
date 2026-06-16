@@ -1,35 +1,19 @@
 import { useMemo, useState } from 'react';
 import { Sparkles, RotateCcw, Heart, TrendingDown, Wallet, PiggyBank } from 'lucide-react';
-import {
-  ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, Legend,
-} from 'recharts';
-import { cn } from '../../lib/utils';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts';
+
+import { api } from '../../lib/api';
 import PageHeader from '../../components/PageHeader';
 import Card, { CardHeader } from '../../components/ui/Card';
 
-const BASE = { engagement: 76, turnover: 7.4, headcount: 127, payroll: 4200, replacement: 22 };
-const MONTHS = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'];
-const DEFAULTS = { raise: 0, training: 0, remote: 0, recognition: 0 };
+const DEFAULTS = { raise_pct: 0, training_pct: 0, remote_days: 0, recognition_pct: 0 };
 
 const LEVERS = [
-  { key: 'raise', label: 'Augmentation salariale', min: 0, max: 8, step: 0.5, unit: '%' },
-  { key: 'training', label: 'Budget formation', min: 0, max: 100, step: 5, unit: '%' },
-  { key: 'remote', label: 'Jours de télétravail / sem.', min: 0, max: 5, step: 1, unit: ' j' },
-  { key: 'recognition', label: 'Programme de reconnaissance', min: 0, max: 100, step: 5, unit: '%' },
+  { key: 'raise_pct', label: 'Augmentation salariale', min: 0, max: 8, step: 0.5, unit: '%' },
+  { key: 'training_pct', label: 'Budget formation', min: 0, max: 100, step: 5, unit: '%' },
+  { key: 'remote_days', label: 'Jours de télétravail / sem.', min: 0, max: 5, step: 1, unit: ' j' },
+  { key: 'recognition_pct', label: 'Programme de reconnaissance', min: 0, max: 100, step: 5, unit: '%' },
 ];
-
-function simulate({ raise, training, remote, recognition }) {
-  const gain = raise * 1.4 + (training / 100) * 5 + remote * 1.3 + (recognition / 100) * 7;
-  const engagement = Math.min(100, BASE.engagement + gain);
-  const engagementGain = engagement - BASE.engagement;
-  const turnover = Math.max(1.5, BASE.turnover - engagementGain * 0.4);
-  const departsAvoided = ((BASE.turnover - turnover) / 100) * BASE.headcount;
-  const savings = departsAvoided * BASE.replacement; // k€
-  const cost = (raise / 100) * BASE.payroll + (training / 100) * 80 + (recognition / 100) * 30; // k€
-  const net = savings - cost;
-  const roi = cost > 0 ? savings / cost : null;
-  return { engagement, engagementGain, turnover, savings, cost, net, roi };
-}
 
 function ResultTile({ icon: Icon, label, value, sub, accent, subColor }) {
   return (
@@ -39,41 +23,53 @@ function ResultTile({ icon: Icon, label, value, sub, accent, subColor }) {
         <span className="text-xs font-medium">{label}</span>
       </div>
       <div className="mt-2 text-2xl font-bold text-brand-dark">{value}</div>
-      {sub && <div className={cn('text-xs font-medium', subColor || 'text-brand-secondary/70')}>{sub}</div>}
+      {sub && <div className={`text-xs font-medium ${subColor || 'text-brand-secondary/70'}`}>{sub}</div>}
     </Card>
   );
 }
 
 export default function Simulations() {
   const [levers, setLevers] = useState(DEFAULTS);
-  const r = useMemo(() => simulate(levers), [levers]);
-  const touched = useMemo(() => Object.keys(DEFAULTS).some((k) => levers[k] !== DEFAULTS[k]), [levers]);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
 
-  const projection = MONTHS.map((month, i) => {
-    const t = i / (MONTHS.length - 1);
-    return {
-      month,
-      actuel: BASE.engagement,
-      projeté: Math.round((BASE.engagement + r.engagementGain * t) * 10) / 10,
-    };
-  });
+  const touched = useMemo(() => Object.keys(DEFAULTS).some((key) => levers[key] !== DEFAULTS[key]), [levers]);
 
-  const fmt = (n) => `${Math.round(n)} k€`;
+  const runSimulation = async () => {
+    try {
+      const payload = await api.post('/predict/simulate', {
+        scenario_type: 'direction_dashboard',
+        parameters: levers,
+      });
+      setResult({
+        engagement: payload.engagement ?? 76,
+        engagementGain: payload.engagement_gain ?? 0,
+        turnover: payload.turnover ?? 7.4,
+        savings: payload.savings ?? 0,
+        cost: payload.cost ?? 0,
+        net: payload.net ?? 0,
+        roi: payload.roi ?? null,
+        projection: payload.projection ?? ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'].map((month) => ({ month, actuel: 76, projeté: 76 })),
+      });
+      setError('');
+    } catch (err) {
+      setError(err.message || 'Impossible de lancer la simulation.');
+    }
+  };
+
+  const projection = result?.projection || ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'].map((month) => ({ month, actuel: 76, projeté: 76 }));
+  const fmt = (n) => `${Math.round(n || 0)} k€`;
 
   return (
     <div className="animate-fade-in-up space-y-6">
       <PageHeader title="Simulateur de scénarios" subtitle="Projetez l'impact RH et financier de vos décisions">
-        <button
-          onClick={() => setLevers(DEFAULTS)}
-          disabled={!touched}
-          className="inline-flex items-center gap-2 rounded-xl border border-brand-secondary/20 bg-white px-3 py-2 text-sm font-medium text-brand-dark shadow-sm transition-colors hover:bg-brand-light disabled:opacity-40"
-        >
+        <button onClick={() => { setLevers(DEFAULTS); setResult(null); }} disabled={!touched} className="inline-flex items-center gap-2 rounded-xl border border-brand-secondary/20 bg-white px-3 py-2 text-sm font-medium text-brand-dark shadow-sm disabled:opacity-40">
           <RotateCcw size={15} /> Réinitialiser
         </button>
       </PageHeader>
+      {error ? <div className="rounded-xl bg-white p-4 text-sm text-brand-warning">{error}</div> : null}
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {/* Levers */}
         <Card className="lg:col-span-1">
           <CardHeader title="Leviers d'action" subtitle="Ajustez et observez l'impact" icon={Sparkles} />
           <div className="space-y-6 p-5">
@@ -81,47 +77,21 @@ export default function Simulations() {
               <div key={lever.key}>
                 <div className="mb-2 flex items-center justify-between">
                   <label className="text-sm font-medium text-brand-dark">{lever.label}</label>
-                  <span className="rounded-xl bg-brand-light px-2 py-0.5 text-sm font-semibold text-brand-secondary">
-                    {levers[lever.key]}{lever.unit}
-                  </span>
+                  <span className="rounded-xl bg-brand-light px-2 py-0.5 text-sm font-semibold text-brand-secondary">{levers[lever.key]}{lever.unit}</span>
                 </div>
-                <input
-                  type="range"
-                  min={lever.min} max={lever.max} step={lever.step}
-                  value={levers[lever.key]}
-                  onChange={(e) => setLevers({ ...levers, [lever.key]: Number(e.target.value) })}
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-brand-light accent-brand-secondary"
-                />
+                <input type="range" min={lever.min} max={lever.max} step={lever.step} value={levers[lever.key]} onChange={(event) => setLevers({ ...levers, [lever.key]: Number(event.target.value) })} className="h-2 w-full cursor-pointer appearance-none rounded-full bg-brand-light accent-brand-secondary" />
               </div>
             ))}
+            <button onClick={runSimulation} className="w-full rounded-xl bg-brand-secondary py-3 text-sm font-semibold text-white">Lancer la simulation</button>
           </div>
         </Card>
 
-        {/* Results */}
         <div className="space-y-6 lg:col-span-2">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            <ResultTile
-              icon={Heart} accent="text-brand-secondary" label="Engagement projeté"
-              value={`${r.engagement.toFixed(0)}/100`}
-              sub={`${r.engagementGain >= 0 ? '+' : ''}${r.engagementGain.toFixed(1)} pts`}
-              subColor={r.engagementGain > 0 ? 'text-brand-secondary' : 'text-brand-secondary/70'}
-            />
-            <ResultTile
-              icon={TrendingDown} accent="text-brand-secondary" label="Turnover projeté"
-              value={`${r.turnover.toFixed(1)}%`}
-              sub={`${(r.turnover - BASE.turnover).toFixed(1)} pts`}
-              subColor={r.turnover < BASE.turnover ? 'text-brand-secondary' : 'text-brand-secondary/70'}
-            />
-            <ResultTile
-              icon={Wallet} accent="text-brand-secondary" label="Coût annuel"
-              value={fmt(r.cost)} sub="investissement"
-            />
-            <ResultTile
-              icon={PiggyBank} accent="text-purple-500" label="Bénéfice net"
-              value={fmt(r.net)}
-              sub={r.roi ? `ROI ${r.roi.toFixed(1)}x` : 'sans coût'}
-              subColor={r.net >= 0 ? 'text-brand-secondary' : 'text-brand-danger'}
-            />
+            <ResultTile icon={Heart} accent="text-brand-secondary" label="Engagement projeté" value={`${Math.round(result?.engagement || 76)}/100`} sub={`${(result?.engagementGain || 0).toFixed(1)} pts`} subColor="text-brand-secondary" />
+            <ResultTile icon={TrendingDown} accent="text-brand-secondary" label="Turnover projeté" value={`${(result?.turnover || 7.4).toFixed(1)}%`} sub="projection backend" />
+            <ResultTile icon={Wallet} accent="text-brand-secondary" label="Coût annuel" value={fmt(result?.cost)} sub="investissement" />
+            <ResultTile icon={PiggyBank} accent="text-purple-500" label="Bénéfice net" value={fmt(result?.net)} sub={result?.roi ? `ROI ${result.roi.toFixed(1)}x` : 'sans coût'} subColor={result?.net >= 0 ? 'text-brand-secondary' : 'text-brand-danger'} />
           </div>
 
           <Card>
@@ -138,18 +108,14 @@ export default function Simulations() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
                   <YAxis domain={[60, 100]} tickLine={false} axisLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                  <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12 }} />
-                  <Legend wrapperStyle={{ fontSize: 12 }} />
+                  <Tooltip />
+                  <Legend />
                   <Area type="monotone" dataKey="actuel" name="Actuel" stroke="#cbd5e1" strokeWidth={2} strokeDasharray="5 5" fill="transparent" />
                   <Area type="monotone" dataKey="projeté" name="Projeté" stroke="#8b5cf6" strokeWidth={2.5} fill="url(#proj)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </Card>
-
-          <p className="px-1 text-xs text-brand-secondary/70">
-            * Modèle illustratif à des fins de démonstration. Base : {BASE.headcount} collaborateurs, turnover {BASE.turnover}%, coût de remplacement moyen {BASE.replacement} k€.
-          </p>
         </div>
       </div>
     </div>

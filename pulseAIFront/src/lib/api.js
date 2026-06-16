@@ -1,6 +1,7 @@
 import keycloak from '../config/keycloak';
 
-const API_BASE_URL = 'https://api.pulse.local';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.pulse.local';
+export const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || API_BASE_URL.replace(/^http/, 'ws');
 
 /**
  * Wrapper centralisé pour les appels API (Fetch).
@@ -8,9 +9,10 @@ const API_BASE_URL = 'https://api.pulse.local';
  */
 async function apiFetch(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
+  const { responseType, ...rawOptions } = options;
   
   // Préparation des headers
-  const headers = new Headers(options.headers || {});
+  const headers = new Headers(rawOptions.headers || {});
   
   // Injection automatique du JWT si l'utilisateur est authentifié
   if (keycloak.token) {
@@ -18,13 +20,13 @@ async function apiFetch(endpoint, options = {}) {
   }
   
   // Par défaut, si le body est un objet brut (non FormData), on l'envoie en JSON
-  if (options.body && !(options.body instanceof FormData) && typeof options.body === 'object') {
+  if (rawOptions.body && !(rawOptions.body instanceof FormData) && typeof rawOptions.body === 'object') {
     headers.set('Content-Type', 'application/json');
-    options.body = JSON.stringify(options.body);
+    rawOptions.body = JSON.stringify(rawOptions.body);
   }
 
   const fetchOptions = {
-    ...options,
+    ...rawOptions,
     headers,
   };
 
@@ -49,9 +51,13 @@ async function apiFetch(endpoint, options = {}) {
       return null;
     }
 
+    if (responseType === 'blob') {
+      return await response.blob();
+    }
+
     return await response.json();
   } catch (error) {
-    console.error(`[API Error] ${options.method || 'GET'} ${endpoint} :`, error);
+    console.error(`[API Error] ${rawOptions.method || 'GET'} ${endpoint} :`, error);
     throw error;
   }
 }
@@ -117,4 +123,3 @@ export const api = {
     };
   },
 };
-

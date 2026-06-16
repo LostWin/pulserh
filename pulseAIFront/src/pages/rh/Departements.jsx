@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Users, GitMerge } from 'lucide-react';
 import { api } from '../../lib/api';
 import { engagementBar, engagementText } from '../../lib/utils';
@@ -18,6 +19,7 @@ function riskVariant(risk) {
 }
 
 export default function Departements() {
+  const navigate = useNavigate();
   const [dbDepartments, setDbDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,16 +28,14 @@ export default function Departements() {
       try {
         const data = await api.get('/departments/');
         const mapped = data.map(d => {
-          const hash = d.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-          const risk = 5 + (hash % 20); // 5 to 25
-          const engagement = 60 + (hash % 30); // 60 to 90
           return {
+            id: d.id,
             name: d.name,
             headcount: d.employee_count || 0,
-            risk: risk,
-            engagement: engagement,
+            risk: d.risk_score || 0,
+            engagement: d.engagement_score || 0,
             leadName: d.manager,
-            leadTitle: 'Manager'
+            leadTitle: d.manager_title || 'Manager',
           };
         });
         setDbDepartments(mapped);
@@ -69,7 +69,11 @@ export default function Departements() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {dbDepartments.map((d) => {
           return (
-            <Card key={d.name} className="p-5">
+            <Card
+              key={d.id || d.name}
+              className="cursor-pointer p-5 transition-colors hover:bg-brand-light/40"
+              onClick={() => navigate(`/rh/employes?department=${encodeURIComponent(d.name)}`)}
+            >
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-lg font-bold text-brand-dark">{d.name}</h3>

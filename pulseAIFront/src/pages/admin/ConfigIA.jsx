@@ -7,22 +7,6 @@ import {
 import { cn } from '../../lib/utils';
 import { api } from '../../lib/api';
 
-const PREDICTIVE_MODULES = [
-  { id: 'engagement', label: 'Prédiction d\'engagement', desc: 'Analyse les patterns comportementaux pour prédire l\'engagement.', enabled: true },
-  { id: 'turnover', label: 'Estimation risque de départ', desc: 'Modèle de scoring du risque de départ à 90 jours.', enabled: true },
-  { id: 'formation', label: 'Recommandation formation', desc: 'Suggère des formations basées sur les lacunes détectées.', enabled: true },
-  { id: 'anomaly', label: 'Détection anomalie absences', desc: 'Identifie les patterns d\'absences anormaux.', enabled: false },
-  { id: 'bias', label: 'Détecteur de biais algorithmique', desc: 'Surveille et signale les biais dans les prédictions IA.', enabled: true },
-  { id: 'nlp', label: 'Analyse NLP des feedbacks', desc: 'Sentiment analysis sur les retours de collaborateurs.', enabled: false },
-];
-
-const HISTORY = [
-  { action: 'Configuration LLM modifiée', old: 'Ollama', new: 'OpenRouter', user: 'admin@pulse-rh.ai', date: 'Aujourd\'hui, 10:45' },
-  { action: 'Nouveau guardrail "Salaires" ajouté', old: '—', new: 'Actif', user: 'admin@pulse-rh.ai', date: 'Aujourd\'hui, 10:30' },
-  { action: 'Seuil d\'alerte modifié', old: '65%', new: '70%', user: 'admin@pulse-rh.ai', date: '11 juin, 09:30' },
-  { action: 'Module "anomaly" désactivé', old: 'Actif', new: 'Inactif', user: 'admin@pulse-rh.ai', date: '10 juin, 14:15' },
-];
-
 export default function ConfigIA() {
   const [activeTab, setActiveTab] = useState('conversational'); // 'conversational' | 'guardrails' | 'predictive'
   
@@ -56,8 +40,9 @@ export default function ConfigIA() {
   const [testing, setTesting] = useState(false);
 
   // Predictive models state (original values)
-  const [modules, setModules] = useState(PREDICTIVE_MODULES);
+  const [modules, setModules] = useState([]);
   const [predictiveConfig, setPredictiveConfig] = useState({ alertThreshold: 70, absenceWeight: 0.45, strictMode: false });
+  const [history, setHistory] = useState([]);
   const [calibrating, setCalibrating] = useState(false);
   const [calibProgress, setCalibProgress] = useState(0);
 
@@ -76,13 +61,17 @@ export default function ConfigIA() {
     setLoading(true);
     setErrorMsg('');
     try {
-      const configData = await api.get('/admin/ai/config');
-      if (configData) {
-        setLlmConfig(configData);
-      }
-      const guardrailsData = await api.get('/admin/guardrails');
-      if (guardrailsData) {
-        setGuardrails(guardrailsData);
+      const [configData, guardrailsData, overviewData] = await Promise.all([
+        api.get('/admin/ai/config'),
+        api.get('/admin/guardrails'),
+        api.get('/admin/ai/overview'),
+      ]);
+      if (configData) setLlmConfig(configData);
+      if (guardrailsData) setGuardrails(guardrailsData);
+      if (overviewData) {
+        setModules(overviewData.modules || []);
+        setPredictiveConfig(overviewData.predictive_config || { alertThreshold: 70, absenceWeight: 0.45, strictMode: false });
+        setHistory(overviewData.history || []);
       }
     } catch (err) {
       console.error("Error fetching AI config", err);
@@ -209,14 +198,21 @@ export default function ConfigIA() {
   // ML Predictive Methods
   const toggleModule = (id) => setModules((p) => p.map((m) => m.id === id ? { ...m, enabled: !m.enabled } : m));
 
-  const calibrate = () => {
-    setCalibrating(true); setCalibProgress(0);
-    const iv = setInterval(() => {
-      setCalibProgress((p) => {
-        if (p >= 100) { clearInterval(iv); setCalibrating(false); return 100; }
-        return Math.min(p + Math.random() * 14, 100);
-      });
-    }, 220);
+  const calibrate = async () => {
+    setCalibrating(true);
+    setCalibProgress(20);
+    try {
+      await api.post('/admin/ai/recompute');
+      setCalibProgress(100);
+      await fetchConfigAndGuardrails();
+    } catch (err) {
+      setErrorMsg("Impossible de recalibrer les modèles.");
+    } finally {
+      setTimeout(() => {
+        setCalibrating(false);
+        setCalibProgress(0);
+      }, 500);
+    }
   };
 
   return (
@@ -495,7 +491,7 @@ export default function ConfigIA() {
                     <h2 className="font-semibold text-brand-dark">Derniers logs admin</h2>
                   </div>
                   <div className="divide-y divide-brand-secondary/5">
-                    {HISTORY.map((h, i) => (
+                    {history.map((h, i) => (
                       <div key={i} className="p-4 hover:bg-brand-light/30 transition-colors text-xs space-y-1">
                         <div className="flex justify-between font-medium text-brand-dark">
                           <span>{h.action}</span>
@@ -921,9 +917,14 @@ export default function ConfigIA() {
 
                 <div className="flex justify-end pt-5 border-t border-brand-secondary/5 mt-6">
                   <button
-                    onClick={() => {
-                      setSavedLlm(true);
-                      setTimeout(() => setSavedLlm(false), 2000);
+                    onClick={async () => {
+                      try {
+                        await api.put('/admin/ai/predictive-config', predictiveConfig);
+                        setSavedLlm(true);
+                        setTimeout(() => setSavedLlm(false), 2000);
+                      } catch (err) {
+                        setErrorMsg("Impossible d'enregistrer les paramètres prédictifs.");
+                      }
                     }}
                     className="flex items-center gap-2 bg-brand-secondary text-white hover:bg-brand-dark transition-all rounded-xl px-5 py-2.5 font-semibold text-sm shadow-sm"
                   >

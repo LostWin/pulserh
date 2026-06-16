@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { Upload, FileText, CheckCircle, XCircle, AlertTriangle, Info } from 'lucide-react';
+import { Upload, FileText, CheckCircle, XCircle, AlertTriangle, Info, Download, RefreshCw, FolderArchive, History } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { api } from '../../lib/api';
+import keycloak from '../../config/keycloak';
+import { api, API_BASE_URL } from '../../lib/api';
 
 const IMPORT_TYPES = {
   departments: { id: 'departments', label: 'Départements' },
@@ -19,17 +20,28 @@ export default function ImportDonnees() {
   const [file, setFile] = useState(null);
   const [detectedType, setDetectedType] = useState(null);
   const [importing, setImporting] = useState(false);
+  const [downloadingSamples, setDownloadingSamples] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(false);
   const [report, setReport] = useState(null);
   const [error, setError] = useState(null);
   const [history, setHistory] = useState([]);
   const inputRef = useRef();
+  const formatHistoryDate = (createdAt) => {
+    if (!createdAt) return 'Date indisponible';
+    const parsedDate = new Date(createdAt);
+    if (Number.isNaN(parsedDate.getTime())) return 'Date indisponible';
+    return `${parsedDate.toLocaleDateString()} ${parsedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  };
 
   const fetchHistory = async () => {
+    setHistoryLoading(true);
     try {
       const data = await api.get('/imports/history');
       setHistory(data);
     } catch (err) {
       console.error("Erreur lors de la récupération de l'historique :", err);
+    } finally {
+      setHistoryLoading(false);
     }
   };
 
@@ -119,11 +131,90 @@ export default function ImportDonnees() {
     if (inputRef.current) inputRef.current.value = '';
   };
 
+  const downloadSamples = async () => {
+    if (downloadingSamples) return;
+    setDownloadingSamples(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/imports/samples`, {
+        headers: keycloak.token ? { Authorization: `Bearer ${keycloak.token}` } : {},
+      });
+
+      if (!response.ok) {
+        throw new Error(`Téléchargement impossible (HTTP ${response.status})`);
+      }
+
+      const blob = await response.blob();
+      const objectUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = 'pulseai-import-samples.zip';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(objectUrl);
+    } catch (err) {
+      setError(err.message || "Impossible de télécharger le kit d'exemples.");
+    } finally {
+      setDownloadingSamples(false);
+    }
+  };
+
   return (
     <div className="animate-fade-in-up space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-brand-dark">Import de données</h1>
-        <p className="mt-1 text-sm text-brand-secondary/70">Le système détecte automatiquement le type d'entité grâce aux colonnes du CSV.</p>
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-brand-dark">Import de données</h1>
+          <p className="mt-1 text-sm text-brand-secondary/70">Le système détecte automatiquement le type d'entité grâce aux colonnes du CSV.</p>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={downloadSamples}
+            disabled={downloadingSamples}
+            className="inline-flex items-center gap-2 rounded-xl bg-brand-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {downloadingSamples ? <RefreshCw size={16} className="animate-spin" /> : <Download size={16} />}
+            {downloadingSamples ? 'Téléchargement...' : 'Télécharger les fichiers samples'}
+          </button>
+          <button
+            type="button"
+            onClick={fetchHistory}
+            disabled={historyLoading}
+            className="inline-flex items-center gap-2 rounded-xl border border-brand-secondary/20 px-4 py-2.5 text-sm font-semibold text-brand-secondary transition-colors hover:bg-brand-light disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            <RefreshCw size={16} className={cn(historyLoading && "animate-spin")} />
+            Actualiser l'historique
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-brand-secondary/10 bg-white p-6 shadow-sm">
+        <div className="flex items-start gap-4">
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-secondary/10">
+            <FolderArchive size={24} className="text-brand-secondary" />
+          </div>
+          <div className="space-y-3">
+            <div>
+              <h2 className="text-lg font-bold text-brand-dark">Kit d'exemples d'import</h2>
+              <p className="mt-1 text-sm text-brand-secondary/70">
+                Le bouton de téléchargement fournit un dossier compressé avec des CSV modèles et un mémo détaillé pour préparer correctement vos imports.
+              </p>
+            </div>
+            <div className="grid gap-3 text-sm text-brand-secondary/80 md:grid-cols-2">
+              <div className="rounded-xl bg-brand-light/30 p-4">
+                <p className="font-semibold text-brand-dark">Le mémo explique</p>
+                <p className="mt-1">les colonnes attendues, les types par colonne, les champs obligatoires, les dépendances entre fichiers et l'ordre d'import recommandé.</p>
+              </div>
+              <div className="rounded-xl bg-brand-light/30 p-4">
+                <p className="font-semibold text-brand-dark">Le dossier contient</p>
+                <p className="mt-1">des exemples `departments`, `jobs`, `employees`, `contracts`, `leaves`, `projects`, `tasks` et `attendances`, déjà ordonnés pour guider vos utilisateurs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Drop zone */}
@@ -252,12 +343,29 @@ export default function ImportDonnees() {
         </div>
       )}
 
-      {/* Historique des imports */}
       <div className="rounded-2xl border border-brand-secondary/10 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-bold text-brand-dark mb-4">Historique de session</h2>
+        <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand-secondary/10">
+              <History size={18} className="text-brand-secondary" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-brand-dark">Historique des imports</h2>
+              <p className="text-sm text-brand-secondary/70">Tous les imports enregistrés sont listés ici, avec accès rapide au dernier rapport.</p>
+            </div>
+          </div>
+          <div className="rounded-full bg-brand-light px-3 py-1 text-xs font-semibold text-brand-secondary">
+            {history.length} import{history.length > 1 ? 's' : ''} enregistré{history.length > 1 ? 's' : ''}
+          </div>
+        </div>
         <div className="space-y-3">
-          {history.length === 0 ? (
-            <p className="text-sm text-brand-secondary/60">Aucun import n'a été effectué lors de cette session.</p>
+          {historyLoading ? (
+            <div className="flex items-center gap-2 rounded-xl bg-brand-light/30 p-4 text-sm text-brand-secondary/80">
+              <RefreshCw size={16} className="animate-spin" />
+              Chargement de l'historique...
+            </div>
+          ) : history.length === 0 ? (
+            <p className="text-sm text-brand-secondary/60">Aucun import enregistré pour le moment.</p>
           ) : (
             history.map((item) => (
               <div 
@@ -300,7 +408,7 @@ export default function ImportDonnees() {
                     {item.status === 'success' ? 'Réussi' : item.status === 'warning' ? 'Partiel' : 'Échoué'}
                   </p>
                   <p className="text-xs font-medium text-brand-secondary/60">
-                    {new Date(item.created_at).toLocaleDateString()} {new Date(item.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                    {formatHistoryDate(item.created_at)}
                   </p>
                 </div>
               </div>

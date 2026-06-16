@@ -1,11 +1,12 @@
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Heart, TrendingDown, ShieldAlert, ArrowRight, Download } from 'lucide-react';
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Cell,
   PieChart, Pie,
 } from 'recharts';
-import { departments } from '../../data/mockData';
 import { engagementBar } from '../../lib/utils';
+import { api } from '../../lib/api';
 import PageHeader from '../../components/PageHeader';
 import Card, { CardHeader } from '../../components/ui/Card';
 import StatCard from '../../components/ui/StatCard';
@@ -31,13 +32,38 @@ function ChartTooltip({ active, payload, label }) {
 }
 
 export default function RhDashboard() {
-  const headcount = departments.reduce((s, d) => s + d.headcount, 0);
-  const globalEngagement = Math.round(
-    departments.reduce((s, d) => s + d.engagement * d.headcount, 0) / headcount,
-  );
-  const activeRisks = Math.round(
-    departments.reduce((s, d) => s + (d.risk / 100) * d.headcount, 0),
-  );
+  const [dashboard, setDashboard] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadDashboard = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const data = await api.get('/dashboard/rh-summary');
+        if (mounted) setDashboard(data);
+      } catch (err) {
+        console.error(err);
+        if (mounted) setError(err.message || "Impossible de charger le dashboard RH.");
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+
+    loadDashboard();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const departments = useMemo(() => dashboard?.departments || [], [dashboard]);
+  const headcount = dashboard?.summary?.headcount || 0;
+  const globalEngagement = dashboard?.summary?.global_engagement || 0;
+  const activeRisks = dashboard?.summary?.active_risks || 0;
+  const turnoverPredicted = dashboard?.summary?.turnover_predicted || 0;
 
   return (
     <div className="animate-fade-in-up space-y-6">
@@ -47,12 +73,24 @@ export default function RhDashboard() {
         </button>
       </PageHeader>
 
+      {error && (
+        <div className="rounded-2xl border border-brand-warning/20 bg-brand-warning/10 px-4 py-3 text-sm font-medium text-brand-warning">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon={Users} label="Effectif total" value={headcount} delta={2} accent="blue" />
         <StatCard icon={Heart} label="Engagement global" value={globalEngagement} suffix="/100" delta={4} accent="emerald" />
-        <StatCard icon={TrendingDown} label="Turnover prédit" value="7.4" suffix="%" delta={1} invertDelta accent="amber" />
+        <StatCard icon={TrendingDown} label="Turnover prédit" value={turnoverPredicted} suffix="%" delta={1} invertDelta accent="amber" />
         <StatCard icon={ShieldAlert} label="Risques actifs" value={activeRisks} delta={3} invertDelta accent="rose" />
       </div>
+
+      {loading && (
+        <div className="rounded-2xl border border-brand-secondary/15 bg-white px-4 py-3 text-sm text-brand-secondary/70 shadow-sm">
+          Chargement des indicateurs RH...
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Engagement by department */}
