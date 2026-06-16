@@ -1,7 +1,7 @@
 id,name,manager_id
-dep-1,Ressources Humaines,emp-42
-dep-2,IT & Engineering,emp-173
-dep-3,Finance & Comptabilité,emp-13
-dep-4,Marketing & Communication,emp-340
-dep-5,Ventes,emp-407
-dep-6,Direction Générale,emp-341
+dep-1,Ressources Humaines,emp-demo-karim
+dep-2,IT & Engineering,emp-demo-fatima
+dep-3,Finance & Comptabilité,emp-63
+dep-4,Marketing & Communication,emp-56
+dep-5,Ventes,emp-9
+dep-6,Direction Générale,emp-demo-sara

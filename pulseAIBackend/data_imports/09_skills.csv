@@ -1,0 +1,9 @@
+id,name,category,description,level_scale,is_certifiable,is_active
+skill-react,React,Engineering,Développement frontend React.,beginner-intermediate-advanced-expert,false,true
+skill-python,Python,Engineering,Développement backend et data.,beginner-intermediate-advanced-expert,false,true
+skill-onboarding,Onboarding,People,Conception de parcours d'intégration.,foundation-operational-strategic,false,true
+skill-payroll,Paie,RH,Gestion des opérations de paie.,beginner-intermediate-advanced-expert,true,true
+skill-management,Management,Leadership,Pilotage d'équipe et accompagnement.,beginner-intermediate-advanced-expert,false,true
+skill-security,Sécurité & RGPD,Compliance,Bonnes pratiques sécurité et confidentialité.,foundation-operational-expert,true,true
+skill-communication,Communication,Soft Skills,Communication écrite et orale.,beginner-intermediate-advanced-expert,false,true
+skill-data,Data Analysis,Analytics,Analyse et interprétation de données RH.,beginner-intermediate-advanced-expert,false,true

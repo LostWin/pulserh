@@ -1,0 +1,3 @@
+id,employee_id,previous_job_title,new_job_title,effective_date,notes
+promotion-emp-demo-fatima,emp-demo-fatima,Lead Engineer,Engineering Manager,2025-11-07,Évolution seedée pour démontrer les parcours de carrière.
+promotion-emp-demo-karim,emp-demo-karim,HR Business Partner,Responsable RH,2025-11-07,Évolution seedée pour démontrer les parcours de carrière.

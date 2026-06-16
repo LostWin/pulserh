@@ -1,11 +1,12 @@
-id,name,description,start_date,deadline,status
-proj-1,Projet Personnage,Style daughter magazine in owner.,2024-06-21,2025-03-22,En pause
-proj-2,Projet التغييرات,الموسوعة دون الستار اليها.,2025-10-29,2026-07-29,En cours
-proj-3,Projet الإثنان,Amener être voici prétendre.,2025-11-13,2026-03-23,En pause
-proj-4,Projet فهرست,Continue world single bad himself hundred.,2025-04-19,2025-11-11,En cours
-proj-5,Projet Suffer,قِبل لعدم يطول والنرويج مما.,2025-07-30,2026-01-02,En pause
-proj-6,Projet Éternel,Computer whole their attention fall policy tell nature.,2025-02-24,2025-05-18,En pause
-proj-7,Projet الجنوبي,Reality staff southern difficult star.,2024-09-19,2025-08-30,En pause
-proj-8,Projet Trouble,Établir puisque oreille français contenir bien.,2025-12-08,2026-03-12,En pause
-proj-9,Projet Flamme,Forget course course leave.,2025-12-31,2026-07-31,En cours
-proj-10,Projet ببحشد,That central bad administration week population dinner.,2024-06-20,2025-05-01,En cours
+id,name,description,start_date,deadline,status,priority,business_domain,required_skill_ids,manager_id
+proj-demo-onboarding,Onboarding Demo,Projet support pour les tâches de démo et l'intégration collaborateur.,2026-06-08,2026-07-15,En cours,Haute,People Operations,"skill-onboarding,skill-communication,skill-security",emp-demo-fatima
+proj-1,Projet Pauvre,Proposer chez glace joue raconter général.,2024-10-29,2025-02-11,En pause,Basse,Finance,"skill-data,skill-react",emp-demo-karim
+proj-2,Projet Retourner,Sommet drame ramasser fixer.,2024-12-25,2025-05-19,En pause,Haute,Talent,"skill-communication,skill-react",emp-36
+proj-3,Projet Put,Local read her base chance good.,2024-08-04,2025-07-18,En pause,Basse,Engineering,"skill-data,skill-management",emp-64
+proj-4,Projet Let,المعاهدات الحرة والروسية محاولات.,2026-01-09,2026-12-27,Terminé,Moyenne,Talent,"skill-python,skill-react",emp-1
+proj-5,Projet After,Owner process voice.,2026-06-02,2026-09-24,Terminé,Haute,Operations,"skill-react,skill-security",emp-44
+proj-6,Projet Like,Sourire étoile puissant dire que tandis que franchir.,2025-11-19,2026-10-26,Terminé,Haute,Finance,"skill-security,skill-management",emp-80
+proj-7,Projet Lorsque,De chanter chemin aucun ami jeunesse gens éclat.,2026-04-01,2026-12-08,En cours,Basse,Finance,"skill-management,skill-security",emp-81
+proj-8,Projet Social,هُزم والمانيا اقتصادية ذات كردة العناد منتصف.,2025-12-17,2026-10-31,Terminé,Haute,Engineering,"skill-communication,skill-management",emp-24
+proj-9,Projet Secrétaire,ممثّلة ايطاليا أعمال فكانت هنا؟.,2025-03-09,2025-11-19,En cours,Critique,People Analytics,"skill-react,skill-management",emp-5
+proj-10,Projet But,Last camera hundred and others.,2025-08-15,2025-12-16,En pause,Moyenne,Finance,"skill-management,skill-react",emp-demo-youssef

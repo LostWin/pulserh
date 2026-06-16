@@ -1,0 +1,3 @@
+id,name,provider,category,coverage_summary,enrollment_month,is_active
+benefit-health,Mutuelle Pulse Santé,Harmonie Pulse,Santé,"Couverture santé famille, téléconsultation et prévention.",10,true
+benefit-mobility,Plan Mobilité Durable,Pulse Mobility,Mobilité,"Transport, vélo et indemnités mobilité douce.",9,true

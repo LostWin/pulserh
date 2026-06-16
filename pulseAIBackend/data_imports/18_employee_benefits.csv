@@ -1,0 +1,189 @@
+id,employee_id,benefit_plan_id,status,effective_date,renewal_date,tier_label,employer_contribution,notes
+benefit-emp-demo-youssef-health,emp-demo-youssef,benefit-health,active,2026-05-12,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-demo-youssef-mobility,emp-demo-youssef,benefit-mobility,active,2026-05-12,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-demo-fatima-health,emp-demo-fatima,benefit-health,active,2025-11-03,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-demo-fatima-mobility,emp-demo-fatima,benefit-mobility,active,2025-11-03,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-demo-karim-health,emp-demo-karim,benefit-health,active,2024-09-02,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-demo-karim-mobility,emp-demo-karim,benefit-mobility,active,2024-09-02,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-demo-sara-health,emp-demo-sara,benefit-health,active,2023-04-10,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-demo-sara-mobility,emp-demo-sara,benefit-mobility,active,2023-04-10,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-demo-admin-health,emp-demo-admin,benefit-health,active,2024-01-15,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-demo-admin-mobility,emp-demo-admin,benefit-mobility,active,2024-01-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-1-health,emp-1,benefit-health,active,2023-01-24,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-1-mobility,emp-1,benefit-mobility,active,2023-01-24,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-2-health,emp-2,benefit-health,eligible,2022-02-18,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-2-mobility,emp-2,benefit-mobility,eligible,2022-02-18,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-3-health,emp-3,benefit-health,eligible,2025-06-28,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-3-mobility,emp-3,benefit-mobility,eligible,2025-06-28,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-4-health,emp-4,benefit-health,active,2019-12-10,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-4-mobility,emp-4,benefit-mobility,active,2019-12-10,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-5-health,emp-5,benefit-health,active,2017-08-16,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-5-mobility,emp-5,benefit-mobility,active,2017-08-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-6-health,emp-6,benefit-health,active,2022-11-12,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-6-mobility,emp-6,benefit-mobility,active,2022-11-12,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-7-health,emp-7,benefit-health,active,2024-09-09,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-7-mobility,emp-7,benefit-mobility,active,2024-09-09,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-8-health,emp-8,benefit-health,active,2018-10-06,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-8-mobility,emp-8,benefit-mobility,active,2018-10-06,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-9-health,emp-9,benefit-health,active,2024-11-08,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-9-mobility,emp-9,benefit-mobility,active,2024-11-08,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-10-health,emp-10,benefit-health,active,2017-04-17,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-10-mobility,emp-10,benefit-mobility,active,2017-04-17,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-11-health,emp-11,benefit-health,active,2019-06-19,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-11-mobility,emp-11,benefit-mobility,active,2019-06-19,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-12-health,emp-12,benefit-health,active,2023-04-12,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-12-mobility,emp-12,benefit-mobility,active,2023-04-12,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-13-health,emp-13,benefit-health,eligible,2025-06-08,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-13-mobility,emp-13,benefit-mobility,eligible,2025-06-08,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-14-health,emp-14,benefit-health,eligible,2017-04-16,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-14-mobility,emp-14,benefit-mobility,eligible,2017-04-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-15-health,emp-15,benefit-health,active,2022-09-15,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-15-mobility,emp-15,benefit-mobility,active,2022-09-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-16-health,emp-16,benefit-health,active,2025-12-21,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-16-mobility,emp-16,benefit-mobility,active,2025-12-21,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-17-health,emp-17,benefit-health,active,2020-06-29,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-17-mobility,emp-17,benefit-mobility,active,2020-06-29,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-18-health,emp-18,benefit-health,eligible,2016-06-26,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-18-mobility,emp-18,benefit-mobility,eligible,2016-06-26,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-19-health,emp-19,benefit-health,active,2021-11-12,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-19-mobility,emp-19,benefit-mobility,active,2021-11-12,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-20-health,emp-20,benefit-health,active,2023-06-13,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-20-mobility,emp-20,benefit-mobility,active,2023-06-13,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-21-health,emp-21,benefit-health,active,2017-06-08,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-21-mobility,emp-21,benefit-mobility,active,2017-06-08,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-22-health,emp-22,benefit-health,active,2017-09-09,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-22-mobility,emp-22,benefit-mobility,active,2017-09-09,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-23-health,emp-23,benefit-health,active,2018-02-04,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-23-mobility,emp-23,benefit-mobility,active,2018-02-04,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-24-health,emp-24,benefit-health,eligible,2023-01-30,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-24-mobility,emp-24,benefit-mobility,eligible,2023-01-30,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-25-health,emp-25,benefit-health,active,2022-03-22,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-25-mobility,emp-25,benefit-mobility,active,2022-03-22,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-26-health,emp-26,benefit-health,active,2024-01-08,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-26-mobility,emp-26,benefit-mobility,active,2024-01-08,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-27-health,emp-27,benefit-health,eligible,2021-09-26,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-27-mobility,emp-27,benefit-mobility,eligible,2021-09-26,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-28-health,emp-28,benefit-health,active,2017-11-30,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-28-mobility,emp-28,benefit-mobility,active,2017-11-30,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-29-health,emp-29,benefit-health,active,2023-07-16,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-29-mobility,emp-29,benefit-mobility,active,2023-07-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-30-health,emp-30,benefit-health,active,2026-02-15,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-30-mobility,emp-30,benefit-mobility,active,2026-02-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-31-health,emp-31,benefit-health,active,2022-01-10,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-31-mobility,emp-31,benefit-mobility,active,2022-01-10,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-32-health,emp-32,benefit-health,active,2019-11-11,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-32-mobility,emp-32,benefit-mobility,active,2019-11-11,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-33-health,emp-33,benefit-health,active,2018-01-27,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-33-mobility,emp-33,benefit-mobility,active,2018-01-27,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-34-health,emp-34,benefit-health,active,2019-12-31,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-34-mobility,emp-34,benefit-mobility,active,2019-12-31,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-35-health,emp-35,benefit-health,active,2020-01-29,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-35-mobility,emp-35,benefit-mobility,active,2020-01-29,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-36-health,emp-36,benefit-health,active,2023-07-17,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-36-mobility,emp-36,benefit-mobility,active,2023-07-17,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-37-health,emp-37,benefit-health,eligible,2024-11-15,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-37-mobility,emp-37,benefit-mobility,eligible,2024-11-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-38-health,emp-38,benefit-health,active,2018-04-01,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-38-mobility,emp-38,benefit-mobility,active,2018-04-01,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-39-health,emp-39,benefit-health,active,2025-01-17,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-39-mobility,emp-39,benefit-mobility,active,2025-01-17,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-40-health,emp-40,benefit-health,active,2016-11-30,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-40-mobility,emp-40,benefit-mobility,active,2016-11-30,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-41-health,emp-41,benefit-health,active,2017-11-02,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-41-mobility,emp-41,benefit-mobility,active,2017-11-02,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-42-health,emp-42,benefit-health,active,2022-04-16,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-42-mobility,emp-42,benefit-mobility,active,2022-04-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-43-health,emp-43,benefit-health,active,2020-08-31,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-43-mobility,emp-43,benefit-mobility,active,2020-08-31,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-44-health,emp-44,benefit-health,active,2024-02-20,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-44-mobility,emp-44,benefit-mobility,active,2024-02-20,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-45-health,emp-45,benefit-health,active,2016-11-02,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-45-mobility,emp-45,benefit-mobility,active,2016-11-02,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-46-health,emp-46,benefit-health,active,2021-07-27,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-46-mobility,emp-46,benefit-mobility,active,2021-07-27,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-47-health,emp-47,benefit-health,active,2016-09-16,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-47-mobility,emp-47,benefit-mobility,active,2016-09-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-48-health,emp-48,benefit-health,active,2016-11-14,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-48-mobility,emp-48,benefit-mobility,active,2016-11-14,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-49-health,emp-49,benefit-health,active,2022-03-03,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-49-mobility,emp-49,benefit-mobility,active,2022-03-03,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-50-health,emp-50,benefit-health,active,2019-04-22,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-50-mobility,emp-50,benefit-mobility,active,2019-04-22,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-51-health,emp-51,benefit-health,active,2018-08-01,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-51-mobility,emp-51,benefit-mobility,active,2018-08-01,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-52-health,emp-52,benefit-health,active,2020-11-07,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-52-mobility,emp-52,benefit-mobility,active,2020-11-07,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-53-health,emp-53,benefit-health,active,2022-11-16,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-53-mobility,emp-53,benefit-mobility,active,2022-11-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-54-health,emp-54,benefit-health,active,2022-07-04,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-54-mobility,emp-54,benefit-mobility,active,2022-07-04,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-55-health,emp-55,benefit-health,active,2017-09-30,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-55-mobility,emp-55,benefit-mobility,active,2017-09-30,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-56-health,emp-56,benefit-health,active,2025-12-13,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-56-mobility,emp-56,benefit-mobility,active,2025-12-13,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-57-health,emp-57,benefit-health,active,2016-07-01,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-57-mobility,emp-57,benefit-mobility,active,2016-07-01,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-58-health,emp-58,benefit-health,active,2024-12-28,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-58-mobility,emp-58,benefit-mobility,active,2024-12-28,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-59-health,emp-59,benefit-health,eligible,2019-09-23,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-59-mobility,emp-59,benefit-mobility,eligible,2019-09-23,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-60-health,emp-60,benefit-health,active,2024-06-11,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-60-mobility,emp-60,benefit-mobility,active,2024-06-11,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-61-health,emp-61,benefit-health,active,2020-08-15,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-61-mobility,emp-61,benefit-mobility,active,2020-08-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-62-health,emp-62,benefit-health,active,2017-07-21,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-62-mobility,emp-62,benefit-mobility,active,2017-07-21,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-63-health,emp-63,benefit-health,eligible,2021-02-21,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-63-mobility,emp-63,benefit-mobility,eligible,2021-02-21,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-64-health,emp-64,benefit-health,active,2018-10-22,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-64-mobility,emp-64,benefit-mobility,active,2018-10-22,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-65-health,emp-65,benefit-health,active,2018-08-30,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-65-mobility,emp-65,benefit-mobility,active,2018-08-30,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-66-health,emp-66,benefit-health,active,2019-10-07,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-66-mobility,emp-66,benefit-mobility,active,2019-10-07,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-67-health,emp-67,benefit-health,active,2023-02-28,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-67-mobility,emp-67,benefit-mobility,active,2023-02-28,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-68-health,emp-68,benefit-health,active,2018-02-07,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-68-mobility,emp-68,benefit-mobility,active,2018-02-07,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-69-health,emp-69,benefit-health,active,2023-08-24,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-69-mobility,emp-69,benefit-mobility,active,2023-08-24,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-70-health,emp-70,benefit-health,eligible,2022-06-14,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-70-mobility,emp-70,benefit-mobility,eligible,2022-06-14,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-71-health,emp-71,benefit-health,active,2024-01-23,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-71-mobility,emp-71,benefit-mobility,active,2024-01-23,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-72-health,emp-72,benefit-health,active,2025-03-09,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-72-mobility,emp-72,benefit-mobility,active,2025-03-09,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-73-health,emp-73,benefit-health,active,2025-06-02,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-73-mobility,emp-73,benefit-mobility,active,2025-06-02,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-74-health,emp-74,benefit-health,active,2025-06-16,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-74-mobility,emp-74,benefit-mobility,active,2025-06-16,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-75-health,emp-75,benefit-health,active,2016-12-21,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-75-mobility,emp-75,benefit-mobility,active,2016-12-21,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-76-health,emp-76,benefit-health,active,2023-01-04,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-76-mobility,emp-76,benefit-mobility,active,2023-01-04,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-77-health,emp-77,benefit-health,active,2017-12-19,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-77-mobility,emp-77,benefit-mobility,active,2017-12-19,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-78-health,emp-78,benefit-health,active,2018-09-21,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-78-mobility,emp-78,benefit-mobility,active,2018-09-21,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-79-health,emp-79,benefit-health,active,2020-02-26,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-79-mobility,emp-79,benefit-mobility,active,2020-02-26,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-80-health,emp-80,benefit-health,active,2019-12-12,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-80-mobility,emp-80,benefit-mobility,active,2019-12-12,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-81-health,emp-81,benefit-health,eligible,2017-05-07,2026-10-01,Standard,1800,Plan santé principal collaborateur.
+benefit-emp-81-mobility,emp-81,benefit-mobility,eligible,2017-05-07,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-82-health,emp-82,benefit-health,active,2020-08-17,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-82-mobility,emp-82,benefit-mobility,active,2020-08-17,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-83-health,emp-83,benefit-health,active,2017-03-14,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-83-mobility,emp-83,benefit-mobility,active,2017-03-14,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-84-health,emp-84,benefit-health,active,2022-12-25,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-84-mobility,emp-84,benefit-mobility,active,2022-12-25,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-85-health,emp-85,benefit-health,active,2023-01-07,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-85-mobility,emp-85,benefit-mobility,active,2023-01-07,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-86-health,emp-86,benefit-health,active,2017-12-15,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-86-mobility,emp-86,benefit-mobility,active,2017-12-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-87-health,emp-87,benefit-health,active,2024-08-24,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-87-mobility,emp-87,benefit-mobility,active,2024-08-24,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-88-health,emp-88,benefit-health,active,2021-08-15,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-88-mobility,emp-88,benefit-mobility,active,2021-08-15,2026-09-01,Transport,420,Plan mobilité interne.
+benefit-emp-89-health,emp-89,benefit-health,active,2020-01-26,2026-10-01,Premium,1800,Plan santé principal collaborateur.
+benefit-emp-89-mobility,emp-89,benefit-mobility,active,2020-01-26,2026-09-01,Transport,420,Plan mobilité interne.
