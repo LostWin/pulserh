@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Send, Bot, Sparkles, Plus, Share2, X, FileText, CheckCircle, Paperclip, Mic, Zap, Download, Wrench, Loader2, Trash2 } from 'lucide-react';
+import { Send, Bot, Sparkles, Plus, Share2, X, FileText, CheckCircle, Paperclip, Mic, Zap, Download, Wrench, Loader2, Trash2, Edit2, Check } from 'lucide-react';
 import { api } from '../../lib/api';
 import { cn } from '../../lib/utils';
 import { useAuth } from '../../contexts/AuthContext';
@@ -25,6 +25,20 @@ function TypingDots() {
       ))}
     </div>
   );
+}
+
+function getRelativeTime(isoStr) {
+  if (!isoStr) return '';
+  const diffMs = Date.now() - new Date(isoStr).getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  if (diffMins < 1) return `à l'instant`;
+  if (diffMins < 60) return `il y a ${diffMins} min`;
+  const diffHrs = Math.floor(diffMins / 60);
+  if (diffHrs < 24) return `il y a ${diffHrs}h`;
+  const diffDays = Math.floor(diffHrs / 24);
+  if (diffDays < 7) return `il y a ${diffDays}j`;
+  const diffWeeks = Math.floor(diffDays / 7);
+  return `il y a ${diffWeeks} sem`;
 }
 
 
@@ -58,6 +72,8 @@ export default function Assistant() {
   const [conversations, setConversations] = useState([]);
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [loadingConversations, setLoadingConversations] = useState(true);
+  const [editingConvId, setEditingConvId] = useState(null);
+  const [editTitle, setEditTitle] = useState('');
   const endRef = useRef(null);
   const streamRef = useRef(null);
   const { user } = useAuth();
@@ -136,6 +152,19 @@ export default function Assistant() {
     } catch (err) {
       console.error('Erreur suppression conversation:', err);
     }
+  };
+
+  const saveTitle = async (convId, e) => {
+    if (e) e.stopPropagation();
+    try {
+      if (editTitle.trim()) {
+        await api.put(`/chat/conversations/${convId}/title`, { title: editTitle.trim() });
+        setConversations((prev) => prev.map((c) => c.id === convId ? { ...c, title: editTitle.trim() } : c));
+      }
+    } catch (err) {
+      console.error('Erreur modification titre:', err);
+    }
+    setEditingConvId(null);
   };
 
   // Initialiser avec un message de bienvenue
@@ -273,29 +302,70 @@ export default function Assistant() {
             conversations.map((conv) => (
               <button
                 key={conv.id}
-                onClick={() => loadConversationMessages(conv.id)}
+                onClick={() => {
+                  if (editingConvId !== conv.id) loadConversationMessages(conv.id);
+                }}
                 className={cn(
                   'w-full text-left px-4 py-3 transition-colors hover:bg-brand-light/60 group relative',
                   activeConversationId === conv.id && 'bg-brand-light',
                 )}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <p className={cn(
-                    'text-sm font-medium truncate pr-6',
-                    activeConversationId === conv.id ? 'text-brand-secondary' : 'text-brand-dark',
-                  )}>
-                    {conv.title || 'Nouvelle conversation'}
-                  </p>
+                  {editingConvId === conv.id ? (
+                    <div className="flex items-center gap-1 w-full" onClick={e => e.stopPropagation()}>
+                      <input
+                        value={editTitle}
+                        onChange={e => setEditTitle(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') saveTitle(conv.id);
+                          if (e.key === 'Escape') setEditingConvId(null);
+                        }}
+                        autoFocus
+                        className="flex-1 bg-white border border-brand-secondary/30 rounded px-1.5 py-0.5 text-xs text-brand-dark outline-none focus:border-brand-secondary"
+                      />
+                      <button onClick={(e) => saveTitle(conv.id, e)} className="text-green-600 hover:bg-green-50 p-1 rounded">
+                        <Check size={12} />
+                      </button>
+                    </div>
+                  ) : (
+                    <p className={cn(
+                      'text-sm font-medium truncate pr-10',
+                      activeConversationId === conv.id ? 'text-brand-secondary' : 'text-brand-dark',
+                    )}>
+                      {conv.title || 'Nouvelle conversation'}
+                    </p>
+                  )}
                 </div>
-                <p className="mt-0.5 text-xs text-brand-secondary/60 truncate">
-                  {conv.message_count || 0} messages
-                </p>
-                <button
-                  onClick={(e) => deleteConversation(conv.id, e)}
-                  className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity text-brand-secondary/40 hover:text-brand-danger"
-                >
-                  <Trash2 size={13} />
-                </button>
+                {editingConvId !== conv.id && (
+                  <div className="flex items-center justify-between mt-0.5 pr-8">
+                    <p className="text-xs text-brand-secondary/60 truncate">
+                      {conv.message_count || 0} msgs
+                    </p>
+                    <p className="text-[10px] text-brand-secondary/50 whitespace-nowrap">
+                      {getRelativeTime(conv.updated_at || conv.created_at)}
+                    </p>
+                  </div>
+                )}
+                {editingConvId !== conv.id && (
+                  <div className="absolute right-2 top-2.5 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEditTitle(conv.title || '');
+                        setEditingConvId(conv.id);
+                      }}
+                      className="text-brand-secondary/40 hover:text-brand-secondary"
+                    >
+                      <Edit2 size={12} />
+                    </button>
+                    <button
+                      onClick={(e) => deleteConversation(conv.id, e)}
+                      className="text-brand-secondary/40 hover:text-brand-danger"
+                    >
+                      <Trash2 size={12} />
+                    </button>
+                  </div>
+                )}
               </button>
             ))
           )}

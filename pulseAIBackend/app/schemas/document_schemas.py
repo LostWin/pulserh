@@ -11,6 +11,9 @@ class DocumentResponse(BaseModel):
     size: str
     file_path: Optional[str] = None
     uploaded_by: Optional[str] = None
+    status: Optional[str] = "validated"
+    employee_id: Optional[str] = None
+    document_type_id: Optional[str] = None
     created_at: datetime
     allowed_roles: Optional[List[str]] = []
     rag_enabled: Optional[bool] = False

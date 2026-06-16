@@ -169,6 +169,9 @@ docker-compose up -d --build
 | Wazuh Dashboard     | https://wazuh.pulse.local        | SSO Keycloak (redirection automatique)                |
 
 > **Note :** Les certificats sont auto‑signés, votre navigateur affichera un avertissement. Acceptez‑le.
+> **IMPORTANT (Firefox) :** Si vous obtenez une erreur du type `NetworkError when attempting to fetch resource`, c'est parce que Firefox bloque silencieusement les requêtes vers l'API et Keycloak en raison du certificat auto-signé. Pour résoudre cela, ouvrez les liens suivants dans un nouvel onglet et acceptez le risque pour chacun d'eux :
+> - [https://api.pulse.local/health](https://api.pulse.local/health)
+> - [https://auth.pulse.local](https://auth.pulse.local)
 
 ---
 

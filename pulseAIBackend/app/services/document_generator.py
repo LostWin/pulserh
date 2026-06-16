@@ -3,52 +3,68 @@ import uuid
 import logging
 from io import BytesIO
 from datetime import datetime
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, DictLoader
 from xhtml2pdf import pisa
-
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
+from app.models.domain import DocumentType, DocumentTemplate, BaseTemplate
 
 logger = logging.getLogger(__name__)
 
 UPLOAD_DIR = "uploads"
-TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "..", "templates")
-
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 class DocumentGenerator:
-    """Outils de génération de documents administratifs basés sur Jinja2."""
-    
-    def __init__(self):
-        # Configuration de l'environnement Jinja2
-        if os.path.exists(TEMPLATE_DIR):
-            self.env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
-        else:
-            self.env = None
-            logger.warning(f"Le dossier de templates n'existe pas : {TEMPLATE_DIR}")
+    """Outils de génération de documents administratifs dynamiques basés sur Jinja2."""
 
-    def create_pdf_bytes(self, doc_type: str, context: dict, custom_fields: dict = None) -> tuple[str, bytes]:
-        """
-        Méthode principale de génération de document.
-        Charge le template Jinja2 correspondant à `doc_type`,
-        injecte le `context` et génère le fichier PDF en mémoire.
-        """
-        logger.info(f"Démarrage de la génération pour le type: {doc_type}")
+    async def create_pdf_bytes(self, db: AsyncSession, doc_type_code: str, context: dict, custom_fields: dict = None) -> tuple[str, bytes]:
+        logger.info(f"Démarrage de la génération pour le type: {doc_type_code}")
         
         if custom_fields is None:
             custom_fields = {}
             
-        template_name = f"{doc_type}.html"
+        # Récupérer le type de document
+        type_query = select(DocumentType).filter(DocumentType.code == doc_type_code)
+        doc_type = (await db.execute(type_query)).scalar_one_or_none()
+        
+        if not doc_type:
+            raise ValueError(f"Type de document introuvable: {doc_type_code}")
+
+        # Récupérer le template actif pour ce type
+        template_query = select(DocumentTemplate).options(selectinload(DocumentTemplate.base_template)).filter(
+            DocumentTemplate.document_type_id == doc_type.id,
+            DocumentTemplate.is_active == True
+        )
+        active_template = (await db.execute(template_query)).scalar_one_or_none()
+        
+        if not active_template:
+            raise ValueError(f"Aucun template actif trouvé pour le type: {doc_type_code}")
+            
+        base_template = active_template.base_template
+        if not base_template:
+            raise ValueError(f"Le template '{active_template.name}' n'est lié à aucun base template.")
+
+        # Charger les templates dans Jinja2 dynamiquement
+        templates_dict = {
+            "base.html": base_template.html_content,
+            f"{doc_type_code}.html": active_template.html_content
+        }
+        
+        env = Environment(loader=DictLoader(templates_dict))
         
         try:
-            template = self.env.get_template(template_name)
-            logger.info(f"Template {template_name} chargé avec succès.")
+            template = env.get_template(f"{doc_type_code}.html")
         except Exception as e:
-            logger.error(f"Erreur lors du chargement du template {template_name}: {e}")
-            # Fallback
-            try:
-                template = self.env.get_template("attestation_travail.html")
-                doc_type = "attestation_travail"
-            except Exception as e2:
-                raise ValueError(f"Impossible de charger le template de fallback: {e2}")
+            logger.error(f"Erreur lors de la compilation du template Jinja2: {e}")
+            raise ValueError(f"Erreur de compilation Jinja2: {str(e)}")
+            
+        # Fetch assets and add to context
+        from app.models.domain import TemplateAsset
+        asset_result = await db.execute(select(TemplateAsset))
+        assets_list = asset_result.scalars().all()
+        assets_dict = {a.key: a.value for a in assets_list}
+        context["assets"] = assets_dict
 
         # Ajout de variables globales utiles au template
         template_vars = {
@@ -61,11 +77,11 @@ class DocumentGenerator:
         try:
             html_out = template.render(template_vars)
         except Exception as e:
-            logger.error(f"Erreur lors du rendu Jinja2 pour {doc_type}: {e}")
-            raise
+            logger.error(f"Erreur lors du rendu Jinja2 pour {doc_type_code}: {e}")
+            raise ValueError(f"Erreur de rendu HTML: {str(e)}")
 
         # 2. Conversion en PDF avec xhtml2pdf
-        filename = f"{doc_type}_{uuid.uuid4().hex[:8]}.pdf"
+        filename = f"{doc_type_code}_{uuid.uuid4().hex[:8]}.pdf"
         try:
             pdf_buffer = BytesIO()
             pisa_status = pisa.CreatePDF(
@@ -84,12 +100,11 @@ class DocumentGenerator:
             logger.error(f"Exception critique lors de l'écriture du PDF: {e}")
             raise
 
-    def create(self, doc_type: str, context: dict, custom_fields: dict = None) -> str:
-        filename, pdf_bytes = self.create_pdf_bytes(doc_type=doc_type, context=context, custom_fields=custom_fields)
+    async def create(self, db: AsyncSession, doc_type_code: str, context: dict, custom_fields: dict = None) -> str:
+        filename, pdf_bytes = await self.create_pdf_bytes(db=db, doc_type_code=doc_type_code, context=context, custom_fields=custom_fields)
         file_path = os.path.join(UPLOAD_DIR, filename)
         with open(file_path, "wb") as pdf_file:
             pdf_file.write(pdf_bytes)
         return file_path
 
-# Singleton global pour utiliser dans l'API et le RAG
 document_generator = DocumentGenerator()

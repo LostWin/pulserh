@@ -20,6 +20,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.routers import (
+    templates,
     auth, chat, documents, employees, departments,
     workflows, predictions, alerts, dashboard, admin, health, leaves, onboarding, interviews, reports, user_settings, skills, trainings, projects, talent_insights, employee_programs,
 )
@@ -260,6 +261,7 @@ app.add_middleware(
 # Routeurs
 # ═══════════════════════════════════════════════════════════════════════════
 from app.routers import (
+    templates,
     imports, audit, manager
 )
 
@@ -287,3 +289,4 @@ app.include_router(manager.router)
 app.include_router(admin.router)
 app.include_router(imports.router)
 app.include_router(audit.router)
+app.include_router(templates.router)

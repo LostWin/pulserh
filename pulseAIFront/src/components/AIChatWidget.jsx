@@ -3,7 +3,7 @@ import { Bot, X, Maximize2, Loader2, Send, Zap, FileText, CheckCircle, Wrench } 
 import { api } from '../lib/api';
 import { cn } from '../lib/utils';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Markdownish({ text }) {
   if (!text) return null;
@@ -59,8 +59,9 @@ export default function AIChatWidget() {
   
   const endRef = useRef(null);
   const streamRef = useRef(null);
-  const { user } = useAuth();
+  const { user, role: contextRole } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -176,25 +177,34 @@ export default function AIChatWidget() {
     }
   }, [streaming, activeConversationId]);
 
-  // Déterminer le rôle principal
-  const getPrimaryRole = () => {
-    if (!user?.roles) return 'collaborator';
-    if (user.roles.includes('admin')) return 'admin';
-    if (user.roles.includes('director')) return 'director';
-    if (user.roles.includes('hr')) return 'hr';
-    if (user.roles.includes('manager')) return 'manager';
+  // Mapping du rôle texte vers la clé interne
+  const getInternalRole = () => {
+    if (!contextRole) return 'collaborator';
+    const cr = contextRole.toLowerCase();
+    if (cr === 'admin') return 'admin';
+    if (cr === 'direction') return 'director';
+    if (cr === 'rh') return 'hr';
+    if (cr === 'manager') return 'manager';
     return 'collaborator';
   };
   
-  const role = getPrimaryRole();
-  const quickPrompts = ROLE_PROMPTS[role] || ROLE_PROMPTS['collaborator'];
+  const internalRole = getInternalRole();
+  const quickPrompts = ROLE_PROMPTS[internalRole] || ROLE_PROMPTS['collaborator'];
 
   const goToFullScreen = () => {
     setIsOpen(false);
-    // Navigation vers la page Assistant du rôle courant
-    const section = role === 'admin' ? 'admin' : role === 'hr' ? 'rh' : role;
+    let section = 'collaborateur';
+    if (internalRole === 'admin') section = 'admin';
+    else if (internalRole === 'hr') section = 'rh';
+    else if (internalRole === 'manager') section = 'manager';
+    else if (internalRole === 'director') section = 'direction';
+    
     navigate(`/${section}/assistant`);
   };
+
+  if (location.pathname.endsWith('/assistant')) {
+    return null;
+  }
 
   return (
     <>

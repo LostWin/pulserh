@@ -22,7 +22,7 @@ from sqlalchemy import select
 from app.config import settings
 from app.services.llm_client import llm_client
 from app.services.embedding_service import embedding_service
-from app.services.ai_tools import TOOL_DEFINITIONS, execute_tool
+from app.services.ai_tools import TOOL_DEFINITIONS, execute_tool, get_dynamic_tool_definitions
 from app.services.guardrail_service import guardrail_service
 from app.models.domain import AIConfiguration
 from app.services.ai_observability_service import ai_observability_service
@@ -175,6 +175,7 @@ Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un emp
         
         # Charger la config IA
         ai_config = await self._get_ai_config(db) if db else {}
+        dynamic_tools = await get_dynamic_tool_definitions(db) if db else TOOL_DEFINITIONS
         
         # 1. Vérifier les guardrails sur l'input
         if db and ai_config.get("guardrails_enabled", True):
@@ -248,7 +249,7 @@ Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un emp
             # Tenter avec tool-calling
             result = await llm_client.chat_with_tools(
                 messages=messages,
-                tools=TOOL_DEFINITIONS,
+                tools=dynamic_tools,
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
@@ -305,7 +306,7 @@ Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un emp
                 # Relancer le LLM avec les résultats des outils
                 result = await llm_client.chat_with_tools(
                     messages=messages,
-                    tools=TOOL_DEFINITIONS,
+                    tools=dynamic_tools,
                     temperature=temperature,
                     max_tokens=max_tokens,
                 )
@@ -371,6 +372,7 @@ Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un emp
         
         start_time = time.time()
         ai_config = await self._get_ai_config(db) if db else {}
+        dynamic_tools = await get_dynamic_tool_definitions(db) if db else TOOL_DEFINITIONS
         
         # 1. Guardrails input
         if db and ai_config.get("guardrails_enabled", True):
@@ -430,7 +432,7 @@ Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un emp
             # Phase tool-calling (non-streaming)
             result = await llm_client.chat_with_tools(
                 messages=messages,
-                tools=TOOL_DEFINITIONS,
+                tools=dynamic_tools,
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
@@ -480,7 +482,7 @@ Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un emp
                 
                 result = await llm_client.chat_with_tools(
                     messages=messages,
-                    tools=TOOL_DEFINITIONS,
+                    tools=dynamic_tools,
                     temperature=temperature,
                     max_tokens=max_tokens,
                 )

@@ -191,6 +191,8 @@ export default function Documents() {
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="truncate text-sm font-medium text-brand-dark">{doc.name}</span>
+                        {doc.status === 'pending' && <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800">En attente</span>}
+                        {doc.status === 'rejected' && <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-red-100 text-red-800">Rejeté</span>}
                         {Object.values(doc._field_visibility || {}).some((value) => value === 'hidden' || value === 'masked') ? (
                           <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
                             <Lock size={10} />
@@ -208,8 +210,9 @@ export default function Documents() {
                   </span>
                   <button
                     onClick={() => downloadDocument(doc)}
-                    title={`Download ${doc.name}`}
-                    className="grid h-8 w-8 place-items-center rounded-xl border border-brand-secondary/20 text-brand-secondary hover:bg-brand-secondary hover:text-white hover:border-brand-secondary transition-colors"
+                    disabled={doc.status !== 'validated'}
+                    title={doc.status !== 'validated' ? "Validation requise pour télécharger" : `Download ${doc.name}`}
+                    className="grid h-8 w-8 place-items-center rounded-xl border border-brand-secondary/20 text-brand-secondary hover:bg-brand-secondary hover:text-white hover:border-brand-secondary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <Download size={14} />
                   </button>

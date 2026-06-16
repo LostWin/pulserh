@@ -70,6 +70,7 @@ export const SIDEBAR_LINKS = {
     { name: 'Sécurité', path: '/admin/securite', icon: Shield },
     { name: 'Config IA', path: '/admin/config-ia', icon: Cpu },
     { name: 'Data Access', path: '/admin/data-access', icon: ShieldAlert },
+    { name: 'Moteur Doc.', path: '/admin/documents', icon: FileText },
     { name: 'Audit', path: '/admin/audit', icon: FileText },
   ],
 };

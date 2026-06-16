@@ -356,3 +356,28 @@ async def submit_feedback(
     """Soumettre un feedback utile/inutile."""
     logger.info(f"Feedback received for conversation {conversation_id}: {feedback.rating}")
     return {"status": "Feedback recorded", "conversation_id": conversation_id}
+from pydantic import BaseModel
+
+class ConversationTitleUpdate(BaseModel):
+    title: str
+
+@router.put("/conversations/{id}/title")
+async def update_conversation_title(
+    id: str,
+    payload: ConversationTitleUpdate,
+    current_user: CurrentUser = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    conv_result = await db.execute(
+        select(Conversation).filter(
+            Conversation.id == id,
+            Conversation.user_id == current_user.id,
+        )
+    )
+    conversation = conv_result.scalar_one_or_none()
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation introuvable")
+
+    conversation.title = payload.title
+    await db.commit()
+    return {"status": "success", "title": conversation.title}

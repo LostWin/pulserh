@@ -267,6 +267,40 @@ class ImportHistory(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     user_id = Column(String, nullable=False)
 
+class DocumentType(Base):
+    __tablename__ = "document_types"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    name = Column(String, nullable=False)
+    code = Column(String, unique=True, index=True, nullable=False)
+    allowed_roles = Column(JSON, nullable=False, default=list)
+    responsible_role = Column(String, nullable=True)
+    required_variables = Column(JSON, nullable=False, default=list)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    templates = relationship("DocumentTemplate", back_populates="document_type", cascade="all, delete-orphan")
+
+class BaseTemplate(Base):
+    __tablename__ = "base_templates"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    name = Column(String, nullable=False)
+    html_content = Column(Text, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    templates = relationship("DocumentTemplate", back_populates="base_template")
+
+class DocumentTemplate(Base):
+    __tablename__ = "document_templates"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    name = Column(String, nullable=False)
+    document_type_id = Column(String, ForeignKey("document_types.id"), nullable=False)
+    base_template_id = Column(String, ForeignKey("base_templates.id"), nullable=False)
+    html_content = Column(Text, nullable=False)
+    is_active = Column(Boolean, default=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    document_type = relationship("DocumentType", back_populates="templates")
+    base_template = relationship("BaseTemplate", back_populates="templates")
+
 class Document(Base):
     __tablename__ = "documents"
     id = Column(String, primary_key=True, default=generate_uuid)
@@ -276,6 +310,12 @@ class Document(Base):
     file_path = Column(String, nullable=False)
     uploaded_by = Column(String, nullable=True)
     allowed_roles = Column(JSON, nullable=False, default=lambda: ["hr", "admin"])
+    
+    # Nouvelles colonnes pour le workflow IA
+    status = Column(String, nullable=False, default="validated") # pending, validated, rejected
+    employee_id = Column(String, ForeignKey("employees.id"), nullable=True)
+    document_type_id = Column(String, ForeignKey("document_types.id"), nullable=True)
+
     rag_enabled = Column(Boolean, default=False)
     rag_status = Column(String, nullable=False, default="disabled")
     rag_last_synced_at = Column(DateTime(timezone=True), nullable=True)
@@ -283,6 +323,8 @@ class Document(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     access_events = relationship("DocumentAccessEvent", back_populates="document", cascade="all, delete-orphan", order_by="DocumentAccessEvent.created_at.desc()")
+    employee = relationship("Employee", foreign_keys=[employee_id])
+    document_type = relationship("DocumentType")
 
 class DocumentAccessEvent(Base):
     __tablename__ = "document_access_events"
@@ -634,3 +676,11 @@ class AIObservabilityEvent(Base):
     details_json = Column(JSON, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+class TemplateAsset(Base):
+    __tablename__ = "template_assets"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    key = Column(String, unique=True, nullable=False, index=True)
+    value = Column(Text, nullable=False)
+    asset_type = Column(String, nullable=False, default="text") # "text", "image_url", "image_base64"
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

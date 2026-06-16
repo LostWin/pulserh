@@ -50,6 +50,7 @@ const Securite = lazy(() => import('./pages/admin/Securite'));
 const ConfigIA = lazy(() => import('./pages/admin/ConfigIA'));
 const Audit = lazy(() => import('./pages/admin/Audit'));
 const DataAccess = lazy(() => import('./pages/admin/DataAccess'));
+const MoteurDocumentaire = lazy(() => import('./pages/admin/MoteurDocumentaire'));
 
 export default function App() {
   return (
@@ -120,7 +121,9 @@ export default function App() {
                 <Route path="/admin/securite" element={<Securite />} />
                 <Route path="/admin/config-ia" element={<ConfigIA />} />
                 <Route path="/admin/data-access" element={<DataAccess />} />
+                <Route path="/admin/documents" element={<MoteurDocumentaire />} />
                 <Route path="/admin/audit" element={<Audit />} />
+                <Route path="/admin/assistant" element={<Assistant />} />
               </Route>
             </Route>
 

@@ -7,7 +7,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ReactKeycloakProvider authClient={keycloak} initOptions={{ onLoad: 'check-sso' }}>
+    <ReactKeycloakProvider authClient={keycloak} initOptions={{ onLoad: 'check-sso', checkLoginIframe: false }}>
       <App />
     </ReactKeycloakProvider>
   </StrictMode>,
