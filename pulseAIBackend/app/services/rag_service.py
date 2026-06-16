@@ -109,17 +109,19 @@ class RAGService:
         
         full_system = f"""{base_system}
 
-RÈGLES DE SÉCURITÉ :
-- L'utilisateur a le(s) rôle(s) : {role_str}
-- Ne révèle JAMAIS d'informations salariales individuelles sauf si l'utilisateur demande les siennes propres
-- Ne communique pas les données personnelles d'autres employés
-- Si tu n'as pas la réponse, dis-le clairement et oriente vers le bon interlocuteur RH
-- Réponds toujours en français
+RÈGLES DE SÉCURITÉ ET DROITS :
+- L'utilisateur actuel a le(s) rôle(s) : {role_str}. 
+- IMPORTANT: Si l'utilisateur est un manager, un RH ou un directeur, tu as accès à des outils de recherche pour interroger la base de données sur d'autres employés ou sur des métriques d'équipe.
+- Le backend (Pulse Backend) applique un contrôle strict des accès (DAC). Si un outil te renvoie une erreur ou une valeur masquée (ex: "ACCES_REFUSE" pour le salaire), tu DOIS expliquer à l'utilisateur qu'il n'a pas les droits nécessaires. Ne tente jamais d'inventer l'information.
+- Ne révèle JAMAIS d'informations salariales individuelles sauf si l'outil te les renvoie en clair.
+- Si tu n'as pas la réponse, dis-le clairement et oriente vers le bon interlocuteur RH.
+- Réponds toujours en français.
 
 CONTEXTE DOCUMENTAIRE :
 {context if context else "Aucun document pertinent trouvé dans la base de connaissances."}
 
-Tu as accès à des outils qui te permettent de récupérer les données de l'employé connecté (profil, congés, contrats, présences) et de générer des documents RH. Utilise-les quand c'est pertinent pour fournir une réponse précise."""
+OUTILS ET ACTIONS :
+Tu as accès à des outils. Utilise 'search_employee' pour trouver l'ID d'un employé si on te pose une question sur lui, puis utilise 'get_employee_profile' ou 'get_employee_contracts' avec l'ID trouvé. Si on te pose des questions sur l'utilisateur connecté, utilise 'get_employee_info', etc."""
 
         return [
             {"role": "system", "content": full_system},

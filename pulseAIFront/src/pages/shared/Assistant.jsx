@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, Bot, Sparkles, Plus, Share2, X, FileText, CheckCircle, Paperclip, Mic, Zap, Download, Wrench, Loader2, Trash2 } from 'lucide-react';
 import { api } from '../../lib/api';
 import { cn } from '../../lib/utils';
+import { useAuth } from '../../contexts/AuthContext';
 
 function Markdownish({ text }) {
   if (!text) return null;
@@ -26,12 +27,29 @@ function TypingDots() {
   );
 }
 
-const QUICK_PROMPTS = [
-  '📋 Mes congés restants',
-  '📄 Génère une attestation de travail',
-  '💰 Mon contrat actuel',
-  '📊 Mes tâches en cours',
-];
+
+const ROLE_PROMPTS = {
+  collaborator: [
+    '📋 Mes congés restants',
+    '📄 Génère une attestation de travail',
+    '💰 Mon contrat actuel',
+    '📊 Mes tâches en cours',
+  ],
+  manager: [
+    '👥 Quelles sont les alertes de mon équipe ?',
+    '📅 Qui est en congé aujourd\'hui ?',
+    '🎯 Donne moi les infos de Walid Traoré',
+  ],
+  hr: [
+    '🔎 Quel est le profil de Jane Doe ?',
+    '📑 Combien de contrats actifs avons-nous ?',
+  ],
+  direction: [
+    '📈 Quel est le taux de turnover actuel ?',
+    '💡 Quels départements sont sous surveillance ?',
+  ]
+};
+
 
 export default function Assistant() {
   const [messages, setMessages] = useState([]);
@@ -42,6 +60,20 @@ export default function Assistant() {
   const [loadingConversations, setLoadingConversations] = useState(true);
   const endRef = useRef(null);
   const streamRef = useRef(null);
+  const { user } = useAuth();
+
+  
+  const getPrimaryRole = () => {
+    if (!user?.roles) return 'collaborator';
+    if (user.roles.includes('admin')) return 'admin';
+    if (user.roles.includes('director')) return 'direction';
+    if (user.roles.includes('hr')) return 'hr';
+    if (user.roles.includes('manager')) return 'manager';
+    return 'collaborator';
+  };
+  
+  const role = getPrimaryRole();
+  const quickPrompts = ROLE_PROMPTS[role] || ROLE_PROMPTS['collaborator'];
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -396,7 +428,7 @@ export default function Assistant() {
           {/* Quick prompts */}
           {messages.length <= 1 && (
             <div className="flex flex-wrap gap-2 mb-3">
-              {QUICK_PROMPTS.map((p) => (
+              {quickPrompts.map((p) => (
                 <button
                   key={p}
                   onClick={() => send(p.replace(/^[^ ]+ /, ''))}

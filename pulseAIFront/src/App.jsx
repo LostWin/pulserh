@@ -9,7 +9,7 @@ import NotFound from './pages/NotFound';
 
 // ── Collaborateur ──────────────────────────────────────────────────────────
 const CollaborateurDashboard = lazy(() => import('./pages/collaborateur/Dashboard'));
-const Assistant = lazy(() => import('./pages/collaborateur/Assistant'));
+const Assistant = lazy(() => import('./pages/shared/Assistant'));
 const Conges = lazy(() => import('./pages/collaborateur/Conges'));
 const Documents = lazy(() => import('./pages/collaborateur/Documents'));
 const Profil = lazy(() => import('./pages/collaborateur/Profil'));
@@ -84,6 +84,7 @@ export default function App() {
                 <Route path="/manager/predictions" element={<Predictions />} />
                 <Route path="/manager/alertes" element={<ManagerAlertes />} />
                 <Route path="/manager/entretiens" element={<ManagerEntretiens />} />
+                <Route path="/manager/assistant" element={<Assistant />} />
               </Route>
 
               {/* ── RH ── */}
@@ -99,6 +100,7 @@ export default function App() {
                 <Route path="/rh/workflows" element={<Workflows />} />
                 <Route path="/rh/alertes" element={<AlertesRH />} />
                 <Route path="/rh/supervision-ia" element={<SupervisionIA />} />
+                <Route path="/rh/assistant" element={<Assistant />} />
               </Route>
 
               {/* ── Direction ── */}
@@ -107,6 +109,7 @@ export default function App() {
                 <Route path="/direction/simulations" element={<Simulations />} />
                 <Route path="/direction/rapports" element={<Rapports />} />
                 <Route path="/direction/alertes" element={<AlertesCritiques />} />
+                <Route path="/direction/assistant" element={<Assistant />} />
               </Route>
 
               {/* ── Admin ── */}

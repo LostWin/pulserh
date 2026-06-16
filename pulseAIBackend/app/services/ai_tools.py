@@ -28,6 +28,11 @@ from app.services.calendar_connector import calendar_connector
 from app.services.field_access_service import apply_field_access, get_primary_role
 from app.services.hr_analytics_service import current_project_names
 
+from app.services.ai_observability_service import ai_observability_service
+from app.models.domain import Alert
+from sqlalchemy import or_
+
+
 logger = logging.getLogger("pulse.services.ai_tools")
 
 
@@ -177,6 +182,61 @@ TOOL_DEFINITIONS = [
                 "properties": {
                     "days_from_now": {"type": "integer", "description": "Décalage en jours pour le rendez-vous souhaité.", "default": 5}
                 },
+                "required": [],
+            },
+        },
+    },
+
+    {
+        "type": "function",
+        "function": {
+            "name": "search_employee",
+            "description": "Rechercher un employé par nom ou prénom pour trouver son ID. Utile pour les managers ou RH avant d'utiliser d'autres outils nécessitant un ID.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Nom ou prénom à rechercher."}
+                },
+                "required": ["query"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_employee_profile",
+            "description": "Obtenir le profil complet d'un employé cible (via son ID). Renvoie ses informations de base selon les droits du demandeur (DAC).",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "employee_id": {"type": "string", "description": "L'ID de l'employé cible (uuid)."}
+                },
+                "required": ["employee_id"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_employee_contracts",
+            "description": "Obtenir les contrats d'un employé cible (via son ID). Le salaire et autres champs sensibles seront filtrés si le demandeur n'a pas les droits.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "employee_id": {"type": "string", "description": "L'ID de l'employé cible (uuid)."}
+                },
+                "required": ["employee_id"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_team_alerts",
+            "description": "Récupère les alertes en cours (absences, tâches en retard, etc.) pour l'équipe du manager qui pose la question.",
+            "parameters": {
+                "type": "object",
+                "properties": {},
                 "required": [],
             },
         },
@@ -544,7 +604,101 @@ async def schedule_one_on_one(
     )
 
 
+
+async def search_employee(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, query: str = "", **kwargs) -> str:
+    logger.info(f"Outil search_employee() appelé pour la requête '{query}'")
+    db_query = select(Employee).filter(
+        or_(
+            Employee.first_name.ilike(f"%{query}%"),
+            Employee.last_name.ilike(f"%{query}%")
+        )
+    ).limit(5)
+    result = await db.execute(db_query)
+    employees = result.scalars().all()
+    
+    if not employees:
+        return json.dumps({"error": "Aucun employé trouvé avec ce nom."}, ensure_ascii=False)
+        
+    return json.dumps([{"id": e.id, "first_name": e.first_name, "last_name": e.last_name, "department_id": e.department_id} for e in employees], ensure_ascii=False)
+
+async def get_employee_profile(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, employee_id: str = "", **kwargs) -> str:
+    logger.info(f"Outil get_employee_profile() appelé pour la cible '{employee_id}'")
+    emp = await _get_employee(db, employee_id, options=[selectinload(Employee.department), selectinload(Employee.job)])
+    if not emp:
+        return json.dumps({"error": "Employé introuvable."}, ensure_ascii=False)
+    
+    current_emp = await _get_employee(db, user_id)
+    scope = "self" if current_emp and emp.id == current_emp.id else "detail"
+    
+    from app.services.field_access_service import build_employee_access_context
+    context = build_employee_access_context(current_emp, emp) if current_emp else {"is_self": False, "is_manager_of_target": False}
+
+    payload = {
+        "id": emp.id,
+        "first_name": emp.first_name,
+        "last_name": emp.last_name,
+        "email": emp.email,
+        "phone": emp.phone,
+        "status": emp.status,
+        "department": emp.department.name if emp.department else "Non assigné",
+        "job_title": emp.job.title if emp.job else "Non défini",
+    }
+    
+    return json.dumps(await _apply_tool_access(db, resource="employee", scope=scope, payload=payload, user_roles=user_roles, context=context), ensure_ascii=False)
+
+async def get_employee_contracts(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, employee_id: str = "", **kwargs) -> str:
+    emp = await _get_employee(db, employee_id)
+    if not emp:
+        return json.dumps({"error": "Employé introuvable."}, ensure_ascii=False)
+        
+    current_emp = await _get_employee(db, user_id)
+    scope = "self" if current_emp and emp.id == current_emp.id else "detail"
+    
+    from app.services.field_access_service import build_employee_access_context
+    context = build_employee_access_context(current_emp, emp) if current_emp else {"is_self": False, "is_manager_of_target": False}
+
+    # Si c'est un collaborateur qui demande pour quelqu'un d'autre, on bloque directement l'accès aux contrats
+    primary_role = user_roles[0] if user_roles else "collaborator"
+    if scope == "detail" and primary_role == "collaborator":
+         return json.dumps({"error": "ACCES_REFUSE: Vous n'êtes pas autorisé à consulter les contrats d'autres employés."}, ensure_ascii=False)
+
+    contracts_query = select(Contract).filter(Contract.employee_id == emp.id)
+    contracts = (await db.execute(contracts_query)).scalars().all()
+    
+    contracts_payload = []
+    for contract in contracts:
+        contract_payload = await _apply_tool_access(
+            db,
+            resource="employee",
+            scope=scope,
+            payload={"contract_type": contract.contract_type, "salary": contract.salary},
+            user_roles=user_roles,
+            context=context
+        )
+        contracts_payload.append({
+            "type": contract_payload.get("contract_type"),
+            "start_date": contract.start_date.isoformat() if contract.start_date else None,
+            "end_date": contract.end_date.isoformat() if contract.end_date else None,
+            "salary": contract_payload.get("salary", "ACCES_REFUSE"),
+            "is_active": contract.is_active,
+            "_field_visibility": contract_payload.get("_field_visibility", {}),
+        })
+    return json.dumps({"contracts": contracts_payload}, ensure_ascii=False)
+
+async def get_team_alerts(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
+    if "manager" not in (user_roles or []) and "director" not in (user_roles or []):
+        return json.dumps({"error": "Vous n'avez pas les droits pour voir les alertes d'équipe."}, ensure_ascii=False)
+        
+    query = select(Alert).filter(Alert.target_user_id == user_id, Alert.status == "open").order_by(Alert.created_at.desc()).limit(10)
+    alerts = (await db.execute(query)).scalars().all()
+    
+    return json.dumps([{
+        "title": a.title, "type": a.type, "severity": a.severity, "message": a.message, "created_at": a.created_at.isoformat() if a.created_at else None
+    } for a in alerts], ensure_ascii=False)
+
 # ════════════════════════════════════════════════════════════════
+# Registre des outils (mapping nom → fonction)
+
 # Registre des outils (mapping nom → fonction)
 # ════════════════════════════════════════════════════════════════
 
@@ -557,8 +711,15 @@ TOOL_REGISTRY = {
     "get_my_tasks": get_my_tasks,
     "recommend_trainings": recommend_trainings,
     "get_manager_availability": get_manager_availability,
+
+    "get_manager_availability": get_manager_availability,
     "schedule_one_on_one": schedule_one_on_one,
+    "search_employee": search_employee,
+    "get_employee_profile": get_employee_profile,
+    "get_employee_contracts": get_employee_contracts,
+    "get_team_alerts": get_team_alerts,
 }
+
 
 
 async def execute_tool(tool_name: str, arguments: dict, db: AsyncSession, user_id: str, user_roles: list[str] | None = None) -> str:
@@ -572,8 +733,25 @@ async def execute_tool(tool_name: str, arguments: dict, db: AsyncSession, user_i
     
     try:
         result = await tool_fn(db=db, user_id=user_id, user_roles=user_roles, **arguments)
+        
+        # Log de l'audit IA (Accès aux données)
+        await ai_observability_service.log_event(
+            db=db,
+            user_id=user_id,
+            event_type="ai_tool_call",
+            status="success",
+            details_json={"tool": tool_name, "arguments": arguments, "DAC_roles_used": user_roles}
+        )
+        
         logger.info(f"Outil {tool_name} exécuté avec succès")
         return result
     except Exception as e:
         logger.error(f"Erreur lors de l'exécution de l'outil {tool_name} : {e}")
+        await ai_observability_service.log_event(
+            db=db,
+            user_id=user_id,
+            event_type="ai_tool_call",
+            status="error",
+            details_json={"tool": tool_name, "error": str(e)}
+        )
         return json.dumps({"error": f"Erreur lors de l'exécution de l'outil : {str(e)}"}, ensure_ascii=False)

@@ -7,6 +7,7 @@ import { cn } from '../lib/utils';
 import { api } from '../lib/api';
 import Avatar from '../components/ui/Avatar';
 import NotificationCenter from '../components/NotificationCenter';
+import AIChatWidget from '../components/AIChatWidget';
 import logo from '../LOGO 512PX.png';
 
 function PageLoader() {
@@ -254,6 +255,7 @@ export default function Layout() {
           </div>
         </main>
       </div>
+      <AIChatWidget />
     </div>
   );
 }
