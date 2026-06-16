@@ -11,6 +11,7 @@ SQLAlchemy
 asyncpg
 alembic
 pandas
+openpyxl
 Faker
 reportlab
 Jinja2
@@ -22,3 +23,11 @@ sse-starlette
 tiktoken
 python-dotenv
 httpx
+pypdf
+python-docx
+odfpy
+minio
+
+pytest
+pytest-asyncio
+aiosqlite

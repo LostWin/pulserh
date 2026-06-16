@@ -14,7 +14,7 @@ Pipeline complet :
 
 import json
 import logging
-from typing import Any, AsyncIterator, Optional
+from typing import Any, AsyncIterator
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -25,6 +25,8 @@ from app.services.embedding_service import embedding_service
 from app.services.ai_tools import TOOL_DEFINITIONS, execute_tool
 from app.services.guardrail_service import guardrail_service
 from app.models.domain import AIConfiguration
+from app.services.ai_observability_service import ai_observability_service
+import time
 
 logger = logging.getLogger("pulse.services.rag")
 
@@ -124,6 +126,23 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
             {"role": "user", "content": question},
         ]
 
+    def _build_role_filter(self, user_role: str | list[str]):
+        roles = user_role if isinstance(user_role, list) else [user_role]
+        normalized_roles = [role.lower() for role in roles if role]
+        if not normalized_roles:
+            return None
+
+        from qdrant_client.models import Filter, FieldCondition, MatchAny
+
+        return Filter(
+            must=[
+                FieldCondition(
+                    key="allowed_roles",
+                    match=MatchAny(any=normalized_roles),
+                )
+            ]
+        )
+
     async def answer(
         self,
         question: str,
@@ -150,6 +169,8 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
             f"RAGService.answer() | user_id={user_id}, question_length={len(question)}"
         )
         
+        start_time = time.time()
+        
         # Charger la config IA
         ai_config = await self._get_ai_config(db) if db else {}
         
@@ -158,6 +179,14 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
             input_check = await guardrail_service.check_input(question, db)
             if not input_check.passed:
                 logger.warning(f"Message bloqué par guardrail : {input_check.triggered_rules}")
+                await ai_observability_service.log_event(
+                    db=db,
+                    user_id=user_id,
+                    event_type="chat",
+                    status="blocked",
+                    duration_ms=int((time.time() - start_time) * 1000),
+                    details_json={"reason": "input_guardrail", "rules": input_check.triggered_rules}
+                )
                 return {
                     "answer": input_check.message,
                     "sources": [],
@@ -179,6 +208,7 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
                     collection_name=self.collection_name,
                     query=query_embedding,
                     limit=max_sources,
+                    query_filter=self._build_role_filter(user_role),
                 ).points
                 
                 if search_results:
@@ -251,7 +281,13 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
                     except json.JSONDecodeError:
                         arguments = {}
                     
-                    tool_result = await execute_tool(tool_name, arguments, db, user_id)
+                    tool_result = await execute_tool(
+                        tool_name,
+                        arguments,
+                        db,
+                        user_id,
+                        user_role if isinstance(user_role, list) else [user_role],
+                    )
                     tool_results_list.append({
                         "tool": tool_name,
                         "arguments": arguments,
@@ -291,6 +327,18 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
         # Dédupliquer les sources
         unique_sources = list(dict.fromkeys(sources))
         
+        if db:
+            status = "blocked" if (output_check and not output_check.passed) else "success"
+            await ai_observability_service.log_event(
+                db=db,
+                user_id=user_id,
+                event_type="chat",
+                status=status,
+                duration_ms=int((time.time() - start_time) * 1000),
+                tokens_used=total_tokens,
+                details_json={"warning": warning, "tools_used": [t["tool"] for t in tool_results_list], "sources": unique_sources}
+            )
+        
         return {
             "answer": answer,
             "sources": unique_sources,
@@ -319,6 +367,7 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
         """
         logger.info(f"RAGService.stream_answer() | user_id={user_id}")
         
+        start_time = time.time()
         ai_config = await self._get_ai_config(db) if db else {}
         
         # 1. Guardrails input
@@ -327,6 +376,14 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
             if not input_check.passed:
                 yield {"type": "text", "content": input_check.message}
                 yield {"type": "done", "content": {"tokens_used": 0, "blocked": True}}
+                await ai_observability_service.log_event(
+                    db=db,
+                    user_id=user_id,
+                    event_type="chat",
+                    status="blocked",
+                    duration_ms=int((time.time() - start_time) * 1000),
+                    details_json={"reason": "input_guardrail", "rules": input_check.triggered_rules}
+                )
                 return
         
         # 2. Recherche Qdrant
@@ -340,6 +397,7 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
                     collection_name=self.collection_name,
                     query=query_embedding,
                     limit=5,
+                    query_filter=self._build_role_filter(user_role),
                 ).points
                 if search_results:
                     context_parts = []
@@ -396,7 +454,13 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
                     except json.JSONDecodeError:
                         arguments = {}
                     
-                    tool_result = await execute_tool(tool_name, arguments, db, user_id)
+                    tool_result = await execute_tool(
+                        tool_name,
+                        arguments,
+                        db,
+                        user_id,
+                        user_role if isinstance(user_role, list) else [user_role],
+                    )
                     
                     yield {
                         "type": "tool_call",
@@ -440,6 +504,17 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
             logger.error(f"Erreur dans stream_answer : {e}")
             yield {"type": "text", "content": "Désolé, une erreur s'est produite. Veuillez réessayer."}
         
+        if db:
+            await ai_observability_service.log_event(
+                db=db,
+                user_id=user_id,
+                event_type="chat",
+                status="success",
+                duration_ms=int((time.time() - start_time) * 1000),
+                tokens_used=total_tokens,
+                details_json={"streaming": True, "sources": sources}
+            )
+            
         yield {"type": "done", "content": {"tokens_used": total_tokens, "sources": sources}}
 
     async def search_documents(
@@ -459,6 +534,7 @@ Tu as accès à des outils qui te permettent de récupérer les données de l'em
                 collection_name=self.collection_name,
                 query=query_embedding,
                 limit=top_k,
+                query_filter=self._build_role_filter(user_role),
             ).points
             
             return [

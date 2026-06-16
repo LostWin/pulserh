@@ -22,7 +22,6 @@ from fastapi import Request, Response
 from jose import jwt, JWTError
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
-from app.config import settings
 
 # ---------------------------------------------------------------------------
 # Structured JSON Formatter

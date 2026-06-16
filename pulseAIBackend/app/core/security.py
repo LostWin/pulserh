@@ -1,7 +1,6 @@
 from jose import jwt, JWTError
 import requests
 from app.config import settings
-from fastapi import HTTPException
 import logging
 
 logger = logging.getLogger(__name__)

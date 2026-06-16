@@ -11,16 +11,14 @@ Endpoints :
 """
 
 import logging
-import uuid
 import json
-from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func, delete
+from sqlalchemy import select, func
 
-from app.schemas.chat import ChatRequest, ChatResponse, ConversationSummary, FeedbackRequest
+from app.schemas.chat import ChatRequest, ChatResponse, FeedbackRequest
 from app.schemas.auth import CurrentUser
 from app.dependencies import get_current_user
 from app.core.rbac import require_any_role

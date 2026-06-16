@@ -1,6 +1,4 @@
 import asyncio
-from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import UploadFile
 from app.database import AsyncSessionLocal
 from app.services.import_service import process_csv_import
 from app.schemas.import_schemas import DepartmentImport

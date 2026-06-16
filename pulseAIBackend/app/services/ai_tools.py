@@ -15,14 +15,57 @@ Ces outils permettent à l'IA de :
 
 import logging
 import json
-from datetime import datetime, date, timedelta
+from datetime import date, timedelta
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from sqlalchemy.orm import selectinload
 
-from app.models.domain import Employee, Contract, Leave, Attendance, Task, Project, Department
+from app.models.domain import (
+    Employee, EmployeeSkill, Contract, Leave, Attendance, Task, Document,
+    ProjectAssignment, TrainingCourse, TrainingEnrollment,
+)
+from app.services.calendar_connector import calendar_connector
+from app.services.field_access_service import apply_field_access, get_primary_role
+from app.services.hr_analytics_service import current_project_names
 
 logger = logging.getLogger("pulse.services.ai_tools")
+
+
+def _format_file_size(size_bytes: int) -> str:
+    if size_bytes < 1024:
+        return f"{size_bytes} o"
+    if size_bytes < 1024 * 1024:
+        return f"{size_bytes / 1024:.1f} Ko"
+    return f"{size_bytes / (1024 * 1024):.1f} Mo"
+
+
+async def _get_employee(db: AsyncSession, user_id: str, *, options: list | None = None) -> Employee | None:
+    query = select(Employee).filter((Employee.user_id == user_id) | (Employee.id == user_id))
+    if options:
+        query = query.options(*options)
+    result = await db.execute(query)
+    return result.scalar_one_or_none()
+
+
+async def _apply_tool_access(
+    db: AsyncSession,
+    *,
+    resource: str,
+    scope: str,
+    payload: dict,
+    user_roles: list[str] | None,
+    context: dict | None = None,
+) -> dict:
+    filtered, field_visibility = await apply_field_access(
+        db,
+        resource=resource,
+        scope=scope,
+        payload=payload,
+        role=get_primary_role(user_roles or ["collaborator"]),
+        context=context or {"is_self": True},
+    )
+    filtered["_field_visibility"] = field_visibility
+    return filtered
 
 
 # ════════════════════════════════════════════════════════════════
@@ -108,6 +151,36 @@ TOOL_DEFINITIONS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "recommend_trainings",
+            "description": "Suggérer des formations utiles selon les compétences connues du collaborateur et les projets de son équipe.",
+            "parameters": {"type": "object", "properties": {}, "required": []},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_manager_availability",
+            "description": "Proposer des créneaux plausibles de 1:1 avec le manager en se basant sur les entretiens déjà planifiés.",
+            "parameters": {"type": "object", "properties": {}, "required": []},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "schedule_one_on_one",
+            "description": "Créer un entretien 1:1 avec le manager du collaborateur sur le prochain créneau disponible.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "days_from_now": {"type": "integer", "description": "Décalage en jours pour le rendez-vous souhaité.", "default": 5}
+                },
+                "required": [],
+            },
+        },
+    },
 ]
 
 
@@ -115,7 +188,7 @@ TOOL_DEFINITIONS = [
 # Implémentation des fonctions d'outils
 # ════════════════════════════════════════════════════════════════
 
-async def get_employee_info(db: AsyncSession, user_id: str, **kwargs) -> str:
+async def get_employee_info(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
     """Récupérer les infos du profil de l'employé connecté."""
     logger.info(f"Outil get_employee_info() appelé pour user_id={user_id}")
     
@@ -131,7 +204,7 @@ async def get_employee_info(db: AsyncSession, user_id: str, **kwargs) -> str:
     if not emp:
         return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
     
-    return json.dumps({
+    payload = {
         "id": emp.id,
         "first_name": emp.first_name,
         "last_name": emp.last_name,
@@ -141,19 +214,25 @@ async def get_employee_info(db: AsyncSession, user_id: str, **kwargs) -> str:
         "status": emp.status,
         "department": emp.department.name if emp.department else "Non assigné",
         "job_title": emp.job.title if emp.job else "Non défini",
-    }, ensure_ascii=False)
+    }
+    return json.dumps(
+        await _apply_tool_access(
+            db,
+            resource="employee",
+            scope="self",
+            payload=payload,
+            user_roles=user_roles,
+        ),
+        ensure_ascii=False,
+    )
 
 
-async def get_leave_balance(db: AsyncSession, user_id: str, **kwargs) -> str:
+async def get_leave_balance(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
     """Consulter le solde de congés."""
     logger.info(f"Outil get_leave_balance() appelé pour user_id={user_id}")
     
     # Trouver l'employé
-    emp_query = select(Employee).filter(
-        (Employee.user_id == user_id) | (Employee.id == user_id)
-    )
-    emp_result = await db.execute(emp_query)
-    emp = emp_result.scalar_one_or_none()
+    emp = await _get_employee(db, user_id)
     
     if not emp:
         return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
@@ -169,43 +248,48 @@ async def get_leave_balance(db: AsyncSession, user_id: str, **kwargs) -> str:
     
     total_annual = 25  # Jours annuels standard
     days_taken = sum(
-        (l.end_date - l.start_date).days + 1 
-        for l in leaves 
-        if l.status in ("Approuvé", "approved")
+        (leave.end_date - leave.start_date).days + 1 
+        for leave in leaves 
+        if leave.status in ("Approuvé", "approved")
     )
     days_pending = sum(
-        (l.end_date - l.start_date).days + 1 
-        for l in leaves 
-        if l.status in ("En attente", "pending")
+        (leave.end_date - leave.start_date).days + 1 
+        for leave in leaves 
+        if leave.status in ("En attente", "pending")
     )
     
+    recent_leaves = []
+    for leave in sorted(leaves, key=lambda x: x.start_date, reverse=True)[:5]:
+        recent_leaves.append(
+            await _apply_tool_access(
+                db,
+                resource="leave",
+                scope="request",
+                payload={
+                    "leave_type": leave.leave_type,
+                    "start_date": leave.start_date.isoformat(),
+                    "end_date": leave.end_date.isoformat(),
+                    "status": leave.status,
+                    "reason": leave.reason,
+                },
+                user_roles=user_roles,
+            )
+        )
+
     return json.dumps({
         "total_annual_days": total_annual,
         "days_taken": days_taken,
         "days_pending": days_pending,
         "days_remaining": total_annual - days_taken,
-        "recent_leaves": [
-            {
-                "type": l.leave_type,
-                "start": l.start_date.isoformat(),
-                "end": l.end_date.isoformat(),
-                "status": l.status,
-                "reason": l.reason,
-            }
-            for l in sorted(leaves, key=lambda x: x.start_date, reverse=True)[:5]
-        ],
+        "recent_leaves": recent_leaves,
     }, ensure_ascii=False)
 
 
-async def get_contracts(db: AsyncSession, user_id: str, **kwargs) -> str:
+async def get_contracts(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
     """Récupérer les contrats actifs."""
     logger.info(f"Outil get_contracts() appelé pour user_id={user_id}")
     
-    emp_query = select(Employee).filter(
-        (Employee.user_id == user_id) | (Employee.id == user_id)
-    )
-    emp_result = await db.execute(emp_query)
-    emp = emp_result.scalar_one_or_none()
+    emp = await _get_employee(db, user_id)
     
     if not emp:
         return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
@@ -214,29 +298,36 @@ async def get_contracts(db: AsyncSession, user_id: str, **kwargs) -> str:
     contracts_result = await db.execute(contracts_query)
     contracts = contracts_result.scalars().all()
     
-    return json.dumps({
-        "contracts": [
+    contracts_payload = []
+    for contract in contracts:
+        contract_payload = await _apply_tool_access(
+            db,
+            resource="employee",
+            scope="self",
+            payload={
+                "contract_type": contract.contract_type,
+                "salary": contract.salary,
+            },
+            user_roles=user_roles,
+        )
+        contracts_payload.append(
             {
-                "type": c.contract_type,
-                "start_date": c.start_date.isoformat() if c.start_date else None,
-                "end_date": c.end_date.isoformat() if c.end_date else None,
-                "salary": c.salary,
-                "is_active": c.is_active,
+                "type": contract_payload.get("contract_type"),
+                "start_date": contract.start_date.isoformat() if contract.start_date else None,
+                "end_date": contract.end_date.isoformat() if contract.end_date else None,
+                "salary": contract_payload.get("salary"),
+                "is_active": contract.is_active,
+                "_field_visibility": contract_payload.get("_field_visibility", {}),
             }
-            for c in contracts
-        ],
-    }, ensure_ascii=False)
+        )
+    return json.dumps({"contracts": contracts_payload}, ensure_ascii=False)
 
 
-async def get_recent_attendances(db: AsyncSession, user_id: str, **kwargs) -> str:
+async def get_recent_attendances(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
     """Historique de présence récent (30 derniers jours)."""
     logger.info(f"Outil get_recent_attendances() appelé pour user_id={user_id}")
     
-    emp_query = select(Employee).filter(
-        (Employee.user_id == user_id) | (Employee.id == user_id)
-    )
-    emp_result = await db.execute(emp_query)
-    emp = emp_result.scalar_one_or_none()
+    emp = await _get_employee(db, user_id)
     
     if not emp:
         return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
@@ -268,11 +359,12 @@ async def get_recent_attendances(db: AsyncSession, user_id: str, **kwargs) -> st
     }, ensure_ascii=False)
 
 
-async def generate_document_tool(db: AsyncSession, user_id: str, document_type: str = "attestation_travail", **kwargs) -> str:
+async def generate_document_tool(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, document_type: str = "attestation_travail", **kwargs) -> str:
     """Générer un document RH via le DocumentGenerator."""
     logger.info(f"Outil generate_document() appelé | user_id={user_id}, type={document_type}")
     
     from app.services.document_generator import document_generator
+    from app.services.secure_document_storage import secure_document_storage
     
     emp_query = select(Employee).options(
         selectinload(Employee.department),
@@ -304,11 +396,23 @@ async def generate_document_tool(db: AsyncSession, user_id: str, document_type: 
     }
     
     try:
-        file_path = document_generator.create(doc_type=document_type, context=context)
+        filename, pdf_bytes = document_generator.create_pdf_bytes(doc_type=document_type, context=context)
+        storage_uri = secure_document_storage.upload_bytes(pdf_bytes, filename, "generated")
+
+        db.add(Document(
+            name=filename,
+            type=document_type,
+            size=_format_file_size(len(pdf_bytes)),
+            file_path=storage_uri,
+            uploaded_by="Moteur de génération IA",
+            allowed_roles=["collaborator", "hr", "admin"],
+        ))
+        await db.commit()
+
         return json.dumps({
             "success": True,
             "document_type": document_type,
-            "file_name": file_path.split("/")[-1],
+            "file_name": filename,
             "message": f"Le document '{document_type}' a été généré avec succès. Il est disponible dans l'onglet Documents.",
         }, ensure_ascii=False)
     except Exception as e:
@@ -316,15 +420,11 @@ async def generate_document_tool(db: AsyncSession, user_id: str, document_type: 
         return json.dumps({"error": f"Erreur lors de la génération : {str(e)}"}, ensure_ascii=False)
 
 
-async def get_my_tasks(db: AsyncSession, user_id: str, **kwargs) -> str:
+async def get_my_tasks(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
     """Récupérer les tâches et projets assignés."""
     logger.info(f"Outil get_my_tasks() appelé pour user_id={user_id}")
     
-    emp_query = select(Employee).filter(
-        (Employee.user_id == user_id) | (Employee.id == user_id)
-    )
-    emp_result = await db.execute(emp_query)
-    emp = emp_result.scalar_one_or_none()
+    emp = await _get_employee(db, user_id)
     
     if not emp:
         return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
@@ -355,6 +455,95 @@ async def get_my_tasks(db: AsyncSession, user_id: str, **kwargs) -> str:
     }, ensure_ascii=False)
 
 
+async def recommend_trainings(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
+    logger.info(f"Outil recommend_trainings() appelé pour user_id={user_id}")
+    emp = await _get_employee(
+        db,
+        user_id,
+        options=[
+            selectinload(Employee.skills).selectinload(EmployeeSkill.skill),
+            selectinload(Employee.project_assignments).selectinload(ProjectAssignment.project),
+            selectinload(Employee.training_enrollments).selectinload(TrainingEnrollment.training),
+            selectinload(Employee.job),
+        ],
+    )
+    if not emp:
+        return json.dumps({"error": "Employé non trouvé"}, ensure_ascii=False)
+
+    skill_ids = {item.skill_id for item in emp.skills}
+    existing_training_ids = {item.training_id for item in emp.training_enrollments}
+    trainings = (await db.execute(select(TrainingCourse))).scalars().all()
+    recommendations = []
+    for training in trainings:
+        if training.id in existing_training_ids:
+            continue
+        matches_skill = training.target_skill_id and training.target_skill_id in skill_ids
+        matches_job = training.required_for_job_family and emp.job and training.required_for_job_family.lower() in emp.job.title.lower()
+        if matches_skill or matches_job:
+            recommendations.append(
+                {
+                    "title": training.title,
+                    "provider": training.provider,
+                    "duration_hours": training.duration_hours,
+                    "format": training.format,
+                    "why": "Alignée avec vos compétences actuelles et le contexte de votre équipe.",
+                }
+            )
+
+    return json.dumps(
+        {
+            "projects": current_project_names(emp),
+            "recommendations": recommendations[:3],
+        },
+        ensure_ascii=False,
+    )
+
+
+async def get_manager_availability(db: AsyncSession, user_id: str, user_roles: list[str] | None = None, **kwargs) -> str:
+    logger.info(f"Outil get_manager_availability() appelé pour user_id={user_id}")
+    emp = await _get_employee(db, user_id)
+    if not emp or not emp.manager_id:
+        return json.dumps({"availability": [], "message": "Aucun manager identifié."}, ensure_ascii=False)
+
+    slots = [
+        {"date": slot.starts_at.strftime("%Y-%m-%d"), "time": slot.starts_at.strftime("%H:%M")}
+        for slot in await calendar_connector.suggest_slots(db, emp.manager_id)
+    ]
+    return json.dumps({"availability": slots}, ensure_ascii=False)
+
+
+async def schedule_one_on_one(
+    db: AsyncSession,
+    user_id: str,
+    user_roles: list[str] | None = None,
+    days_from_now: int = 5,
+    **kwargs,
+) -> str:
+    logger.info(f"Outil schedule_one_on_one() appelé pour user_id={user_id}")
+    emp = await _get_employee(db, user_id)
+    if not emp or not emp.manager_id:
+        return json.dumps({"error": "Manager introuvable pour ce collaborateur."}, ensure_ascii=False)
+
+    interview = await calendar_connector.schedule_one_on_one(
+        db,
+        employee_id=emp.id,
+        manager_id=emp.manager_id,
+        title="1:1 de suivi",
+        notes="Planifié par l'assistant IA à la demande du collaborateur.",
+        preferred_days_from_now=max(1, days_from_now),
+    )
+    await db.commit()
+    return json.dumps(
+        {
+            "scheduled": True,
+            "date": interview.scheduled_at.strftime("%Y-%m-%d"),
+            "time": interview.scheduled_at.strftime("%H:%M"),
+            "message": "Le 1:1 a été ajouté au suivi manager côté plateforme.",
+        },
+        ensure_ascii=False,
+    )
+
+
 # ════════════════════════════════════════════════════════════════
 # Registre des outils (mapping nom → fonction)
 # ════════════════════════════════════════════════════════════════
@@ -366,10 +555,13 @@ TOOL_REGISTRY = {
     "get_recent_attendances": get_recent_attendances,
     "generate_document": generate_document_tool,
     "get_my_tasks": get_my_tasks,
+    "recommend_trainings": recommend_trainings,
+    "get_manager_availability": get_manager_availability,
+    "schedule_one_on_one": schedule_one_on_one,
 }
 
 
-async def execute_tool(tool_name: str, arguments: dict, db: AsyncSession, user_id: str) -> str:
+async def execute_tool(tool_name: str, arguments: dict, db: AsyncSession, user_id: str, user_roles: list[str] | None = None) -> str:
     """Exécuter un outil par son nom et retourner le résultat en JSON string."""
     if tool_name not in TOOL_REGISTRY:
         logger.error(f"Outil inconnu demandé par l'IA : {tool_name}")
@@ -379,7 +571,7 @@ async def execute_tool(tool_name: str, arguments: dict, db: AsyncSession, user_i
     logger.info(f"Exécution de l'outil : {tool_name}({arguments})")
     
     try:
-        result = await tool_fn(db=db, user_id=user_id, **arguments)
+        result = await tool_fn(db=db, user_id=user_id, user_roles=user_roles, **arguments)
         logger.info(f"Outil {tool_name} exécuté avec succès")
         return result
     except Exception as e:

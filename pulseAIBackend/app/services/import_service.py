@@ -1,6 +1,8 @@
 import csv
+import json
 from io import StringIO
-from typing import List, Dict, Type
+from typing import List, Type
+from datetime import datetime, timezone
 from pydantic import BaseModel, ValidationError
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import UploadFile, HTTPException
@@ -9,6 +11,38 @@ import logging
 from app.schemas.employee import ErrorLine, ImportReport
 
 logger = logging.getLogger(__name__)
+
+
+def _parse_list_like(value):
+    if value is None or isinstance(value, list):
+        return value
+    if isinstance(value, str):
+        raw = value.strip()
+        if not raw:
+            return []
+        if raw.startswith("["):
+            try:
+                parsed = json.loads(raw)
+                return parsed if isinstance(parsed, list) else [str(parsed)]
+            except json.JSONDecodeError:
+                pass
+        return [item.strip() for item in raw.split(",") if item.strip()]
+    return value
+
+
+def _parse_json_like(value):
+    if value is None or isinstance(value, (dict, list)):
+        return value
+    if isinstance(value, str):
+        raw = value.strip()
+        if not raw:
+            return None
+        if raw.startswith("{") or raw.startswith("["):
+            try:
+                return json.loads(raw)
+            except json.JSONDecodeError:
+                return value
+    return value
 
 async def process_csv_import(
     file: UploadFile, 
@@ -54,7 +88,14 @@ async def process_csv_import(
         
         try:
             validated_data = schema_class(**cleaned_row)
-            valid_records.append((line_num, validated_data.model_dump()))
+            record = validated_data.model_dump()
+            for list_field in ["required_skill_ids", "mandatory_for_roles"]:
+                if list_field in record:
+                    record[list_field] = _parse_list_like(record[list_field])
+            for json_field in ["source_signals"]:
+                if json_field in record:
+                    record[json_field] = _parse_json_like(record[json_field])
+            valid_records.append((line_num, record))
         except ValidationError as e:
             error_details = []
             for err in e.errors():
@@ -92,40 +133,16 @@ async def process_csv_import(
             async with db.begin_nested():
                 await attempt_upsert(record)
         except IntegrityError as e:
-            # Possible Foreign Key violation. Attempt fallback by removing foreign keys
-            fallback_record = copy.deepcopy(record)
-            fks_removed = []
-            for k in list(fallback_record.keys()):
-                if k.endswith("_id") and k != "id" and fallback_record[k] is not None:
-                    fallback_record[k] = None
-                    fks_removed.append(k)
-            
-            if fks_removed:
-                try:
-                    async with db.begin_nested():
-                        # We must rollback the created/updated counts from the failed attempt
-                        # Actually they were incremented in the failed transaction, so we should 
-                        # technically decrement them, but it's simpler to just let attempt_upsert run again.
-                        # Wait, the counters were incremented locally before flush threw an error!
-                        # Let's adjust counts safely:
-                        if record.get(unique_field) and await db.get(model_class, record.get(unique_field)):
-                            updated_count -= 1
-                        else:
-                            created_count -= 1
-                        
-                        await attempt_upsert(fallback_record)
-                        errors.append(ErrorLine(line=line_num, error=f"Importé partiellement sans les liaisons ({', '.join(fks_removed)}). Dépendances introuvables. Veuillez réimporter après avoir importé les données parentes."))
-                except Exception as e2:
-                    if fallback_record.get(unique_field) and await db.get(model_class, fallback_record.get(unique_field)):
-                        updated_count -= 1
-                    else:
-                        created_count -= 1
-                    errors.append(ErrorLine(line=line_num, error="Erreur base de données (après tentative de récupération)."))
+            if record.get(unique_field) and await db.get(model_class, record.get(unique_field)):
+                updated_count -= 1
             else:
-                if record.get(unique_field) and await db.get(model_class, record.get(unique_field)):
-                    updated_count -= 1
-                else:
-                    created_count -= 1
+                created_count -= 1
+            
+            # Message clair sur la dépendance manquante
+            error_msg = str(e)
+            if "ForeignKeyViolationError" in error_msg or "foreign key constraint" in error_msg.lower():
+                errors.append(ErrorLine(line=line_num, error="Échec d'intégrité (clé étrangère). Dépendance introuvable. Importez d'abord les entités parentes (départements, etc.)."))
+            else:
                 errors.append(ErrorLine(line=line_num, error="Erreur d'intégrité SQL (ex: clé étrangère introuvable)."))
         except Exception as e:
             if record.get(unique_field) and await db.get(model_class, record.get(unique_field)):
@@ -166,7 +183,8 @@ async def process_csv_import(
         error_count=len(errors),
         status=status_val,
         full_report=report_dict,
-        user_id=user_id
+        user_id=user_id,
+        created_at=datetime.now(timezone.utc),
     )
     
     db.add(history)
@@ -175,5 +193,19 @@ async def process_csv_import(
     except Exception as e:
         await db.rollback()
         logger.error(f"Failed to save import history: {e}")
+
+    if model_class.__name__ == "Employee":
+        from sqlalchemy import select
+        from app.models.domain import Employee
+        from app.services.employee_identity_service import sync_employee_identity
+
+        emails = [record.get("email") for _, record in valid_records if record.get("email")]
+        if emails:
+            result = await db.execute(select(Employee.id).where(Employee.email.in_(emails)))
+            for employee_id, in result.all():
+                try:
+                    await sync_employee_identity(employee_id, db)
+                except Exception as exc:
+                    logger.warning("Provisioning Keycloak ignoré pour %s: %s", employee_id, exc)
 
     return ImportReport(**report_dict)

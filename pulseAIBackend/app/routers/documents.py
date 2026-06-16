@@ -1,29 +1,67 @@
 import logging
 import uuid
-from datetime import datetime, timezone
 from typing import List
-import os
-import shutil
+from pathlib import Path
+from io import BytesIO
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
-from fastapi.responses import FileResponse
+from fastapi.responses import StreamingResponse
+from sqlalchemy.orm import selectinload
 
 from app.schemas.document import (
     DocumentGenerateRequest, DocumentResponse, 
     BatchGenerateRequest, BatchGenerateResponse
 )
-from app.schemas.document_schemas import DocumentResponse as UploadedDocumentResponse
-from app.models.domain import Document, Employee, Contract
+from app.schemas.document_schemas import (
+    DocumentResponse as UploadedDocumentResponse,
+    DocumentAccessEventResponse,
+    DocumentSettingsUpdate,
+    DocumentViewerResponse,
+)
+from app.models.domain import Document, Employee
 from app.database import get_db
 from app.schemas.auth import CurrentUser
 from app.dependencies import get_current_user
 from app.core.rbac import require_hr, require_any_role
 from app.services.document_generator import document_generator
-from sqlalchemy.orm import selectinload
+from app.services.document_access_service import (
+    ALL_DOCUMENT_ROLES,
+    delete_document_from_rag,
+    document_can_preview,
+    guess_media_type,
+    log_document_event,
+    mark_document_rag_state,
+    normalize_roles,
+    sync_document_to_rag,
+    user_can_access_document,
+)
+from app.services.field_access_service import apply_field_access, get_primary_role
+from app.services.secure_document_storage import secure_document_storage
 
-UPLOAD_DIR = "uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+ALLOWED_DOCUMENT_EXTENSIONS = {
+    ".pdf",
+    ".doc",
+    ".docx",
+    ".odt",
+    ".ott",
+    ".rtf",
+    ".pages",
+}
+
+ALLOWED_DOCUMENT_MIME_TYPES = {
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.oasis.opendocument.text",
+    "application/vnd.oasis.opendocument.text-template",
+    "application/rtf",
+    "text/rtf",
+    "application/x-iwork-pages-sffpages",
+    "application/vnd.apple.pages",
+    "application/zip",
+    "application/octet-stream",
+}
 
 def get_file_size_formatted(size_bytes):
     if size_bytes < 1024:
@@ -33,12 +71,102 @@ def get_file_size_formatted(size_bytes):
     else:
         return f"{size_bytes / (1024 * 1024):.1f} Mo"
 
+
+def validate_uploaded_document(file: UploadFile) -> None:
+    extension = Path(file.filename or "").suffix.lower()
+    if extension not in ALLOWED_DOCUMENT_EXTENSIONS:
+        raise HTTPException(
+            status_code=400,
+            detail="Format non autorisé. Seuls les fichiers Word, ODT, Pages, RTF et PDF sont acceptés.",
+        )
+
+    if file.content_type and file.content_type not in ALLOWED_DOCUMENT_MIME_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail="Type MIME non autorisé pour ce document.",
+        )
+
 router = APIRouter(prefix="/documents", tags=["Documents"])
 logger = logging.getLogger(__name__)
 
 # Groupes de rôles pour la simplification
 doc_generate_roles = require_any_role("collaborator", "manager", "hr")
-collab_hr_roles = require_any_role("collaborator", "hr")
+document_access_roles = require_any_role("collaborator", "manager", "hr", "director", "admin")
+
+
+async def get_document_or_404(db: AsyncSession, document_id: str) -> Document:
+    result = await db.execute(
+        select(Document)
+        .options(selectinload(Document.access_events))
+        .filter(Document.id == document_id)
+    )
+    document = result.scalar_one_or_none()
+    if not document:
+        raise HTTPException(status_code=404, detail="Document non trouvé")
+    return document
+
+
+def ensure_document_access(document: Document, current_user: CurrentUser) -> None:
+    if not user_can_access_document(document, current_user.roles):
+        raise HTTPException(status_code=403, detail="Vous n'avez pas accès à ce document.")
+
+
+async def _serialize_document(
+    db: AsyncSession,
+    *,
+    document: Document,
+    current_user: CurrentUser,
+) -> UploadedDocumentResponse:
+    payload = {
+        "id": document.id,
+        "name": document.name,
+        "type": document.type,
+        "size": document.size,
+        "file_path": document.file_path,
+        "uploaded_by": document.uploaded_by,
+        "created_at": document.created_at,
+        "allowed_roles": normalize_roles(document.allowed_roles or []),
+        "rag_enabled": document.rag_enabled,
+        "rag_status": document.rag_status,
+        "rag_last_synced_at": document.rag_last_synced_at,
+        "rag_error": document.rag_error,
+    }
+    filtered, field_visibility = await apply_field_access(
+        db,
+        resource="document",
+        scope="list",
+        payload=payload,
+        role=get_primary_role(current_user.roles),
+        context={},
+    )
+    return UploadedDocumentResponse(**filtered, field_visibility=field_visibility)
+
+
+async def _serialize_document_viewer(
+    db: AsyncSession,
+    *,
+    document: Document,
+    current_user: CurrentUser,
+) -> DocumentViewerResponse:
+    payload = {
+        "id": document.id,
+        "name": document.name,
+        "can_preview": document_can_preview(document),
+        "allowed_roles": normalize_roles(document.allowed_roles or []),
+        "rag_enabled": document.rag_enabled,
+        "rag_status": document.rag_status,
+        "rag_last_synced_at": document.rag_last_synced_at,
+        "rag_error": document.rag_error,
+    }
+    filtered, field_visibility = await apply_field_access(
+        db,
+        resource="document",
+        scope="viewer",
+        payload=payload,
+        role=get_primary_role(current_user.roles),
+        context={},
+    )
+    return DocumentViewerResponse(**filtered, field_visibility=field_visibility)
 
 @router.post("/generate", response_model=DocumentResponse, dependencies=[Depends(doc_generate_roles)])
 async def generate_document(request: DocumentGenerateRequest, current_user: CurrentUser = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
@@ -79,7 +207,7 @@ async def generate_document(request: DocumentGenerateRequest, current_user: Curr
     }
     
     try:
-        file_path = document_generator.create(
+        filename, pdf_bytes = document_generator.create_pdf_bytes(
             doc_type=request.type, 
             context=context,
             custom_fields=request.custom_fields
@@ -88,15 +216,17 @@ async def generate_document(request: DocumentGenerateRequest, current_user: Curr
         logger.error(f"Échec de la génération du document: {str(e)}")
         raise HTTPException(status_code=500, detail="Erreur lors de la génération du document")
 
-    file_size_bytes = os.path.getsize(file_path)
+    file_size_bytes = len(pdf_bytes)
     size_str = get_file_size_formatted(file_size_bytes)
+    storage_uri = secure_document_storage.upload_bytes(pdf_bytes, filename, "generated")
     
     new_doc = Document(
-        name=os.path.basename(file_path),
+        name=filename,
         type=request.type,
         size=size_str,
-        file_path=file_path,
-        uploaded_by="Moteur de génération IA"
+        file_path=storage_uri,
+        uploaded_by="Moteur de génération IA",
+        allowed_roles=["collaborator", "hr", "admin"],
     )
     db.add(new_doc)
     await db.commit()
@@ -120,11 +250,16 @@ def generate_documents_batch(request: BatchGenerateRequest):
     job_id = f"job-{uuid.uuid4()}"
     return BatchGenerateResponse(job_id=job_id, status="pending")
 
-@router.get("/", response_model=List[UploadedDocumentResponse], dependencies=[Depends(collab_hr_roles)])
+@router.get("/", response_model=List[UploadedDocumentResponse], dependencies=[Depends(document_access_roles)])
 async def list_documents(current_user: CurrentUser = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
-    """Liste des documents uploadés (HR voit tout)"""
+    """Liste des documents uploadés (HR/Admin voient tout, autres selon permissions)."""
     result = await db.execute(select(Document).order_by(Document.created_at.desc()))
-    return result.scalars().all()
+    documents = result.scalars().all()
+    normalized_roles = normalize_roles(current_user.roles)
+    visible_documents = documents if "hr" in normalized_roles or "admin" in normalized_roles else [
+        document for document in documents if user_can_access_document(document, normalized_roles)
+    ]
+    return [await _serialize_document(db, document=document, current_user=current_user) for document in visible_documents]
 
 @router.post("/upload", response_model=UploadedDocumentResponse, dependencies=[Depends(require_hr)])
 async def upload_document(
@@ -134,31 +269,104 @@ async def upload_document(
     current_user: CurrentUser = Depends(get_current_user)
 ):
     try:
+        validate_uploaded_document(file)
         file_content = await file.read()
         file_size = len(file_content)
         size_str = get_file_size_formatted(file_size)
-        await file.seek(0)
         
         safe_filename = file.filename.replace(" ", "_").replace("/", "-")
-        file_path = os.path.join(UPLOAD_DIR, f"{current_user.id[:8]}_{safe_filename}")
-        
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+        storage_uri = secure_document_storage.upload_bytes(file_content, f"{current_user.id[:8]}_{safe_filename}", "uploaded")
             
         new_doc = Document(
             name=file.filename,
             type=doc_type,
             size=size_str,
-            file_path=file_path,
-            uploaded_by=current_user.email
+            file_path=storage_uri,
+            uploaded_by=current_user.email,
+            allowed_roles=["hr", "admin"],
         )
         db.add(new_doc)
         await db.commit()
         await db.refresh(new_doc)
         
-        return new_doc
+        return await _serialize_document(db, document=new_doc, current_user=current_user)
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/{id}/viewer", response_model=DocumentViewerResponse, dependencies=[Depends(document_access_roles)])
+async def get_document_viewer_metadata(
+    id: str,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(get_current_user),
+):
+    document = await get_document_or_404(db, id)
+    ensure_document_access(document, current_user)
+    return await _serialize_document_viewer(db, document=document, current_user=current_user)
+
+@router.get("/{id}/access-history", response_model=List[DocumentAccessEventResponse], dependencies=[Depends(require_hr)])
+async def get_document_access_history(
+    id: str,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(get_current_user),
+):
+    document = await get_document_or_404(db, id)
+    return document.access_events
+
+@router.put("/{id}/settings", response_model=DocumentViewerResponse, dependencies=[Depends(require_hr)])
+async def update_document_settings(
+    id: str,
+    payload: DocumentSettingsUpdate,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(get_current_user),
+):
+    document = await get_document_or_404(db, id)
+    allowed_roles = [role for role in normalize_roles(payload.allowed_roles) if role in ALL_DOCUMENT_ROLES]
+    if not allowed_roles:
+        raise HTTPException(status_code=400, detail="Au moins un rôle autorisé est requis.")
+
+    document.allowed_roles = allowed_roles
+    document.rag_enabled = payload.rag_enabled
+
+    if payload.rag_enabled:
+        try:
+            sync_error = None
+            await sync_document_to_rag(document)
+            mark_document_rag_state(document, True, "ready")
+            action = "rag_sync"
+        except Exception as exc:
+            sync_error = str(exc)
+            mark_document_rag_state(document, True, "error", sync_error)
+            action = "rag_sync_error"
+    else:
+        delete_document_from_rag(document.id)
+        document.rag_status = "disabled"
+        document.rag_error = None
+        document.rag_last_synced_at = None
+        action = "rag_disable"
+        sync_error = None
+
+    await db.commit()
+    await db.refresh(document)
+    await log_document_event(
+        db,
+        document=document,
+        user_email=current_user.email,
+        user_roles=current_user.roles,
+        action="permissions_update",
+        details={"allowed_roles": allowed_roles, "rag_enabled": payload.rag_enabled},
+    )
+    await log_document_event(
+        db,
+        document=document,
+        user_email=current_user.email,
+        user_roles=current_user.roles,
+        action=action,
+        details={"error": sync_error} if sync_error else {"allowed_roles": allowed_roles},
+    )
+
+    return await _serialize_document_viewer(db, document=document, current_user=current_user)
 
 @router.get("/templates", dependencies=[Depends(require_hr)])
 def list_templates():
@@ -170,28 +378,63 @@ def update_template(id: str):
     """Modifier un modèle"""
     return {"status": "Template updated", "id": id}
 
-@router.get("/{id}/download", dependencies=[Depends(collab_hr_roles)])
+@router.get("/{id}/view", dependencies=[Depends(document_access_roles)])
+async def view_document(
+    id: str,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(get_current_user),
+):
+    document = await get_document_or_404(db, id)
+    ensure_document_access(document, current_user)
+
+    if not document_can_preview(document):
+        raise HTTPException(status_code=400, detail="Prévisualisation disponible uniquement pour les PDF.")
+
+    if not secure_document_storage.exists(document.file_path):
+        raise HTTPException(status_code=404, detail="Le fichier n'existe plus")
+
+    await log_document_event(
+        db,
+        document=document,
+        user_email=current_user.email,
+        user_roles=current_user.roles,
+        action="view",
+    )
+    file_bytes = secure_document_storage.download_bytes(document.file_path)
+    return StreamingResponse(
+        BytesIO(file_bytes),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'inline; filename="{document.name}"'},
+    )
+
+@router.get("/{id}/download", dependencies=[Depends(document_access_roles)])
 async def download_document(id: str, db: AsyncSession = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
     """Télécharger un document physique"""
-    result = await db.execute(select(Document).filter(Document.id == id))
-    doc = result.scalar_one_or_none()
+    doc = await get_document_or_404(db, id)
+    ensure_document_access(doc, current_user)
     
-    if not doc:
-        raise HTTPException(status_code=404, detail="Document non trouvé")
-        
-    if not os.path.exists(doc.file_path):
+    if not secure_document_storage.exists(doc.file_path):
         raise HTTPException(status_code=404, detail="Le fichier n'existe plus")
-        
-    return FileResponse(path=doc.file_path, filename=doc.name)
+
+    await log_document_event(
+        db,
+        document=doc,
+        user_email=current_user.email,
+        user_roles=current_user.roles,
+        action="download",
+    )
+    file_bytes = secure_document_storage.download_bytes(doc.file_path)
+    return StreamingResponse(
+        BytesIO(file_bytes),
+        media_type=guess_media_type(doc),
+        headers={"Content-Disposition": f'attachment; filename="{doc.name}"'},
+    )
 
 @router.delete("/{id}", dependencies=[Depends(require_hr)])
 async def delete_document(id: str, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Document).filter(Document.id == id))
-    doc = result.scalar_one_or_none()
-    if not doc:
-        raise HTTPException(status_code=404, detail="Document non trouvé")
-    if os.path.exists(doc.file_path):
-        os.remove(doc.file_path)
+    doc = await get_document_or_404(db, id)
+    delete_document_from_rag(doc.id)
+    secure_document_storage.delete(doc.file_path)
     await db.delete(doc)
     await db.commit()
     return {"message": "Document supprimé"}

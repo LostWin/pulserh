@@ -12,7 +12,6 @@ Supporte :
 
 import re
 import logging
-from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
 
@@ -37,7 +36,7 @@ class GuardrailService:
         """Récupérer toutes les règles actives depuis la DB, triées par priorité."""
         result = await db.execute(
             select(Guardrail)
-            .filter(Guardrail.is_active == True)
+            .filter(Guardrail.is_active)
             .order_by(Guardrail.priority.desc())
         )
         return result.scalars().all()

@@ -1,14 +1,20 @@
 from pydantic import BaseModel
 from typing import Literal
 
+class ServiceStatus(BaseModel):
+    status: Literal["ok", "down", "degraded"]
+    latency_ms: int
+    message: str
+
 class ServicesHealth(BaseModel):
-    postgres: Literal["ok", "down", "degraded"]
-    redis: Literal["ok", "down", "degraded"]
-    minio: Literal["ok", "down", "degraded"]
-    qdrant: Literal["ok", "down", "degraded"]
-    keycloak: Literal["ok", "down", "degraded"]
-    llm: Literal["ok", "down", "degraded"]
-    horilla: Literal["ok", "down", "degraded"]
+    postgres: ServiceStatus
+    redis: ServiceStatus
+    minio: ServiceStatus
+    qdrant: ServiceStatus
+    keycloak: ServiceStatus
+    llm: ServiceStatus
+    horilla: ServiceStatus
+    embeddings: ServiceStatus
 
 class DetailedHealthResponse(BaseModel):
     status: Literal["healthy", "unhealthy", "degraded"]

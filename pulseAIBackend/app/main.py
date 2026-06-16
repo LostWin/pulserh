@@ -17,12 +17,11 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.routers import (
     auth, chat, documents, employees, departments,
-    workflows, predictions, alerts, dashboard, admin, health,
+    workflows, predictions, alerts, dashboard, admin, health, leaves, onboarding, interviews, reports, user_settings, skills, trainings, projects, talent_insights, employee_programs,
 )
 from app.middleware.logging import LoggingMiddleware
 from app.middleware.rate_limit import RateLimitMiddleware
@@ -37,38 +36,8 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # --- Startup ---
-    logger.info("Initializing connection pools (DB, Redis, MinIO, Qdrant)...")
-    
-    # Initialiser le service d'embedding
-    try:
-        from app.services.embedding_service import embedding_service
-        await embedding_service.initialize()
-        logger.info("EmbeddingService initialisé avec succès")
-    except Exception as e:
-        logger.error(f"Erreur lors de l'initialisation de l'EmbeddingService : {e}")
-    
-    # Initialiser la connexion Qdrant et la collection
-    try:
-        from app.services.rag_service import rag_service
-        await rag_service.initialize()
-        logger.info("RAGService (Qdrant) initialisé avec succès")
-    except Exception as e:
-        logger.error(f"Erreur lors de l'initialisation du RAGService : {e}")
-    
-    # Vérifier la connectivité LLM
-    try:
-        from app.services.llm_client import llm_client
-        is_healthy = await llm_client.health_check()
-        if is_healthy:
-            logger.info("LLM health check : OK")
-        else:
-            logger.warning("LLM health check : ÉCHEC (le LLM n'est pas accessible, les requêtes chat échoueront)")
-    except Exception as e:
-        logger.warning(f"LLM health check ignoré : {e}")
-    
+    logger.info("Starting Pulse AI API without blocking warmup tasks.")
     yield
-    # --- Shutdown ---
     logger.info("Closing connection pools...")
     logger.info("Cleaning up resources...")
 
@@ -86,6 +55,16 @@ tags_metadata = [
     {"name": "Workflows", "description": "Orchestrateur agentique (Onboarding/Offboarding)."},
     {"name": "Predictions", "description": "Modèles prédictifs (Risque de départ, Turnover)."},
     {"name": "Dashboard", "description": "Métriques et KPIs consolidés pour la direction."},
+    {"name": "Leaves", "description": "Consultation et demandes de congés collaborateur."},
+    {"name": "Onboarding", "description": "Parcours d'intégration collaborateur et ressources associées."},
+    {"name": "Interviews", "description": "Planification et suivi des entretiens manager."},
+    {"name": "Reports", "description": "Génération et téléchargement des rapports direction."},
+    {"name": "User Settings", "description": "Préférences utilisateur, avatar et notifications."},
+    {"name": "Skills", "description": "Catalogue et maîtrise des compétences collaborateur."},
+    {"name": "Trainings", "description": "Catalogue, affectation et recommandations de formation."},
+    {"name": "Projects", "description": "Projets d'équipe et affectations collaborateurs."},
+    {"name": "Talent Insights", "description": "Engagement historisé, performance et objectifs individuels."},
+    {"name": "Employee Programs", "description": "Benefits, carrière et mobilité interne."},
     {"name": "Alerts", "description": "Gestion proactive des alertes RH et de sécurité."},
     {"name": "Admin", "description": "Console d'administration (Guardrails, Logs, Config IA)."},
     {"name": "Health", "description": "Surveillance de l'état du système et des dépendances."},
@@ -257,14 +236,6 @@ cors_origins = [
     if origin.strip()
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
-    allow_headers=["Authorization", "Content-Type"],
-)
-
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Middlewares Custom
@@ -273,20 +244,23 @@ app.add_middleware(
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(RateLimitMiddleware)
 
-
-# ═══════════════════════════════════════════════════════════════════════════
-# Prometheus Metrics
-# ═══════════════════════════════════════════════════════════════════════════
-
-Instrumentator().instrument(app).expose(app, endpoint="/metrics")
+# CORS doit être ajouté EN DERNIER pour être exécuté EN PREMIER (Starlette LIFO)
+# Cela garantit que les requêtes OPTIONS preflight reçoivent les headers CORS
+# avant d'être interceptées par le rate limiting ou le logging.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["Authorization", "Content-Type"],
+)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Routeurs
 # ═══════════════════════════════════════════════════════════════════════════
 from app.routers import (
-    auth, chat, documents, employees, departments,
-    workflows, predictions, alerts, dashboard, admin, health, imports, audit
+    imports, audit, manager
 )
 
 app.include_router(health.router)
@@ -294,11 +268,22 @@ app.include_router(auth.router)
 app.include_router(chat.router)
 app.include_router(documents.router)
 app.include_router(employees.router)
+app.include_router(leaves.router)
+app.include_router(onboarding.router)
+app.include_router(interviews.router)
+app.include_router(reports.router)
+app.include_router(user_settings.router)
+app.include_router(skills.router)
+app.include_router(trainings.router)
+app.include_router(projects.router)
+app.include_router(talent_insights.router)
+app.include_router(employee_programs.router)
 app.include_router(departments.router)
 app.include_router(workflows.router)
 app.include_router(predictions.router)
 app.include_router(alerts.router)
 app.include_router(dashboard.router)
+app.include_router(manager.router)
 app.include_router(admin.router)
 app.include_router(imports.router)
 app.include_router(audit.router)

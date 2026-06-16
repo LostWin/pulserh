@@ -96,27 +96,45 @@ end
 """
 
 # ---------------------------------------------------------------------------
-# Connexion Redis (lazy singleton)
+# Connexion Redis (lazy singleton avec Circuit Breaker)
 # ---------------------------------------------------------------------------
 
 _redis_client = None
 _lua_script_sha = None
+_redis_last_attempt = 0
+_REDIS_COOLDOWN_SECONDS = 60
+REDIS_STATE = "operational"
+
+def get_redis_state() -> str:
+    """Retourne l'état actuel du cache Redis pour le health check."""
+    return REDIS_STATE
 
 
 async def _get_redis():
     """
     Retourne le client Redis async (singleton).
-    Lazy-init pour ne pas bloquer le démarrage si Redis est down.
+    Lazy-init avec circuit breaker pour ne pas bloquer le démarrage
+    ni pénaliser chaque requête si Redis est down.
     """
-    global _redis_client, _lua_script_sha
+    global _redis_client, _lua_script_sha, _redis_last_attempt, REDIS_STATE
+
+    if not settings.RATE_LIMIT_ENABLED:
+        return None, None
 
     if _redis_client is not None:
         return _redis_client, _lua_script_sha
 
-    try:
-        import redis.asyncio as aioredis
+    now = time.time()
+    if now - _redis_last_attempt < _REDIS_COOLDOWN_SECONDS:
+        # En période de cooldown suite à un échec, on retourne None directement
+        return None, None
 
-        _redis_client = aioredis.from_url(
+    _redis_last_attempt = now
+
+    try:
+        import redis.asyncio as redis_asyncio
+
+        _redis_client = redis_asyncio.from_url(
             settings.REDIS_URL,
             decode_responses=True,
             socket_connect_timeout=2,
@@ -129,14 +147,21 @@ async def _get_redis():
         # Charger le script Lua côté Redis
         _lua_script_sha = await _redis_client.script_load(RATE_LIMIT_LUA_SCRIPT)
 
-        logger.info("Redis connection established for rate limiting")
+        if REDIS_STATE != "operational":
+            logger.info("Redis connection restored. Rate limiting operational.")
+            REDIS_STATE = "operational"
+
         return _redis_client, _lua_script_sha
 
     except Exception as e:
-        logger.warning(f"Redis connection failed for rate limiting: {e}")
+        if REDIS_STATE != "degraded":
+            logger.warning(f"Rate limiting degraded (fail-open): Redis unavailable. Cooldown {_REDIS_COOLDOWN_SECONDS}s. Error: {e}")
+            REDIS_STATE = "degraded"
+            
         _redis_client = None
         _lua_script_sha = None
         return None, None
+
 
 
 # ---------------------------------------------------------------------------
@@ -196,9 +221,14 @@ async def _check_rate_limit(
     redis_client, lua_sha = await _get_redis()
 
     if redis_client is None:
-        # Fail-open : si Redis est down, on laisse passer
-        logger.warning("Rate limiting disabled: Redis unavailable")
-        return True, limit, 0
+        if not settings.RATE_LIMIT_ENABLED:
+            # Rate limiting désactivé : on autorise silencieusement
+            return True, limit, 0
+        else:
+            # Fail-open : si Redis est down ou en cooldown, on autorise le trafic
+            # pour ne pas bloquer l'API. On journalise la dégradation.
+            logger.warning(f"Rate limiting degraded (fail-open): Redis unavailable for {bucket_name}")
+            return True, limit, 0
 
     key = f"pulse:ratelimit:{bucket_name}:{identifier}"
     now = time.time()
@@ -243,6 +273,10 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self, request: Request, call_next: RequestResponseEndpoint
     ) -> Response:
         path = request.url.path
+
+        # Ne jamais rate-limiter les preflight CORS (OPTIONS)
+        if request.method == "OPTIONS":
+            return await call_next(request)
 
         # Exempter les routes système
         if path in EXEMPT_ROUTES:

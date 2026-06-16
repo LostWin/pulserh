@@ -6,8 +6,7 @@ Supporte OpenRouter (défaut), Ollama, vLLM, et tout backend compatible OpenAI.
 """
 
 import logging
-import json
-from typing import AsyncIterator, Optional
+from typing import AsyncIterator
 
 from openai import AsyncOpenAI
 

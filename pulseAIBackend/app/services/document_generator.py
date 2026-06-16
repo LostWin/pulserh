@@ -1,12 +1,11 @@
 import os
 import uuid
 import logging
+from io import BytesIO
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 from xhtml2pdf import pisa
-from typing import Optional
 
-from app.models.domain import Employee
 
 logger = logging.getLogger(__name__)
 
@@ -26,11 +25,11 @@ class DocumentGenerator:
             self.env = None
             logger.warning(f"Le dossier de templates n'existe pas : {TEMPLATE_DIR}")
 
-    def create(self, doc_type: str, context: dict, custom_fields: dict = None) -> str:
+    def create_pdf_bytes(self, doc_type: str, context: dict, custom_fields: dict = None) -> tuple[str, bytes]:
         """
         Méthode principale de génération de document.
         Charge le template Jinja2 correspondant à `doc_type`,
-        injecte le `context` et génère le fichier PDF.
+        injecte le `context` et génère le fichier PDF en mémoire.
         """
         logger.info(f"Démarrage de la génération pour le type: {doc_type}")
         
@@ -67,25 +66,30 @@ class DocumentGenerator:
 
         # 2. Conversion en PDF avec xhtml2pdf
         filename = f"{doc_type}_{uuid.uuid4().hex[:8]}.pdf"
-        file_path = os.path.join(UPLOAD_DIR, filename)
-        
         try:
-            with open(file_path, "wb") as pdf_file:
-                pisa_status = pisa.CreatePDF(
-                    src=html_out,
-                    dest=pdf_file
-                )
+            pdf_buffer = BytesIO()
+            pisa_status = pisa.CreatePDF(
+                src=html_out,
+                dest=pdf_buffer
+            )
                 
             if pisa_status.err:
                 logger.error(f"Erreur lors de la création du PDF {filename}: {pisa_status.err}")
                 raise Exception("Erreur de conversion PDF")
-                
-            logger.info(f"Document PDF généré avec succès : {file_path}")
-            return file_path
+
+            logger.info("Document PDF généré avec succès : %s", filename)
+            return filename, pdf_buffer.getvalue()
             
         except Exception as e:
             logger.error(f"Exception critique lors de l'écriture du PDF: {e}")
             raise
+
+    def create(self, doc_type: str, context: dict, custom_fields: dict = None) -> str:
+        filename, pdf_bytes = self.create_pdf_bytes(doc_type=doc_type, context=context, custom_fields=custom_fields)
+        file_path = os.path.join(UPLOAD_DIR, filename)
+        with open(file_path, "wb") as pdf_file:
+            pdf_file.write(pdf_bytes)
+        return file_path
 
 # Singleton global pour utiliser dans l'API et le RAG
 document_generator = DocumentGenerator()

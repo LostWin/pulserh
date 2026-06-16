@@ -7,7 +7,6 @@ Supporte deux backends :
 """
 
 import logging
-from typing import Optional, List
 
 from app.config import settings
 
@@ -29,6 +28,7 @@ class EmbeddingService:
         self.model_name = model_name or settings.EMBEDDING_MODEL
         self.model = None
         self._openai_client = None
+        self.is_degraded = False
         logger.info(
             f"EmbeddingService initializing | provider={self.provider}, model={self.model_name}"
         )
@@ -48,8 +48,10 @@ class EmbeddingService:
                 )
             except ImportError:
                 logger.error("fastembed non installé. Fallback vers le mode stub.")
+                self.is_degraded = True
             except Exception as e:
                 logger.error(f"Erreur lors du chargement de fastembed : {e}")
+                self.is_degraded = True
         elif self.provider == "openai":
             try:
                 from openai import AsyncOpenAI
@@ -61,11 +63,16 @@ class EmbeddingService:
                 logger.info("EmbeddingService configuré via l'API OpenAI/OpenRouter")
             except Exception as e:
                 logger.error(f"Erreur lors de l'initialisation du client OpenAI pour embeddings : {e}")
+                self.is_degraded = True
         else:
             logger.warning(f"Provider d'embedding inconnu : {self.provider}")
 
     async def encode(self, text: str) -> list[float]:
         """Encoder un texte unique en vecteur dense."""
+        if self.provider == "fastembed" and self.model is None:
+            await self.initialize()
+        if self.provider == "openai" and self._openai_client is None:
+            await self.initialize()
         if self.provider == "fastembed" and self.model:
             embeddings = list(self.model.embed([text]))
             return embeddings[0].tolist()
@@ -77,6 +84,7 @@ class EmbeddingService:
             return response.data[0].embedding
         else:
             logger.warning("EmbeddingService.encode() appelé sans modèle chargé — retour vecteur zéro")
+            self.is_degraded = True
             return [0.0] * self.VECTOR_DIMENSION
 
     async def encode_batch(
@@ -86,6 +94,10 @@ class EmbeddingService:
         show_progress: bool = False,
     ) -> list[list[float]]:
         """Encoder un batch de textes en vecteurs denses."""
+        if self.provider == "fastembed" and self.model is None:
+            await self.initialize()
+        if self.provider == "openai" and self._openai_client is None:
+            await self.initialize()
         if self.provider == "fastembed" and self.model:
             embeddings = list(self.model.embed(texts, batch_size=batch_size))
             return [e.tolist() for e in embeddings]
@@ -101,6 +113,7 @@ class EmbeddingService:
             return results
         else:
             logger.warning("EmbeddingService.encode_batch() appelé sans modèle chargé")
+            self.is_degraded = True
             return [[0.0] * self.VECTOR_DIMENSION for _ in texts]
 
     def get_dimension(self) -> int:

@@ -22,6 +22,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> CurrentUser:
     user_id = payload.get("sub")
     email = payload.get("email", "")
     department = payload.get("department") # Claim personnalisé
+    username = payload.get("preferred_username")
+    first_name = payload.get("given_name")
+    last_name = payload.get("family_name")
+    full_name = payload.get("name")
     
     # Extraction des rôles Keycloak
     realm_access = payload.get("realm_access", {})
@@ -37,5 +41,9 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> CurrentUser:
         id=user_id,
         email=email,
         roles=roles,
-        department=department
+        department=department,
+        username=username,
+        first_name=first_name,
+        last_name=last_name,
+        full_name=full_name
     )
