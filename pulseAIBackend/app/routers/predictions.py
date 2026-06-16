@@ -1,231 +1,286 @@
 import logging
+from datetime import datetime, date, timezone
 from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
-from app.database import get_db
-from app.models.domain import Employee, ProjectAssignment, TrainingEnrollment
-from app.schemas.prediction import (
-    RiskScoreResponse, TurnoverProjectionResponse, MonthProjection,
-    SimulationRequest, SimulationResponse
-)
-from app.schemas.auth import CurrentUser
-from app.dependencies import get_current_user
 from app.core.rbac import require_any_role
-from app.services.field_access_service import apply_field_access, get_primary_role
-from app.services.current_employee_service import get_or_create_current_employee
-from app.services.hr_analytics_service import build_turnover_projection
-from app.services.prediction_scoring_service import calculate_and_store_risk_score, get_risk_score_payload
+from app.database import get_db
+from app.dependencies import get_current_user
+from app.models.domain import Employee
+from app.schemas.auth import CurrentUser
+from app.schemas.prediction import (
+    MonthProjection, RiskActionsResponse, RiskDetailsResponse,
+    RiskScoreResponse, SimulationRequest, SimulationResponse,
+    TurnoverProjectionResponse,
+)
+from app.services.feature_extractor import feature_extractor
+from app.services.llm_client import llm_client
+from app.services.risk_predictor import risk_predictor
 
 router = APIRouter(prefix="/predict", tags=["Predictions"])
 logger = logging.getLogger(__name__)
 
-# Dépendances RBAC
 risk_roles = require_any_role("manager", "hr", "director")
-team_risk_roles = require_any_role("manager", "hr")
+team_roles = require_any_role("manager", "hr")
 turnover_roles = require_any_role("hr", "director")
 simulate_roles = require_any_role("director", "hr")
 
 
-@router.get("/risk/{employee_id}", response_model=RiskScoreResponse, dependencies=[Depends(risk_roles)])
+def _parse_result(result: dict) -> RiskScoreResponse:
+    return RiskScoreResponse(
+        employee_id=result["employee_id"],
+        score=result["score"],
+        level=result["level"],
+        computed_at=datetime.fromisoformat(result["computed_at"]),
+    )
+
+
+@router.get(
+    "/risk/{employee_id}",
+    response_model=RiskScoreResponse,
+    summary="Score de désengagement d'un employé",
+)
 async def get_employee_risk(
     employee_id: str,
     current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
+    _=Depends(risk_roles),
 ):
-    """Score de désengagement d'un employé"""
+    """
+    Retourne le score de risque de départ (0–1) et le niveau associé
+    (green / orange / red) pour un employé donné.
 
-    employee = (
-        await db.execute(
-            select(Employee).options(
-                selectinload(Employee.department),
-                selectinload(Employee.job),
-                selectinload(Employee.tasks),
-                selectinload(Employee.attendances),
-                selectinload(Employee.contracts),
-                selectinload(Employee.training_enrollments).selectinload(TrainingEnrollment.training),
-                selectinload(Employee.project_assignments).selectinload(ProjectAssignment.project),
-                selectinload(Employee.engagement_snapshots),
-            ).where(Employee.id == employee_id)
-        )
-    ).scalar_one_or_none()
-    if not employee:
-        raise HTTPException(status_code=404, detail="Employé introuvable.")
-
+    Un manager ne peut consulter que les membres de son équipe.
+    Le résultat est mis en cache Redis pendant 1 heure.
+    """
     if "hr" not in current_user.roles and "director" not in current_user.roles:
-        manager = await get_or_create_current_employee(current_user, db)
-        if employee.manager_id != manager.id:
+        emp = (await db.execute(
+            select(Employee).where(
+                Employee.id == employee_id,
+                Employee.manager_id == current_user.id,
+            )
+        )).scalar_one_or_none()
+        if not emp:
             raise HTTPException(status_code=403, detail="Cet employé n'est pas dans votre équipe.")
 
-    payload = await calculate_and_store_risk_score(db, employee)
-    filtered, field_visibility = await apply_field_access(
-        db,
-        resource="prediction",
-        scope="risk",
-        payload=payload,
-        role=get_primary_role(current_user.roles),
-        context={},
-    )
-    return RiskScoreResponse(**filtered, field_visibility=field_visibility)
+    try:
+        return _parse_result(await risk_predictor.predict(employee_id, db))
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
-@router.get("/risk", response_model=List[RiskScoreResponse], dependencies=[Depends(team_risk_roles)])
+
+@router.get(
+    "/risk/{employee_id}/details",
+    response_model=RiskDetailsResponse,
+    summary="Détail des signaux faibles d'un employé",
+)
+async def get_employee_risk_details(
+    employee_id: str,
+    db: AsyncSession = Depends(get_db),
+    _=Depends(team_roles),
+):
+    """
+    Retourne le score de risque accompagné des valeurs de features
+    utilisées par le modèle (ancienneté, absences, congés maladie, etc.).
+    """
+    try:
+        result = await risk_predictor.predict(employee_id, db)
+        features = await feature_extractor.get_employee_features(employee_id, db)
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    return RiskDetailsResponse(
+        employee_id=employee_id,
+        score=result["score"],
+        level=result["level"],
+        features={k: v for k, v in features.items() if k != "employee_id"},
+        computed_at=datetime.fromisoformat(result["computed_at"]),
+    )
+
+
+@router.get(
+    "/risk/{employee_id}/actions",
+    response_model=RiskActionsResponse,
+    summary="Plan d'action généré par le LLM pour un employé à risque",
+)
+async def get_employee_risk_actions(
+    employee_id: str,
+    db: AsyncSession = Depends(get_db),
+    _=Depends(team_roles),
+):
+    """
+    Génère 3 actions concrètes via le LLM en s'appuyant sur le score
+    de risque et les signaux faibles de l'employé.
+    """
+    try:
+        result = await risk_predictor.predict(employee_id, db)
+        features = await feature_extractor.get_employee_features(employee_id, db)
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    prompt = (
+        f"Un employé présente un score de désengagement de {result['score']:.0%} "
+        f"(niveau : {result['level']}).\n"
+        f"Signaux observés :\n"
+        f"- Ancienneté : {features['tenure_months']} mois\n"
+        f"- Absences (3 mois) : {features['absence_count_3m']}\n"
+        f"- Retards (3 mois) : {features['late_count_3m']}\n"
+        f"- Congés maladie (12 mois) : {features['sick_leave_count_12m']}\n"
+        f"- Score moyen sur les tâches : {features['avg_task_score']:.1f}/10\n"
+        f"- Tâches en retard : {features['overdue_tasks_count']}\n\n"
+        f"Propose 3 actions concrètes que le manager peut mettre en place "
+        f"pour retenir cet employé. Réponds uniquement avec une liste numérotée."
+    )
+
+    try:
+        response = await llm_client.generate(prompt, temperature=0.4, max_tokens=400)
+        actions = [
+            line.strip()
+            for line in response.strip().split("\n")
+            if line.strip() and line.strip()[0].isdigit()
+        ]
+    except Exception as e:
+        logger.error(f"Erreur LLM pour les actions de risque : {e}")
+        actions = [
+            "Organiser un entretien individuel",
+            "Évaluer la charge de travail",
+            "Proposer une formation adaptée",
+        ]
+
+    return RiskActionsResponse(
+        employee_id=employee_id,
+        level=result["level"],
+        actions=actions,
+    )
+
+
+@router.get(
+    "/risk",
+    response_model=List[RiskScoreResponse],
+    summary="Scores de risque pour l'ensemble de l'équipe",
+)
 async def get_team_risks(
     current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
+    _=Depends(team_roles),
 ):
-    """Scores pour toute l'équipe/tous les employés"""
-    query = select(Employee).options(
-        selectinload(Employee.department),
-        selectinload(Employee.job),
-        selectinload(Employee.tasks),
-        selectinload(Employee.attendances),
-        selectinload(Employee.contracts),
-        selectinload(Employee.training_enrollments).selectinload(TrainingEnrollment.training),
-        selectinload(Employee.project_assignments).selectinload(ProjectAssignment.project),
-        selectinload(Employee.engagement_snapshots),
-    )
+    """
+    Retourne les scores de risque pour tous les employés accessibles
+    par l'utilisateur connecté (équipe du manager, ou tous les employés pour RH).
+    """
+    query = select(Employee.id)
+    if "manager" in current_user.roles and "hr" not in current_user.roles:
+        query = query.where(Employee.manager_id == current_user.id)
 
-    if "hr" not in current_user.roles:
-        manager = await get_or_create_current_employee(current_user, db)
-        query = query.where(Employee.manager_id == manager.id)
+    employee_ids = (await db.execute(query)).scalars().all()
 
-    employees = (await db.execute(query)).scalars().all()
-    responses = []
-    for employee in employees:
-        payload = await calculate_and_store_risk_score(db, employee)
-        filtered, field_visibility = await apply_field_access(
-            db,
-            resource="prediction",
-            scope="risk",
-            payload=payload,
-            role=get_primary_role(current_user.roles),
-            context={},
-        )
-        responses.append(RiskScoreResponse(**filtered, field_visibility=field_visibility))
-    return responses
+    scores = []
+    for emp_id in employee_ids:
+        try:
+            scores.append(_parse_result(await risk_predictor.predict(emp_id, db)))
+        except Exception:
+            continue
 
-@router.get("/turnover", response_model=TurnoverProjectionResponse, dependencies=[Depends(turnover_roles)])
+    return scores
+
+
+@router.get(
+    "/turnover",
+    response_model=TurnoverProjectionResponse,
+    summary="Projection du turnover sur 6 mois",
+)
 async def get_turnover_projection(
-    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
+    _=Depends(turnover_roles),
 ):
-    """Projection turnover à 6 mois"""
-    employees = (
-        await db.execute(
-            select(Employee).options(
-                selectinload(Employee.department),
-                selectinload(Employee.tasks),
-                selectinload(Employee.attendances),
-                selectinload(Employee.contracts),
-                selectinload(Employee.training_enrollments).selectinload(TrainingEnrollment.training),
-                selectinload(Employee.project_assignments).selectinload(ProjectAssignment.project),
-                selectinload(Employee.engagement_snapshots),
-            )
-        )
-    ).scalars().all()
-    risk_scores = [round(get_risk_score_payload(employee)["score"]) for employee in employees if employee.status != "inactif"]
-    monthly_scores = risk_scores[:6] if len(risk_scores) >= 6 else risk_scores + [max(22, round(sum(risk_scores) / len(risk_scores))) if risk_scores else 28] * max(0, 6 - len(risk_scores))
-    payload = {
-        "months": [MonthProjection(**month) for month in build_turnover_projection(monthly_scores[:6], len(employees))],
-        "summary": f"Projection consolidée sur 6 mois calculée à partir des signaux RH réels de {len(employees)} collaborateurs.",
-    }
-    filtered, field_visibility = await apply_field_access(
-        db,
-        resource="prediction",
-        scope="turnover",
-        payload=payload,
-        role=get_primary_role(current_user.roles),
-        context={},
-    )
-    return TurnoverProjectionResponse(**filtered, field_visibility=field_visibility)
+    """
+    Calcule le nombre d'employés à risque élevé (rouge) et projette
+    les départs probables sur les 6 prochains mois.
+    """
+    employee_ids = (await db.execute(select(Employee.id))).scalars().all()
 
-@router.post("/simulate", response_model=SimulationResponse, dependencies=[Depends(simulate_roles)])
+    high_risk = 0
+    for emp_id in employee_ids:
+        try:
+            r = await risk_predictor.predict(emp_id, db)
+            if r["level"] == "red":
+                high_risk += 1
+        except Exception:
+            continue
+
+    today = date.today()
+    months = []
+    for i in range(1, 7):
+        m = (today.month - 1 + i) % 12 + 1
+        y = today.year + (today.month - 1 + i) // 12
+        confidence = round(max(0.5, 0.9 - i * 0.07), 2)
+        projected = max(0, round(high_risk * (1 - i * 0.1) * confidence))
+        months.append(MonthProjection(
+            month=f"{y:04d}-{m:02d}",
+            projected_departures=projected,
+            confidence=confidence,
+        ))
+
+    return TurnoverProjectionResponse(months=months)
+
+
+@router.post(
+    "/simulate",
+    response_model=SimulationResponse,
+    summary="Simulation d'un scénario RH",
+)
 async def simulate_scenario(
     request: SimulationRequest,
-    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
+    _=Depends(simulate_roles),
 ):
-    """Simulation scénario (ex: +5% salaire)"""
-    logger.info(f"Simulation demandée : {request.scenario_type} avec params {request.parameters}")
-    employees = (
-        await db.execute(
-            select(Employee).options(
-                selectinload(Employee.department),
-                selectinload(Employee.job),
-                selectinload(Employee.tasks),
-                selectinload(Employee.attendances),
-                selectinload(Employee.contracts),
-                selectinload(Employee.training_enrollments).selectinload(TrainingEnrollment.training),
-                selectinload(Employee.project_assignments).selectinload(ProjectAssignment.project),
-                selectinload(Employee.engagement_snapshots),
-            )
+    """
+    Modifie les features d'un employé selon un scénario (ex : augmentation salariale)
+    et compare le score de risque simulé avec le score actuel.
+
+    Scénarios supportés : `salary_increase` (paramètre `salary_increase_pct`),
+    `reduce_overdue`. Tout autre scénario applique les paramètres directement
+    comme surcharges de features.
+    """
+    logger.info(f"Simulation : {request.scenario_type} pour l'employé {request.employee_id}")
+
+    overrides: dict = {}
+    if request.scenario_type == "salary_increase":
+        pct = request.parameters.get("salary_increase_pct", 0) / 100
+        features = await feature_extractor.get_employee_features(request.employee_id, db)
+        overrides["salary"] = features["salary"] * (1 + pct)
+    elif request.scenario_type == "reduce_overdue":
+        overrides["overdue_tasks_count"] = 0
+    else:
+        overrides = dict(request.parameters)
+
+    try:
+        original, simulated = await risk_predictor.predict_with_scenario(
+            request.employee_id, overrides, db
         )
-    ).scalars().all()
-    active_employees = [employee for employee in employees if employee.status != "inactif"]
-    baseline_payloads = [get_risk_score_payload(employee) for employee in active_employees]
-    baseline_scores = [p["score"] for p in baseline_payloads]
-    baseline_turnover = round(sum(baseline_scores) / len(baseline_scores) / 10, 1) if baseline_scores else 4.2
-    baseline_engagement = round(
-        sum(p["engagement"] for p in baseline_payloads) / len(active_employees),
-        1,
-    ) if active_employees else 72.0
-    active_contract_salaries = [
-        contract.salary
-        for employee in active_employees
-        for contract in employee.contracts
-        if contract.is_active and contract.salary is not None
-    ]
-    average_salary = round(sum(active_contract_salaries) / len(active_contract_salaries), 2) if active_contract_salaries else 42000.0
-    raise_pct = float(request.parameters.get("raise_pct", 0))
-    training_pct = float(request.parameters.get("training_pct", 0))
-    recognition_pct = float(request.parameters.get("recognition_pct", 0))
-    remote_days = float(request.parameters.get("remote_days", 0))
-    impact_gain = round((raise_pct * 0.16) + (training_pct * 0.09) + (recognition_pct * 0.08) + (remote_days * 0.42), 1)
-    projected_turnover_change = round(max(-6.0, -(impact_gain * 0.28)), 1)
-    projected_turnover = round(max(0, baseline_turnover + projected_turnover_change), 1)
-    projected_engagement = round(min(96.0, baseline_engagement + impact_gain), 1)
-    implementation_cost = round(
-        (average_salary * (raise_pct / 100) * len(active_employees))
-        + (training_pct * 35 * len(active_employees))
-        + (recognition_pct * 12 * len(active_employees))
-        + (remote_days * 180 * len(active_employees)),
-        2,
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    delta = simulated - original
+    direction = "réduire" if delta < 0 else "augmenter"
+
+    return SimulationResponse(
+        original_score=original,
+        simulated_score=simulated,
+        projected_turnover_change=round(delta * 100, 2),
+        impact_description=(
+            f"Le scénario '{request.scenario_type}' devrait {direction} "
+            f"le risque de départ de {abs(delta):.0%}."
+        ),
     )
-    avoided_departures = max(1, round(abs(projected_turnover_change) * len(active_employees) * 0.012))
-    average_departure_cost = average_salary * 0.35
-    savings = round((avoided_departures * average_departure_cost) / 1000, 1)
-    net = round(savings - (implementation_cost / 1000), 1)
-    roi = round(savings / max(implementation_cost / 1000, 1), 1) if implementation_cost > 0 else None
-    projection = []
-    for index, month in enumerate(["Jan", "Fév", "Mar", "Avr", "Mai", "Juin"], start=1):
-        ratio = index / 6
-        projection.append(
-            {
-                "month": month,
-                "actuel": round(baseline_engagement, 1),
-                "projeté": round(baseline_engagement + impact_gain * ratio, 1),
-            }
-        )
-    payload = {
-        "impact_description": f"Le scénario '{request.scenario_type}' ferait évoluer le turnover projeté de {baseline_turnover}% vers {projected_turnover:.1f}% en améliorant surtout l'engagement, la formation et la qualité d'intégration.",
-        "projected_turnover_change": projected_turnover_change,
-        "engagement": projected_engagement,
-        "engagement_gain": impact_gain,
-        "turnover": projected_turnover,
-        "savings": savings,
-        "cost": round(implementation_cost / 1000, 1),
-        "net": net,
-        "roi": roi,
-        "projection": projection,
-    }
-    filtered, field_visibility = await apply_field_access(
-        db,
-        resource="prediction",
-        scope="simulation",
-        payload=payload,
-        role=get_primary_role(current_user.roles),
-        context={},
-    )
-    return SimulationResponse(**filtered, field_visibility=field_visibility)

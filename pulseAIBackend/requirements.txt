@@ -31,3 +31,10 @@ minio
 pytest
 pytest-asyncio
 aiosqlite
+
+# ML & Tasks
+celery[redis]
+xgboost
+scikit-learn
+joblib
+pytest-mock
