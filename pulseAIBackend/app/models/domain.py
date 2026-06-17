@@ -684,3 +684,32 @@ class TemplateAsset(Base):
     value = Column(Text, nullable=False)
     asset_type = Column(String, nullable=False, default="text") # "text", "image_url", "image_base64"
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class MLModuleConfig(Base):
+    """Configuration persistante par module ML/heuristique (une ligne par module)."""
+    __tablename__ = "ml_module_configs"
+
+    id = Column(String, primary_key=True, default=generate_uuid)
+    module_id = Column(String, nullable=False, unique=True, index=True)  # ex: "CHURN_RISK"
+    module_name = Column(String, nullable=False)
+    is_enabled = Column(Boolean, default=True)
+    mode = Column(String, default="heuristic")              # "heuristic" | "ml"
+
+    # Config partagée (communes aux deux modes)
+    alert_threshold = Column(Float, default=0.70)           # Seuil d'alerte (0.0–1.0)
+    strict_mode = Column(Boolean, default=False)            # Validation humaine obligatoire
+
+    # Config Heuristique (JSON)
+    heuristic_params = Column(JSON, default=dict)
+
+    # Config ML (JSON)
+    ml_params = Column(JSON, default=dict)
+    model_version = Column(String, nullable=True)           # ex: "xgboost_churn_v1.2"
+    last_trained_at = Column(DateTime(timezone=True), nullable=True)
+    training_status = Column(String, default="untrained")   # "untrained"|"training"|"ready"|"error"
+    training_error = Column(String, nullable=True)
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+

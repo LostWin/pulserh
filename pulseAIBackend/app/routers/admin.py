@@ -1075,3 +1075,100 @@ async def get_security_overview(db: AsyncSession = Depends(get_db)):
         "suspicious_logs": suspicious_logs,
         "active_admins": active_admins,
     }
+
+
+# ═══════════════════════════════════════════════════════════════
+# ML Module Configs — Gestion Heuristique / ML par module
+# ═══════════════════════════════════════════════════════════════
+
+from fastapi import BackgroundTasks
+from app.models.domain import MLModuleConfig
+from app.schemas.ml_config import MLModuleConfigResponse, MLModuleConfigUpdate
+
+
+@router.get("/ml/modules", response_model=List[MLModuleConfigResponse], dependencies=[Depends(admin_only)])
+async def list_ml_modules(db: AsyncSession = Depends(get_db)):
+    """Liste tous les modules ML/Heuristiques avec leur configuration."""
+    result = await db.execute(select(MLModuleConfig).order_by(MLModuleConfig.module_id))
+    return result.scalars().all()
+
+
+@router.get("/ml/modules/{module_id}", response_model=MLModuleConfigResponse, dependencies=[Depends(admin_only)])
+async def get_ml_module(module_id: str, db: AsyncSession = Depends(get_db)):
+    """Récupère la configuration d'un module spécifique."""
+    config = (await db.execute(
+        select(MLModuleConfig).where(MLModuleConfig.module_id == module_id)
+    )).scalar_one_or_none()
+    if not config:
+        raise HTTPException(status_code=404, detail=f"Module '{module_id}' introuvable.")
+    return config
+
+
+@router.put("/ml/modules/{module_id}", response_model=MLModuleConfigResponse, dependencies=[Depends(admin_only)])
+async def update_ml_module(
+    module_id: str,
+    payload: MLModuleConfigUpdate,
+    current_user: CurrentUser = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Met à jour la configuration d'un module (mode, seuils, paramètres)."""
+    config = (await db.execute(
+        select(MLModuleConfig).where(MLModuleConfig.module_id == module_id)
+    )).scalar_one_or_none()
+    if not config:
+        raise HTTPException(status_code=404, detail=f"Module '{module_id}' introuvable.")
+
+    for field, value in payload.model_dump(exclude_none=True).items():
+        setattr(config, field, value)
+
+    await db.commit()
+    await db.refresh(config)
+
+    logger.info(f"ML module '{module_id}' updated by {current_user.email}: {payload.model_dump(exclude_none=True)}")
+    return config
+
+
+@router.post("/ml/modules/{module_id}/train", dependencies=[Depends(admin_only)])
+async def trigger_training(
+    module_id: str,
+    background_tasks: BackgroundTasks,
+    db: AsyncSession = Depends(get_db),
+    current_user: CurrentUser = Depends(get_current_user),
+):
+    """Lance l'entraînement du modèle ML pour un module donné en arrière-plan."""
+    config = (await db.execute(
+        select(MLModuleConfig).where(MLModuleConfig.module_id == module_id)
+    )).scalar_one_or_none()
+    if not config:
+        raise HTTPException(status_code=404, detail=f"Module '{module_id}' introuvable.")
+
+    if config.training_status == "training":
+        raise HTTPException(status_code=409, detail="Un entraînement est déjà en cours pour ce module.")
+
+    config.training_status = "training"
+    config.training_error = None
+    await db.commit()
+
+    from app.tasks.train_risk_model import train_risk_model_task
+    from app.tasks.train_absenteeism_model import train_absenteeism_model_task
+    from app.tasks.train_anomaly_model import train_anomaly_model_task
+
+    TRAINING_TASKS = {
+        "CHURN_RISK": train_risk_model_task,
+        "ABSENTEEISM": train_absenteeism_model_task,
+        "SECURITY_ANOMALY": train_anomaly_model_task,
+        # SENTIMENT : modèle pré-entraîné (pas d'entraînement custom)
+        # TRAINING_RECO : pas de tâche de batch (gap analysis à la demande)
+    }
+
+    task_fn = TRAINING_TASKS.get(module_id)
+    if not task_fn:
+        config.training_status = "error"
+        config.training_error = f"Aucune tâche d'entraînement disponible pour le module '{module_id}'."
+        await db.commit()
+        raise HTTPException(status_code=400, detail=config.training_error)
+
+    background_tasks.add_task(task_fn)
+    logger.info(f"Training task started for module '{module_id}' by {current_user.email}")
+    return {"status": "training_started", "module_id": module_id}
+

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { 
   Cpu, RefreshCw, Save, History, CheckCircle, Shield, AlertTriangle, 
   Trash2, Edit3, Plus, Play, ToggleLeft, ToggleRight, X, Settings, 
-  HelpCircle, Key, FileText, Check, AlertOctagon, Sliders, Info
+  HelpCircle, Key, FileText, Check, AlertOctagon, Sliders, Info, Brain
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { api } from '../../lib/api';
+import MLModuleCard from '../../components/MLModuleCard';
 
 export default function ConfigIA() {
   const [activeTab, setActiveTab] = useState('conversational'); // 'conversational' | 'guardrails' | 'predictive'
@@ -39,12 +40,10 @@ export default function ConfigIA() {
   const [testResult, setTestResult] = useState(null);
   const [testing, setTesting] = useState(false);
 
-  // Predictive models state (original values)
-  const [modules, setModules] = useState([]);
-  const [predictiveConfig, setPredictiveConfig] = useState({ alertThreshold: 70, absenceWeight: 0.45, strictMode: false });
+  // Predictive models state
+  const [mlModules, setMlModules] = useState([]);
+  const [mlLoading, setMlLoading] = useState(false);
   const [history, setHistory] = useState([]);
-  const [calibrating, setCalibrating] = useState(false);
-  const [calibProgress, setCalibProgress] = useState(0);
 
   // UI state
   const [loading, setLoading] = useState(false);
@@ -69,8 +68,6 @@ export default function ConfigIA() {
       if (configData) setLlmConfig(configData);
       if (guardrailsData) setGuardrails(guardrailsData);
       if (overviewData) {
-        setModules(overviewData.modules || []);
-        setPredictiveConfig(overviewData.predictive_config || { alertThreshold: 70, absenceWeight: 0.45, strictMode: false });
         setHistory(overviewData.history || []);
       }
     } catch (err) {
@@ -80,6 +77,22 @@ export default function ConfigIA() {
       setLoading(false);
     }
   };
+
+  const fetchMlModules = async () => {
+    setMlLoading(true);
+    try {
+      const data = await api.get('/admin/ml/modules');
+      if (data) setMlModules(data);
+    } catch (err) {
+      console.error('Error fetching ML modules', err);
+    } finally {
+      setMlLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'predictive') fetchMlModules();
+  }, [activeTab]);
 
   // Save LLM Config
   const handleSaveLlmConfig = async () => {
@@ -195,24 +208,8 @@ export default function ConfigIA() {
     }
   };
 
-  // ML Predictive Methods
-  const toggleModule = (id) => setModules((p) => p.map((m) => m.id === id ? { ...m, enabled: !m.enabled } : m));
-
-  const calibrate = async () => {
-    setCalibrating(true);
-    setCalibProgress(20);
-    try {
-      await api.post('/admin/ai/recompute');
-      setCalibProgress(100);
-      await fetchConfigAndGuardrails();
-    } catch (err) {
-      setErrorMsg("Impossible de recalibrer les modèles.");
-    } finally {
-      setTimeout(() => {
-        setCalibrating(false);
-        setCalibProgress(0);
-      }, 500);
-    }
+  const handleModuleSave = (updatedModule) => {
+    setMlModules(prev => prev.map(m => m.module_id === updatedModule.module_id ? updatedModule : m));
   };
 
   return (
@@ -837,169 +834,60 @@ export default function ConfigIA() {
             </div>
           )}
 
-          {/* TAB 3: PREDICTIVE MODELS (ORIGINAL SECTION) */}
+          {/* TAB 3: PREDICTIVE MODELS — Mode Heuristique/ML par module */}
           {activeTab === 'predictive' && (
-            <div className="space-y-6">
-              {/* Parameter Settings */}
-              <div className="bg-white rounded-2xl border border-brand-secondary/10 shadow-sm p-6">
-                <h2 className="font-bold text-lg text-brand-dark mb-5 flex items-center gap-2">
-                  <Sliders size={18} className="text-brand-secondary" />
-                  Paramètres Globaux des Algorithmes Prédictifs
-                </h2>
-                
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                  {/* Alert Threshold */}
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-brand-secondary/70">
-                      Seuil d'alerte (%)
-                    </label>
-                    <input
-                      type="range"
-                      min="50"
-                      max="95"
-                      step="5"
-                      value={predictiveConfig.alertThreshold}
-                      onChange={(e) => setPredictiveConfig((p) => ({ ...p, alertThreshold: Number(e.target.value) }))}
-                      className="w-full accent-brand-secondary cursor-pointer h-2 bg-brand-light rounded-lg appearance-none"
-                    />
-                    <div className="flex justify-between mt-1 text-xs text-brand-secondary/50">
-                      <span>50%</span>
-                      <span className="font-bold text-brand-secondary">{predictiveConfig.alertThreshold}%</span>
-                      <span>95%</span>
-                    </div>
-                  </div>
-
-                  {/* Absences Weight */}
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-brand-secondary/70">
-                      Poids absences
-                    </label>
-                    <input
-                      type="range"
-                      min="0.1"
-                      max="1"
-                      step="0.05"
-                      value={predictiveConfig.absenceWeight}
-                      onChange={(e) => setPredictiveConfig((p) => ({ ...p, absenceWeight: Number(e.target.value) }))}
-                      className="w-full accent-brand-secondary cursor-pointer h-2 bg-brand-light rounded-lg appearance-none"
-                    />
-                    <div className="flex justify-between mt-1 text-xs text-brand-secondary/50">
-                      <span>0.1</span>
-                      <span className="font-bold text-brand-secondary">{predictiveConfig.absenceWeight.toFixed(2)}</span>
-                      <span>1.0</span>
-                    </div>
-                  </div>
-
-                  {/* Strict Mode */}
-                  <div className="flex flex-col justify-between">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-brand-secondary/70 mb-2">
-                      Mode strict
-                    </label>
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => setPredictiveConfig((p) => ({ ...p, strictMode: !p.strictMode }))}
-                        className={cn(
-                          'h-7 w-14 rounded-full transition-colors relative focus:outline-none',
-                          predictiveConfig.strictMode ? 'bg-brand-secondary' : 'bg-brand-secondary/20'
-                        )}
-                      >
-                        <span className={cn('absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform', predictiveConfig.strictMode ? 'left-7' : 'left-0.5')} />
-                      </button>
-                      <span className="text-sm font-semibold text-brand-dark">
-                        {predictiveConfig.strictMode ? 'Activé' : 'Désactivé'}
-                      </span>
-                    </div>
-                    <p className="text-xxs text-brand-secondary/50 mt-2">
-                      En mode strict, toute décision IA est soumise à validation humaine obligatoire.
-                    </p>
-                  </div>
+            <div className="space-y-4">
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="font-bold text-lg text-brand-dark flex items-center gap-2">
+                    <Brain size={20} className="text-brand-secondary" />
+                    Moteurs Analytiques RH
+                  </h2>
+                  <p className="text-xs text-brand-secondary/60 mt-1">
+                    Configurez chaque module indépendamment — basculez entre le mode heuristique (règles métier) et le mode ML (modèles entraînés).
+                  </p>
                 </div>
-
-                <div className="flex justify-end pt-5 border-t border-brand-secondary/5 mt-6">
-                  <button
-                    onClick={async () => {
-                      try {
-                        await api.put('/admin/ai/predictive-config', predictiveConfig);
-                        setSavedLlm(true);
-                        setTimeout(() => setSavedLlm(false), 2000);
-                      } catch (err) {
-                        setErrorMsg("Impossible d'enregistrer les paramètres prédictifs.");
-                      }
-                    }}
-                    className="flex items-center gap-2 bg-brand-secondary text-white hover:bg-brand-dark transition-all rounded-xl px-5 py-2.5 font-semibold text-sm shadow-sm"
-                  >
-                    Sauvegarder les paramètres
-                  </button>
-                </div>
+                <button
+                  onClick={fetchMlModules}
+                  disabled={mlLoading}
+                  className="flex items-center gap-2 text-xs font-semibold text-brand-secondary border border-brand-secondary/20 hover:bg-brand-light px-3 py-2 rounded-xl transition-all"
+                >
+                  <RefreshCw size={13} className={mlLoading ? 'animate-spin' : ''} />
+                  Actualiser
+                </button>
               </div>
 
-              {/* Module Toggles */}
-              <div className="bg-white rounded-2xl border border-brand-secondary/10 shadow-sm p-6">
-                <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-4 pb-4 border-b border-brand-secondary/5">
-                  <div>
-                    <h2 className="font-bold text-lg text-brand-dark">Modules actifs d'analyse RH</h2>
-                    <p className="text-xs text-brand-secondary/60 mt-1">Activez ou désactivez les moteurs analytiques spécifiques.</p>
-                  </div>
-                  <button
-                    onClick={calibrate}
-                    disabled={calibrating}
-                    className="flex items-center justify-center gap-2 rounded-xl border border-brand-secondary/20 px-4 py-2.5 text-xs font-semibold text-brand-secondary hover:bg-brand-light transition-colors disabled:opacity-60 self-start sm:self-auto"
-                  >
-                    <RefreshCw size={14} className={calibrating ? 'animate-spin' : ''} />
-                    Recalibrer les Modèles
-                  </button>
+              {/* Info banner */}
+              <div className="flex items-start gap-3 bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-800">
+                <Info size={15} className="shrink-0 mt-0.5" />
+                <p>En <strong>mode Heuristique</strong>, les scores sont calculés en temps réel via des formules configurables. En <strong>mode ML</strong>, un modèle entraîné est utilisé (avec fallback heuristique si le modèle n'est pas disponible). <strong>Le mode strict</strong> force la validation humaine avant toute action.</p>
+              </div>
+
+              {/* Module cards */}
+              {mlLoading ? (
+                <div className="flex flex-col items-center justify-center py-16 text-brand-secondary/40">
+                  <RefreshCw className="animate-spin mb-3" size={32} />
+                  <p className="text-sm">Chargement des modules...</p>
                 </div>
-
-                {/* Calibration progress bar */}
-                {calibrating && (
-                  <div className="rounded-xl bg-brand-light/30 border border-brand-secondary/10 p-4 mb-6">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-xs font-bold text-brand-dark">Recalibration des réseaux de neurones...</span>
-                      <span className="text-xs font-extrabold text-brand-secondary">{Math.round(calibProgress)}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-brand-light overflow-hidden">
-                      <div className="h-full rounded-full bg-brand-secondary transition-all duration-300" style={{ width: `${calibProgress}%` }} />
-                    </div>
-                  </div>
-                )}
-
-                {/* Grid list of toggles */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {modules.map((m) => (
-                    <div
-                      key={m.id}
-                      className={cn(
-                        'flex items-center gap-4 rounded-xl px-4 py-3.5 transition-colors border',
-                        m.enabled 
-                          ? 'bg-brand-light/40 border-brand-secondary/10' 
-                          : 'bg-white border-brand-secondary/10 opacity-70'
-                      )}
-                    >
-                      <button
-                        onClick={() => toggleModule(m.id)}
-                        className={cn(
-                          'h-6 w-11 rounded-full transition-colors relative shrink-0 focus:outline-none',
-                          m.enabled ? 'bg-brand-secondary' : 'bg-brand-secondary/20'
-                        )}
-                      >
-                        <span className={cn('absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform', m.enabled ? 'left-5' : 'left-0.5')} />
-                      </button>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-brand-dark">{m.label}</p>
-                        <p className="text-xxs text-brand-secondary/60 mt-0.5">{m.desc}</p>
-                      </div>
-                      <span className={cn(
-                        'text-xxs font-extrabold rounded-full px-2 py-0.5 shrink-0 border',
-                        m.enabled 
-                          ? 'bg-brand-secondary/5 text-brand-secondary border-brand-secondary/10' 
-                          : 'bg-brand-dark/5 text-brand-dark/50 border-brand-dark/5'
-                      )}>
-                        {m.enabled ? 'Actif' : 'Inactif'}
-                      </span>
-                    </div>
+              ) : mlModules.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 text-brand-secondary/40 border border-dashed border-brand-secondary/15 rounded-2xl">
+                  <Brain size={40} className="mb-3" />
+                  <p className="text-sm font-semibold">Aucun module trouvé</p>
+                  <p className="text-xs mt-1">Exécutez le script de seed pour initialiser les modules.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {mlModules.map(m => (
+                    <MLModuleCard
+                      key={m.module_id}
+                      module={m}
+                      onSave={handleModuleSave}
+                      onTrain={(moduleId) => console.log('Training started for', moduleId)}
+                    />
                   ))}
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
