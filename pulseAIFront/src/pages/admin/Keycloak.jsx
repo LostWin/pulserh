@@ -27,15 +27,18 @@ export default function Keycloak() {
   const [error, setError] = useState('');
   
   const [pendingForms, setPendingForms] = useState({});
+  const [autoProvision, setAutoProvision] = useState(false);
 
   const loadData = async () => {
     try {
-      const [usersData, empData] = await Promise.all([
+      const [usersData, empData, settingsData] = await Promise.all([
         api.get('/admin/users'),
-        api.get('/admin/employees/unlinked')
+        api.get('/admin/employees/unlinked'),
+        api.get('/admin/keycloak-settings')
       ]);
       
       setUsers(usersData.items || []);
+      setAutoProvision(settingsData.auto_provision || false);
       
       const items = empData.items || [];
       // The endpoint already filters for unlinked employees
@@ -57,6 +60,16 @@ export default function Keycloak() {
   useEffect(() => {
     loadData();
   }, []);
+
+  const toggleAutoProvision = async () => {
+    const newVal = !autoProvision;
+    try {
+      await api.put('/admin/keycloak-settings', { auto_provision: newVal });
+      setAutoProvision(newVal);
+    } catch (err) {
+      setError("Impossible de mettre à jour la configuration d'auto-provisionnement.");
+    }
+  };
 
   const filteredUsers = useMemo(() => users.filter((user) =>
     (roleFilter === 'Tous' || user.role === roleFilter) &&
@@ -106,6 +119,24 @@ export default function Keycloak() {
         <div>
           <h1 className="text-2xl font-bold text-brand-dark">Gestion Keycloak</h1>
           <p className="mt-1 text-sm text-brand-secondary/70">Les comptes sont automatiquement provisionnés à partir des employés et synchronisés avec les rôles métier.</p>
+        </div>
+        <div className="flex items-center gap-3 rounded-xl border border-brand-secondary/10 bg-white p-3 shadow-sm">
+          <div className="text-sm">
+            <div className="font-semibold text-brand-dark">Création auto à l'import</div>
+            <div className="text-xs text-brand-secondary/60">{autoProvision ? 'Activée' : 'Désactivée'}</div>
+          </div>
+          <button
+            onClick={toggleAutoProvision}
+            className={cn(
+              "relative h-6 w-11 rounded-full transition-colors",
+              autoProvision ? "bg-brand-primary" : "bg-brand-secondary/20"
+            )}
+          >
+            <div className={cn(
+              "absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform",
+              autoProvision ? "translate-x-5" : "translate-x-0"
+            )} />
+          </button>
         </div>
       </div>
       {error ? <div className="rounded-xl bg-white p-4 text-sm text-brand-warning">{error}</div> : null}

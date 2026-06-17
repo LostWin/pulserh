@@ -218,14 +218,18 @@ async def process_csv_import(
         from sqlalchemy import select
         from app.models.domain import Employee
         from app.services.employee_identity_service import sync_employee_identity
-
-        emails = [record.get("email") for _, record in valid_records if record.get("email")]
-        if emails:
-            result = await db.execute(select(Employee.id).where(Employee.email.in_(emails)))
-            for employee_id, in result.all():
-                try:
-                    await sync_employee_identity(employee_id, db)
-                except Exception as exc:
-                    logger.warning("Provisioning Keycloak ignoré pour %s: %s", employee_id, exc)
+        
+        # Read the auto_provision setting
+        from app.routers.admin import _read_keycloak_settings
+        settings = _read_keycloak_settings()
+        if settings.get("auto_provision", False):
+            emails = [record.get("email") for _, record in valid_records if record.get("email")]
+            if emails:
+                result = await db.execute(select(Employee.id).where(Employee.email.in_(emails)))
+                for employee_id, in result.all():
+                    try:
+                        await sync_employee_identity(employee_id, db)
+                    except Exception as exc:
+                        logger.warning("Provisioning Keycloak ignoré pour %s: %s", employee_id, exc)
 
     return ImportReport(**report_dict)

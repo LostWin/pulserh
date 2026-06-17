@@ -1,7 +1,7 @@
 import {
   LayoutDashboard, MessageSquare, FileText, User, Calendar, CheckSquare,
   Users, TrendingUp, Bell, Users2, Upload, GitMerge, ShieldAlert,
-  BarChart4, FileSpreadsheet, Shield, Cpu, Activity, Settings, Briefcase,
+  BarChart4, FileSpreadsheet, Shield, Cpu, Activity, Settings, Briefcase, Database
 } from 'lucide-react';
 
 /** Single source of truth for the five access profiles of the platform. */
@@ -67,6 +67,7 @@ export const SIDEBAR_LINKS = {
   Admin: [
     { name: 'Monitoring', path: '/admin/monitoring', icon: Activity },
     { name: 'Keycloak', path: '/admin/keycloak', icon: Users },
+    { name: 'Base de données', path: '/admin/database', icon: Database },
     { name: 'Sécurité', path: '/admin/securite', icon: Shield },
     { name: 'Config IA', path: '/admin/config-ia', icon: Cpu },
     { name: 'Data Access', path: '/admin/data-access', icon: ShieldAlert },

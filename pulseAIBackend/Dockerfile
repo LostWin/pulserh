@@ -32,7 +32,7 @@ WORKDIR /app
 
 # Installer uniquement les libs runtime (pas les headers de compilation)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libpq5 curl libcairo2 pango1.0-tools && \
+    apt-get install -y --no-install-recommends libpq5 curl libcairo2 pango1.0-tools postgresql-client && \
     rm -rf /var/lib/apt/lists/*
 
 # Copier les packages Python installés depuis le stage précédent

@@ -93,6 +93,29 @@ def _write_security_policy(payload: dict) -> dict:
     return normalized
 
 
+KEYCLOAK_SETTINGS_PATH = Path("/app/uploads/keycloak_settings.json")
+DEFAULT_KEYCLOAK_SETTINGS = {
+    "auto_provision": False
+}
+
+def _read_keycloak_settings() -> dict:
+    if not KEYCLOAK_SETTINGS_PATH.exists():
+        return DEFAULT_KEYCLOAK_SETTINGS.copy()
+    try:
+        return {**DEFAULT_KEYCLOAK_SETTINGS, **json.loads(KEYCLOAK_SETTINGS_PATH.read_text())}
+    except Exception:
+        return DEFAULT_KEYCLOAK_SETTINGS.copy()
+
+def _write_keycloak_settings(payload: dict) -> dict:
+    KEYCLOAK_SETTINGS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    normalized = {
+        "auto_provision": bool(payload.get("auto_provision", DEFAULT_KEYCLOAK_SETTINGS["auto_provision"]))
+    }
+    KEYCLOAK_SETTINGS_PATH.write_text(json.dumps(normalized, indent=2))
+    return normalized
+
+
+
 def _relative_time(value: datetime | None) -> str:
     if value is None:
         return "—"
@@ -819,8 +842,120 @@ async def unblock_user(id: str):
 
 @router.post("/users/{id}/reset-password", dependencies=[Depends(admin_only)])
 async def reset_user_password(id: str):
-    await keycloak_admin_service.set_password(id, keycloak_admin_service.default_password, temporary=True)
-    return {"status": "Password reset", "id": id, "temporary_password": keycloak_admin_service.default_password}
+    """Force une réinitialisation du mot de passe (temporary=True)."""
+    await keycloak_admin_service.set_password(id, "Welcome123!")
+    return {"message": "Mot de passe réinitialisé (temporaire)"}
+
+
+@router.get("/keycloak-settings", dependencies=[Depends(admin_only)])
+async def get_keycloak_settings():
+    """Récupère les paramètres globaux de Keycloak."""
+    return _read_keycloak_settings()
+
+
+@router.put("/keycloak-settings", dependencies=[Depends(admin_only)])
+async def update_keycloak_settings(payload: dict, current_user: CurrentUser = Depends(get_current_user)):
+    """Met à jour les paramètres globaux de Keycloak."""
+    updated = _write_keycloak_settings(payload)
+    logger.info(f"Keycloak settings updated by {current_user.email}: {updated}")
+    return updated
+
+
+# --- Database Management ---
+
+@router.post("/database/clear", dependencies=[Depends(admin_only)])
+async def clear_hr_database(db: AsyncSession = Depends(get_db)):
+    """Vide toutes les tables RH de la base (TRUNCATE CASCADE)."""
+    from sqlalchemy import text
+    HR_TABLES = [
+        "employees", "departments", "jobs", "contracts", "attendances", "leaves",
+        "projects", "tasks", "skills", "employee_skills", "training_courses",
+        "training_enrollments", "project_assignments", "engagement_snapshots",
+        "performance_reviews", "performance_objectives", "benefit_plans",
+        "employee_benefits", "career_paths", "mobility_requests", "promotion_history",
+        "import_history", "document_access_events", "documents", "chat_messages",
+        "conversations", "alerts", "alert_recipient_states", "ai_observability_events",
+        "prediction_snapshots", "engagement_events"
+    ]
+    for table in HR_TABLES:
+        try:
+            await db.execute(text(f"TRUNCATE TABLE {table} CASCADE;"))
+        except Exception as e:
+            logger.error(f"Echec du TRUNCATE pour {table}: {e}")
+            await db.rollback()
+            raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression de la table {table}")
+    await db.commit()
+    return {"message": "Base de données RH vidée avec succès."}
+
+
+@router.get("/database/backup", dependencies=[Depends(admin_only)])
+async def backup_database():
+    """Crée et retourne un dump SQL de la base de données via pg_dump."""
+    import asyncio
+    import tempfile
+    import os
+    from fastapi.responses import FileResponse
+    from app.config import settings
+
+    fd, path = tempfile.mkstemp(suffix=".sql")
+    os.close(fd)
+    
+    # Run pg_dump
+    proc = await asyncio.create_subprocess_exec(
+        "pg_dump",
+        settings.DATABASE_URL.replace("+asyncpg", ""),
+        "--clean",
+        "--if-exists",
+        "--no-owner",
+        "--no-privileges",
+        "-f", path,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE
+    )
+    stdout, stderr = await proc.communicate()
+    
+    if proc.returncode != 0:
+        logger.error(f"pg_dump failed: {stderr.decode()}")
+        raise HTTPException(status_code=500, detail="La sauvegarde a échoué.")
+        
+    return FileResponse(path=path, filename=f"pulse_db_backup_{datetime.now().strftime('%Y%m%d%H%M%S')}.sql", media_type="application/sql")
+
+
+@router.post("/database/restore", dependencies=[Depends(admin_only)])
+async def restore_database(file: UploadFile = File(...)):
+    """Restaure la base de données à partir d'un fichier SQL uploadé via psql."""
+    import asyncio
+    import tempfile
+    import os
+    from app.config import settings
+    
+    if not file.filename.endswith(".sql"):
+        raise HTTPException(status_code=400, detail="Veuillez uploader un fichier .sql")
+        
+    fd, path = tempfile.mkstemp(suffix=".sql")
+    try:
+        content = await file.read()
+        with os.fdopen(fd, 'wb') as f:
+            f.write(content)
+            
+        proc = await asyncio.create_subprocess_exec(
+            "psql",
+            settings.DATABASE_URL.replace("+asyncpg", ""),
+            "-f", path,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+        stdout, stderr = await proc.communicate()
+        
+        if proc.returncode != 0:
+            logger.error(f"psql restore failed: {stderr.decode()}")
+            raise HTTPException(status_code=500, detail="La restauration a échoué.")
+            
+        return {"message": "Base de données restaurée avec succès."}
+    finally:
+        os.remove(path)
+
+
 
 @router.post("/ai/documents", dependencies=[Depends(admin_only)])
 def upload_ai_document(file: UploadFile = File(...)):
