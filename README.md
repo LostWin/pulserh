@@ -173,6 +173,64 @@ docker-compose up -d --build
 > - [https://api.pulse.local/health](https://api.pulse.local/health)
 > - [https://auth.pulse.local](https://auth.pulse.local)
 
+### 8. Générer et importer les données RH de démonstration
+
+Le projet inclut un script Python qui génère des données RH réalistes (105 employés, 3-5 ans d'historique) dans 21 fichiers CSV. Ces données alimentent les dashboards, le chatbot IA et les modèles de Machine Learning.
+
+#### 8.1 Générer les fichiers CSV
+
+```bash
+cd pulseAIBackend
+python3 -m scripts.generate_csv
+```
+
+> Le script crée un dossier `data_imports/` contenant 21 fichiers CSV numérotés de `01_departments.csv` à `21_promotion_history.csv`.
+> La génération prend quelques secondes (~59 000 lignes de présence, ~3 000 snapshots d'engagement, ~1 500 congés, etc.).
+
+#### 8.2 Importer les données dans Pulse AI
+
+Les fichiers doivent être importés **dans l'ordre numérique** pour respecter les dépendances entre entités (un employé doit exister avant ses congés, etc.).
+
+1. Connectez-vous à **https://ai.pulse.local** avec un compte admin (ex: `admin.technique` / `Pulse@Admin2026`)
+2. Allez dans le menu **Administration** → **Imports**
+3. Importez les fichiers un par un dans l'ordre suivant :
+
+| Ordre | Fichier | Contenu | Dépendances |
+|-------|---------|---------|-------------|
+| 1 | `01_departments.csv` | 6 départements | — |
+| 2 | `02_jobs.csv` | 33 postes | — |
+| 3 | `03_employees.csv` | 105 employés | Départements, Postes |
+| 4 | `04_contracts.csv` | ~140 contrats | Employés |
+| 5 | `05_leaves.csv` | ~1 500 congés | Employés |
+| 6 | `06_projects.csv` | 25 projets | Employés (manager) |
+| 7 | `07_tasks.csv` | ~420 tâches | Projets, Employés |
+| 8 | `08_attendances.csv` | ~59 000 présences | Employés |
+| 9 | `09_skills.csv` | 8 compétences | — |
+| 10 | `10_employee_skills.csv` | ~315 compétences | Employés, Compétences |
+| 11 | `11_training_courses.csv` | 6 formations | Compétences |
+| 12 | `12_training_enrollments.csv` | ~170 inscriptions | Employés, Formations |
+| 13 | `13_project_assignments.csv` | ~190 affectations | Projets, Employés |
+| 14 | `14_engagement_snapshots.csv` | ~3 000 snapshots | Employés |
+| 15 | `15_performance_reviews.csv` | ~530 revues | Employés |
+| 16 | `16_performance_objectives.csv` | ~480 objectifs | Employés |
+| 17 | `17_benefit_plans.csv` | 3 plans avantages | — |
+| 18 | `18_employee_benefits.csv` | ~315 rattachements | Employés, Plans |
+| 19 | `19_career_paths.csv` | 105 parcours | Employés, Postes |
+| 20 | `20_mobility_requests.csv` | ~20 demandes | Employés, Départements |
+| 21 | `21_promotion_history.csv` | ~16 promotions | Employés |
+
+> **💡 Astuce :** Vous pouvez aussi télécharger le kit d'import complet (avec un README détaillé) directement depuis l'interface via le bouton **Télécharger les exemples** de la page d'import.
+
+#### 8.3 Entraîner les modèles de Machine Learning
+
+Une fois les données importées, lancez l'entraînement des modèles ML depuis l'interface :
+
+1. Allez dans **Administration** → **Intelligence Artificielle** → onglet **Modèles ML**
+2. Pour chaque module en mode ML (`CHURN_RISK`, `ABSENTEEISM`, `SECURITY_ANOMALY`), cliquez sur **Entraîner**
+3. Le statut passe de "Non entraîné" à "En cours..." puis "Prêt" une fois l'entraînement terminé
+
+> **⚠️ Important :** Le module `ABSENTEEISM` nécessite au minimum 30 jours de données de présence pour s'entraîner. Le script de génération en produit 3 ans, ce qui est largement suffisant.
+
 ---
 
 ## 👥 Comptes de test Keycloak
