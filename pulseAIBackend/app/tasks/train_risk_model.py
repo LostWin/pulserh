@@ -10,7 +10,6 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 
 from app.config import settings
-from celery_app import celery_app
 
 logger = logging.getLogger(__name__)
 
@@ -112,13 +111,9 @@ async def _run_training():
         await _update_module_status("error", error=str(e))
 
 
-@celery_app.task(name="app.tasks.train_risk_model", bind=True)
-def train_risk_model(self):
-    """Tâche Celery (exécution planifiée)."""
-    asyncio.run(_run_training())
 
 
-def train_risk_model_task():
+async def train_risk_model_task():
     """Point d'entrée pour BackgroundTasks FastAPI (exécution à la demande)."""
-    asyncio.run(_run_training())
+    await _run_training()
 

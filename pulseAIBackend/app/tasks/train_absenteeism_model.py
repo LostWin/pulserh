@@ -121,6 +121,6 @@ async def _train():
         await _update_module_status("error", error=str(e))
 
 
-def train_absenteeism_model_task():
+async def train_absenteeism_model_task():
     """Point d'entrée pour BackgroundTasks FastAPI."""
-    asyncio.run(_train())
+    await _train()

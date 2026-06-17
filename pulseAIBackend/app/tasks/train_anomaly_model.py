@@ -21,7 +21,7 @@ async def _load_behavior_data():
     """Charge les features comportementales des 30 derniers jours."""
     from app.database import AsyncSessionLocal
     from app.models.domain import AIObservabilityEvent
-    from sqlalchemy import select, and_, func
+    from sqlalchemy import select, and_, func, Integer
 
     since = datetime.now(timezone.utc) - timedelta(days=30)
 
@@ -34,7 +34,7 @@ async def _load_behavior_data():
                 func.count().label("request_count"),
                 func.avg(AIObservabilityEvent.duration_ms).label("avg_duration_ms"),
                 func.sum(
-                    (AIObservabilityEvent.status == "error").cast("int")
+                    (AIObservabilityEvent.status == "error").cast(Integer)
                 ).label("error_count"),
             )
             .where(AIObservabilityEvent.created_at >= since)
@@ -155,6 +155,6 @@ async def _train():
         await _update_module_status("error", error=str(e))
 
 
-def train_anomaly_model_task():
+async def train_anomaly_model_task():
     """Point d'entrée pour BackgroundTasks FastAPI."""
-    asyncio.run(_train())
+    await _train()
