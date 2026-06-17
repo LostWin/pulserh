@@ -16,3 +16,21 @@ class AdminUserItem(BaseModel):
 
 class AdminUsersResponse(BaseModel):
     items: List[AdminUserItem]
+
+
+class AdminUserCreate(BaseModel):
+    employee_id: str
+    role: str
+    password: Optional[str] = None
+
+class AdminUnlinkedEmployee(BaseModel):
+    id: str
+    first_name: str
+    last_name: str
+    email: str
+    department: Optional[str] = None
+    job: Optional[str] = None
+    user_id: Optional[str] = None
+
+class AdminUnlinkedEmployeesResponse(BaseModel):
+    items: List[AdminUnlinkedEmployee]

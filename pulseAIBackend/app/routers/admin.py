@@ -13,6 +13,7 @@ from typing import List
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Request, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
+from sqlalchemy.orm import selectinload
 
 from app.middleware.rate_limit import get_redis_state
 from app.schemas.admin import (
@@ -45,7 +46,7 @@ from app.models.domain import (
 )
 from app.database import get_db
 from app.schemas.auth import CurrentUser
-from app.schemas.admin_users import AdminUserItem, AdminUsersResponse
+from app.schemas.admin_users import AdminUserItem, AdminUsersResponse, AdminUserCreate, AdminUnlinkedEmployeesResponse
 from app.dependencies import get_current_user
 from app.services.guardrail_service import guardrail_service
 from app.services.keycloak_admin_service import keycloak_admin_service
@@ -747,6 +748,59 @@ async def get_users(db: AsyncSession = Depends(get_db)):
             )
         )
     return AdminUsersResponse(items=items)
+
+@router.get("/employees/unlinked", response_model=AdminUnlinkedEmployeesResponse, dependencies=[Depends(admin_only)])
+async def get_unlinked_employees(db: AsyncSession = Depends(get_db)):
+    """Récupérer la liste des employés non liés à un compte Keycloak (payload léger pour admin)"""
+    stmt = (
+        select(Employee)
+        .filter(Employee.user_id.is_(None))
+        .options(selectinload(Employee.department), selectinload(Employee.job))
+    )
+    result = await db.execute(stmt)
+    employees = result.scalars().all()
+    
+    items = []
+    for emp in employees:
+        items.append({
+            "id": emp.id,
+            "first_name": emp.first_name,
+            "last_name": emp.last_name,
+            "email": emp.email,
+            "department": emp.department.name if emp.department else None,
+            "job": emp.job.title if emp.job else None,
+            "user_id": emp.user_id
+        })
+    return {"items": items}
+
+@router.post("/users", dependencies=[Depends(admin_only)])
+async def create_user(user: AdminUserCreate, db: AsyncSession = Depends(get_db)):
+    """Créer un utilisateur Keycloak à partir d'un employé (avec assignation de rôle)"""
+    employee = (await db.execute(select(Employee).filter(Employee.id == user.employee_id))).scalar_one_or_none()
+    if not employee:
+        raise HTTPException(status_code=404, detail="Employé introuvable")
+
+    logger.info(f"Admin creating user for employee {employee.email}")
+    username = employee.email.split("@")[0]
+    
+    # Check if we should generate a password or use the provided one
+    temporary_password = user.password if user.password else keycloak_admin_service.default_password
+
+    keycloak_user = await keycloak_admin_service.create_or_update_user(
+        username=username,
+        email=employee.email,
+        first_name=employee.first_name,
+        last_name=employee.last_name,
+        role=user.role,
+        enabled=True,
+        temporary_password=temporary_password
+    )
+
+    if not employee.user_id:
+        employee.user_id = keycloak_user["id"]
+        await db.commit()
+
+    return {"status": "User created", "id": keycloak_user["id"], "username": username}
 
 @router.post("/users/{id}/block", dependencies=[Depends(admin_only)])
 async def block_user(id: str):
