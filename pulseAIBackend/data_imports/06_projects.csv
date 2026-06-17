@@ -1,12 +1,26 @@
 id,name,description,start_date,deadline,status,priority,business_domain,required_skill_ids,manager_id
-proj-demo-onboarding,Onboarding Demo,Projet support pour les tâches de démo et l'intégration collaborateur.,2026-06-08,2026-07-15,En cours,Haute,People Operations,"skill-onboarding,skill-communication,skill-security",emp-demo-fatima
-proj-1,Projet Pauvre,Proposer chez glace joue raconter général.,2024-10-29,2025-02-11,En pause,Basse,Finance,"skill-data,skill-react",emp-demo-karim
-proj-2,Projet Retourner,Sommet drame ramasser fixer.,2024-12-25,2025-05-19,En pause,Haute,Talent,"skill-communication,skill-react",emp-36
-proj-3,Projet Put,Local read her base chance good.,2024-08-04,2025-07-18,En pause,Basse,Engineering,"skill-data,skill-management",emp-64
-proj-4,Projet Let,المعاهدات الحرة والروسية محاولات.,2026-01-09,2026-12-27,Terminé,Moyenne,Talent,"skill-python,skill-react",emp-1
-proj-5,Projet After,Owner process voice.,2026-06-02,2026-09-24,Terminé,Haute,Operations,"skill-react,skill-security",emp-44
-proj-6,Projet Like,Sourire étoile puissant dire que tandis que franchir.,2025-11-19,2026-10-26,Terminé,Haute,Finance,"skill-security,skill-management",emp-80
-proj-7,Projet Lorsque,De chanter chemin aucun ami jeunesse gens éclat.,2026-04-01,2026-12-08,En cours,Basse,Finance,"skill-management,skill-security",emp-81
-proj-8,Projet Social,هُزم والمانيا اقتصادية ذات كردة العناد منتصف.,2025-12-17,2026-10-31,Terminé,Haute,Engineering,"skill-communication,skill-management",emp-24
-proj-9,Projet Secrétaire,ممثّلة ايطاليا أعمال فكانت هنا؟.,2025-03-09,2025-11-19,En cours,Critique,People Analytics,"skill-react,skill-management",emp-5
-proj-10,Projet But,Last camera hundred and others.,2025-08-15,2025-12-16,En pause,Moyenne,Finance,"skill-management,skill-react",emp-demo-youssef
+proj-demo-onboarding,Onboarding Demo,Projet support pour les tâches de démo et l'intégration collaborateur.,2026-06-10,2026-07-17,En cours,Haute,People Operations,"skill-onboarding,skill-communication,skill-security",emp-demo-fatima
+proj-1,Refonte Portail RH,Projet Refonte Portail RH — initiative stratégique de l'entreprise.,2025-01-31,2025-05-20,Terminé,Critique,Talent,"skill-react,skill-communication",emp-87
+proj-2,Migration Cloud,Projet Migration Cloud — initiative stratégique de l'entreprise.,2023-06-25,2023-10-15,Terminé,Moyenne,Talent,skill-react,emp-73
+proj-3,Analytics Dashboard,Projet Analytics Dashboard — initiative stratégique de l'entreprise.,2022-07-05,2023-12-05,Terminé,Moyenne,Operations,skill-management,emp-25
+proj-4,Sécurité RGPD,Projet Sécurité RGPD — initiative stratégique de l'entreprise.,2022-02-14,2023-08-03,Terminé,Critique,People Analytics,"skill-python,skill-react,skill-data",emp-61
+proj-5,Onboarding Automatisé,Projet Onboarding Automatisé — initiative stratégique de l'entreprise.,2022-12-13,2023-11-17,Terminé,Moyenne,Operations,"skill-communication,skill-react",emp-25
+proj-6,Plan de Formation 2024,Projet Plan de Formation 2024 — initiative stratégique de l'entreprise.,2024-12-13,2026-03-24,Terminé,Basse,Compliance,"skill-management,skill-react,skill-security",emp-8
+proj-7,Audit Qualité,Projet Audit Qualité — initiative stratégique de l'entreprise.,2023-01-27,2023-06-15,Terminé,Haute,Finance,"skill-management,skill-python",emp-80
+proj-8,CRM Interne,Projet CRM Interne — initiative stratégique de l'entreprise.,2023-05-24,2024-09-17,Terminé,Basse,Compliance,skill-communication,emp-22
+proj-9,App Mobile,Projet App Mobile — initiative stratégique de l'entreprise.,2025-07-30,2026-12-27,Terminé,Moyenne,People Analytics,"skill-communication,skill-security,skill-python",emp-73
+proj-10,Refonte SI Paie,Projet Refonte SI Paie — initiative stratégique de l'entreprise.,2025-01-07,2025-09-13,Terminé,Basse,People Analytics,"skill-python,skill-data,skill-security",emp-71
+proj-11,Data Warehouse,Projet Data Warehouse — initiative stratégique de l'entreprise.,2025-05-03,2025-09-09,Terminé,Basse,Engineering,"skill-data,skill-react,skill-python",emp-21
+proj-12,Chatbot RH,Projet Chatbot RH — initiative stratégique de l'entreprise.,2021-12-10,2022-12-10,Terminé,Basse,People Analytics,"skill-security,skill-communication,skill-python",emp-4
+proj-13,Programme Mentorat,Projet Programme Mentorat — initiative stratégique de l'entreprise.,2023-03-25,2023-08-01,Terminé,Basse,Engineering,"skill-security,skill-data,skill-communication",emp-37
+proj-14,Digitalisation Processus,Projet Digitalisation Processus — initiative stratégique de l'entreprise.,2023-07-07,2024-01-04,Terminé,Basse,Engineering,"skill-management,skill-communication",emp-20
+proj-15,Certification ISO,Projet Certification ISO — initiative stratégique de l'entreprise.,2024-10-27,2025-12-14,Terminé,Moyenne,Finance,"skill-data,skill-communication,skill-react",emp-demo-admin
+proj-16,Plan Succession,Projet Plan Succession — initiative stratégique de l'entreprise.,2023-09-17,2024-03-13,Terminé,Basse,Operations,"skill-communication,skill-management",emp-11
+proj-17,Bien-Être au Travail,Projet Bien-Être au Travail — initiative stratégique de l'entreprise.,2024-08-29,2025-06-01,Terminé,Critique,Compliance,"skill-python,skill-react,skill-security",emp-15
+proj-18,Marque Employeur,Projet Marque Employeur — initiative stratégique de l'entreprise.,2025-10-03,2026-05-18,En pause,Critique,Talent,skill-python,emp-61
+proj-19,Optimisation Recrutement,Projet Optimisation Recrutement — initiative stratégique de l'entreprise.,2026-02-26,2027-06-28,En cours,Critique,Engineering,"skill-react,skill-security",emp-66
+proj-20,Intégration ERP,Projet Intégration ERP — initiative stratégique de l'entreprise.,2021-11-17,2022-08-11,Terminé,Basse,Compliance,"skill-react,skill-python",emp-36
+proj-21,Plateforme E-Learning,Projet Plateforme E-Learning — initiative stratégique de l'entreprise.,2022-07-10,2023-06-28,Terminé,Critique,Finance,skill-security,emp-32
+proj-22,Gestion des Talents,Projet Gestion des Talents — initiative stratégique de l'entreprise.,2023-06-02,2024-09-08,Terminé,Critique,Engineering,skill-react,emp-64
+proj-23,Restructuration Org,Projet Restructuration Org — initiative stratégique de l'entreprise.,2021-07-16,2022-01-16,Terminé,Haute,Compliance,"skill-data,skill-react,skill-security",emp-10
+proj-24,Innovation Lab,Projet Innovation Lab — initiative stratégique de l'entreprise.,2022-08-28,2023-03-21,Terminé,Haute,Engineering,skill-communication,emp-32

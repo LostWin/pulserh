@@ -79,12 +79,32 @@ async def process_csv_import(
     
     valid_records = []
     
+    # Identify date-only fields from schema (not datetime)
+    from datetime import date as _date_type
+    import typing
+    _date_only_fields = set()
+    for field_name, field_info in schema_class.model_fields.items():
+        annotation = field_info.annotation
+        # Unwrap Optional[X] → X
+        origin = getattr(annotation, '__origin__', None)
+        if origin is type(None) or str(origin) == 'typing.Union':
+            args = getattr(annotation, '__args__', ())
+            annotation = next((a for a in args if a is not type(None)), annotation)
+        if annotation is _date_type:
+            _date_only_fields.add(field_name)
+
     # 1. Parsing & Validation
     for line_num, row in enumerate(reader, start=2): # Start at 2 because line 1 is header
         processed_count += 1
         
         # Replace empty strings with None to allow validation rules to pass
         cleaned_row = {k: (v if v.strip() != "" else None) for k, v in row.items()}
+
+        # Normalize date fields: strip time component from ISO-8601 timestamps
+        for date_field in _date_only_fields:
+            val = cleaned_row.get(date_field)
+            if val and isinstance(val, str) and "T" in val:
+                cleaned_row[date_field] = val.split("T")[0]
         
         try:
             validated_data = schema_class(**cleaned_row)

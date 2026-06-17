@@ -1,3 +1,17 @@
 id,employee_id,previous_job_title,new_job_title,effective_date,notes
-promotion-emp-demo-fatima,emp-demo-fatima,Lead Engineer,Engineering Manager,2025-11-07,Évolution seedée pour démontrer les parcours de carrière.
-promotion-emp-demo-karim,emp-demo-karim,HR Business Partner,Responsable RH,2025-11-07,Évolution seedée pour démontrer les parcours de carrière.
+promotion-emp-demo-fatima,emp-demo-fatima,Lead Engineer,Engineering Manager,2025-11-09,Évolution de poste validée par la direction.
+promotion-emp-demo-karim,emp-demo-karim,HR Business Partner,Responsable RH,2025-11-09,Évolution de poste validée par la direction.
+2599f82e-7e05-419d-8d1a-d2f8626c4737,emp-2,Assistant,SDR,2023-05-21,Prise de responsabilité élargie.
+c325643e-24ab-4427-970f-e9314c43ea80,emp-4,Consultant Junior,SEO Specialist,2025-06-11,Reconnaissance de la montée en compétence.
+7e2ed06f-ba21-4b4b-9096-044681741d89,emp-19,Assistant,Directeur Commercial,2025-12-11,Prise de responsabilité élargie.
+03221fd0-72c8-4eaf-8469-ac643f0dc32b,emp-24,Stagiaire,Directeur Marketing,2025-10-29,Promotion suite à l'évaluation annuelle.
+d24e5218-d84c-42e6-8778-7c44cc1199d2,emp-28,Stagiaire,Directeur Marketing,2024-04-07,Promotion suite à l'évaluation annuelle.
+9ef1d351-5508-4593-b189-8c59c580caa1,emp-30,Stagiaire,Directeur Financier,2025-05-23,Reconnaissance de la montée en compétence.
+5ce9d55d-a671-4494-8ccf-2038516c4124,emp-35,Stagiaire,Directeur Commercial,2024-01-25,Prise de responsabilité élargie.
+5e846f17-0ac4-4b10-ac6e-ab43eccbd18c,emp-36,Consultant Junior,Software Engineer,2026-01-08,Prise de responsabilité élargie.
+dc08f0a1-a384-45c0-9683-a5c35c8fc03d,emp-53,Analyste,HR Business Partner,2024-05-14,Reconnaissance de la montée en compétence.
+ff100bcf-506a-4802-a0f2-2588784d0390,emp-76,Stagiaire,Directeur Financier,2026-01-07,Promotion suite à l'évaluation annuelle.
+ff9b5950-3ec4-43ba-9a79-d22a05c70702,emp-86,Analyste,Gestionnaire de Paie,2025-05-30,Prise de responsabilité élargie.
+e2d9f0b0-86f7-4a13-9657-2568159bcd3d,emp-88,Chargé de mission,Gestionnaire de Paie,2023-04-07,Reconnaissance de la montée en compétence.
+233c640e-5fc4-4cc0-9ae4-0ca25bc9e882,emp-91,Stagiaire,COO,2023-01-13,Reconnaissance de la montée en compétence.
+cf0e9560-39e3-468a-ad87-3fea3726e4b3,emp-96,Assistant,Administrateur Système,2024-03-07,Évolution naturelle dans le parcours de carrière.

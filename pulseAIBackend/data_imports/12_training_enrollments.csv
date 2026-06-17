@@ -1,98 +1,169 @@
 id,employee_id,training_id,status,assigned_at,due_date,completed_at,score,mandatory,assigned_by,recommendation_reason
-training-enrollment-rgpd-emp-demo-youssef,emp-demo-youssef,training-rgpd,completed,2026-05-06T18:49:02.556267+00:00,2026-07-05,2026-05-26T18:49:02.556268+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-demo-fatima,emp-demo-fatima,training-rgpd,completed,2026-05-06T18:49:02.556314+00:00,2026-07-05,,82,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-demo-karim,emp-demo-karim,training-rgpd,assigned,2026-05-06T18:49:02.556360+00:00,2026-07-05,,88,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-demo-sara,emp-demo-sara,training-rgpd,assigned,2026-05-06T18:49:02.556405+00:00,2026-07-05,2026-05-30T18:49:02.556406+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-demo-admin,emp-demo-admin,training-rgpd,completed,2026-05-06T18:49:02.556461+00:00,2026-07-05,,72,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-1,emp-1,training-rgpd,completed,2026-05-06T18:49:02.556509+00:00,2026-07-05,2026-05-30T18:49:02.556511+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-2,emp-2,training-rgpd,assigned,2026-05-06T18:49:02.556555+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-3,emp-3,training-rgpd,assigned,2026-05-06T18:49:02.556600+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-4,emp-4,training-rgpd,completed,2026-05-06T18:49:02.556639+00:00,2026-07-05,2026-05-29T18:49:02.556641+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-5,emp-5,training-rgpd,completed,2026-05-06T18:49:02.556690+00:00,2026-07-05,2026-05-29T18:49:02.556692+00:00,75,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-6,emp-6,training-rgpd,completed,2026-05-06T18:49:02.556747+00:00,2026-07-05,2026-06-12T18:49:02.556749+00:00,91,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-7,emp-7,training-rgpd,completed,2026-05-06T18:49:02.556792+00:00,2026-07-05,2026-06-03T18:49:02.556793+00:00,82,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-8,emp-8,training-rgpd,completed,2026-05-06T18:49:02.556845+00:00,2026-07-05,2026-05-29T18:49:02.556847+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-9,emp-9,training-rgpd,completed,2026-05-06T18:49:02.556895+00:00,2026-07-05,2026-05-30T18:49:02.556896+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-10,emp-10,training-rgpd,completed,2026-05-06T18:49:02.556938+00:00,2026-07-05,2026-05-27T18:49:02.556940+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-11,emp-11,training-rgpd,completed,2026-05-06T18:49:02.556988+00:00,2026-07-05,2026-06-13T18:49:02.556990+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-12,emp-12,training-rgpd,completed,2026-05-06T18:49:02.557029+00:00,2026-07-05,2026-06-07T18:49:02.557030+00:00,97,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-13,emp-13,training-rgpd,assigned,2026-05-06T18:49:02.557068+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-14,emp-14,training-rgpd,assigned,2026-05-06T18:49:02.557108+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-15,emp-15,training-rgpd,completed,2026-05-06T18:49:02.557146+00:00,2026-07-05,2026-06-05T18:49:02.557147+00:00,72,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-16,emp-16,training-rgpd,completed,2026-05-06T18:49:02.557186+00:00,2026-07-05,2026-06-06T18:49:02.557188+00:00,73,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-17,emp-17,training-rgpd,completed,2026-05-06T18:49:02.557227+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-18,emp-18,training-rgpd,assigned,2026-05-06T18:49:02.557269+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-19,emp-19,training-rgpd,completed,2026-05-06T18:49:02.557323+00:00,2026-07-05,2026-05-27T18:49:02.557325+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-20,emp-20,training-rgpd,completed,2026-05-06T18:49:02.557370+00:00,2026-07-05,2026-05-29T18:49:02.557372+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-21,emp-21,training-rgpd,completed,2026-05-06T18:49:02.557416+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-22,emp-22,training-rgpd,completed,2026-05-06T18:49:02.557460+00:00,2026-07-05,2026-06-03T18:49:02.557462+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-23,emp-23,training-rgpd,assigned,2026-05-06T18:49:02.557508+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-24,emp-24,training-rgpd,assigned,2026-05-06T18:49:02.557545+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-25,emp-25,training-rgpd,completed,2026-05-06T18:49:02.557587+00:00,2026-07-05,2026-06-12T18:49:02.557589+00:00,95,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-26,emp-26,training-rgpd,assigned,2026-05-06T18:49:02.557636+00:00,2026-07-05,2026-06-10T18:49:02.557638+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-27,emp-27,training-rgpd,assigned,2026-05-06T18:49:02.557678+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-28,emp-28,training-rgpd,completed,2026-05-06T18:49:02.557724+00:00,2026-07-05,2026-05-28T18:49:02.557726+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-29,emp-29,training-rgpd,completed,2026-05-06T18:49:02.557768+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-30,emp-30,training-rgpd,assigned,2026-05-06T18:49:02.557827+00:00,2026-07-05,,75,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-31,emp-31,training-rgpd,completed,2026-05-06T18:49:02.557872+00:00,2026-07-05,2026-06-07T18:49:02.557874+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-32,emp-32,training-rgpd,completed,2026-05-06T18:49:02.557919+00:00,2026-07-05,2026-05-31T18:49:02.557921+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-33,emp-33,training-rgpd,completed,2026-05-06T18:49:02.557974+00:00,2026-07-05,,91,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-34,emp-34,training-rgpd,completed,2026-05-06T18:49:02.558029+00:00,2026-07-05,2026-06-08T18:49:02.558031+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-35,emp-35,training-rgpd,completed,2026-05-06T18:49:02.558083+00:00,2026-07-05,2026-05-31T18:49:02.558085+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-36,emp-36,training-rgpd,assigned,2026-05-06T18:49:02.558126+00:00,2026-07-05,2026-06-09T18:49:02.558128+00:00,98,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-37,emp-37,training-rgpd,assigned,2026-05-06T18:49:02.558170+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-38,emp-38,training-rgpd,completed,2026-05-06T18:49:02.558219+00:00,2026-07-05,2026-05-28T18:49:02.558220+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-39,emp-39,training-rgpd,completed,2026-05-06T18:49:02.558257+00:00,2026-07-05,2026-06-08T18:49:02.558258+00:00,88,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-40,emp-40,training-rgpd,completed,2026-05-06T18:49:02.558297+00:00,2026-07-05,2026-05-30T18:49:02.558299+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-41,emp-41,training-rgpd,assigned,2026-05-06T18:49:02.558337+00:00,2026-07-05,2026-06-04T18:49:02.558338+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-42,emp-42,training-rgpd,completed,2026-05-06T18:49:02.558376+00:00,2026-07-05,2026-06-04T18:49:02.558378+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-43,emp-43,training-rgpd,assigned,2026-05-06T18:49:02.558418+00:00,2026-07-05,2026-05-26T18:49:02.558419+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-44,emp-44,training-rgpd,completed,2026-05-06T18:49:02.558457+00:00,2026-07-05,2026-06-01T18:49:02.558458+00:00,97,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-45,emp-45,training-rgpd,assigned,2026-05-06T18:49:02.558496+00:00,2026-07-05,2026-06-12T18:49:02.558497+00:00,98,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-46,emp-46,training-rgpd,completed,2026-05-06T18:49:02.558545+00:00,2026-07-05,2026-06-01T18:49:02.558546+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-47,emp-47,training-rgpd,completed,2026-05-06T18:49:02.558586+00:00,2026-07-05,,76,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-48,emp-48,training-rgpd,assigned,2026-05-06T18:49:02.558625+00:00,2026-07-05,2026-06-07T18:49:02.558627+00:00,98,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-49,emp-49,training-rgpd,completed,2026-05-06T18:49:02.558675+00:00,2026-07-05,2026-06-02T18:49:02.558676+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-50,emp-50,training-rgpd,completed,2026-05-06T18:49:02.558719+00:00,2026-07-05,2026-06-12T18:49:02.558720+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-51,emp-51,training-rgpd,assigned,2026-05-06T18:49:02.558763+00:00,2026-07-05,2026-05-30T18:49:02.558764+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-52,emp-52,training-rgpd,completed,2026-05-06T18:49:02.558812+00:00,2026-07-05,,72,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-53,emp-53,training-rgpd,completed,2026-05-06T18:49:02.558864+00:00,2026-07-05,2026-06-06T18:49:02.558866+00:00,97,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-54,emp-54,training-rgpd,assigned,2026-05-06T18:49:02.558919+00:00,2026-07-05,2026-05-26T18:49:02.558920+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-55,emp-55,training-rgpd,completed,2026-05-06T18:49:02.558962+00:00,2026-07-05,2026-05-26T18:49:02.558963+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-56,emp-56,training-rgpd,completed,2026-05-06T18:49:02.559011+00:00,2026-07-05,2026-06-02T18:49:02.559013+00:00,75,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-57,emp-57,training-rgpd,completed,2026-05-06T18:49:02.559056+00:00,2026-07-05,2026-06-11T18:49:02.559058+00:00,96,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-58,emp-58,training-rgpd,completed,2026-05-06T18:49:02.559096+00:00,2026-07-05,2026-05-29T18:49:02.559097+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-59,emp-59,training-rgpd,assigned,2026-05-06T18:49:02.559140+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-60,emp-60,training-rgpd,assigned,2026-05-06T18:49:02.559184+00:00,2026-07-05,2026-05-27T18:49:02.559185+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-61,emp-61,training-rgpd,completed,2026-05-06T18:49:02.559228+00:00,2026-07-05,,95,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-62,emp-62,training-rgpd,completed,2026-05-06T18:49:02.559270+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-63,emp-63,training-rgpd,assigned,2026-05-06T18:49:02.559310+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-64,emp-64,training-rgpd,completed,2026-05-06T18:49:02.559352+00:00,2026-07-05,,87,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-65,emp-65,training-rgpd,assigned,2026-05-06T18:49:02.559393+00:00,2026-07-05,2026-06-02T18:49:02.559394+00:00,72,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-66,emp-66,training-rgpd,completed,2026-05-06T18:49:02.559435+00:00,2026-07-05,2026-06-13T18:49:02.559436+00:00,98,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-67,emp-67,training-rgpd,completed,2026-05-06T18:49:02.559472+00:00,2026-07-05,2026-06-12T18:49:02.559473+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-68,emp-68,training-rgpd,completed,2026-05-06T18:49:02.559511+00:00,2026-07-05,,74,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-69,emp-69,training-rgpd,completed,2026-05-06T18:49:02.559552+00:00,2026-07-05,,84,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-70,emp-70,training-rgpd,assigned,2026-05-06T18:49:02.559593+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-71,emp-71,training-rgpd,assigned,2026-05-06T18:49:02.559638+00:00,2026-07-05,2026-06-09T18:49:02.559639+00:00,80,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-72,emp-72,training-rgpd,completed,2026-05-06T18:49:02.559682+00:00,2026-07-05,2026-06-06T18:49:02.559684+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-73,emp-73,training-rgpd,completed,2026-05-06T18:49:02.559725+00:00,2026-07-05,2026-06-11T18:49:02.559727+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-74,emp-74,training-rgpd,completed,2026-05-06T18:49:02.559767+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-75,emp-75,training-rgpd,completed,2026-05-06T18:49:02.559818+00:00,2026-07-05,2026-06-06T18:49:02.559819+00:00,81,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-76,emp-76,training-rgpd,completed,2026-05-06T18:49:02.559863+00:00,2026-07-05,2026-05-31T18:49:02.559864+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-77,emp-77,training-rgpd,assigned,2026-05-06T18:49:02.559905+00:00,2026-07-05,2026-06-14T18:49:02.559907+00:00,84,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-78,emp-78,training-rgpd,completed,2026-05-06T18:49:02.559951+00:00,2026-07-05,2026-06-02T18:49:02.559952+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-79,emp-79,training-rgpd,completed,2026-05-06T18:49:02.559989+00:00,2026-07-05,2026-06-05T18:49:02.559991+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-80,emp-80,training-rgpd,completed,2026-05-06T18:49:02.560026+00:00,2026-07-05,2026-06-10T18:49:02.560028+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-81,emp-81,training-rgpd,assigned,2026-05-06T18:49:02.560073+00:00,2026-07-05,,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-82,emp-82,training-rgpd,completed,2026-05-06T18:49:02.560115+00:00,2026-07-05,2026-06-09T18:49:02.560116+00:00,75,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-83,emp-83,training-rgpd,assigned,2026-05-06T18:49:02.560159+00:00,2026-07-05,2026-06-13T18:49:02.560161+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-84,emp-84,training-rgpd,completed,2026-05-06T18:49:02.560201+00:00,2026-07-05,2026-06-10T18:49:02.560203+00:00,,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-85,emp-85,training-rgpd,completed,2026-05-06T18:49:02.560242+00:00,2026-07-05,2026-06-08T18:49:02.560244+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-86,emp-86,training-rgpd,completed,2026-05-06T18:49:02.560286+00:00,2026-07-05,2026-06-11T18:49:02.560288+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-87,emp-87,training-rgpd,completed,2026-05-06T18:49:02.560330+00:00,2026-07-05,,88,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-88,emp-88,training-rgpd,completed,2026-05-06T18:49:02.560371+00:00,2026-07-05,2026-06-11T18:49:02.560373+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-rgpd-emp-89,emp-89,training-rgpd,assigned,2026-05-06T18:49:02.560414+00:00,2026-07-05,2026-06-04T18:49:02.560416+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
-training-enrollment-youssef-react,emp-demo-youssef,training-react,in_progress,2026-06-12T18:49:02.560419+00:00,2026-06-29,,,false,Fatima Alaoui,Projet frontend actif et montée en compétence produit
-training-enrollment-fatima-manager,emp-demo-fatima,training-manager-101,completed,2026-05-11T18:49:02.560424+00:00,2026-06-10,2026-06-07T18:49:02.560425+00:00,91,true,Karim Tazi,Prise de poste managériale
-training-enrollment-karim-onboarding,emp-demo-karim,training-onboarding,completed,2026-05-18T18:49:02.560430+00:00,2026-06-13,2026-06-11T18:49:02.560431+00:00,95,true,Karim Tazi,Montée en compétence RH sur les parcours d'intégration
+training-enrollment-rgpd-emp-demo-youssef,emp-demo-youssef,training-rgpd,completed,2026-01-02T10:54:07.660568+00:00,2026-07-07,2026-05-07T10:54:07.660577+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-demo-fatima,emp-demo-fatima,training-rgpd,completed,2026-01-12T10:54:07.660581+00:00,2026-07-07,2026-06-08T10:54:07.660584+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
+ceabdc59-5ff3-41e9-b4f0-45797ba954cd,emp-demo-fatima,training-python-data,in_progress,2026-01-16T10:54:07.660605+00:00,2026-08-25,,,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-demo-karim,emp-demo-karim,training-rgpd,completed,2026-01-12T10:54:07.660609+00:00,2026-07-07,2026-05-13T10:54:07.660611+00:00,73,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-demo-sara,emp-demo-sara,training-rgpd,completed,2025-10-10T10:54:07.660613+00:00,2026-07-07,2026-06-07T10:54:07.660614+00:00,97,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-demo-admin,emp-demo-admin,training-rgpd,completed,2025-10-18T10:54:07.660616+00:00,2026-07-07,2026-05-31T10:54:07.660618+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-1,emp-1,training-rgpd,completed,2025-10-11T10:54:07.660620+00:00,2026-07-07,2026-04-30T10:54:07.660621+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+2fd777ce-7b4f-4f42-8f65-d6bae56d99a0,emp-1,training-onboarding,assigned,2026-04-08T10:54:07.660626+00:00,2026-09-07,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-2,emp-2,training-rgpd,completed,2025-09-26T10:54:07.660630+00:00,2026-07-07,2026-05-10T10:54:07.660632+00:00,80,true,Pulse RH,Parcours de conformité obligatoire
+bb367823-b612-4ee6-a41f-5c45968610dc,emp-2,training-communication,completed,2026-01-12T10:54:07.660636+00:00,2026-08-19,2026-05-25T10:54:07.660638+00:00,62,false,Pulse RH,Projet actif
+training-enrollment-rgpd-emp-3,emp-3,training-rgpd,completed,2025-06-18T10:54:07.660641+00:00,2026-07-07,2026-05-02T10:54:07.660642+00:00,98,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-4,emp-4,training-rgpd,assigned,2026-02-03T10:54:07.660644+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-5,emp-5,training-rgpd,completed,2025-12-05T10:54:07.660646+00:00,2026-07-07,2026-05-28T10:54:07.660647+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
+3026b5e4-6be0-44b4-af80-03adf4aa04a7,emp-5,training-onboarding,in_progress,2026-01-10T10:54:07.660651+00:00,2026-09-01,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-6,emp-6,training-rgpd,completed,2025-05-14T10:54:07.660654+00:00,2026-07-07,2026-04-29T10:54:07.660656+00:00,72,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-7,emp-7,training-rgpd,completed,2026-04-02T10:54:07.660657+00:00,2026-07-07,2026-05-14T10:54:07.660659+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-8,emp-8,training-rgpd,assigned,2025-12-03T10:54:07.660661+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+8289c128-e381-460d-8e42-68b0cc396b52,emp-8,training-python-data,completed,2026-03-01T10:54:07.660665+00:00,2026-07-26,2026-05-23T10:54:07.660667+00:00,95,false,Pulse RH,Projet actif
+training-enrollment-rgpd-emp-9,emp-9,training-rgpd,completed,2025-06-17T10:54:07.660669+00:00,2026-07-07,2026-06-09T10:54:07.660671+00:00,80,true,Pulse RH,Parcours de conformité obligatoire
+0025b1f1-4d24-4654-91ec-9f67de510802,emp-9,training-python-data,assigned,2025-12-23T10:54:07.660675+00:00,2026-09-07,,,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-10,emp-10,training-rgpd,completed,2025-05-23T10:54:07.660677+00:00,2026-07-07,2026-05-11T10:54:07.660679+00:00,85,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-11,emp-11,training-rgpd,completed,2025-05-28T10:54:07.660680+00:00,2026-07-07,2026-05-20T10:54:07.660682+00:00,80,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-12,emp-12,training-rgpd,assigned,2025-12-05T10:54:07.660683+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-13,emp-13,training-rgpd,completed,2026-02-17T10:54:07.660685+00:00,2026-07-07,2026-05-16T10:54:07.660687+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+87c81c5d-6a1c-42a8-a754-937fc669a546,emp-13,training-manager-101,completed,2026-01-23T10:54:07.660690+00:00,2026-08-11,2026-06-11T10:54:07.660692+00:00,70,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-14,emp-14,training-rgpd,assigned,2025-12-07T10:54:07.660694+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-15,emp-15,training-rgpd,assigned,2025-08-21T10:54:07.660696+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-16,emp-16,training-rgpd,completed,2026-04-13T10:54:07.660698+00:00,2026-07-07,2026-04-29T10:54:07.660699+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
+2f4228a5-6f46-4449-bcb1-b1f29b29f21d,emp-16,training-python-data,assigned,2026-04-02T10:54:07.660703+00:00,2026-06-30,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-17,emp-17,training-rgpd,completed,2026-02-04T10:54:07.660705+00:00,2026-07-07,2026-05-23T10:54:07.660707+00:00,96,true,Pulse RH,Parcours de conformité obligatoire
+8bc4d640-45da-4854-9fcf-1bc041d5cdc7,emp-17,training-manager-101,in_progress,2026-05-31T10:54:07.660710+00:00,2026-08-31,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-18,emp-18,training-rgpd,completed,2026-03-17T10:54:07.660713+00:00,2026-07-07,2026-05-26T10:54:07.660714+00:00,95,true,Pulse RH,Parcours de conformité obligatoire
+21756535-3528-4566-9367-46258d345ada,emp-18,training-onboarding,in_progress,2026-03-04T10:54:07.660718+00:00,2026-07-01,,,false,Manager direct,Montée en compétence
+training-enrollment-rgpd-emp-19,emp-19,training-rgpd,completed,2026-01-19T10:54:07.660721+00:00,2026-07-07,2026-05-03T10:54:07.660722+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+40bee837-a96b-4907-b2d7-5b768a9b0885,emp-19,training-manager-101,completed,2026-03-23T10:54:07.660725+00:00,2026-09-15,2026-06-15T10:54:07.660727+00:00,82,false,Auto-inscription,Plan de développement
+training-enrollment-rgpd-emp-20,emp-20,training-rgpd,completed,2025-07-03T10:54:07.660729+00:00,2026-07-07,2026-06-07T10:54:07.660730+00:00,94,true,Pulse RH,Parcours de conformité obligatoire
+22c6b313-ee03-4f8c-bae9-86003461d001,emp-20,training-react,in_progress,2025-12-07T10:54:07.660734+00:00,2026-09-06,,,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-21,emp-21,training-rgpd,completed,2025-09-02T10:54:07.660736+00:00,2026-07-07,2026-05-18T10:54:07.660738+00:00,77,true,Pulse RH,Parcours de conformité obligatoire
+61fc6f0b-dc02-485a-b76d-10ed886566f3,emp-21,training-onboarding,in_progress,2026-01-20T10:54:07.660745+00:00,2026-08-15,,,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-22,emp-22,training-rgpd,assigned,2025-07-29T10:54:07.660748+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-23,emp-23,training-rgpd,assigned,2025-09-08T10:54:07.660750+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+4ba0a0b8-4d4c-48a0-b10c-949dcbb844c3,emp-23,training-communication,assigned,2025-12-08T10:54:07.660754+00:00,2026-08-27,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-24,emp-24,training-rgpd,assigned,2025-06-12T10:54:07.660756+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+80e77ce1-c7bd-4c90-a97a-00236abe994f,emp-24,training-manager-101,in_progress,2025-12-30T10:54:07.660760+00:00,2026-08-10,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-25,emp-25,training-rgpd,completed,2025-07-21T10:54:07.660762+00:00,2026-07-07,2026-05-13T10:54:07.660764+00:00,81,true,Pulse RH,Parcours de conformité obligatoire
+9bf7e772-beee-4c49-babe-41a155b58c29,emp-25,training-onboarding,assigned,2026-02-13T10:54:07.660768+00:00,2026-09-08,,,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-26,emp-26,training-rgpd,completed,2026-03-07T10:54:07.660770+00:00,2026-07-07,2026-05-01T10:54:07.660771+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
+0832f499-f0fe-4f7d-a688-f617c46a7153,emp-26,training-python-data,in_progress,2026-06-05T10:54:07.660774+00:00,2026-07-12,,,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-27,emp-27,training-rgpd,completed,2025-06-13T10:54:07.660783+00:00,2026-07-07,2026-05-27T10:54:07.660785+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
+fa81907f-89a5-4922-b193-b4b830fb3dab,emp-27,training-onboarding,in_progress,2025-12-26T10:54:07.660788+00:00,2026-09-10,,,false,Manager direct,Montée en compétence
+training-enrollment-rgpd-emp-28,emp-28,training-rgpd,completed,2025-09-06T10:54:07.660791+00:00,2026-07-07,2026-05-01T10:54:07.660792+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+0f08e50c-4c3b-457c-b9af-9d8afd0b888c,emp-28,training-communication,in_progress,2026-02-08T10:54:07.660796+00:00,2026-07-30,,,false,Pulse RH,Projet actif
+training-enrollment-rgpd-emp-29,emp-29,training-rgpd,completed,2026-01-17T10:54:07.660798+00:00,2026-07-07,2026-06-11T10:54:07.660799+00:00,95,true,Pulse RH,Parcours de conformité obligatoire
+ae93e82d-04f9-4109-a2ff-0b9730c53083,emp-29,training-communication,in_progress,2026-01-02T10:54:07.660803+00:00,2026-09-02,,,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-30,emp-30,training-rgpd,completed,2026-01-11T10:54:07.660805+00:00,2026-07-07,2026-05-31T10:54:07.660807+00:00,81,true,Pulse RH,Parcours de conformité obligatoire
+b60eecc4-c980-4bb9-90cb-8ec7b2ef77b5,emp-30,training-python-data,in_progress,2026-03-08T10:54:07.660810+00:00,2026-07-11,,,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-31,emp-31,training-rgpd,completed,2025-09-21T10:54:07.660813+00:00,2026-07-07,2026-06-02T10:54:07.660814+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
+92f0f334-e4e7-4faa-87c5-c46900324e56,emp-31,training-onboarding,assigned,2026-04-28T10:54:07.660818+00:00,2026-08-11,,,false,Manager direct,Curiosité personnelle
+training-enrollment-rgpd-emp-32,emp-32,training-rgpd,completed,2025-07-19T10:54:07.660820+00:00,2026-07-07,2026-05-21T10:54:07.660821+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-33,emp-33,training-rgpd,assigned,2026-01-25T10:54:07.660823+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+f5217331-036d-40bc-aa86-f601e0e84e6b,emp-33,training-communication,assigned,2026-04-21T10:54:07.660827+00:00,2026-09-11,,,false,Pulse RH,Plan de développement
+training-enrollment-rgpd-emp-34,emp-34,training-rgpd,completed,2026-03-01T10:54:07.660829+00:00,2026-07-07,2026-05-16T10:54:07.660830+00:00,96,true,Pulse RH,Parcours de conformité obligatoire
+3e86e772-d51d-45ae-9d5a-7aa202f34d2c,emp-34,training-manager-101,in_progress,2026-04-24T10:54:07.660834+00:00,2026-09-08,,,false,Pulse RH,Projet actif
+training-enrollment-rgpd-emp-35,emp-35,training-rgpd,completed,2025-06-22T10:54:07.660836+00:00,2026-07-07,2026-06-15T10:54:07.660837+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
+eb1a1e82-9b57-4f65-bdb8-2843882a86c8,emp-35,training-react,completed,2026-01-28T10:54:07.660840+00:00,2026-06-28,2026-06-15T10:54:07.660842+00:00,88,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-36,emp-36,training-rgpd,completed,2025-06-14T10:54:07.660844+00:00,2026-07-07,2026-06-13T10:54:07.660845+00:00,95,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-37,emp-37,training-rgpd,assigned,2025-07-07T10:54:07.660847+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-38,emp-38,training-rgpd,completed,2025-08-15T10:54:07.660849+00:00,2026-07-07,2026-06-11T10:54:07.660850+00:00,97,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-39,emp-39,training-rgpd,completed,2025-12-26T10:54:07.660853+00:00,2026-07-07,2026-05-01T10:54:07.660854+00:00,77,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-40,emp-40,training-rgpd,completed,2026-02-11T10:54:07.660856+00:00,2026-07-07,2026-05-22T10:54:07.660857+00:00,79,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-41,emp-41,training-rgpd,assigned,2025-07-14T10:54:07.660859+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-42,emp-42,training-rgpd,completed,2025-08-28T10:54:07.660861+00:00,2026-07-07,2026-05-22T10:54:07.660868+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
+1148ac65-da1f-46df-9a61-54caaf71407f,emp-42,training-react,completed,2026-05-21T10:54:07.660872+00:00,2026-09-12,2026-05-30T10:54:07.660874+00:00,72,false,Auto-inscription,Montée en compétence
+training-enrollment-rgpd-emp-43,emp-43,training-rgpd,completed,2025-08-13T10:54:07.660875+00:00,2026-07-07,2026-05-17T10:54:07.660877+00:00,85,true,Pulse RH,Parcours de conformité obligatoire
+11989c8a-f466-4ade-9d9e-5a62e7e7ef5c,emp-43,training-python-data,in_progress,2026-01-07T10:54:07.660880+00:00,2026-07-22,,,false,Auto-inscription,Projet actif
+training-enrollment-rgpd-emp-44,emp-44,training-rgpd,completed,2026-02-24T10:54:07.660883+00:00,2026-07-07,2026-06-11T10:54:07.660884+00:00,92,true,Pulse RH,Parcours de conformité obligatoire
+b29bda1e-99a5-4af5-9d29-19af34d57b83,emp-44,training-communication,assigned,2026-02-20T10:54:07.660887+00:00,2026-07-30,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-45,emp-45,training-rgpd,completed,2026-01-08T10:54:07.660890+00:00,2026-07-07,2026-05-03T10:54:07.660891+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-46,emp-46,training-rgpd,assigned,2025-06-10T10:54:07.660893+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+d086a1da-d04f-4dd7-a6ff-34f8926494a5,emp-46,training-react,completed,2026-05-21T10:54:07.660897+00:00,2026-08-21,2026-06-02T10:54:07.660898+00:00,95,false,Pulse RH,Plan de développement
+training-enrollment-rgpd-emp-47,emp-47,training-rgpd,completed,2025-07-13T10:54:07.660900+00:00,2026-07-07,2026-05-10T10:54:07.660902+00:00,95,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-48,emp-48,training-rgpd,assigned,2025-10-31T10:54:07.660903+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+e565ffde-f71f-4610-a36a-0aa029208830,emp-48,training-manager-101,in_progress,2026-02-10T10:54:07.660907+00:00,2026-08-25,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-49,emp-49,training-rgpd,completed,2026-01-10T10:54:07.660909+00:00,2026-07-07,2026-05-11T10:54:07.660911+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-50,emp-50,training-rgpd,completed,2026-03-30T10:54:07.660912+00:00,2026-07-07,2026-05-30T10:54:07.660914+00:00,72,true,Pulse RH,Parcours de conformité obligatoire
+34fad5aa-557a-4389-8fda-5dc89c7bb136,emp-50,training-communication,in_progress,2025-12-09T10:54:07.660917+00:00,2026-08-09,,,false,Auto-inscription,Montée en compétence
+training-enrollment-rgpd-emp-51,emp-51,training-rgpd,completed,2025-06-12T10:54:07.660919+00:00,2026-07-07,2026-05-24T10:54:07.660921+00:00,91,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-52,emp-52,training-rgpd,completed,2026-04-04T10:54:07.660922+00:00,2026-07-07,2026-05-22T10:54:07.660924+00:00,86,true,Pulse RH,Parcours de conformité obligatoire
+42dc3ab4-a963-4de4-af1e-6f4ac79bcc28,emp-52,training-python-data,completed,2026-03-29T10:54:07.660927+00:00,2026-07-08,2026-05-21T10:54:07.660928+00:00,80,false,Pulse RH,Montée en compétence
+training-enrollment-rgpd-emp-53,emp-53,training-rgpd,completed,2025-05-18T10:54:07.660930+00:00,2026-07-07,2026-06-05T10:54:07.660932+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
+e0bb8444-add8-4d8c-887b-523849ba4038,emp-53,training-communication,in_progress,2026-03-08T10:54:07.660935+00:00,2026-07-10,,,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-54,emp-54,training-rgpd,assigned,2026-01-25T10:54:07.660937+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-55,emp-55,training-rgpd,assigned,2025-06-20T10:54:07.660939+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+3fcf6698-6317-4f70-bcd7-fa882c1da7f7,emp-55,training-python-data,in_progress,2026-03-04T10:54:07.660943+00:00,2026-08-25,,,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-56,emp-56,training-rgpd,assigned,2025-08-09T10:54:07.660946+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+687d53dc-c344-4694-9020-ca8524c35fc8,emp-56,training-python-data,in_progress,2026-02-11T10:54:07.660949+00:00,2026-08-30,,,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-57,emp-57,training-rgpd,completed,2026-03-31T10:54:07.660952+00:00,2026-07-07,2026-06-07T10:54:07.660953+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
+3080c547-f625-4a93-a612-70449956747b,emp-57,training-communication,completed,2026-01-05T10:54:07.660957+00:00,2026-09-09,2026-05-28T10:54:07.660958+00:00,79,false,Manager direct,Montée en compétence
+training-enrollment-rgpd-emp-58,emp-58,training-rgpd,assigned,2025-08-03T10:54:07.660960+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-59,emp-59,training-rgpd,completed,2026-03-01T10:54:07.660962+00:00,2026-07-07,2026-05-11T10:54:07.660964+00:00,85,true,Pulse RH,Parcours de conformité obligatoire
+b8551576-1535-4bcf-973f-541d6b510ca8,emp-59,training-manager-101,in_progress,2026-05-07T10:54:07.660967+00:00,2026-07-21,,,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-60,emp-60,training-rgpd,assigned,2026-01-22T10:54:07.660969+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+8a76cc3b-828c-41a1-a77b-c989bdb9ce6d,emp-60,training-communication,completed,2025-12-03T10:54:07.660973+00:00,2026-08-04,2026-05-21T10:54:07.660974+00:00,77,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-61,emp-61,training-rgpd,assigned,2025-08-12T10:54:07.660976+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-62,emp-62,training-rgpd,completed,2025-12-17T10:54:07.660978+00:00,2026-07-07,2026-05-20T10:54:07.660979+00:00,81,true,Pulse RH,Parcours de conformité obligatoire
+ddea7b05-2b8d-4263-8aaf-fd09a3fa1de0,emp-62,training-onboarding,completed,2026-02-24T10:54:07.660983+00:00,2026-08-19,2026-05-25T10:54:07.660984+00:00,94,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-63,emp-63,training-rgpd,assigned,2025-08-06T10:54:07.660986+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+c39d1e06-f13f-45d3-9598-5a32fb7382e6,emp-63,training-python-data,in_progress,2026-05-06T10:54:07.660989+00:00,2026-08-02,,,false,Auto-inscription,Plan de développement
+training-enrollment-rgpd-emp-64,emp-64,training-rgpd,completed,2025-07-12T10:54:07.660996+00:00,2026-07-07,2026-06-14T10:54:07.660997+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-65,emp-65,training-rgpd,completed,2025-07-09T10:54:07.660999+00:00,2026-07-07,2026-04-30T10:54:07.661000+00:00,98,true,Pulse RH,Parcours de conformité obligatoire
+0f6ea53f-79e8-4386-9681-af3c77adb5da,emp-65,training-onboarding,completed,2026-03-27T10:54:07.661004+00:00,2026-08-11,2026-06-07T10:54:07.661006+00:00,73,false,Pulse RH,Montée en compétence
+training-enrollment-rgpd-emp-66,emp-66,training-rgpd,completed,2025-07-24T10:54:07.661008+00:00,2026-07-07,2026-05-09T10:54:07.661010+00:00,74,true,Pulse RH,Parcours de conformité obligatoire
+55b18d17-e169-4077-b941-0b2ab9e46bf8,emp-66,training-python-data,in_progress,2026-01-19T10:54:07.661013+00:00,2026-07-11,,,false,Auto-inscription,Montée en compétence
+training-enrollment-rgpd-emp-67,emp-67,training-rgpd,completed,2025-05-31T10:54:07.661015+00:00,2026-07-07,2026-06-04T10:54:07.661016+00:00,94,true,Pulse RH,Parcours de conformité obligatoire
+bec7d5cb-1e0b-4e54-90ab-b69b9b93d6c2,emp-67,training-communication,assigned,2025-12-13T10:54:07.661020+00:00,2026-07-17,,,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-68,emp-68,training-rgpd,completed,2025-09-15T10:54:07.661022+00:00,2026-07-07,2026-05-09T10:54:07.661024+00:00,93,true,Pulse RH,Parcours de conformité obligatoire
+1f9f0f3a-4b7c-4dfc-ab99-5ff8342042e2,emp-68,training-manager-101,completed,2026-06-02T10:54:07.661027+00:00,2026-07-21,2026-05-29T10:54:07.661029+00:00,76,false,Pulse RH,Plan de développement
+training-enrollment-rgpd-emp-69,emp-69,training-rgpd,completed,2025-10-18T10:54:07.661030+00:00,2026-07-07,2026-06-14T10:54:07.661032+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-70,emp-70,training-rgpd,completed,2025-12-20T10:54:07.661033+00:00,2026-07-07,2026-06-15T10:54:07.661036+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+57aa443e-e3df-4a75-836c-8d4fac670686,emp-70,training-python-data,completed,2026-04-27T10:54:07.661039+00:00,2026-07-30,2026-05-31T10:54:07.661041+00:00,63,false,Auto-inscription,Montée en compétence
+training-enrollment-rgpd-emp-71,emp-71,training-rgpd,assigned,2025-12-11T10:54:07.661042+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+01ef5030-ed6c-494a-a57f-bbe18850ebd4,emp-71,training-manager-101,completed,2026-03-06T10:54:07.661046+00:00,2026-09-06,2026-06-08T10:54:07.661048+00:00,83,false,Manager direct,Plan de développement
+training-enrollment-rgpd-emp-72,emp-72,training-rgpd,completed,2025-10-06T10:54:07.661049+00:00,2026-07-07,2026-05-01T10:54:07.661051+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+c4ab8374-8319-40ea-88a5-bf0f79d7b97c,emp-72,training-communication,assigned,2026-03-28T10:54:07.661054+00:00,2026-08-14,,,false,Manager direct,Curiosité personnelle
+training-enrollment-rgpd-emp-73,emp-73,training-rgpd,completed,2026-03-13T10:54:07.661056+00:00,2026-07-07,2026-05-06T10:54:07.661057+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-74,emp-74,training-rgpd,completed,2025-07-17T10:54:07.661059+00:00,2026-07-07,2026-05-30T10:54:07.661060+00:00,84,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-75,emp-75,training-rgpd,completed,2026-02-01T10:54:07.661062+00:00,2026-07-07,2026-05-01T10:54:07.661063+00:00,73,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-76,emp-76,training-rgpd,completed,2025-10-08T10:54:07.661065+00:00,2026-07-07,2026-06-16T10:54:07.661066+00:00,77,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-77,emp-77,training-rgpd,assigned,2025-06-25T10:54:07.661068+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-78,emp-78,training-rgpd,assigned,2025-11-06T10:54:07.661070+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+28616a6d-e5a1-4b7e-b0ff-75c3debfebcb,emp-78,training-react,assigned,2026-05-29T10:54:07.661074+00:00,2026-07-12,,,false,Manager direct,Curiosité personnelle
+training-enrollment-rgpd-emp-79,emp-79,training-rgpd,completed,2025-12-14T10:54:07.661077+00:00,2026-07-07,2026-05-09T10:54:07.661079+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
+cfe4ebb3-ee90-4e69-8cdb-a328b19369d4,emp-79,training-python-data,completed,2026-04-21T10:54:07.661082+00:00,2026-09-05,2026-06-11T10:54:07.661091+00:00,61,false,Manager direct,Curiosité personnelle
+training-enrollment-rgpd-emp-80,emp-80,training-rgpd,completed,2025-07-07T10:54:07.661093+00:00,2026-07-07,2026-06-04T10:54:07.661094+00:00,83,true,Pulse RH,Parcours de conformité obligatoire
+65ce6831-e7cb-4854-b5a7-3f757ff38342,emp-80,training-react,in_progress,2026-04-29T10:54:07.661098+00:00,2026-07-08,,,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-81,emp-81,training-rgpd,assigned,2025-08-09T10:54:07.661101+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-82,emp-82,training-rgpd,completed,2025-12-17T10:54:07.661103+00:00,2026-07-07,2026-05-13T10:54:07.661104+00:00,78,true,Pulse RH,Parcours de conformité obligatoire
+b5258af2-6a80-4f7e-b397-9958f3b584db,emp-82,training-react,completed,2026-05-28T10:54:07.661108+00:00,2026-07-18,2026-05-18T10:54:07.661110+00:00,67,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-83,emp-83,training-rgpd,assigned,2025-12-27T10:54:07.661112+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+ef76dd7a-ba05-4406-86cd-aeeaead5a24d,emp-83,training-communication,assigned,2026-02-10T10:54:07.661115+00:00,2026-09-15,,,false,Pulse RH,Projet actif
+training-enrollment-rgpd-emp-84,emp-84,training-rgpd,completed,2025-06-30T10:54:07.661118+00:00,2026-07-07,2026-06-05T10:54:07.661120+00:00,76,true,Pulse RH,Parcours de conformité obligatoire
+9197c55a-e610-4a3e-97f2-a0e48a89051b,emp-84,training-manager-101,completed,2026-04-12T10:54:07.661123+00:00,2026-09-02,2026-06-16T10:54:07.661125+00:00,85,false,Pulse RH,Curiosité personnelle
+training-enrollment-rgpd-emp-85,emp-85,training-rgpd,assigned,2025-07-31T10:54:07.661127+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-86,emp-86,training-rgpd,completed,2025-11-24T10:54:07.661129+00:00,2026-07-07,2026-06-02T10:54:07.661131+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-87,emp-87,training-rgpd,completed,2025-07-26T10:54:07.661132+00:00,2026-07-07,2026-06-08T10:54:07.661134+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-88,emp-88,training-rgpd,assigned,2025-12-27T10:54:07.661136+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-89,emp-89,training-rgpd,completed,2026-01-26T10:54:07.661138+00:00,2026-07-07,2026-06-09T10:54:07.661139+00:00,95,true,Pulse RH,Parcours de conformité obligatoire
+c2922ab3-b713-4f17-90af-4f9845f3ddb7,emp-89,training-react,in_progress,2026-05-20T10:54:07.661143+00:00,2026-07-23,,,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-90,emp-90,training-rgpd,assigned,2025-09-19T10:54:07.661146+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+04cc0393-71f5-407e-93ad-8bfc1db3a17b,emp-90,training-onboarding,completed,2026-04-20T10:54:07.661151+00:00,2026-09-09,2026-06-13T10:54:07.661153+00:00,83,false,Manager direct,Montée en compétence
+training-enrollment-rgpd-emp-91,emp-91,training-rgpd,assigned,2025-06-28T10:54:07.661155+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+45f00cd9-17ab-4b66-87ee-e626e430142f,emp-91,training-communication,in_progress,2026-03-05T10:54:07.661159+00:00,2026-09-15,,,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-92,emp-92,training-rgpd,completed,2026-02-09T10:54:07.661162+00:00,2026-07-07,2026-05-01T10:54:07.661163+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-93,emp-93,training-rgpd,completed,2025-07-11T10:54:07.661165+00:00,2026-07-07,2026-05-18T10:54:07.661166+00:00,90,true,Pulse RH,Parcours de conformité obligatoire
+f90a6c32-7267-4d79-83af-65bbc3515456,emp-93,training-communication,in_progress,2026-05-29T10:54:07.661170+00:00,2026-07-20,,,false,Pulse RH,Montée en compétence
+training-enrollment-rgpd-emp-94,emp-94,training-rgpd,assigned,2026-01-23T10:54:07.661172+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-95,emp-95,training-rgpd,completed,2025-06-19T10:54:07.661174+00:00,2026-07-07,2026-05-14T10:54:07.661176+00:00,77,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-96,emp-96,training-rgpd,assigned,2025-08-18T10:54:07.661178+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+3cc9c4ff-3b59-4b49-aaeb-7d38882393b7,emp-96,training-onboarding,assigned,2026-04-03T10:54:07.661182+00:00,2026-08-30,,,false,Pulse RH,Plan de développement
+training-enrollment-rgpd-emp-97,emp-97,training-rgpd,assigned,2025-05-26T10:54:07.661184+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-rgpd-emp-98,emp-98,training-rgpd,completed,2026-01-24T10:54:07.661187+00:00,2026-07-07,2026-05-20T10:54:07.661188+00:00,84,true,Pulse RH,Parcours de conformité obligatoire
+28c6afc3-81e7-4182-9de5-4a82192308e2,emp-98,training-react,completed,2026-03-13T10:54:07.661192+00:00,2026-09-08,2026-06-09T10:54:07.661194+00:00,81,false,Manager direct,Projet actif
+training-enrollment-rgpd-emp-99,emp-99,training-rgpd,completed,2026-01-16T10:54:07.661196+00:00,2026-07-07,2026-05-11T10:54:07.661197+00:00,89,true,Pulse RH,Parcours de conformité obligatoire
+83e4f619-cec7-4d39-8301-589d35819706,emp-99,training-communication,in_progress,2026-03-14T10:54:07.661201+00:00,2026-07-18,,,false,Auto-inscription,Curiosité personnelle
+training-enrollment-rgpd-emp-100,emp-100,training-rgpd,assigned,2026-02-16T10:54:07.661203+00:00,2026-07-07,,,true,Pulse RH,Parcours de conformité obligatoire
+training-enrollment-youssef-react,emp-demo-youssef,training-react,in_progress,2026-06-14T10:54:07.661206+00:00,2026-07-01,,,false,Fatima Alaoui,Projet frontend actif et montée en compétence produit
+training-enrollment-fatima-manager,emp-demo-fatima,training-manager-101,completed,2026-05-13T10:54:07.661209+00:00,2026-06-12,2026-06-09T10:54:07.661211+00:00,91,true,Karim Tazi,Prise de poste managériale
+training-enrollment-karim-onboarding,emp-demo-karim,training-onboarding,completed,2026-05-20T10:54:07.661212+00:00,2026-06-15,2026-06-13T10:54:07.661214+00:00,95,true,Karim Tazi,Montée en compétence RH sur les parcours d'intégration

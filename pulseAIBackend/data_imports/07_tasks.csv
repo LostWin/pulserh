@@ -1,236 +1,419 @@
 id,project_id,assignee_id,title,description,status,due_date,evaluation_score
-task-demo-setup,proj-demo-onboarding,emp-demo-youssef,Configurer le poste de travail,Installation des outils internes et accès.,À faire,2026-06-17,
-task-demo-manager-meeting,proj-demo-onboarding,emp-demo-youssef,Rencontre avec le manager,Point d'intégration avec Fatima Alaoui.,À faire,2026-06-16,
-0226e621-f578-4945-b3a9-0d305b3f0107,proj-1,emp-30,Le droit de louer de manière sûre,Suggest fly hard organization meeting when way effort.,En cours,2024-11-21,
-5425a76c-382f-4231-8d47-7f770c023c6c,proj-1,emp-83,Quality-focused composite matrices,Accrocher lourd jardin étendue consulter.,Terminé,2024-11-13,99
-154ba4e3-ba68-4f79-96cf-43d0a3e0eccf,proj-1,emp-58,Automated mission-critical open system,تم جديداً التاريخ لمحاكم.,À faire,2024-12-15,
-5582137c-9e3e-431f-b39f-0403e4443bcb,proj-1,emp-47,La liberté de concrétiser vos projets de manière sûre,البولندي الشرق الإكتفاء.,En revue,2024-12-27,
-21d7e895-03cb-4087-acfd-4963bc39bc84,proj-1,emp-2,Up-sized scalable firmware,Sure blue factor anyone him.,À faire,2024-11-25,
-8d4a3560-9a8e-483f-820a-20f96a37174d,proj-1,emp-59,Le plaisir de concrétiser vos projets sans soucis,تم من التبرعات الأمور.,À faire,2024-12-14,
-5b530f42-8280-42ca-b3b0-3224eb2f088c,proj-1,emp-10,Le droit de louer autrement,Mien naturel pont souvenir intérêt possible somme.,À faire,2024-11-27,
-32ecf2c2-418e-4cd0-973d-5f6dadfd6460,proj-1,emp-41,Re-contextualized value-added neural-net,Foot change difficult reduce industry spend.,Terminé,2024-11-09,87
-05b4a668-8109-4430-af5a-864b6a8e04d0,proj-1,emp-58,Future-proofed regional system engine,الأعمال وهولندا يتعلّق وشعار بتحت استدعى.,En cours,2024-11-20,
-e50675a6-ffd6-43e7-b32f-aea20f7fb01e,proj-1,emp-70,Multi-channeled secondary interface,Look rise impact white.,En cours,2024-11-12,
-25fea342-b354-4023-9848-13b7d07412bd,proj-1,emp-15,La liberté d'avancer avant-tout,في ومحاولة وحلفاؤها وفي.,Terminé,2024-11-24,76
-378543ce-f618-4145-9cec-c2cb3fc23530,proj-1,emp-60,Decentralized non-volatile moderator,الشتوية ان بنقطة جهة بالجوي والفلبين حلّت.,À faire,2024-12-02,
-48880c4e-478a-4432-82ae-d01ba5196ea0,proj-1,emp-demo-karim,Cross-platform methodical superstructure,Risquer éloigner monter changement portier feuille tache.,Terminé,2024-12-15,72
-820851de-5eaf-401d-902b-1dd47acda787,proj-1,emp-58,La liberté d'atteindre vos buts autrement,ما الجوي أسابيع حين أجزاء.,En revue,2024-11-20,
-85cf46b3-8cbd-4c95-95e0-2a154464fd86,proj-1,emp-36,L'assurance d'atteindre vos buts de manière efficace,Quality staff middle keep stay.,En cours,2024-12-21,
-b42ad0f7-5a99-4519-b2ad-9a9845e9a56f,proj-1,emp-demo-fatima,Streamlined 24hour groupware,ابتدعها بسبب خلاف أطراف الأمور.,Terminé,2024-11-24,80
-f7413ed7-8c96-47cc-9deb-481d02d62738,proj-1,emp-54,Proactive bi-directional concept,اللازمة العالمية المسرح أحكم كلا المشترك بالمحور.,En revue,2024-12-11,
-2968652d-ffde-4da1-b2dc-38380a2a994e,proj-1,emp-71,Team-oriented modular customer loyalty,Front coucher porte étonner.,Terminé,2024-11-18,100
-846c950c-b114-4143-b654-fe1f5dfbfae8,proj-1,emp-demo-sara,Organized intermediate forecast,المواد انتصارهم بعرض الا بنقطة واحدة به.,À faire,2024-12-18,
-7a1a64f6-6ccf-482f-aa04-4a4f2f7f7037,proj-1,emp-20,Mandatory optimal hierarchy,هو ولم إحكام وإعلان سليمان.,En revue,2024-12-15,
-ba04a134-a9ea-4009-b575-9b0f9f95e505,proj-1,emp-17,Persistent real-time process improvement,الخاسرة تجهيز منتصف تعديل إستيلاء الغالي والمعدات.,À faire,2024-11-08,
-26ddc6ec-4991-4351-9521-da976cd228e2,proj-1,emp-83,Extended well-modulated capability,Professeur façon regretter vue fin.,En revue,2024-12-25,
-d70d8fd0-4593-4216-8c11-0ceb3e1cbe2f,proj-1,emp-11,Robust web-enabled hardware,Similar arm black on behind.,En revue,2024-12-28,
-d4c472a9-6989-4fd5-b86f-39edc1ab43cf,proj-1,emp-demo-fatima,Balanced background implementation,مشروط العظمى معارضة الشّعبين الإطلاق.,En revue,2024-11-29,
-d2c5daee-d1e9-422c-81e2-a2567279059d,proj-1,emp-48,Optimized attitude-oriented strategy,Hors lourd voie créer regretter.,En cours,2024-11-18,
-150f2a70-8305-498b-ac6c-8a1fa9431eaa,proj-1,emp-71,Exclusive global encryption,Bas reculer réalité charger deviner fleur.,À faire,2024-11-23,
-e19bee12-95d4-4588-b123-bc8f4051204f,proj-1,emp-2,Seamless executive extranet,Vert frais ami aussi devoir chaîne préparer.,Terminé,2024-11-27,86
-17c668d2-55d9-4f43-af7b-fbe6ed6d7567,proj-2,emp-8,Cloned responsive access,Join be size good spring main business occur.,En revue,2025-02-22,
-7e8f3621-facb-419d-bd45-533337409117,proj-2,emp-84,Streamlined high-level parallelism,Attitude étudier membre distance.,En cours,2025-02-09,
-8ef4aeb4-bc39-4c96-a06f-55381a64251f,proj-2,emp-48,Total heuristic orchestration,Teacher development society particular account knowledge.,À faire,2025-01-23,
-ea1b0e14-ce62-4e36-bf2f-f152bd3d407d,proj-2,emp-65,L'art d'innover en toute tranquilité,Full already such.,À faire,2025-02-13,
-915358a8-d81a-4f2f-80f7-404c770ce253,proj-2,emp-2,Le pouvoir d'innover avant-tout,Because nearly with run then win region.,Terminé,2025-01-27,69
-5cd6b20a-1ff4-4faa-b7a2-756c48816128,proj-2,emp-70,Function-based background encryption,Effort environmental interview actually.,Terminé,2025-01-06,98
-923f95d1-10b2-4104-8679-1644362bc046,proj-2,emp-34,Le confort d'innover plus facilement,قادة السيطرة المسرح الشّعبين رجوعهم المبرمة.,En cours,2025-01-09,
-b76ce4aa-0c8d-446a-8cf4-271c20f8db86,proj-2,emp-5,Function-based stable open system,Sueur blanc centre fier.,En cours,2025-01-15,
-b015be0f-0c5c-48e3-b797-4bde9134a56b,proj-2,emp-82,L'assurance d'avancer de manière sûre,Think maintain fill.,En cours,2025-01-05,
-d4dd168b-93e8-4eca-b996-7b5f7957e69f,proj-2,emp-12,Function-based optimizing infrastructure,Présenter nation elle aventure quatre.,En revue,2025-02-13,
-7bf4f343-4dc6-47ae-8c95-47d4f17dcebd,proj-2,emp-65,Triple-buffered human-resource toolset,Rue rêver général.,En cours,2025-01-10,
-cbf99833-8650-45b5-922d-3d56c036eb4b,proj-2,emp-demo-youssef,La liberté d'innover en toute tranquilité,Produire histoire penser charger déchirer.,En cours,2025-02-08,
-5eb7582e-e332-46e8-a828-a5ebba6165b5,proj-2,emp-7,Virtual interactive protocol,حالية علاقة كثيرة والإتحاد وسوء.,En cours,2025-01-27,
-af9d8aa5-6690-49ed-bde1-729e14be53d7,proj-2,emp-45,Robust heuristic moderator,Owner animal full.,En revue,2025-01-12,
-4fab7efd-94ec-4b17-b743-0b3c675c4862,proj-2,emp-15,Secured intermediate initiative,Court bataille état position matin histoire mourir.,À faire,2025-01-14,
-d9e77bd5-dd2e-4d05-8bb6-76c9f86686cf,proj-2,emp-49,Reverse-engineered bottom-line hub,Franc sortir chant promettre confier lèvre crainte.,En revue,2025-01-07,
-a1424d96-78d4-464e-b243-743e5a9c0af2,proj-2,emp-4,Optimized regional groupware,Born record produce list crime expect account down.,Terminé,2025-02-18,77
-c900b722-32fb-41a0-b3a9-754365802f64,proj-2,emp-69,Le pouvoir de concrétiser vos projets plus rapidement,Fine mois journée.,À faire,2025-02-12,
-9e247e44-1ca0-4078-9575-878f767e0309,proj-2,emp-81,Le pouvoir d'avancer en toute tranquilité,الأمريكي وإعلان فهرست جمعت التغييرات حادثة سنغافورة.,En revue,2025-01-22,
-f539cce1-c7ec-4dc6-8006-b5aba9e3d07b,proj-2,emp-80,Universal context-sensitive help-desk,Tendre dix monde former.,En cours,2025-01-15,
-37b56a3d-346e-428e-95dc-ddd82fb04329,proj-2,emp-1,Public-key web-enabled system engine,Rencontrer parfaitement plaisir contenir réserver lier tard.,À faire,2025-01-17,
-a30e86ce-c683-4cc8-94b3-faa46c6b3b09,proj-2,emp-demo-youssef,Le plaisir d'évoluer sans soucis,Example individual sort ever.,Terminé,2025-02-04,100
-74cce23d-953f-441d-9ec4-243f734c0488,proj-2,emp-32,Visionary scalable firmware,Te nouveau paix.,Terminé,2025-02-23,92
-b447828b-7197-47f3-a17e-0a6667e6bc7e,proj-2,emp-80,L'art d'avancer à l'état pur,Exemple drôle changement intéresser naître.,À faire,2025-01-06,
-759022d1-d799-4112-838a-b224b113aade,proj-2,emp-88,De-engineered national core,وبولندا تلك والنفيس الذود المواد.,Terminé,2025-02-21,72
-3c14b3eb-b505-4047-94e8-e4c6803b8111,proj-3,emp-46,Multi-tiered client-server data-warehouse,Production condition prevent customer effort maintain.,Terminé,2024-08-18,61
-ff191be1-466d-49bb-98e3-6698f67657c9,proj-3,emp-46,Decentralized discrete solution,Run very her buy life make.,À faire,2024-09-21,
-95ec334c-bf60-470e-a2d3-6bd768fc692d,proj-3,emp-63,Stand-alone incremental matrix,Enough nor tough site become last.,À faire,2024-08-25,
-4036a9cd-8091-4ea1-bffa-b7c9ea48832a,proj-3,emp-86,Ergonomic regional hardware,عدد لمّ تم مدن يرتبط.,Terminé,2024-08-17,88
-dfd196f8-eb87-4281-8434-5ba252f16496,proj-3,emp-63,Enterprise-wide solution-oriented time-frame,Community music resource but may.,En cours,2024-09-18,
-b0c04af1-30c9-4990-9d1f-e7ad66497f58,proj-3,emp-57,Le confort de louer à sa source,Divers français vaincre moment abri.,Terminé,2024-10-01,65
-e8c6f861-1970-4337-aa81-054df432a9e4,proj-3,emp-89,Total high-level workforce,إعادة وصغار غضون.,En revue,2024-09-16,
-8484fd07-ee1b-4a26-8072-3f266e9cbcd2,proj-3,emp-14,Implemented mobile data-warehouse,Vin dos couler je ensemble grand souffler.,À faire,2024-09-02,
-f29738ba-dbb4-47d0-b9b3-f510f5cbfe19,proj-3,emp-81,Le pouvoir d'avancer plus facilement,Guy from like car expert heavy.,Terminé,2024-09-16,63
-d130b4f2-3586-497e-b49b-17077043bcfe,proj-3,emp-2,Synchronized object-oriented installation,Puissance du occuper double interroger titre saluer.,À faire,2024-09-12,
-1d22ffa1-bcdd-4c93-90ff-c8fc91c2f044,proj-3,emp-58,Virtual impactful interface,شاسعة بل مرجع بتخصيص.,Terminé,2024-09-12,64
-bbe11350-5e4d-464b-8f70-fe3267528e86,proj-3,emp-13,La liberté d'évoluer à l'état pur,Similar whose large reality American all.,En cours,2024-08-21,
-35b22c34-e816-42ae-b3c2-3f5bfc7ce49c,proj-3,emp-72,Optional bi-directional system engine,Bring increase reduce east open.,En cours,2024-10-01,
-1486c6fd-713d-4903-b4d3-e3fdc330a75d,proj-3,emp-23,L'art d'atteindre vos buts à sa source,Commercial machine money every.,Terminé,2024-10-03,91
-6c4ff570-7d77-4b42-bc68-9954c115b3a8,proj-3,emp-82,Decentralized 6thgeneration migration,ايطاليا والديون بالرّغم الأخذ عن الأمور المتّبعة الأمم.,À faire,2024-09-03,
-2e656bee-8c23-4cf0-b94e-60e5e7e27673,proj-3,emp-38,Enterprise-wide local knowledgebase,Réponse bas haïr clef élément tour.,À faire,2024-10-02,
-9c64c7a1-118a-490b-89b5-923795040f96,proj-3,emp-23,Le plaisir d'avancer plus facilement,لم للحكومة بخطوط حيث هامش للأراضي.,Terminé,2024-08-23,69
-22f2cba0-197b-4b10-93b6-c1c4ad9aab7d,proj-3,emp-72,Virtual 24/7 pricing structure,Stuff news position nature in reach.,En cours,2024-09-25,
-1a680dc4-8dfe-4e62-be60-87ed076e6450,proj-3,emp-demo-youssef,Decentralized 5thgeneration groupware,قبضتهم ب٠٨٠٤ ٢٠٠٤ الشمال إختار قام اليها.,Terminé,2024-09-03,78
-1616cc46-631e-49f3-8243-5ff8b05a7c30,proj-3,emp-10,Face-to-face stable product,Different class street quite.,Terminé,2024-09-15,78
-22fe432d-4b5d-4dad-8d6c-5dc61807e39a,proj-3,emp-63,Innovative non-volatile firmware,Seul désert feuille profondément condition monde épais.,En cours,2024-08-14,
-beecd3f3-d09d-42c1-afa7-d12b19ecf9f4,proj-3,emp-82,Intuitive even-keeled info-mediaries,Soon continue turn add.,En cours,2024-08-28,
-67feb6ac-143c-4986-92d3-6c3af88d5455,proj-3,emp-35,Focused leadingedge Local Area Network,Policy arrive environment my care accept response.,En revue,2024-09-09,
-23b46ded-22a7-4c4f-8c2c-0b6eea677c81,proj-3,emp-65,Quality-focused user-facing core,Venir essuyer tromper train rire.,Terminé,2024-08-27,64
-695ffca0-4cf7-4604-954e-8bbb32d15f0e,proj-3,emp-39,Realigned tertiary infrastructure,الإقتصادي والتي ولاتّساع الا.,À faire,2024-09-17,
-268ba94b-cc9c-45dc-8705-07b3a0c39362,proj-3,emp-76,Le pouvoir d'avancer à la pointe,Avoid some certain arrive son have ground.,En cours,2024-08-29,
-c48ec478-9922-44e0-8638-ab62b9617ea5,proj-3,emp-50,Centralized dedicated definition,Fenêtre animer acheter front lèvre abandonner souhaiter.,À faire,2024-08-19,
-a8acc1ff-1b49-4a0b-a53d-57f2eed49727,proj-3,emp-demo-sara,Cross-platform content-based emulation,Dehors rare calmer.,Terminé,2024-09-06,64
-3739e4cb-572e-4683-af1b-102c402776c7,proj-3,emp-39,La liberté d'innover naturellement,بضرب ببعض للصين.,En revue,2024-09-01,
-08798784-152f-4668-af9a-3636ca3dba7d,proj-4,emp-75,Fundamental hybrid website,Education key find clear care let hope.,Terminé,2026-02-17,85
-dab7725d-a70b-40d8-a745-532415a58e16,proj-4,emp-11,Automated optimizing infrastructure,البرية الحكم المنتصر إذ تلك بأضرار نفس.,Terminé,2026-03-01,71
-45837eb4-8623-485c-a962-27d3c1c19e2d,proj-4,emp-22,Ergonomic regional Local Area Network,الإطلاق السبب الإيطالية حلّت وقوعها بدون.,Terminé,2026-02-05,75
-d5db8034-6694-4506-8a5f-272c84dd285b,proj-4,emp-82,Le pouvoir d'avancer avant-tout,Cause enough economic fire fund.,Terminé,2026-02-21,84
-e0e7cd45-7e31-4667-9933-998719c9b525,proj-4,emp-6,Le plaisir de louer autrement,الربيع حقول بريطانيا-فرنسا قتيل الأحمر تشيكوسلوفاكيا.,Terminé,2026-02-08,70
-b16c0e63-e976-44c2-97da-99e65c2dfccb,proj-4,emp-33,Versatile actuating artificial intelligence,Boy three pattern green four necessary discussion.,Terminé,2026-01-23,88
-4029273e-07ab-4579-8ab8-df00a0aa4afe,proj-4,emp-88,Synchronized multimedia process improvement,Too foot activity challenge.,Terminé,2026-03-10,70
-83947f8b-728e-4eda-b992-75745a88d032,proj-4,emp-28,Face-to-face multi-tasking website,Performance there have own ever economic skin.,Terminé,2026-02-27,61
-51fbbb38-3f4d-43a7-bee6-24cacb9a00d2,proj-4,emp-36,Progressive attitude-oriented portal,الأجل بينما اليها الانجليزية بانه تسبب.,Terminé,2026-02-25,77
-1332506e-fcee-44f5-8e8a-5b7b695c8cdc,proj-4,emp-19,Proactive zero-defect info-mediaries,للإتحاد حكومة الفرنسية لأداء الشهيرة كثيرة الشطر بدون.,Terminé,2026-03-03,80
-5e1f52d5-1c9e-47aa-a9a6-4c3a016d0f56,proj-4,emp-23,Integrated system-worthy emulation,Thank either beautiful talk use house.,Terminé,2026-02-08,87
-e5b17bf1-be77-4e00-8ec0-b37911a5e489,proj-4,emp-73,Distributed secondary Internet solution,تحرّك تشيكوسلوفاكيا بـ التاريخ ابتدعها.,Terminé,2026-02-10,83
-7f0f54eb-4f16-4a18-a665-14e958afe84f,proj-4,emp-14,Operative tangible encryption,اليميني سبتمبر وزارة.,Terminé,2026-01-19,93
-4bbdaaa5-af53-4615-b171-4f68a7880d96,proj-4,emp-58,Devolved leadingedge focus group,Lune lettre sommet réunir plaine dimanche.,Terminé,2026-03-06,79
-4aea6d24-0319-4f9b-b199-207f8035276b,proj-5,emp-47,Distributed context-sensitive middleware,Savoir troubler besoin.,Terminé,2026-07-14,100
-a4e8d944-18d9-48f0-baa7-46283a987561,proj-5,emp-demo-admin,L'avantage de louer à sa source,Parent violence autorité jeune conduire carte connaître.,Terminé,2026-06-25,66
-9e1f8e1d-983f-46d8-805f-1697b73b6f8f,proj-5,emp-76,Le plaisir d'évoluer sans soucis,Voyage bien ouvert déchirer.,Terminé,2026-07-28,72
-16c378c4-2287-450a-a06c-fcd53253d3a1,proj-5,emp-43,Le confort d'avancer à la pointe,Nous entier offrir faveur.,Terminé,2026-06-27,64
-9c447355-59d2-4b12-9c0a-dabf492429b2,proj-5,emp-37,La possibilité d'atteindre vos buts avant-tout,Tax risk agree person use describe seat.,Terminé,2026-06-26,91
-3b09282a-45cf-4863-9635-2157f1e62f55,proj-5,emp-34,Object-based disintermediate synergy,Poor language class.,Terminé,2026-07-31,92
-9e9a5162-0178-4ba9-94fe-dbd9f7881ef6,proj-5,emp-42,Multi-tiered national parallelism,بالحرب الأوروبية الإتفاقية مرجع يتسنّى بالجوي.,Terminé,2026-06-28,95
-99a6f658-0feb-402f-a0b4-0d14028825bc,proj-5,emp-24,Le plaisir de rouler à sa source,Reason staff rock Democrat.,Terminé,2026-07-28,70
-3d0f4b38-6390-4df5-8b1d-d4b59208a89a,proj-5,emp-7,Down-sized mission-critical moderator,غير اللازمة أسابيع أن قبضتهم بالثالث الشهيرة.,Terminé,2026-06-14,70
-cc350e8b-5010-4836-a5fd-0428d3a3ae66,proj-5,emp-9,Total didactic knowledge user,Fuir inquiétude déposer parce que.,Terminé,2026-06-21,71
-c4114834-5e94-4f41-a2ac-d4bbb1414608,proj-5,emp-77,Organic content-based application,Camera main tend scientist.,Terminé,2026-07-10,87
-7b7ac63a-267e-42ed-8e71-81df5654c72a,proj-5,emp-56,Visionary zero-defect strategy,Précipiter ton vêtement au aussitôt matière attendre vif.,Terminé,2026-07-27,66
-cbb1c8b9-f6df-479f-a7a1-67fde7222211,proj-5,emp-77,L'assurance d'atteindre vos buts plus facilement,وبدون كلا احداث الجنوب بزمام هنا؟ واشتدّت.,Terminé,2026-07-14,68
-9faa9efb-7b63-4ae7-aa88-2aacd56df1d8,proj-5,emp-22,Innovative motivating encoding,Often spring kitchen special either.,Terminé,2026-07-05,98
-3e93cfb9-642b-400a-972c-bc580f4b7943,proj-5,emp-75,Ameliorated national database,والنفيس اليابان بدارت.,Terminé,2026-06-27,69
-5185718b-3a8e-4618-8ddc-131fd5cb895b,proj-5,emp-demo-admin,Ergonomic zero administration extranet,Popular president everything second central stuff.,Terminé,2026-07-23,63
-64aa4f9a-6c5e-46f8-86d6-5bbebc092f25,proj-5,emp-31,L'assurance d'évoluer autrement,Confiance vérité système occuper.,Terminé,2026-06-27,90
-033a30e6-9493-42b2-b77d-6e072656f541,proj-5,emp-31,Le confort d'avancer plus rapidement,الإقتصادية وصافرات مكّن وقرى تحرّكت تحرّكت الإحتفاظ.,Terminé,2026-07-19,86
-a8ce6bfd-c8bb-45e2-875e-ba21a29949e9,proj-5,emp-57,Realigned foreground customer loyalty,Charger mode rire.,Terminé,2026-07-20,93
-f2d4008d-8b56-48ad-af5a-f54555c92ac7,proj-5,emp-86,Automated foreground installation,المشترك انذار بدون القوى.,Terminé,2026-06-16,94
-783abb52-69c4-4665-b0c9-10b33db74a99,proj-5,emp-12,Le plaisir de louer autrement,Senior center perhaps serve perform different.,Terminé,2026-07-14,73
-34501e4d-b002-44cb-8af5-8679affbc00b,proj-5,emp-87,Function-based attitude-oriented core,لعملة كنقطة سابق لإنعدام البشريةً.,Terminé,2026-07-29,62
-30ab35c8-337e-4efc-bdbd-5a9319595508,proj-5,emp-37,L'avantage d'évoluer à la pointe,Table maintain arrive third collection responsibility drive.,Terminé,2026-07-17,96
-de1dbdf6-1f62-4ac0-b0e1-9f8d6746562c,proj-5,emp-65,Exclusive real-time complexity,دون الأوروبية بقد ببلا محاولات الدولارات.,Terminé,2026-07-29,60
-8510f8eb-1199-4a3d-80dd-c4ff6467535a,proj-5,emp-65,Open-source tertiary service-desk,Space watch become wait phone.,Terminé,2026-06-17,83
-59cbdada-41ef-4dda-860a-ab774db04f3d,proj-5,emp-65,L'art d'avancer naturellement,État yeux toucher route dont admettre.,Terminé,2026-07-03,72
-1904fd02-bbef-4641-8819-a63f63f50f18,proj-5,emp-2,Multi-layered empowering hierarchy,Dresser soleil cruel chez bientôt.,Terminé,2026-07-04,98
-152d93e6-a421-477d-9170-cc54fff0540f,proj-5,emp-13,Multi-channeled optimal capability,Debout terminer social femme.,Terminé,2026-07-07,80
-6b648e94-4586-406c-aead-16728e0f873e,proj-6,emp-16,Multi-layered scalable help-desk,Avouer nous médecin beau ramasser soi servir couleur.,Terminé,2026-01-01,94
-ded84471-8ea2-4889-9c0e-b9cc61459d34,proj-6,emp-6,Realigned maximized policy,Sonner perte loi commun.,Terminé,2025-12-30,70
-63fe8ba8-e96c-4d54-81bc-7925d0689cba,proj-6,emp-5,Extended responsive process improvement,Account night something move whether art yourself.,Terminé,2026-01-17,93
-0ec3c71a-ab6f-4e92-815b-17bc37686ce9,proj-6,emp-25,Total tangible throughput,Il écrire fine mer préférer.,Terminé,2026-01-04,62
-872e7349-9acb-4a4b-941c-c28daddc5291,proj-6,emp-19,Triple-buffered regional function,Direction along analysis grow expert factor offer.,Terminé,2026-01-15,80
-6bbc5a07-2841-4cdf-bbb3-93f67d9868bb,proj-6,emp-1,Realigned next generation workforce,Lire inspirer heure désir.,Terminé,2025-12-24,73
-4a58d152-b34c-4c7b-b0a7-f9986e23e786,proj-6,emp-18,Organized coherent ability,بقد الجنرال ثانية الخارجية أخذ انتباه.,Terminé,2026-01-05,67
-d76c43a7-af1f-4f35-be6f-dc4c2728278c,proj-6,emp-76,Cross-group directional hardware,Un trace chant somme.,Terminé,2025-12-15,100
-5d3ffa9b-865f-4dbc-a942-bf407dfb6712,proj-6,emp-76,Assimilated demand-driven throughput,Amour se prince âme céder long prière.,Terminé,2025-12-31,69
-fd9ffa59-5887-4460-a1c2-9b450971a2dc,proj-6,emp-66,Le confort de rouler à l'état pur,Citizen spring huge his reflect nature.,Terminé,2025-12-20,88
-d8c28662-6ead-4f43-a361-f14f04e450ea,proj-6,emp-76,Realigned attitude-oriented collaboration,Manquer mari justice droite sombre surtout.,Terminé,2026-01-06,71
-a03de2c9-2929-4229-ad89-56e18d548028,proj-6,emp-41,Synergized tertiary frame,Envie libre demain prix celui descendre nu.,Terminé,2025-12-23,78
-519d3d51-4374-43d4-a190-055a9c40643a,proj-6,emp-81,Programmable human-resource core,وصافرات المتحدة تحرّك بأم لكل الضغوط.,Terminé,2026-01-06,92
-05b9dfc7-a5e3-4d40-9a81-356a8633d321,proj-6,emp-26,La liberté de concrétiser vos projets avant-tout,Can challenge possible likely religious role.,Terminé,2025-12-25,88
-a30ecb3a-1096-4d2e-9254-6881cc45c209,proj-6,emp-9,La liberté d'innover plus rapidement,Attention fils jamais phrase.,Terminé,2025-11-29,93
-f4c4347a-05f2-43d8-9158-4b864608f9c6,proj-6,emp-20,Diverse tangible software,Author election condition here near evidence.,Terminé,2025-12-20,83
-ed1d5d6c-abad-4b35-a849-70a18da3ab4e,proj-6,emp-6,Multi-lateral transitional challenge,Autant dessiner couler plutôt.,Terminé,2025-12-22,70
-6b93d48f-1e28-4db1-9f12-65448275bd79,proj-6,emp-53,Object-based non-volatile approach,Use cut almost.,Terminé,2025-12-23,76
-7f5b9d57-b848-4880-87e8-8db5b82dfb60,proj-6,emp-35,Realigned exuding matrix,Spend debate stuff east week last.,Terminé,2025-12-18,89
-cc61451a-5e90-441d-834e-cc97f8a76506,proj-6,emp-26,Devolved interactive knowledge user,After the beyond them drop anyone.,Terminé,2025-12-01,83
-ee185453-7016-42ea-ab93-041be26eab1b,proj-6,emp-53,L'avantage d'évoluer plus rapidement,Follow director deal standard job material.,Terminé,2026-01-05,94
-69d76c60-596d-45b5-8059-8675aa0e2668,proj-6,emp-29,La liberté d'atteindre vos buts de manière sûre,غرّة أحكم إذ للجزر الشطر.,Terminé,2026-01-10,80
-46775417-a73b-42c3-a6fe-f4b4be8cc6c2,proj-7,emp-10,Phased system-worthy product,Senior green us building his leader dog.,Terminé,2026-04-26,98
-48756dfd-931f-4ce9-a1a8-bcce4d16ac0b,proj-7,emp-demo-karim,Future-proofed systematic structure,لأداء الباهضة جيوب وبداية دول.,En revue,2026-05-01,
-702deb8f-3edb-4bd7-9d25-cbd881401fb3,proj-7,emp-88,Front-line tangible help-desk,والإتحاد الشطر تصرّف.,En cours,2026-04-22,
-d8b2ef22-20db-4bf5-83eb-bcac6339a1b3,proj-7,emp-64,Le confort d'évoluer à l'état pur,مسارح الصينية الشرقية المحيط لبلجيكا.,En revue,2026-05-05,
-b491339a-30e3-49e0-9a7e-bdadc40ce47a,proj-7,emp-demo-youssef,L'assurance d'innover en toute tranquilité,Even field just out person detail successful.,À faire,2026-04-11,
-843d8bf4-42d5-4e5b-af0e-381e1ab4c6ba,proj-7,emp-37,L'avantage de louer avant-tout,Magnifique user défaut nez air surveiller grand.,Terminé,2026-04-18,82
-9eac723f-939a-4850-b1fa-e864c709cc57,proj-7,emp-32,Ergonomic tangible help-desk,Clair oser tendre faire.,En cours,2026-05-14,
-d792ead6-9ebf-40ae-b514-89d2ddcdd8c8,proj-7,emp-39,Le confort d'avancer à l'état pur,Enfoncer observer être.,Terminé,2026-05-03,71
-862af426-8665-4475-bb69-10fc4e9abfc7,proj-7,emp-13,Digitized context-sensitive definition,مسرح حادثة لبلجيكا أم.,En cours,2026-05-23,
-8e6569f2-a729-4d50-ae67-87e7968c270d,proj-7,emp-2,L'assurance d'évoluer plus rapidement,Shoulder as religious.,À faire,2026-04-20,
-203ebabb-c213-44d9-a6ec-91bcfc22c124,proj-7,emp-82,Extended responsive moderator,When defense author free full remember.,En cours,2026-05-21,
-ae3c91cd-ce6d-4318-bf91-e5b3458bb46b,proj-7,emp-72,Decentralized attitude-oriented productivity,Owner enter over Republican way nothing.,Terminé,2026-05-13,85
-8239f954-b59a-48c7-8ed4-b109227072f1,proj-7,emp-demo-karim,Upgradable zero administration Internet solution,وباءت الأبرياء أصقاع سقوط وحتى الأرضية فكان على.,À faire,2026-04-17,
-914a9243-3389-4557-bc5d-a717231909d8,proj-7,emp-22,Le plaisir d'évoluer autrement,Pleurer facile imaginer huit mouvement abri.,En cours,2026-04-18,
-ce49d231-f733-446c-8c66-022a5a5078cc,proj-7,emp-78,Down-sized bi-directional ability,ومطالبة الفرنسي وصل أجزاء للجزر.,En revue,2026-05-09,
-adcb1599-c438-4e41-adae-f2d2ca5edfb0,proj-7,emp-63,Mandatory optimizing emulation,Business from no include together.,Terminé,2026-04-22,98
-1ae0ae19-984f-4eee-92a2-89eb601b9b71,proj-7,emp-75,La possibilité d'avancer de manière sûre,Raise majority build woman down do size nature.,En cours,2026-05-23,
-efe951db-82dd-4c85-8b70-a53df6803c02,proj-7,emp-23,Expanded tangible architecture,بدون أصقاع بانه بسبب.,À faire,2026-04-13,
-707461c3-a2a3-4eba-9722-19ac2f23731e,proj-7,emp-65,L'avantage d'atteindre vos buts en toute tranquilité,Card do bill green.,À faire,2026-05-01,
-16f019a1-b15c-451b-b07d-a541910b915b,proj-7,emp-demo-admin,L'avantage de concrétiser vos projets de manière efficace,واُسدل يونيو دنو ثانية إبّان النفط.,À faire,2026-05-30,
-a57a607d-8602-426d-b673-8d24afca8480,proj-7,emp-80,Le droit d'innover naturellement,إنطلاق اللا القادة وبعض.,En cours,2026-05-13,
-99269c47-ab03-48cd-b99e-3e6fb0b3d66d,proj-7,emp-5,Expanded hybrid collaboration,Phone maintain old.,Terminé,2026-05-27,60
-0311baf4-647c-4a57-b5d4-c7221eeb496e,proj-7,emp-17,Le pouvoir d'avancer autrement,الخاصّة قدما الإيطالية الرئيسية أراض ٠٨٠٤ فكانت حتى.,À faire,2026-05-26,
-c05eccb1-2ec8-4bca-840d-ea6e8c7a05bd,proj-7,emp-59,La liberté d'évoluer plus rapidement,Even short feeling stage heavy skin kind.,En revue,2026-04-30,
-ba70368b-5214-4d35-b256-38cf3adee146,proj-7,emp-67,Reduced impactful flexibility,حاملات بال الإمتعاض فشكّل مليون بعرض شاسعة.,À faire,2026-04-28,
-5cdf9796-2189-4c6f-98d5-86e7a3ba16d4,proj-7,emp-31,Operative scalable success,أواخر مسؤولية واُسدل الخطّة.,En cours,2026-05-12,
-0ebebc0d-4dd2-4d9d-b2e3-bbc4af8ff9d5,proj-7,emp-89,Assimilated dynamic emulation,وإقامة دفّة أسر هذا اقتصادية.,Terminé,2026-04-20,80
-d07b33d3-f829-4436-9310-fec01732311c,proj-7,emp-34,Profit-focused user-facing installation,Such population fight really.,En revue,2026-04-19,
-b6554997-05f4-4b31-b292-07534c4b776d,proj-8,emp-54,Networked secondary attitude,Relate save magazine action.,Terminé,2026-01-01,97
-cb480d98-3e3f-4b77-841c-a4c410c67a90,proj-8,emp-13,Face-to-face bi-directional artificial intelligence,Surtout justice jeter oreille fier expliquer dont.,Terminé,2026-01-31,72
-ff538fda-ba0b-43b8-88d4-e5e6c9744bf8,proj-8,emp-13,L'avantage de louer à l'état pur,Summer tax go red.,Terminé,2026-01-22,61
-2392af82-3aa7-4dbe-ab96-aebc7c7a9911,proj-8,emp-52,Multi-layered transitional budgetary management,Amount have owner whose garden price.,Terminé,2026-02-11,95
-e65252a4-96d2-442a-a274-224d5ee18870,proj-8,emp-14,L'assurance de concrétiser vos projets de manière efficace,Certainly continue church under sport.,Terminé,2026-01-21,76
-de14eb1a-9b18-4d6d-bef9-9f5c9112114c,proj-8,emp-9,Quality-focused fault-tolerant protocol,أما والمانيا التغييرات وتنصيب جُل ليبين.,Terminé,2026-01-20,98
-d097f7ad-0d66-4d91-b405-f6ae7f8e6c09,proj-8,emp-29,Adaptive value-added architecture,Cours retour mal seul véritable.,Terminé,2026-01-06,80
-e1980bd4-f189-40fe-b1ac-2c3bab868e07,proj-8,emp-40,Le confort de concrétiser vos projets en toute tranquilité,Environ mener semblable carte.,Terminé,2026-01-13,71
-a4753f74-579f-43de-a512-7675ac8d867c,proj-8,emp-34,Open-architected asymmetric array,Officer enter car performance board.,Terminé,2026-02-01,86
-7ccec021-78fa-4e77-a525-28a62039415f,proj-8,emp-75,Le confort de rouler autrement,Enfin ton guerre sien âgé.,Terminé,2026-01-11,82
-69c1e6e9-6ae2-4b0b-b614-3a41493e1571,proj-9,emp-71,Cloned analyzing support,Water local lay decide true.,En revue,2025-03-19,
-49b3b953-49c9-4da3-9855-c92a408a9cbd,proj-9,emp-76,Extended incremental capacity,Ni mettre auprès occuper.,En cours,2025-04-06,
-5139a8e4-04dc-4883-93d1-b58ed581687f,proj-9,emp-18,Customer-focused 5thgeneration Internet solution,أصقاع والمعدات فكان المؤلّفة.,Terminé,2025-04-02,61
-40ff8960-6ddc-424a-80cf-8cc348e2fa29,proj-9,emp-21,Public-key didactic installation,بالولايات الجو مدن زهاء بولم.,En revue,2025-03-27,
-8fe9b3b5-65e9-487f-8eb4-82ce8d4f2fcd,proj-9,emp-31,L'art de changer à l'état pur,Demeurer inventer pousser montrer travail neuf.,À faire,2025-03-28,
-c85a8509-8ded-45f3-b30d-05c338b47aa1,proj-9,emp-11,L'art de louer sans soucis,Nerveux lit départ regard gouvernement.,Terminé,2025-04-18,71
-37cad15d-6ad7-4f8e-ba80-4a9f5624edc7,proj-9,emp-27,Secured mobile time-frame,بالمحور معاملة حصدت رجوعهم للإتحاد فرنسية انتصارهم.,Terminé,2025-03-25,98
-a855e99b-bfe4-4dd7-add2-b4773a7ff354,proj-9,emp-33,Multi-lateral 24hour synergy,يبق اليابانية الا وحرمان سبتمبر.,Terminé,2025-03-23,90
-aa94b329-45d0-411d-9465-d5bd5d36c4e4,proj-9,emp-84,Le confort d'évoluer avant-tout,Rocher éprouver possible digne force trente page accorder.,En revue,2025-03-20,
-c5b9d9fa-0f2e-4770-ae7c-5c27836503ed,proj-9,emp-88,L'avantage d'évoluer naturellement,Depuis approcher eau cheveu accomplir jardin seul madame.,En cours,2025-03-21,
-09365a2e-1b19-472a-aedc-dc2dfcc0ce60,proj-9,emp-37,Le pouvoir de concrétiser vos projets naturellement,Complet théâtre elle manquer faveur.,Terminé,2025-04-04,93
-0eb174ab-9950-488e-9be3-5aed66619f0c,proj-9,emp-9,Le droit de rouler en toute tranquilité,Care change yeah paper.,Terminé,2025-04-24,73
-3020848d-a895-4a1a-aa1e-a187d035d705,proj-9,emp-72,La possibilité d'avancer autrement,Player soon or month.,Terminé,2025-05-01,62
-fb14f592-0da5-4a69-845f-76c84c2993c6,proj-9,emp-53,Universal foreground focus group,Pattern trouble today.,En revue,2025-03-29,
-f643ff28-4ea6-4d8e-b4c5-e16827c2df18,proj-9,emp-31,L'art d'innover en toute tranquilité,Inquiétude suivant d'abord mien.,En cours,2025-05-08,
-1bc9d925-c71d-4886-9795-04d8ed926219,proj-9,emp-51,Le pouvoir de louer à sa source,Summer check cost almost energy marriage.,À faire,2025-04-20,
-dbc4a011-ac41-446d-acde-e41a327a69a9,proj-9,emp-52,Inverse disintermediate array,الإثنان بتخصيص الفرنسية للحكومة بشكل.,En cours,2025-04-27,
-ae04f96f-0ad3-4cfc-bef9-5569cc1500b0,proj-9,emp-49,Persevering context-sensitive utilization,Commander transformer composer tout cruel mince personne.,En revue,2025-05-04,
-7c60369e-2a40-4942-bbff-2c2d78c806c2,proj-9,emp-64,Focused executive model,عملية لإعادة أراضي الصفحات معارضة استبدال.,En cours,2025-04-27,
-90d21a31-86f3-4c60-adb8-3a960cd10740,proj-9,emp-11,La liberté de changer de manière efficace,المبرمة عل بسبب بداية عدد.,Terminé,2025-05-07,74
-3bf28e00-5131-4ccb-8ac1-7461dcdacde5,proj-10,emp-4,Le plaisir d'atteindre vos buts à sa source,الإتفاقية الأرضية وباءت وهولندا ويكيبيديا لم للسيطرة أهّل.,En cours,2025-09-23,
-2c5e05c0-5f63-497a-b713-8ade81781499,proj-10,emp-63,Profound even-keeled project,Fait bout couler exécuter court inventer.,En cours,2025-09-17,
-7e48a192-374d-4635-bd1d-685d34776513,proj-10,emp-24,User-centric actuating portal,Life make while.,Terminé,2025-10-07,72
-50424517-34b4-42a1-9eaf-663574a5beb8,proj-10,emp-74,L'art d'atteindre vos buts en toute tranquilité,Couvrir cours agiter risquer poursuivre doux aucun calme.,À faire,2025-09-02,
-fac3f1c7-c663-453a-b943-7592e90ee454,proj-10,emp-75,Team-oriented hybrid help-desk,Pénétrer ton lèvre rencontre blanc.,À faire,2025-09-30,
-ac8950af-eedd-4c77-9670-beaf41548902,proj-10,emp-78,Reverse-engineered global emulation,Decision let cut growth middle hotel doctor.,Terminé,2025-09-15,76
-3b2ceb52-dfb2-45d3-b9cf-f06ac92f9cae,proj-10,emp-3,Managed stable Graphical User Interface,أجزاء جيوب وصل خلاف معقل.,En cours,2025-09-13,
-ae9d3410-de75-4e84-99f9-8fb1f8c11610,proj-10,emp-21,Balanced maximized leverage,Loi enfance emporter moyen apparaître.,En revue,2025-09-24,
-82a87eee-8807-4674-b9d1-8b490b6074d3,proj-10,emp-34,Extended optimizing encryption,Croiser service aile en.,À faire,2025-08-29,
-c5674a9c-0064-4c85-8447-e043323784ee,proj-10,emp-62,Ameliorated composite Local Area Network,مدينة النفط التجارية بانه التكاليف الأوروبيّون بالسادس تونس.,En cours,2025-10-01,
-d448d938-35c4-4a10-a43b-72c7305091f9,proj-10,emp-65,Horizontal 5thgeneration moratorium,Board identify five whom.,En cours,2025-10-02,
-d914068d-4ea3-4242-b63b-ff02f2f0ca3f,proj-10,emp-54,Le droit de changer à l'état pur,All than main.,Terminé,2025-08-30,100
-65f2fa09-b659-4f39-bc54-aabb8a490906,proj-10,emp-26,La liberté d'atteindre vos buts en toute tranquilité,سليمان لها حاملات ب٣٠ بزمام بحث الفترة.,En cours,2025-09-25,
-06fb2658-f360-4672-bc62-68f4bbf4913e,proj-10,emp-48,Switchable foreground implementation,Help perhaps project great.,En cours,2025-10-09,
-26f322db-04fb-4219-bb0f-be9e73c30c5b,proj-10,emp-48,Reactive context-sensitive software,Bill medical pick likely serious build.,Terminé,2025-09-07,86
-86c43251-fafb-4264-b9f4-c5125c260b91,proj-10,emp-60,La liberté d'atteindre vos buts plus facilement,Dix mauvais malade lors oncle plusieurs.,En revue,2025-09-27,
-300a961a-c501-443f-93fb-6f805e50960d,proj-10,emp-5,Switchable system-worthy attitude,Droite aider un.,À faire,2025-09-21,
-c2a44cca-6896-4eb5-a397-103f3d407026,proj-10,emp-demo-youssef,Right-sized didactic structure,Per write marriage professional room.,En cours,2025-09-14,
-537a95b6-f4ce-4fe4-873e-2e8beca84bf6,proj-10,emp-5,Fully-configurable fresh-thinking focus group,Bring what yes most number idea system forget.,En cours,2025-10-14,
-74c519f6-f60b-4113-a410-256bbc48570d,proj-10,emp-32,Implemented coherent framework,Lay back popular strategy she.,En cours,2025-08-28,
-3fa3a220-4ae0-425d-835b-b4ce85c08647,proj-10,emp-59,Public-key zero administration analyzer,Peur effacer rêve chacun.,Terminé,2025-08-28,81
-a7c93648-b33a-479c-b3b2-e393dc1c1c3b,proj-10,emp-2,Reactive regional adapter,But food south catch.,En cours,2025-10-06,
-7350711c-cdfc-45ba-8409-0cc1a6e029a9,proj-10,emp-86,La possibilité de concrétiser vos projets sans soucis,فقد ٣٠ يتم الوزراء قادة الله.,À faire,2025-09-07,
-1e36af7f-d12e-468b-aab2-f7783ee20880,proj-10,emp-61,Polarized dedicated focus group,المتساقطة إعلان بوقامت انتهت.,Terminé,2025-09-04,73
-bee423eb-6044-4a30-888d-2b368a6f5182,proj-10,emp-20,Visionary actuating focus group,Involve response at everything small happy.,En revue,2025-09-13,
-d586d87c-67ac-453e-bd48-9acbe5258050,proj-10,emp-41,L'avantage de changer naturellement,Occuper premier passé petit.,Terminé,2025-09-07,77
-bfbb4e2d-8d41-43d0-a0b8-acb90bad2656,proj-10,emp-59,Sharable bottom-line hardware,Especially maybe main or part sign.,À faire,2025-09-12,
-650ffd1a-92f4-450e-a33b-0557dc1c3411,proj-10,emp-8,L'assurance de changer sans soucis,وبالرغم هو العظمى.,Terminé,2025-09-17,69
-17dd9344-5c2c-478b-8503-8b17d6612922,proj-10,emp-19,Le pouvoir de louer naturellement,إتفاقية عقبت فكانت ومضى المحيط لإنعدام.,En revue,2025-09-21,
-71c10a4a-f7f6-46f0-b458-537b276169b2,proj-10,emp-68,Phased modular algorithm,Bring partner according girl that nearly.,À faire,2025-09-26,
+task-demo-setup,proj-demo-onboarding,emp-demo-youssef,Configurer le poste de travail,Installation des outils internes et accès.,À faire,2026-06-19,
+task-demo-manager-meeting,proj-demo-onboarding,emp-demo-youssef,Rencontre avec le manager,Point d'intégration avec Fatima Alaoui.,À faire,2026-06-18,
+e7051cda-03df-4ba2-9476-480245c2dd04,proj-1,emp-87,Le pouvoir d'atteindre vos buts à sa source,بريطانيا-فرنسا فرنسا بالجانب الإكتفاء وحتّى إستعمل.,Terminé,2025-03-15,58
+835992ff-fa08-465b-ba37-2ce529305844,proj-1,emp-demo-karim,Cross-group intermediate attitude,Speech news only no form business.,Terminé,2025-05-07,71
+37dcf108-1e19-4a5b-976e-d46e81e1d555,proj-1,emp-65,L'art d'avancer sans soucis,Choice lot suggest glass news.,Terminé,2025-05-12,77
+ea35189e-9756-4c5a-a160-a1db8e350fff,proj-1,emp-72,Virtual even-keeled orchestration,وإعلان ويكيبيديا مواقعها شاسعة عقبت أعلنت.,Terminé,2025-03-12,57
+bea54f9b-1b31-4e21-bf0f-c7ed0c5d1cd3,proj-1,emp-9,Team-oriented encompassing algorithm,كانت المجتمع اليابانية أخذ والفلبين.,Terminé,2025-02-19,77
+ff01995e-8aa6-499f-aa9e-88cfd0aca17b,proj-1,emp-52,Switchable impactful architecture,استراليا تنفّس بالجوي.,Terminé,2025-02-24,87
+1d4df805-7ee9-4b05-a023-c443a8e6d620,proj-1,emp-5,Le confort de louer en toute tranquilité,Since nothing be apply church pay.,Terminé,2025-03-12,87
+caf7a6a2-44cd-494a-9f82-abd1ea6395b9,proj-1,emp-37,Configurable encompassing intranet,Magazine kind event sense box involve.,Terminé,2025-04-24,68
+7a7620d9-3e88-4e27-93aa-38d8a90fa1f1,proj-1,emp-83,La possibilité d'innover de manière efficace,يذكر أوسع الحرة وفي مئات ليرتفع.,Terminé,2025-04-04,78
+73dd0b30-1b39-41a2-8855-a29dd0d60749,proj-1,emp-78,Le plaisir de rouler naturellement,Compare herself region matter street south.,Terminé,2025-04-05,59
+f2b07648-aae3-457c-8571-c4371c6377e3,proj-1,emp-14,Object-based user-facing analyzer,Importer avec enfance.,Terminé,2025-02-13,73
+86065b84-7a2a-4ec6-9fff-64c58513c0d6,proj-1,emp-73,La liberté d'atteindre vos buts en toute tranquilité,أسيا النزاع مقاطعة شعار هذا وجهان.,Terminé,2025-03-28,75
+1cee3d61-0684-4b9c-960d-ec207ea49e82,proj-1,emp-48,Optional bi-directional encryption,Fou avec sombre queue danser rendre avant partager.,Terminé,2025-05-04,76
+81ba2490-58fd-4488-b0a2-1ff12a910049,proj-1,emp-56,Profound content-based time-frame,Propos route rond demande chaud cou.,Terminé,2025-03-19,78
+f4d05643-7570-4d93-80bc-bc08e7becf33,proj-1,emp-demo-sara,Distributed well-modulated task-force,Concern significant management senior.,Terminé,2025-03-02,94
+884d67e7-e987-466f-9444-cf93c04e220d,proj-2,emp-61,Organized systemic open system,Follow wife firm key light place someone option.,Terminé,2023-10-04,75
+fe452b63-c999-4e41-b246-568b57476076,proj-2,emp-96,L'assurance de concrétiser vos projets naturellement,بالأجل الفترة عل يتبقّ.,Terminé,2023-09-17,87
+24bfdd1d-7aa1-4086-8f20-8366b144a95b,proj-2,emp-40,Seamless radical middleware,Nature usage quart appartenir tellement mort consulter.,Terminé,2023-08-01,100
+19d19ba9-4581-4278-b299-0861a44c6dc4,proj-2,emp-70,Phased motivating collaboration,اكتوبر وبريطانيا ان كنقطة تزامناً التبرعات الشرقي.,Terminé,2023-07-09,79
+aa052e88-255b-4c70-9a88-413bcb18cb84,proj-2,emp-88,La possibilité d'évoluer avant-tout,Fixe remercier poésie arrivée parmi.,Terminé,2023-07-24,97
+33b035e3-6d8a-4c87-a0da-72e19d63ba6b,proj-2,emp-93,L'art d'avancer à la pointe,Exist rich prevent trade their four.,Terminé,2023-09-26,79
+00a31fbd-4813-4622-bbf9-6b48ecfed3d5,proj-2,emp-5,Switchable client-server hardware,Cercle président barbe mine paupière envoyer.,Terminé,2023-08-02,60
+05b01a60-e26c-4966-9d40-9a11ac1eb530,proj-2,emp-60,Synchronized tangible support,Behavior provide meet adult final week game.,Terminé,2023-09-16,91
+8d93576c-d980-47fd-bae5-fa7236862042,proj-2,emp-66,L'assurance d'avancer à la pointe,Also from short capital heavy class story.,Terminé,2023-10-06,95
+58dbe180-e5b3-40eb-a906-bf358a332b5e,proj-2,emp-64,Down-sized uniform intranet,باستحداث لإعادة وهولندا سنغافورة لم مسؤولية.,Terminé,2023-10-06,81
+fc95ce86-87a1-4c23-9f5a-59f5bf946ed0,proj-2,emp-63,Public-key disintermediate function,Fait trop vivre impossible drame.,Terminé,2023-10-15,62
+afa16fd3-3b6e-4b32-9f46-a7d44c3f6d75,proj-2,emp-73,Le confort de changer de manière sûre,Their appear lose he.,Terminé,2023-09-03,58
+1b6db54d-2c13-4416-94b8-03f1d068e85a,proj-2,emp-63,Universal multi-state capability,Recueillir donc tant chef.,Terminé,2023-09-09,97
+b6d101fa-2d40-4fd6-bd66-f0407da33588,proj-2,emp-36,Le pouvoir de rouler autrement,Dog yes heart agreement us stuff.,Terminé,2023-08-08,83
+6f835933-3e3f-443d-82da-bc08e93821a1,proj-3,emp-91,Managed client-server challenge,وتنصيب بنقطة هامش لهذه بمحاولة.,Terminé,2023-11-24,75
+c24c5c32-5aaa-4f1c-9185-116986bd966f,proj-3,emp-84,Adaptive attitude-oriented adapter,Se mensonge propos malade ça.,Terminé,2022-11-15,62
+127a5739-cbc7-443b-9be9-845442e32ed4,proj-3,emp-89,L'assurance d'avancer de manière efficace,عرفها شواطيء إحكام هناك تحرّك ثم.,Terminé,2023-11-17,83
+f3135184-2cfe-45ce-be69-9b3299448952,proj-3,emp-42,Profound object-oriented encoding,Fact ability good number.,Terminé,2022-08-24,81
+cdddeb4d-3e19-41eb-9bee-d444312e6ce0,proj-3,emp-67,Synchronized static artificial intelligence,Attack moment medical write never hospital.,Terminé,2023-03-30,77
+ded9e90f-79da-4b30-a984-c80cff7b9ac8,proj-3,emp-42,La liberté d'atteindre vos buts avant-tout,Exiger auquel déposer.,Terminé,2023-06-14,59
+9bd4c490-9a2b-4235-aa51-79d0a730d161,proj-3,emp-73,Self-enabling bi-directional throughput,Card good full poor store range.,Terminé,2022-11-09,85
+3174a4f4-1d8a-4242-b351-9b20383ec8c2,proj-3,emp-96,Polarized responsive contingency,كُلفة وفرنسا أم الجوي.,Terminé,2023-02-14,83
+d86743de-0c6e-4f29-915f-78087f9c274e,proj-3,emp-68,Balanced foreground function,Writer myself education send course ground.,Terminé,2023-09-11,69
+4fdf3723-5217-469b-a146-f02775c168ae,proj-3,emp-64,Streamlined full-range flexibility,بعدم ببه بعشوائية وكسبت اليابان الثالث.,Terminé,2022-11-17,63
+40ed9616-a607-46f5-9dff-d90765536422,proj-3,emp-82,Proactive holistic website,Song risk bad own state.,Terminé,2023-05-10,81
+1484bf5c-fd36-44c8-9928-5b6f8f4d3a58,proj-3,emp-13,Implemented fresh-thinking benchmark,فاتّبع المتساقطة ساعة بريطانيا-فرنسا قبل انه.,Terminé,2023-05-21,97
+e41b09e2-75ba-4c69-8ede-f09a98020de8,proj-3,emp-97,Upgradable heuristic pricing structure,Passage respecter assez planche frapper.,Terminé,2022-12-08,71
+cd000a3f-8c0e-449a-bea4-84a1c7916e6c,proj-3,emp-36,User-friendly systematic complexity,واتّجه فكانت بعرض الأمريكية.,Terminé,2022-09-13,76
+fa33c904-6400-43a9-b8ea-ec3a03583a2e,proj-3,emp-48,Vision-oriented secondary hierarchy,Tu ancien chiffre hôtel fatiguer hier.,Terminé,2023-02-15,60
+2f11783b-8b16-4af6-853b-6390ebeb6eec,proj-3,emp-14,Re-engineered client-driven moderator,Enfermer doute veiller ajouter consentir l'une.,Terminé,2023-05-05,87
+6688fab2-9f43-4eae-b853-dc78280eb003,proj-3,emp-76,Decentralized empowering time-frame,Croix or pourquoi vue couleur chair autrement.,Terminé,2023-10-09,86
+ace8600e-da8b-45f1-b6a8-27c0d3c73e5b,proj-3,emp-19,Universal leadingedge array,Property remember nearly face feel church.,Terminé,2023-10-06,67
+46b57b24-a66b-4f32-b048-c55f80d8f81a,proj-3,emp-demo-fatima,Total scalable conglomeration,De voici respirer demander le exposer mort.,Terminé,2022-10-08,84
+a4654570-1d19-47b2-8198-b2c56f85ce31,proj-3,emp-49,L'avantage d'avancer plus rapidement,Yeux prison maître règle saint autrefois.,Terminé,2022-11-26,62
+4c3b2774-cb3c-4dbb-a3ef-c16467e3d55e,proj-3,emp-87,Le droit de concrétiser vos projets à l'état pur,Campaign stop necessary onto should can.,Terminé,2023-11-03,90
+c81546bc-1dcb-434f-90df-6bbde588b26c,proj-3,emp-91,Centralized bottom-line model,الباهضة المواد كل انتباه وعُرفت.,Terminé,2022-09-04,85
+16eec9d8-99f8-44e5-9faf-fbb2bef098ce,proj-4,emp-50,L'assurance de changer à l'état pur,By field move maybe collection.,Terminé,2023-02-21,79
+93878a15-da72-4a09-af71-8647678bda40,proj-4,emp-47,Distributed composite protocol,Front under American tell ball we side enough.,Terminé,2022-10-29,63
+efef61af-f8c6-4375-9d2e-5445b9cb4616,proj-4,emp-33,Visionary object-oriented instruction set,Marriage phone face.,Terminé,2022-06-25,100
+d82c8826-1c2a-4b34-be8d-1c54f80c402d,proj-4,emp-39,Le plaisir de rouler plus facilement,Joli courir oeuvre énergie prison puissance.,Terminé,2022-06-14,76
+a6c9e7ad-b034-4714-9784-39afc0547b4e,proj-4,emp-5,Le confort de louer à la pointe,Five letter environment easy.,Terminé,2023-02-22,57
+5f26a575-d3f4-4924-b6e9-6841d18d0421,proj-4,emp-48,Business-focused explicit info-mediaries,Eat tend civil force officer fine.,Terminé,2023-05-30,83
+4651daea-af41-468b-970b-1b3b1f6f8580,proj-4,emp-33,Proactive multimedia Local Area Network,Lettre beau fonction immense dépasser.,Terminé,2023-06-27,82
+a9af89b5-1749-4da2-9734-f3bb0b12fd74,proj-4,emp-13,Multi-channeled actuating application,Nu semblable plein drôle accord bruit cesser.,Terminé,2022-08-30,99
+7089e452-edf3-4add-b159-96b8414b0c17,proj-4,emp-100,Le pouvoir de louer de manière efficace,Montrer corde mettre.,Terminé,2023-07-30,92
+6dd6a35b-b20a-4274-8cf4-88cda1503274,proj-4,emp-15,Networked motivating knowledge user,Stay perhaps particularly campaign benefit.,Terminé,2022-03-03,60
+a178892f-e16c-4327-b7c5-80fb43141699,proj-4,emp-71,La possibilité de louer de manière sûre,ساعة بتحت أمام أما كما.,Terminé,2023-03-09,92
+c91f4c67-1c0d-4e1e-9a54-b72fcab168c4,proj-4,emp-79,Le confort d'évoluer avant-tout,Class wrong school federal from stock.,Terminé,2023-06-03,98
+88928ad0-3d8d-45fc-a31d-d291eb86ae88,proj-4,emp-37,Pre-emptive tertiary open system,Rose fait pleurer violent nerveux retirer promener.,Terminé,2023-05-19,79
+2c1731f8-edcd-4fd8-b75b-4bc3019e86ed,proj-4,emp-61,Self-enabling 4thgeneration policy,Vers repas remonter musique produire.,Terminé,2022-12-07,66
+06ec39c0-d32b-4007-979d-7052614db299,proj-4,emp-25,Polarized composite moderator,Simple herself start drug occur red course kid.,Terminé,2022-12-25,61
+f23980f9-23f3-4538-853e-47a52ad64714,proj-4,emp-39,Le pouvoir de changer autrement,Turn their save artist catch debate foot production.,Terminé,2022-04-14,86
+86a0ae0d-2b14-456f-b4b4-ab9997aa7c40,proj-4,emp-62,Multi-tiered foreground conglomeration,Etc événement relation prochain paupière pourquoi ombre.,Terminé,2023-07-29,91
+484dbd1a-9a2f-4b97-b317-5bff51f5271a,proj-4,emp-32,Fully-configurable even-keeled open architecture,Trembler visite rejoindre près posséder.,Terminé,2023-01-20,82
+e962946a-c292-4e2e-83a4-34486f8c3897,proj-4,emp-36,Le droit de louer à la pointe,Explain of myself time house.,Terminé,2022-08-25,79
+b9c83032-6c36-4e4b-9367-e0715903ab66,proj-4,emp-1,L'assurance de rouler en toute tranquilité,Get kind either look.,Terminé,2022-09-27,64
+bc821936-c928-4f76-a5f6-f916a73763cc,proj-4,emp-62,Public-key encompassing open architecture,Case past only drug prove.,Terminé,2022-12-05,82
+e4b541f6-94e4-4326-befd-be299831fcf4,proj-4,emp-74,Face-to-face scalable emulation,بحشد لأداء اعلان مارد.,Terminé,2023-01-11,91
+1eaa6bec-728f-44e5-aee3-a91147585509,proj-4,emp-40,Reactive cohesive installation,Local current white fly position traditional become.,Terminé,2022-12-12,61
+1abac64d-8aec-4382-adbb-9108878e82c8,proj-4,emp-11,Focused national support,Tree company think.,Terminé,2022-12-15,65
+b69976d5-8c86-4aff-927f-90ba31c29f46,proj-5,emp-8,Automated hybrid toolset,Traiter venir ton sortir.,Terminé,2023-04-07,64
+8c70abee-88ba-4676-95f7-c7f59fb16ed7,proj-5,emp-61,Innovative non-volatile portal,الغالي يعادل جزيرتي تاريخ وصل واحدة.,Terminé,2023-03-19,90
+86aac1b0-9d1a-4ba4-96b2-49a913502338,proj-5,emp-72,Le droit d'innover à sa source,لفشل مشاركة حقول.,Terminé,2023-01-12,56
+bd4d8152-9d21-4708-b7d0-7db74f7692f9,proj-5,emp-64,Enhanced reciprocal productivity,Lui bas plaire conscience changer entre.,Terminé,2023-04-01,89
+9030e19c-4e80-4684-8a90-adf6505b30a4,proj-5,emp-58,Adaptive empowering info-mediaries,لمحاكم وقوعها المبرمة لإنعدام أدنى غريمه قد.,Terminé,2023-01-05,55
+eec0176b-3fe2-4800-95de-717792ad55c2,proj-5,emp-22,Synchronized bottom-line Local Area Network,François lien supérieur prendre.,Terminé,2023-05-16,78
+754bbf2f-01eb-4561-9921-7d6a9c7ccb43,proj-5,emp-50,La liberté d'innover avant-tout,Despite card check security paper.,Terminé,2023-08-07,91
+0d5efd12-3c97-4314-b9ec-42a3a67f99cd,proj-5,emp-12,La possibilité de changer de manière sûre,والكوري اتفاقية بفصل كانتا ابتدعها حتى إحتار جمعت.,Terminé,2023-08-12,88
+7a01b49b-f5be-4a03-ba60-838bc5016092,proj-5,emp-10,Exclusive object-oriented monitoring,الهادي تغييرات الأراضي الحكم.,Terminé,2023-02-22,73
+515dd80c-605c-456a-b48a-9156673dabff,proj-5,emp-51,Pre-emptive background migration,Idée loup imaginer assister.,Terminé,2023-09-01,83
+13eebc64-1439-42b2-915d-4385db4a0b5f,proj-5,emp-7,L'art d'avancer à la pointe,يرتبط بنقطة الفترة التقليدي.,Terminé,2023-03-03,71
+2c7480ba-5ca4-46a8-adf0-1a6489fb4cb8,proj-5,emp-89,Visionary secondary superstructure,Hear through large true help bag.,Terminé,2023-02-20,72
+19fbce3a-1c10-4f79-9270-222ab42c915b,proj-5,emp-98,Quality-focused client-driven projection,Compter marier malgré proposer.,Terminé,2023-02-01,77
+14a60729-d103-443c-8c8c-201f31ee119b,proj-5,emp-89,Adaptive web-enabled adapter,Plein membre manquer saint désespoir étoile dos.,Terminé,2023-01-30,69
+77e40c01-796e-4442-bce4-2c4e2fa56a91,proj-5,emp-16,Virtual bifurcated alliance,Past view threat drive attack order.,Terminé,2023-09-08,75
+0461bb6f-ce53-423d-b245-72f67269e25e,proj-5,emp-31,Le confort de changer autrement,Attendre troubler souffrir temps parce que.,Terminé,2023-08-12,76
+0d238638-5d48-4fc5-933c-2a22916378df,proj-6,emp-20,La possibilité de louer à sa source,Cher ferme rapidement inutile serrer élément.,Terminé,2026-02-26,75
+b94e5081-e80c-49a2-8b73-6dd8a23ae7c4,proj-6,emp-80,Digitized maximized approach,Whose newspaper care drug data position.,Terminé,2026-02-24,90
+53d22fad-5ed2-4d7a-a837-f14954f0ecd5,proj-6,emp-demo-admin,Le plaisir de changer de manière efficace,Plein obtenir son consulter recommencer profondément.,Terminé,2025-11-12,95
+9f4e8a11-37fd-4563-b010-90538379647a,proj-6,emp-demo-fatima,Extended mission-critical database,Vaincre affirmer tranquille venir car.,Terminé,2025-04-27,95
+e514183b-af2f-4e11-8dd1-cb88fad67edb,proj-6,emp-71,L'avantage de changer autrement,المنتصر العناد بلها عليها المتّبعة بأم واندونيسيا.,Terminé,2025-07-03,63
+9f63de15-feae-415c-b990-317a634db7f0,proj-6,emp-82,L'art d'atteindre vos buts de manière efficace,Scientist administration network once result.,Terminé,2025-04-02,69
+a86a888c-50b3-4a6b-a2ce-92b44b2dc598,proj-6,emp-56,L'avantage de changer naturellement,Either start whom politics make collection.,Terminé,2025-03-10,71
+bdb519a0-7f72-42f9-afef-d6af0e4e789f,proj-6,emp-100,Le confort de concrétiser vos projets plus facilement,Model stuff avoid stand.,Terminé,2025-03-28,86
+4e7b6a4a-4e7a-4710-b1e6-1b8495043534,proj-6,emp-32,Virtual 24hour installation,الساحل كرسي أخرى تسبب بالثالث شعار فسقط شرسة.,Terminé,2025-02-28,86
+1f88ac1f-f552-43b3-b699-92ed3523fd24,proj-6,emp-77,La possibilité d'innover de manière efficace,South travel blood benefit chance court.,Terminé,2026-03-16,67
+2118d1c0-4142-4556-ad90-4b0c79e60254,proj-6,emp-62,Function-based heuristic flexibility,Faux frapper moitié voiture.,Terminé,2026-03-06,60
+fcfe21ae-2874-4342-97c3-6d5122b904e5,proj-6,emp-demo-youssef,Innovative systemic artificial intelligence,Behavior here need.,Terminé,2025-08-02,68
+67ad6ffd-a7b1-4b2f-bf68-4c4c3739563b,proj-6,emp-58,Sharable 24/7 standardization,تحرّك بضرب مسؤولية حصدت.,Terminé,2025-10-04,59
+2d4f15a8-0ef0-445b-8209-0863438e0138,proj-6,emp-22,Progressive 6thgeneration emulation,بها أهّل إنطلاق وحلفاؤها وبريطانيا حتى أكثر.,Terminé,2025-12-21,94
+9543d813-1c61-4ce2-b32f-d3d2a6c0ed1d,proj-6,emp-demo-admin,Le plaisir d'innover plus facilement,Note support quality music himself.,Terminé,2025-07-25,66
+4ecec6ed-d843-46ce-8202-2e2b1b68ab81,proj-6,emp-29,Devolved system-worthy success,للحكومة انتباه استمرار الساحل إيطاليا سقطت شاسعة.,Terminé,2025-11-02,99
+82f2e1d3-b903-42b5-bdc8-b2c457aff91b,proj-6,emp-76,Object-based zero-defect Graphic Interface,مرمى بقسوة الربيع جيما بالجوي.,Terminé,2025-10-17,79
+5de9245d-3e1f-422f-9a25-9aed8d883903,proj-6,emp-77,Synergized optimal protocol,Relation écraser désert autrefois.,Terminé,2025-06-19,70
+5b4cdd68-4e05-4df3-9ced-5cacf020e74e,proj-6,emp-63,Le pouvoir d'évoluer à sa source,Exposer beauté très histoire recommencer bonheur.,Terminé,2025-11-24,85
+d0ff3fa9-5285-4572-841f-341cb321b9a3,proj-6,emp-34,Enterprise-wide intermediate knowledge user,Mention billion bed never others six tell.,Terminé,2026-02-26,66
+7be18263-4c0b-4298-b9f0-1a9fad07130d,proj-6,emp-33,Implemented incremental info-mediaries,وبغطاء يتبقّ حول البولندي بالرّد الأول المارق.,Terminé,2025-11-30,69
+1a4d02ae-50ff-4520-a6ec-1bacc8021512,proj-6,emp-58,Le plaisir d'évoluer autrement,Eh repas exposer triste prochain lendemain.,Terminé,2026-02-03,86
+6ce6a416-f79f-4eed-956c-966ca88fc9c5,proj-6,emp-46,Exclusive logistical benchmark,أخذ ببحشد وأزيز بالرّد والحزب.,Terminé,2025-10-25,95
+bf7a98e0-e9dd-4c58-b246-c3a07e8e59e9,proj-6,emp-65,Le pouvoir d'évoluer en toute tranquilité,Trop coup enfermer vérité vêtement éclairer pourtant justice.,Terminé,2025-08-26,77
+3cc73eda-27bd-4b8d-9dec-0dc0314b2848,proj-7,emp-18,Fully-configurable fresh-thinking implementation,Façon tout couleur vraiment condition regard.,Terminé,2023-06-04,62
+966842f1-3c0f-4805-b276-060959411a61,proj-7,emp-80,Upgradable maximized strategy,معاملة هذا إستيلاء وإيطالي مع فقامت.,Terminé,2023-03-07,75
+0af8e83e-aa80-4c96-b722-749bdff174c0,proj-7,emp-85,Sharable exuding encoding,Prier résistance autrement voix.,Terminé,2023-05-18,77
+350ce9e7-b11f-43ec-b7db-0fa05853fbcb,proj-7,emp-12,La possibilité d'atteindre vos buts à la pointe,كانت مما ذات وتم الأثناء الشرقية.,Terminé,2023-06-09,100
+6d902711-17c9-4d20-bf12-c932d0df6a6c,proj-7,emp-72,Multi-channeled composite project,None population position.,Terminé,2023-05-22,86
+de350d68-939a-465a-86aa-90041fda6a90,proj-7,emp-26,Le plaisir de rouler plus rapidement,Long lutte nature moyen hiver.,Terminé,2023-02-13,98
+8e7c66e6-10d5-479e-be5d-650029cf7976,proj-7,emp-30,La liberté d'évoluer avant-tout,الآخر بحيث ومحاولة الأراضي وعلى الإتحاد المدن.,Terminé,2023-06-15,73
+66af4ee2-c644-4fb6-888c-d0ad14f85989,proj-7,emp-96,La possibilité de concrétiser vos projets avant-tout,Haut poussière ensemble eh.,Terminé,2023-05-21,68
+cbd07845-90ee-4bdc-9bd1-5c521956fe0b,proj-7,emp-67,Customizable 3rdgeneration Graphical User Interface,Quality clearly worker during.,Terminé,2023-04-29,58
+76960603-efc1-43cc-bafa-1eae61191dfc,proj-7,emp-82,Reactive cohesive groupware,When discussion if continue policy it.,Terminé,2023-04-28,71
+837e2ac3-dc08-4dd2-8982-572a0c3dd57e,proj-7,emp-46,User-centric reciprocal customer loyalty,Gris absolument cruel douleur prendre retenir musique retrouver.,Terminé,2023-05-30,81
+3d77831b-fc6d-4df3-b338-8f4a62baecb0,proj-7,emp-47,Enterprise-wide high-level Graphic Interface,الأحمر فصل بينما ومن المسرح بالعمل بالولايات.,Terminé,2023-04-13,82
+ef3cc0ba-d776-4084-9910-b68dec6fa2ae,proj-7,emp-30,Monitored heuristic knowledgebase,Sport relationship father pass.,Terminé,2023-06-10,58
+1e0f2b66-9635-427c-809f-17e3d0f8bd60,proj-7,emp-39,Synergistic client-driven functionalities,المتحدة التكاليف قد تصرّف بخطوط.,Terminé,2023-02-17,69
+bd406e82-4f76-48d7-b27e-b94a481041f2,proj-7,emp-53,Re-engineered human-resource interface,عدم قد علاقة ٣٠ جيوب بينما الأولى.,Terminé,2023-05-21,74
+711bc40f-5bfd-4e71-90b3-d0bdbe6993c6,proj-7,emp-69,Le pouvoir de concrétiser vos projets autrement,Indeed style major bar air set factor.,Terminé,2023-03-20,69
+e54513d6-e3b5-4018-be09-063e1f55347e,proj-7,emp-22,La possibilité d'innover plus facilement,Quel réfléchir mentir calme calme remettre saint.,Terminé,2023-03-06,89
+3395f75e-dc3b-4be7-b77c-2dc321c60d13,proj-7,emp-74,Le droit de changer autrement,الله ٣٠ بقد انتهت منتصف.,Terminé,2023-05-01,94
+c07d1905-5dc5-408d-9522-724fd87ea2f5,proj-7,emp-73,L'avantage d'atteindre vos buts plus facilement,Size spend south now.,Terminé,2023-02-11,63
+2057c769-6fee-4419-9351-aac3336b6999,proj-7,emp-98,Grass-roots radical monitoring,يتسنّى القوى حول وقرى تطوير وبريطانيا.,Terminé,2023-05-14,56
+8ee7cec0-c082-424a-933f-ec79dbd12f58,proj-7,emp-95,Devolved web-enabled toolset,Volonté soit cent soirée.,Terminé,2023-05-02,60
+f50d10de-b782-4ede-adab-a8d4c7507cf2,proj-8,emp-21,Digitized transitional Graphic Interface,بينما خلاف الطرفين بحق بقصف عدد.,Terminé,2023-08-22,89
+d4322b68-34d0-4656-9aff-031534eb33b1,proj-8,emp-46,Open-architected multimedia synergy,Il juge naturellement soleil séparer bête.,Terminé,2024-08-16,89
+bb89c0e0-c733-49d9-b53e-1916ff6c5910,proj-8,emp-25,L'assurance de louer à la pointe,Not magazine gas radio.,Terminé,2023-10-29,100
+f3a309ba-2b18-4acf-a078-ea3fa96242f0,proj-8,emp-43,Balanced bandwidth-monitored product,Ceci signer herbe.,Terminé,2023-11-19,65
+81768853-d1da-4e06-a42c-fa1d8ccf2f90,proj-8,emp-23,Optimized dedicated solution,الإيطالية وسوء العالم غريمه الشطر.,Terminé,2024-03-12,81
+6cfeac0a-e5c6-4499-8158-a82010599972,proj-8,emp-demo-fatima,Le plaisir d'évoluer sans soucis,فهرست أخرى قررت مهمّات يطول بدول الأوربيين.,Terminé,2023-06-21,70
+a81d021f-704d-4e49-8f30-031f6cd1684f,proj-8,emp-92,Focused human-resource array,Billion happen federal him.,Terminé,2024-02-27,56
+1f4fe925-ac57-408b-b8ba-1247ed93cd3f,proj-8,emp-60,Stand-alone systematic circuit,حتى سليمان الاندونيسية انه الخاسرة للصين وجهان.,Terminé,2023-12-23,61
+313d811d-cd37-4782-8f75-2b45b23ddad1,proj-8,emp-1,Synergized leadingedge data-warehouse,الأولى الأعمال لدحر انه.,Terminé,2023-08-22,86
+d73c42ec-a4f4-44c3-bbfc-14dc8948451c,proj-8,emp-34,Le confort de changer en toute tranquilité,Easy over return expect.,Terminé,2023-06-15,73
+49846928-ed7b-4cd6-8e89-3b13197aaf3b,proj-8,emp-76,Assimilated stable framework,سقوط الثانية بالمطالبة علاقة مسؤولية مع السفن.,Terminé,2024-07-02,69
+cf7e8bfb-eb24-49e5-a52c-d7605343b943,proj-8,emp-27,La possibilité de rouler avant-tout,Finir secret glace même.,Terminé,2023-06-20,99
+7d16c44b-36f4-4d7e-9000-b4d837f8039f,proj-8,emp-91,Virtual methodical throughput,دنو أراض الخاطفة.,Terminé,2023-08-05,72
+b1423037-dc4a-4b88-971b-6368498f48f4,proj-8,emp-79,Object-based motivating forecast,Short interest I policy Mrs check base.,Terminé,2023-12-25,79
+38453c7f-5ec2-46b7-a0aa-4c9deb91b350,proj-8,emp-100,Profound demand-driven workforce,النفط دفّة ليتسنّى عملية عقبت المجتمع بعرض.,Terminé,2024-06-16,63
+9a1316a1-8b5d-4c32-bcf2-e292c5dc7281,proj-8,emp-6,Centralized dynamic array,Idée oiseau en que.,Terminé,2023-07-12,72
+c02f0f0e-bf4c-4ebe-886f-27f191b94cd2,proj-8,emp-60,Enhanced bottom-line access,Reduce clearly well mission.,Terminé,2024-06-06,59
+bd4bec3f-6ab5-4822-87eb-788173cc3080,proj-8,emp-93,Fundamental composite hub,لعملة الأرض وبريطانيا الولايات بسبب.,Terminé,2024-06-12,100
+ff9d6ef7-9ee9-4de9-bf3e-3d52e5ea1043,proj-8,emp-demo-karim,Cloned empowering structure,Baby lawyer growth matter note happy effort bill.,Terminé,2023-06-10,81
+181c1653-2801-47ec-ac46-76c11fa036cf,proj-9,emp-50,Synergistic uniform budgetary management,أجزاء والإتحاد أدوات أن باستحداث وجهان التقليدي.,Terminé,2026-04-28,75
+b5da2071-377b-4c52-b54c-c9c34e887867,proj-9,emp-34,Reactive transitional support,Different eat trouble floor step number.,Terminé,2025-12-27,56
+02c460c7-41e3-4bd8-9e15-4319d4304f42,proj-9,emp-21,Profit-focused systematic application,مكثّفة يتم وقوعها إستيلاء بلمّ.,Terminé,2025-09-29,84
+07da733b-6b0e-43b8-8a30-d1911015105d,proj-9,emp-79,L'art d'avancer à la pointe,Falloir éclairer répondre.,Terminé,2026-05-31,71
+8df09f82-95d1-474c-8f98-d65b8dfc4f1a,proj-9,emp-44,Secured dynamic Local Area Network,Vide vraiment remonter puis mémoire retenir cheval toute.,Terminé,2026-01-05,85
+136c4361-8d6c-4ce5-867e-072bae5c9537,proj-9,emp-7,Focused needs-based hardware,Week ability price.,Terminé,2025-11-30,82
+a31343ea-242f-42f6-90ee-9f9b7acafa47,proj-9,emp-67,Upgradable fault-tolerant benchmark,يتمكن بدارت ومحاولة ويتّفق الإتحاد العصبة أمّا.,Terminé,2025-12-29,81
+4f8aadf1-69b1-4028-854e-6b9fd19058ee,proj-9,emp-32,Programmable incremental standardization,Vieux bas bientôt cesser rue avance monsieur.,Terminé,2026-11-16,85
+79e7a4ad-dd2f-419c-99ef-91d716924da8,proj-9,emp-64,Le pouvoir de louer avant-tout,Déjà trésor chair regretter brusquement.,Terminé,2026-04-25,99
+9ce4589b-fb3c-4121-9fa6-71cf657211ab,proj-9,emp-44,Down-sized local Local Area Network,Casser existence rejeter humide indiquer seulement.,Terminé,2025-08-17,70
+98614a12-fe03-4a23-92e1-00ef90f7001a,proj-9,emp-89,Diverse systemic framework,American structure foreign before eat green message quality.,Terminé,2026-02-26,86
+0f95e3ae-fe60-4609-be63-943b75fa9be1,proj-9,emp-93,La possibilité de changer plus rapidement,Rêver changement acte sauvage.,Terminé,2026-05-15,78
+da70bd6d-45e5-45f2-91f9-f4d45a79b9e4,proj-9,emp-9,De-engineered dedicated initiative,Tranquille bande nez terreur avance vrai couche pays.,Terminé,2026-03-28,100
+1b590318-4910-4ed8-8bb1-cd679f3e3dc1,proj-9,emp-69,Cross-group full-range capability,أوروبا وحرمان بضرب لبلجيكا تجهيز بالسادس بريطانيا-فرنسا.,Terminé,2026-12-21,69
+bfdbcc6c-6c0c-450b-9968-d1599bd8c4c5,proj-9,emp-46,Le confort d'innover en toute tranquilité,Angoisse ouvrir descendre écraser.,Terminé,2026-09-07,56
+c4536fc2-a2d8-4ca7-ad40-3984447a75a3,proj-9,emp-53,La liberté de rouler autrement,Look sit general not focus establish.,Terminé,2026-02-14,69
+80d839eb-8251-4182-b8a1-2754e7e53491,proj-9,emp-68,Intuitive radical definition,إتفاقية يقوم تمهيد مئات ٣٠.,Terminé,2025-10-03,85
+39260322-d791-44ce-84ab-443c94e8f72d,proj-10,emp-14,Cross-platform dynamic protocol,تُصب مشاركة لفشل ليرتفع وقام.,Terminé,2025-04-30,60
+3b67139b-317b-4494-acff-6141bb84ab2c,proj-10,emp-56,Networked heuristic conglomeration,ديسمبر مكن قُدُماً وتم أعمال.,Terminé,2025-05-30,94
+1ca7669c-245e-4d34-8e1a-2385d6f7060d,proj-10,emp-93,Multi-channeled non-volatile open system,وقبل هناك مليون ووصف جديدة التحالف أما.,Terminé,2025-03-17,91
+b13a9e5b-f7db-479d-b382-3df01cf45ea8,proj-10,emp-94,Focused real-time definition,بهيئة الواقعة شاسعة مكن اليميني التخطيط مقاومة.,Terminé,2025-05-23,58
+c4064062-030a-4c58-968a-2a111996a2ac,proj-10,emp-48,Le plaisir de louer plus rapidement,Nez essayer entourer vif puis haïr.,Terminé,2025-04-06,71
+255527dc-b04a-416c-b9e9-01b77ae49e30,proj-10,emp-15,Pre-emptive solution-oriented functionalities,قد وزارة مساعدة الدولارات دول التحالف المتساقطة.,Terminé,2025-01-26,76
+e3557506-f03a-400e-b9df-67e5d3ad079e,proj-10,emp-84,Implemented clear-thinking conglomeration,We we hot.,Terminé,2025-06-10,75
+fa20c6e5-fe98-4792-bbc6-667e7e24d6a1,proj-10,emp-48,Automated contextually-based portal,Dans moitié traiter changer question demeurer visite commander.,Terminé,2025-08-28,93
+b28a0370-f7c8-46f8-890f-2629cd270d3b,proj-10,emp-30,Triple-buffered static productivity,Land enter economic attack either blue.,Terminé,2025-07-12,55
+9e2d459d-d05b-423e-9adb-f91c3ecce50c,proj-10,emp-92,Business-focused human-resource intranet,Why this manage her national big.,Terminé,2025-06-09,68
+2d575976-e283-4d37-b0cf-ddb1578d46f3,proj-10,emp-65,Le confort de concrétiser vos projets plus rapidement,أسر الصفحات الآخر اليميني وباءت.,Terminé,2025-05-24,86
+57d67755-d68f-4a6a-a050-7fa129565e9f,proj-10,emp-79,Upgradable asynchronous neural-net,ذات شاسعة بولاتّساع أفريقيا وفرنسا الباهضة.,Terminé,2025-03-18,75
+0683eb21-0117-4a67-a502-6666bf46f020,proj-10,emp-55,La liberté d'innover en toute tranquilité,أوراقهم حول و الإمتعاض.,Terminé,2025-07-17,75
+c1091af3-b2e4-4ddb-bc83-e0af0439e8e5,proj-10,emp-61,Le pouvoir d'avancer en toute tranquilité,Outside current agent color factor bank such final.,Terminé,2025-06-08,85
+97c9fd32-fdbc-48c9-b36d-d46c0e35302c,proj-10,emp-9,Le droit d'innover plus rapidement,Hold he high cost and keep enjoy.,Terminé,2025-05-05,60
+e8f09571-7f59-48a6-8b33-eb65e82b9837,proj-11,emp-demo-admin,Le confort d'avancer plus rapidement,Space including series dinner article hit.,Terminé,2025-09-03,62
+9281dcd7-b487-4a90-a9ff-81045ca43246,proj-11,emp-59,Operative national software,Soulever jambe avenir tache prévoir lien système.,Terminé,2025-06-03,82
+b4b415f5-0626-4087-bb8d-f96caefe4342,proj-11,emp-98,Synergistic regional circuit,التبرعات يذكر ويتّفق مليارات الأمريكية بدون يطول.,Terminé,2025-07-19,95
+19dff822-63b6-4d2a-8c0e-51687629c393,proj-11,emp-13,L'art d'avancer plus rapidement,Forme entretenir double immobile son repousser papa.,Terminé,2025-08-16,86
+2494df04-5c54-4e9e-ba68-0f8339dda2fb,proj-11,emp-49,Operative bifurcated instruction set,حصدت دار ومطالبة اعلان.,Terminé,2025-07-03,90
+c8ac640a-b93e-4960-852a-c1b197e1706e,proj-11,emp-33,Re-contextualized zero-defect attitude,Souffrir soudain discours père mort interrompre comment.,Terminé,2025-05-28,55
+ebec1d20-d522-4501-a1e3-e45ab5603567,proj-11,emp-33,L'avantage d'atteindre vos buts de manière efficace,Posséder armer inviter distinguer fauteuil essuyer.,Terminé,2025-08-13,82
+0d38be85-9239-4699-a720-ea796f4718a9,proj-11,emp-30,L'art d'innover à sa source,Payer construire crier saisir que recevoir soit sable.,Terminé,2025-07-18,98
+b551418e-7cc7-4a91-af52-7e688871ab24,proj-11,emp-74,Diverse asymmetric function,Idea sister modern notice community themselves customer.,Terminé,2025-09-03,75
+d1d7cdbc-3cee-488c-9d6e-5816ca17a582,proj-11,emp-68,Fully-configurable 5thgeneration knowledgebase,كثيرة العالم نتيجة تسبب عدم الأعمال.,Terminé,2025-08-04,78
+1a3d72b0-07c4-4027-8752-faf7140814df,proj-11,emp-14,Front-line holistic matrix,Concern that only glass clear thus see.,Terminé,2025-06-19,65
+f573f23b-a8cc-4ee4-a666-bc0bd15b12e0,proj-11,emp-83,Cross-group executive algorithm,Coeur mort vérité.,Terminé,2025-06-08,88
+51353af3-f8e2-4d8b-9bf2-8126e548cedf,proj-11,emp-87,Stand-alone directional service-desk,عن تصفح والروسية ونتج في.,Terminé,2025-06-29,94
+1707a81b-248f-480e-9cfa-28d969cc5ee0,proj-11,emp-73,La liberté d'évoluer sans soucis,الشمال مكثّفة المتحدة ونتج عقبت.,Terminé,2025-06-14,88
+044d2219-3f5e-442a-8e24-03dce47692d0,proj-11,emp-55,L'art de concrétiser vos projets en toute tranquilité,المبرمة تغييرات شيء دخول أخر ٣٠ ومن.,Terminé,2025-06-08,85
+45c96d02-fa4b-471f-8ca7-89714a573cb5,proj-11,emp-91,L'assurance d'avancer naturellement,يطول عسكرياً والحزب الصفحات كلا وبالرغم.,Terminé,2025-08-13,76
+cbe1d85d-6ba6-4e66-b2b9-963d3b5e6109,proj-11,emp-17,Le confort de changer de manière efficace,Produce race return pretty young else.,Terminé,2025-07-19,63
+4da402de-e8b0-4ab9-b5d6-a56d173efcd2,proj-11,emp-56,Le pouvoir de rouler sans soucis,Staff gas require rather point little wait.,Terminé,2025-05-14,100
+b34d8b48-3a48-4741-9133-7c8d2ebb54e5,proj-11,emp-49,Le confort d'évoluer en toute tranquilité,الأمم الصعداء مليارات ليتسنّى التكاليف فهرست الولايات.,Terminé,2025-06-04,75
+86f8fecb-70eb-4dad-bcc1-82d8636ce65b,proj-11,emp-56,Face-to-face heuristic definition,Inside thought he one less.,Terminé,2025-05-21,64
+f7297a69-b55e-424c-a5f8-4aa8d90f4031,proj-11,emp-35,Phased actuating productivity,Want author threat matter test high fear approach.,Terminé,2025-08-10,55
+04f973e6-ab10-4d19-a784-855f7f43c7d2,proj-11,emp-21,Devolved dedicated Graphical User Interface,Suivant voilà charge six condition avoir escalier.,Terminé,2025-08-09,67
+91e51da2-8fe6-427e-8530-73ccab08dab1,proj-12,emp-67,Intuitive scalable approach,العالم ليبين البشريةً ليرتفع بينما ليرتفع استبدال.,Terminé,2022-04-14,95
+33d9d6ed-81a9-405e-9fd0-1b0b1b63069f,proj-12,emp-76,Optional scalable interface,Verre fille apercevoir couler faux adresser.,Terminé,2021-12-27,77
+880072dc-a026-4653-bdf0-cab8f4a68ac1,proj-12,emp-31,Le plaisir d'atteindre vos buts à la pointe,Cold statement fear fact road.,Terminé,2022-05-14,67
+5b76a795-f050-4d73-adda-19d61a3fba9a,proj-12,emp-70,Progressive global Internet solution,Garden top grow could.,Terminé,2022-05-25,82
+d0590e3b-9a1e-4a03-a5ae-ffc856c7bee3,proj-12,emp-75,Le plaisir de louer à sa source,Heart policy side.,Terminé,2022-07-14,78
+87d751ca-cd73-47ca-96f2-056af1ca0449,proj-12,emp-67,Business-focused radical application,President after ready indicate.,Terminé,2022-09-23,71
+696207cc-4279-4465-8344-ab26176627fb,proj-12,emp-80,La possibilité d'innover naturellement,Day rate act inside.,Terminé,2022-04-02,96
+686abfd5-d8f1-4690-b7ee-ba9b1ac3f482,proj-12,emp-71,Switchable multi-state flexibility,Red industry together memory pay executive size marriage.,Terminé,2022-03-08,59
+c3220fbf-3044-40da-a2a8-2969cf3768ea,proj-12,emp-89,Exclusive zero-defect firmware,Group important civil nature travel.,Terminé,2022-04-09,61
+4b512b76-604a-418e-915a-5a698c7d9d36,proj-12,emp-18,Polarized full-range encoding,فعل وبلجيكا هنا؟.,Terminé,2022-05-03,72
+de94eebe-f939-42e0-ae31-94abd0b745d6,proj-12,emp-9,Proactive coherent array,Rich big eight discuss.,Terminé,2022-02-22,91
+3f4bce34-7e85-4bee-a319-bc45cdfadff6,proj-12,emp-71,Le droit de rouler plus rapidement,واستمر بأم فكان.,Terminé,2022-11-15,88
+1ea098b8-1bb9-4d45-9fa9-24c4c7b1b6d3,proj-12,emp-38,Le plaisir de rouler de manière efficace,الهادي وبحلول وقوعها الضغوط.,Terminé,2022-10-10,79
+e3c78642-39c1-4ce3-8371-ac405541b9ad,proj-12,emp-73,Cross-group holistic Graphical User Interface,ببه ومحاولة العاصمة بالشتاء.,Terminé,2022-05-10,92
+8512ec17-0a29-4acf-8fa3-f687ef2f5d0a,proj-12,emp-81,La liberté d'évoluer plus rapidement,يتم وإعلان اكتوبر وترك.,Terminé,2022-08-19,94
+bee5af49-38cd-4ffe-834f-c72923bdb813,proj-12,emp-17,Le confort d'atteindre vos buts de manière sûre,Amener politique secret vieillard certainement tirer calme fumer.,Terminé,2021-12-21,68
+db224c06-9a72-4528-b3f9-9462e54c12ca,proj-12,emp-23,Cloned empowering projection,Près poche regard.,Terminé,2022-02-04,69
+e0774d26-42d7-45ce-af1c-3da172a48cd5,proj-12,emp-14,Up-sized non-volatile definition,Mind read peace item risk loss.,Terminé,2022-03-03,94
+7a8f4313-22e5-4dd5-bd4a-6e89ad4c9bac,proj-12,emp-56,Synergistic secondary info-mediaries,وبالرغم سياسة أدوات وشعار تسبب بمحاولة تجهيز.,Terminé,2021-12-20,65
+136160d6-e0a1-49a9-955c-6d298b2b458b,proj-13,emp-93,Compatible web-enabled matrix,Époque douleur livre mer feu.,Terminé,2023-04-19,87
+08873020-b309-4729-9f90-5270621e0156,proj-13,emp-67,Configurable logistical intranet,Because material firm wonder seat adult idea.,Terminé,2023-05-24,70
+66db0806-ac24-4fc2-b6b9-8c1f9a75ad75,proj-13,emp-95,Realigned neutral ability,ومضى عرض وباستثناء حاول غريمه بكلا اليميني نفس.,Terminé,2023-05-23,79
+6ef61531-0a76-442e-accc-294691f5fd3c,proj-13,emp-56,Persevering full-range open architecture,List price respond box service develop game stop.,Terminé,2023-05-19,100
+6c8baa88-db54-46fe-ac94-72bdd8e147ce,proj-13,emp-62,Le plaisir de rouler plus facilement,Sac quel fruit deux.,Terminé,2023-05-14,74
+a07c4e51-210a-41a5-863a-46a58f6f2e5e,proj-13,emp-6,Ergonomic bottom-line infrastructure,نفس الثقيلة اليابان لها أهّل عجّل فعل.,Terminé,2023-07-26,88
+e47a3ced-8a17-499d-b243-56e46fe3a075,proj-13,emp-23,Visionary local knowledgebase,What care material morning any very stuff lot.,Terminé,2023-04-25,93
+fc1081ab-eea7-4a12-9261-58fc719b3abd,proj-13,emp-31,Vision-oriented context-sensitive solution,Room campaign hold over.,Terminé,2023-07-04,95
+38735c6a-eec3-4d6f-8e5f-8fc4cfee5f9b,proj-13,emp-51,Le pouvoir de changer en toute tranquilité,Victime idée cesse gagner précipiter quoi.,Terminé,2023-06-14,64
+abf4a01d-3db1-4b34-9a0e-3257b910d40f,proj-13,emp-58,L'avantage d'innover à l'état pur,Visible pendant valoir lieu.,Terminé,2023-07-01,83
+d94a0613-6e4f-4d28-bfc4-855f0596a719,proj-13,emp-83,Sharable fresh-thinking strategy,حاول دار وفرنسا كلا فقد وبحلول.,Terminé,2023-04-19,71
+835eed15-a896-4249-a076-47550c61827f,proj-13,emp-51,Horizontal interactive workforce,الآلاف بالرّد أوزار إبّان الضغوط مسارح يتمكن.,Terminé,2023-06-26,90
+22b44010-7129-463a-a5ce-e1d70dca7ca1,proj-13,emp-18,Function-based client-server approach,Daughter must grow laugh pattern.,Terminé,2023-04-07,77
+8f4a85d7-ab4b-4d12-8ace-2688afa2cfbb,proj-13,emp-55,User-centric next generation definition,Home memory someone receive realize another high.,Terminé,2023-07-11,78
+b1b35bea-d007-4450-a36c-f210ae9727b3,proj-13,emp-40,La possibilité de rouler de manière efficace,Data than team kitchen difficult.,Terminé,2023-07-06,97
+32ce1bc8-81a9-4040-ab11-368949b23f6d,proj-13,emp-23,Triple-buffered tertiary project,Mémoire occasion remonter véritable écouter compte poitrine considérer.,Terminé,2023-06-21,82
+81abaee1-27f8-40f0-bb63-91b0d3e90740,proj-13,emp-20,User-centric multimedia capability,Grandir militaire certain.,Terminé,2023-05-22,90
+55b714a0-983b-44f1-abbc-f01d3aeb371d,proj-14,emp-35,Function-based 24hour groupware,Appartement tour nouveau remarquer.,Terminé,2023-10-09,92
+15d4ee2a-26f2-4b44-8716-c47917c20198,proj-14,emp-43,Seamless stable framework,Mer autre présent maître vaincre madame repousser.,Terminé,2023-09-19,61
+9797d798-cced-405f-956a-60f21b527fcb,proj-14,emp-demo-fatima,Operative needs-based monitoring,Étranger sourd phrase éprouver.,Terminé,2023-12-19,87
+20db55b4-8536-48cc-a463-2a1f0ad5467f,proj-14,emp-demo-admin,L'avantage de concrétiser vos projets à la pointe,Boy generation drive.,Terminé,2023-12-29,72
+6ba0c413-e28b-411b-a4f1-8f6c4d86a8df,proj-14,emp-78,Seamless regional encryption,بالرّغم معارضة الأحمر الشهيرة لان أطراف.,Terminé,2023-11-16,72
+f228d9d5-e873-4f82-a9ff-db786f1f8cbd,proj-14,emp-1,Visionary holistic migration,Main fast prepare fly bank benefit will.,Terminé,2023-09-19,80
+fe466362-0184-4aa5-9450-83ed8a4dbcb1,proj-14,emp-76,Public-key 24hour product,فصل ماليزيا والروسية بدون الآخر.,Terminé,2023-07-31,72
+b8ce1b10-6179-4502-ad87-55566886d822,proj-14,emp-demo-sara,Total user-facing time-frame,Qui chiffre important éprouver.,Terminé,2023-11-14,91
+c1b7b21a-661e-40c1-a079-bb986d3e169b,proj-15,emp-74,Compatible actuating conglomeration,Auteur sac tempête froid humain franchir engager.,Terminé,2025-11-06,56
+b8783d94-a1be-4387-87d9-c30f645fc008,proj-15,emp-86,La possibilité de rouler à l'état pur,As second animal summer group me face rate.,Terminé,2025-11-17,64
+e6cc0240-1e22-48c7-8b8c-f9efc672bfc6,proj-15,emp-12,Cross-group executive task-force,Force petit inutile marché chaise foi.,Terminé,2024-12-18,66
+51865aaa-4fc7-43f8-9d92-11f060f53724,proj-15,emp-11,Implemented scalable circuit,Vaincre achever songer chant appeler mot.,Terminé,2024-12-04,81
+62e8674c-aacf-43e0-a314-53f9168d8e39,proj-15,emp-77,L'assurance de changer à sa source,Deep town surface central contain pattern.,Terminé,2025-11-04,83
+c56ced0a-750e-44e3-ba2a-6f4b2adfee90,proj-15,emp-36,Le plaisir d'évoluer à l'état pur,Surface usually yes.,Terminé,2024-12-25,58
+f6d3a9d7-e338-4088-825b-460086bcfe00,proj-15,emp-31,L'assurance d'avancer en toute tranquilité,لبلجيكا بيكن الواقعة الأمم غرّة.,Terminé,2025-02-13,89
+25961abf-aedd-4dd4-9829-2af233d677c4,proj-15,emp-74,Horizontal regional architecture,بولندا الهادي غير قد الإكتفاء حصدت.,Terminé,2025-11-18,96
+cf5e6eeb-6386-4116-8e50-ca58b4ae23b9,proj-15,emp-38,Le confort de rouler avant-tout,كلّ عشوائية العالمية بأم فمرّ.,Terminé,2025-10-16,56
+2033e05e-e78b-4eff-96fc-4ac4ffe859b2,proj-15,emp-86,Le droit de concrétiser vos projets avant-tout,Mesure complètement oeuvre selon silence changement masse.,Terminé,2025-01-31,75
+4612d2cd-cce4-4f72-8d43-974c5673ebfe,proj-15,emp-88,L'avantage d'atteindre vos buts de manière sûre,Trade necessary myself your line.,Terminé,2025-05-12,92
+bbff6e2d-a254-4edb-bfdf-361a0f45c25f,proj-15,emp-demo-fatima,Multi-lateral hybrid definition,Card may bed hair action.,Terminé,2025-10-12,88
+85c51314-66c3-4efa-ba02-6a5ed84ad708,proj-15,emp-49,Seamless systemic concept,Land condition we process.,Terminé,2025-10-13,80
+6d968145-05ce-4324-aa88-4cbd5276e0ea,proj-15,emp-3,User-centric upward-trending matrices,Dame journée attirer.,Terminé,2024-12-09,97
+c3902c07-703e-4283-8a0d-8cd1504c37d0,proj-15,emp-93,Le pouvoir de concrétiser vos projets naturellement,يتعلّق الموسوعة كانتا.,Terminé,2025-07-20,67
+707abb56-bda9-4a59-8a5b-4569ef9b4194,proj-15,emp-89,Sharable even-keeled support,Membre compagnon perdre faible perdre sec l'un ferme.,Terminé,2025-03-22,64
+026654a1-df5f-4967-893d-0c6fe809ee15,proj-15,emp-18,Programmable impactful help-desk,Respirer souvenir accompagner soumettre haute défaut lueur.,Terminé,2025-06-21,60
+9fdb437a-2774-46f7-9a7c-061286943777,proj-15,emp-31,Le confort d'évoluer plus facilement,Principe caractère défaut roche prochain jeune jeter cri.,Terminé,2025-09-13,57
+61e30121-60f2-4e84-9ffc-bb720d6e1b2c,proj-15,emp-84,Stand-alone incremental adapter,الأمم ديسمبر الأوروبية.,Terminé,2025-07-22,67
+2aeb3caf-7288-44b2-bbd8-6ca9c76cf414,proj-16,emp-68,Balanced object-oriented circuit,الشّعبين التقليدي ولكسمبورغ زهاء.,Terminé,2023-10-19,84
+d870c859-b13e-42e0-8661-3c1e5a7562b4,proj-16,emp-55,Sharable 3rdgeneration success,Water describe paper likely loss.,Terminé,2023-10-19,91
+6250d65a-9ae7-4789-9bf5-9678c023a6a8,proj-16,emp-7,Open-source radical circuit,Perhaps member cold rate.,Terminé,2023-11-12,62
+2bf12e9f-41d9-4d71-8bd5-9cc3ab2810d6,proj-16,emp-19,Le confort d'avancer plus facilement,Nul soudain manier ramener bête petit tâche matière.,Terminé,2023-12-17,60
+8bff1ea9-0bad-4181-915e-59eb955fbaf5,proj-16,emp-76,Vision-oriented systematic projection,Glace songer pouvoir grave transformer jeunesse regarder.,Terminé,2023-10-02,92
+d4416639-fdb2-4802-9283-af6eb982600d,proj-16,emp-96,Le pouvoir d'évoluer en toute tranquilité,Témoin bande nuage mêler devoir.,Terminé,2023-09-29,65
+d86f5b54-0075-476a-98e4-7c588d018260,proj-16,emp-77,Triple-buffered value-added utilization,تكبّد تغييرات بالجانب الحكم مكثّفة بتونس الآلاف.,Terminé,2023-12-31,68
+48fad8d9-8f81-4ec4-9b5a-3d93219f5d5c,proj-16,emp-6,L'assurance d'atteindre vos buts sans soucis,Dos point rappeler garçon répéter joie fatigue mieux.,Terminé,2023-11-29,84
+d778066c-11a8-4f8b-b60b-a772fe3bff84,proj-16,emp-83,L'avantage de louer de manière sûre,Save talk process security land record.,Terminé,2024-03-09,74
+f7e8eb90-84ae-4e00-9e15-296990bc738b,proj-16,emp-91,Cross-platform didactic migration,Réussir oreille politique arrivée flamme partir.,Terminé,2023-10-30,67
+a271cafd-9fc5-4b0f-88bf-853fd0326009,proj-16,emp-2,Digitized methodical policy,Au d'autres avis apercevoir.,Terminé,2024-01-02,74
+93b91089-48f1-4a3b-97fc-0aeacb41ccbb,proj-16,emp-32,L'avantage d'innover à sa source,Watch star policy keep.,Terminé,2023-11-11,100
+2e547e47-5f6a-4d2e-a5e8-e5dfa5e74fbe,proj-16,emp-13,Switchable multi-state forecast,مسؤولية تشيكوسلوفاكيا قِبل.,Terminé,2024-02-18,72
+115ddb75-d158-490d-8439-fe8273814798,proj-16,emp-48,Down-sized systematic alliance,Père vif bas double fort.,Terminé,2023-11-23,75
+097f2b48-6531-47ad-ba9b-500e90d1c657,proj-16,emp-30,Object-based impactful parallelism,أراضي كانتا وجزر جنوب لبولندا حالية دار.,Terminé,2023-11-17,67
+b69c2da8-89ac-450e-a3bc-58ef99773422,proj-16,emp-33,L'avantage de rouler en toute tranquilité,تسبب حالية ترتيب اليابانية الأرض تصفح.,Terminé,2023-12-02,66
+522512e8-3cb0-4444-867c-88337415b7e3,proj-16,emp-52,Le droit d'atteindre vos buts sans soucis,Rassurer vendre importance imposer ni.,Terminé,2023-12-03,99
+2b10a811-d9f7-44b6-bc87-73b39dec72a4,proj-16,emp-58,Polarized bifurcated firmware,عدد يكن فكانت الساحة المشترك وكسبت.,Terminé,2023-12-26,60
+d40d1aa5-6484-41bd-956b-87c1dbeac8cf,proj-17,emp-22,Public-key 24/7 standardization,Durant fort quoi état mien.,Terminé,2025-04-18,91
+c237a412-6342-4ce5-b2f5-598c04e57634,proj-17,emp-78,Phased foreground help-desk,الطرفين وقام قائمة وتتحمّل تحرير الجو لفرنسا.,Terminé,2025-02-02,77
+26ff71ef-d7d5-4791-a5d6-bc761ba57387,proj-17,emp-39,L'avantage de louer plus facilement,وجهان فكان فبعد شاسعة.,Terminé,2025-05-23,68
+408ce05f-870f-4ddf-be78-c54e2fc76528,proj-17,emp-91,Balanced mission-critical hub,Manage world to than make worker.,Terminé,2025-01-23,90
+9e9bb38f-e8da-478b-b4bd-3b9cae4f6120,proj-17,emp-61,Grass-roots hybrid definition,Approach son long must.,Terminé,2024-12-24,60
+c2e1d164-edfd-4984-bbfb-2dd375e4969e,proj-17,emp-23,Monitored hybrid software,يبق قُدُماً بل قبضتهم أدوات الخاسر دأبوا.,Terminé,2025-05-05,71
+0e026dd2-5c64-40d4-b18a-c63b74d0155b,proj-17,emp-demo-admin,L'avantage d'innover plus facilement,Down likely party hand material.,Terminé,2024-11-06,71
+28788b7b-cb02-4b80-8f22-43c9667871fd,proj-17,emp-80,Operative tangible system engine,Siècle douter condamner certainement moyen découvrir.,Terminé,2024-12-12,88
+a0867026-6c81-41dc-ad08-ab09c94a58d5,proj-17,emp-13,Up-sized encompassing website,بشكل بالرّد الإحتفاظ ولكسمبورغ الإقتصادي مكن التخطيط.,Terminé,2025-05-05,85
+33bd29ec-97cc-455e-b62e-17dd0ece0747,proj-17,emp-37,La liberté de louer de manière sûre,Dessiner silence argent blond coeur.,Terminé,2025-03-17,92
+c5e1ee25-0da6-4e1b-992c-eb19a1453b0e,proj-17,emp-44,Function-based methodical product,للحكومة الصفحات بأم حادثة مليون ان بحث.,Terminé,2024-09-25,91
+b1b97e81-2b9b-4382-8c66-cff9fd6fee41,proj-17,emp-85,L'avantage d'évoluer de manière sûre,Entrer long remercier honneur avec oreille.,Terminé,2024-10-31,75
+1a9b9e95-a8b2-4585-a30f-e430f5ee324f,proj-17,emp-41,Le confort de louer autrement,Occur support author class direction first fact environment.,Terminé,2024-09-12,95
+052e6a34-3f98-4da8-8f1e-1a7b5542a4ce,proj-17,emp-49,Object-based encompassing intranet,Madame huit combien si céder demain dessus quelque.,Terminé,2025-05-09,65
+65d15894-ba8f-400f-a277-503ae66a30fd,proj-17,emp-39,Configurable demand-driven concept,Bientôt traiter interrompre art.,Terminé,2024-10-29,76
+15451904-460e-401a-99a1-1685c0c47175,proj-17,emp-41,Le plaisir d'innover sans soucis,غريمه وايرلندا المجتمع الشرقي.,Terminé,2025-02-11,66
+7c6f7b18-97c1-4731-9034-0b6e0b93200f,proj-17,emp-55,La liberté d'évoluer plus facilement,Agreement professional team foot.,Terminé,2024-12-12,65
+7625c0bf-c2dc-4108-b14e-5b90f7769f57,proj-17,emp-52,La possibilité d'innover à la pointe,Vêtir pouvoir comprendre nu.,Terminé,2025-04-29,56
+2d6ed2f8-4d6b-4f53-9f49-4057d769dd78,proj-17,emp-69,User-friendly scalable open system,Passé marche tel jeunesse décider beau en.,Terminé,2025-04-18,92
+9e3df330-1038-481a-9a9f-0470a8275c17,proj-17,emp-56,Le confort d'innover de manière efficace,منتصف وإيطالي ان بمحاولة أخر وحتّى وقام.,Terminé,2025-01-10,80
+f2b7d807-e845-4496-bafd-159519d4bed8,proj-17,emp-88,L'avantage de changer de manière sûre,بالثالث بحث حاملات بانه الاندونيسية لفشل بالمحور.,Terminé,2025-03-18,71
+ac2b18a7-329e-442d-b720-ca3cd8df6806,proj-17,emp-39,L'assurance d'avancer autrement,Might son party really even.,Terminé,2025-05-13,93
+598ef4a0-686c-4777-9402-a712e21bec4e,proj-17,emp-47,User-friendly national workforce,Construire aussitôt chaise but île ici.,Terminé,2025-02-08,98
+1e3fa82c-80fe-421a-b249-9b505449a471,proj-17,emp-25,Secured mobile core,Chez vêtir aile.,Terminé,2025-05-25,57
+7111074a-eb97-4bcc-bd43-550431cb6384,proj-17,emp-49,Horizontal encompassing capacity,Road do character management game find.,Terminé,2025-04-14,61
+50d88492-9380-4543-a5b8-402880ca0194,proj-18,emp-72,Le droit de rouler avant-tout,أي مايو إعلان بمحاولة.,En revue,2026-04-09,
+79c9d6bd-d5ec-49cd-a5ca-f23fb89ab5b5,proj-18,emp-68,Function-based homogeneous access,بالسيطرة ويكيبيديا الشرقي يونيو الجو.,En cours,2026-04-23,
+98864613-dc3e-4cce-b7d4-35d2b814eb68,proj-18,emp-12,Visionary bandwidth-monitored model,List race fine follow pick.,En cours,2026-03-31,
+b312c0f0-2d11-4040-ad9e-a74bcf62a13d,proj-18,emp-96,User-friendly neutral model,بوقامت المؤلّفة بأم أوزار فسقط.,En revue,2025-10-26,
+50994742-ea54-465f-9b79-ac9cc48dddf2,proj-18,emp-35,Front-line scalable Internet solution,Combien double carte.,À faire,2026-05-03,
+bb8010a2-0cd2-4348-b456-e5da5c9722a7,proj-18,emp-98,Advanced 6thgeneration paradigm,Read choice side eat matter rather full.,En cours,2026-01-09,
+45799b7d-7105-46ad-94a8-d50acdb3885d,proj-18,emp-17,Centralized analyzing help-desk,Red social call discussion.,Terminé,2026-02-07,80
+22bd70bb-18f1-4806-8e12-e2ebb74cfd58,proj-18,emp-80,Stand-alone web-enabled hardware,Aider fête projet dessiner apparence.,À faire,2025-11-19,
+1994e395-7ec2-40c3-8f70-047f7ee7e510,proj-18,emp-18,Organic next generation frame,Couple cost girl run every story trial.,En cours,2025-12-29,
+be0a0ade-7faf-4c0f-9dbe-10701499d594,proj-18,emp-6,Diverse asymmetric moderator,اللا الصين بال أثره عرفها بالرغم التي.,En revue,2025-11-29,
+1e1373df-b947-4fc7-a246-80708ad43df8,proj-18,emp-22,Secured high-level time-frame,Fly as whose standard couple.,En cours,2026-02-01,
+0f210a15-3e70-4445-a144-349c83bb63e7,proj-18,emp-88,Proactive zero administration neural-net,العناد بتونس المواد استعملت غير أمّا وصغار التغييرات.,À faire,2025-12-14,
+62b48220-48c2-433e-b1ba-bbdb515406ec,proj-18,emp-83,Exclusive bi-directional matrix,أكثر عشوائية بالعمل بينما.,En cours,2026-03-04,
+172f7f6b-4dc0-4378-9daa-1c69c5a7cf84,proj-19,emp-56,Total optimizing extranet,الدنمارك لأداء أراض وحتى غرّة وزارة.,En cours,2027-02-13,
+a43b6624-9516-43e4-8f7e-f42c7868c5a9,proj-19,emp-86,Persistent scalable approach,Quelque succès sac rester assurer oublier malgré.,Terminé,2026-07-10,84
+a70f7198-eed2-4484-adc7-452b792356da,proj-19,emp-45,Compatible exuding archive,استمرار لبلجيكا تونس الثقيل تلك الشرقية صفحة.,À faire,2026-05-12,
+b13a761a-9d6a-482e-8c95-aff19312bb5c,proj-19,emp-93,Realigned value-added open architecture,Réflexion muet plonger premier.,En revue,2026-05-15,
+3393376b-249d-451c-912b-696df914d864,proj-19,emp-32,Le confort d'évoluer à la pointe,Essuyer cinq vue heure étude enfin vol.,Terminé,2027-05-01,75
+46d0db4a-d03a-4bfc-918a-9a46f5153742,proj-19,emp-46,L'avantage de changer sans soucis,Heart nearly season growth laugh.,Terminé,2026-12-06,93
+f88f1587-4d4f-4b9b-bbcd-6b6dab99aaa0,proj-19,emp-40,La possibilité d'évoluer en toute tranquilité,يذكر الخاصّة المشترك مارد وفرنسا.,À faire,2026-11-13,
+4dc7636c-469b-4343-926c-91135d561d7f,proj-19,emp-24,Le plaisir de rouler naturellement,Champ faire ne dehors.,À faire,2027-06-04,
+6cd1cd6d-176f-44fd-91eb-6a8bfa468b38,proj-19,emp-94,L'avantage d'atteindre vos buts sans soucis,لان مشروط التبرعات نقطة.,En cours,2026-07-06,
+43e90d21-bd28-41d2-875d-b628c46aac65,proj-19,emp-42,Total object-oriented attitude,Also space high sister two.,En revue,2026-08-29,
+54ae0e0b-de2b-4b6d-9d1b-b0da2d4f1698,proj-19,emp-74,L'art d'évoluer avant-tout,Check purpose young wife send.,À faire,2027-01-08,
+bb1282de-23ec-4f05-bc28-b37563d6e5dc,proj-19,emp-78,Profit-focused background definition,Repousser chemin esprit jamais question.,Terminé,2026-07-03,59
+7faafea3-acd6-4d81-afb5-08fe74240e12,proj-19,emp-59,Open-architected empowering artificial intelligence,Habiter pouvoir reconnaître jeune couche force mort.,En cours,2026-06-12,
+a83c9311-6fd6-49b3-86e2-3a6d8ea63f8c,proj-19,emp-23,Seamless user-facing moderator,إعلان محاولات الموسوعة وحرمان استدعى.,À faire,2026-08-09,
+b36d3d12-213d-4c38-b711-af9db937076f,proj-19,emp-39,Open-source interactive hierarchy,Ensuite notre ainsi émotion voile.,Terminé,2026-09-20,60
+ab49f013-3391-4af3-b66b-c3f117bd5060,proj-19,emp-50,Organic regional circuit,Tomber déjà politique.,En cours,2026-05-24,
+de288a9a-64aa-4111-a8a4-48da0af0c2f5,proj-19,emp-35,Versatile upward-trending artificial intelligence,الشتاء شموليةً الإطلاق.,En revue,2026-09-22,
+010754e4-5a42-4292-9ea3-ad79589dd733,proj-19,emp-29,L'art d'avancer en toute tranquilité,Ailleurs crainte marquer courant maintenir dieu joindre.,Terminé,2026-10-09,57
+55fd9cbf-4195-4619-a3b3-5d863b330b0d,proj-19,emp-16,Digitized system-worthy standardization,Heavy town money.,En cours,2026-09-27,
+d9b5d41d-69cb-4257-b261-358ab8caa7ab,proj-19,emp-55,Le plaisir d'atteindre vos buts à l'état pur,Soi agir sol pencher défendre fier.,À faire,2027-04-24,
+c212af7f-869e-4136-b647-cc516f25be82,proj-20,emp-60,Cross-platform foreground matrix,Because current whom night Republican always two.,Terminé,2022-06-11,91
+1c6ee40c-9c67-4006-901c-6b4e9db66a9f,proj-20,emp-54,Le droit d'atteindre vos buts à sa source,انتصارهم انه صفحة.,Terminé,2021-12-02,98
+e9cdadda-94a6-4c92-a5c8-1848715341ad,proj-20,emp-79,Profit-focused even-keeled workforce,الشّعبين بالشرقي ٣٠ يعبأ وفنلندا وقبل الذود اليميني.,Terminé,2022-06-20,86
+117b3326-7040-4798-852f-2b5e43ff9be8,proj-20,emp-94,Le plaisir d'atteindre vos buts à la pointe,Their rather individual of interview fine painting last.,Terminé,2021-12-24,82
+1c0b0976-ffb8-483a-aafd-88ad06809799,proj-20,emp-50,Expanded solution-oriented challenge,Range dark catch read together travel involve.,Terminé,2022-04-08,74
+5340e00b-413c-468b-9cc3-05b1802fc25d,proj-20,emp-10,Streamlined non-volatile complexity,Mille troubler caresser ennemi.,Terminé,2022-07-15,95
+61f0793f-080a-4f8a-8587-0c6fa36a6708,proj-20,emp-43,Upgradable 4thgeneration task-force,Vendre embrasser queue sac parvenir quarante.,Terminé,2022-07-27,87
+59a05994-bb20-4eeb-a849-2ea68234c7e1,proj-20,emp-38,Vision-oriented content-based benchmark,أعلنت يرتبط شرسة سقطت.,Terminé,2022-06-01,100
+a92ee602-911c-4442-b84f-18077584c9d1,proj-20,emp-96,Focused radical emulation,بأضرار قامت بهناك.,Terminé,2022-02-26,62
+5acf362a-e9d7-4b88-bc5c-bd2544e3db46,proj-20,emp-64,Robust methodical structure,Contain hold listen clearly difficult impact.,Terminé,2022-06-11,82
+700c89f8-57dd-4924-aca1-05cf9991de3a,proj-20,emp-6,Future-proofed incremental definition,Serious at until worry term.,Terminé,2022-02-11,98
+da164dd5-e801-4a66-9767-7a7418c54732,proj-20,emp-39,Le droit de changer autrement,Offrir saison problème.,Terminé,2022-04-08,55
+e40735b4-4764-4663-8b0f-3b7c68351c34,proj-21,emp-58,La possibilité d'avancer naturellement,Soudain descendre marquer.,Terminé,2023-03-12,62
+a71a8bc7-34a7-487a-8d71-c4454e931b7e,proj-21,emp-2,Balanced next generation info-mediaries,While couple keep this similar experience coach family.,Terminé,2023-05-22,78
+66a63459-e4f5-40d3-8d44-017719138606,proj-21,emp-43,Team-oriented multi-state circuit,Beaucoup lèvre condamner neuf sujet même fonction.,Terminé,2022-11-26,98
+609a5d1f-09b6-4a10-9049-2eb2761cbed2,proj-21,emp-39,Le droit d'avancer en toute tranquilité,Prison ce calme hôtel.,Terminé,2022-12-18,82
+c47dcff0-aa49-4719-a1b3-15ecd96effb8,proj-21,emp-65,La possibilité d'atteindre vos buts à sa source,Wear her herself should treatment not process change.,Terminé,2022-12-03,56
+b389d7b3-a832-49c0-b5b2-a920abc39a32,proj-21,emp-33,Enhanced zero administration structure,المتّبعة لعدم ولم الفرنسية التقليدية وبدون.,Terminé,2023-01-18,66
+05166d16-34bb-4171-9b92-bb3cd68dfcf2,proj-21,emp-demo-karim,Adaptive regional task-force,Importance siège mêler.,Terminé,2023-03-05,81
+e7747e90-5c5e-4f48-8978-ebbd7fed6dac,proj-21,emp-34,Robust modular encoding,غينيا بقعة بعلى سابق أخذ واندونيسيا العدّ ضمنها.,Terminé,2023-06-10,75
+a126e215-6060-4602-ae31-1169fe7d55b5,proj-21,emp-72,Business-focused contextually-based circuit,أم واستمرت فسقط هو الله وجهان.,Terminé,2022-09-15,57
+0aac7b62-eccf-42ae-b04b-9c3022518ea7,proj-22,emp-89,Customer-focused intangible conglomeration,سنغافورة قتيل ذلك مساعدة التخطيط.,Terminé,2023-08-25,63
+da346d5a-6ac4-4e4d-b3bd-73ad071ce421,proj-22,emp-59,L'art de louer autrement,وأكثرها إختار بمما الأسيوي والإتحاد الهجوم.,Terminé,2024-01-18,95
+8a8267c6-a52f-4899-bd1c-561281a2a659,proj-22,emp-40,Le droit d'innover autrement,Employee offer perhaps until pass market.,Terminé,2024-02-01,72
+df0137d4-b1bb-42f5-a0cc-a114973f7d7a,proj-22,emp-75,Self-enabling modular methodology,الساحلية القادة الجنرال الأرض بلمّ معاملة لكل الحكومة.,Terminé,2023-10-14,99
+c4fbc67c-ce49-4f94-ab44-8167e723e8f2,proj-22,emp-68,Operative incremental analyzer,Minute pas achever couper drame résoudre.,Terminé,2024-02-01,88
+9ab402b1-5681-41ac-a850-3f2969834a20,proj-22,emp-5,La possibilité de louer de manière sûre,قام اليميني لبلجيكا شدّت.,Terminé,2023-11-26,57
+814dc086-9222-47da-ba5a-b9e3743895ca,proj-22,emp-demo-admin,Enhanced content-based groupware,Terrain retomber payer jeune parcourir suite marier.,Terminé,2023-08-26,78
+9ea7da39-6631-4acc-8d00-89f3f2ce0bfc,proj-22,emp-88,L'avantage de louer à la pointe,Decade rate son.,Terminé,2024-05-03,93
+49e3f372-026a-40ce-b00c-e0aaf808b4f7,proj-22,emp-44,L'art d'atteindre vos buts à l'état pur,Number hope organization ten.,Terminé,2024-02-29,61
+a861c1a1-2dc5-40b6-aae8-6ff070d4d10c,proj-22,emp-39,Le droit de changer avant-tout,Cuisine elle cacher réponse rencontre.,Terminé,2024-05-03,60
+55ec6cab-3393-4112-897b-aa9ccd52c9d9,proj-22,emp-50,Organic motivating algorithm,Choisir étage joindre son encore envie règle.,Terminé,2024-01-03,74
+8f35e1c3-546f-4ad9-9491-a975d66c36a2,proj-23,emp-29,Programmable systematic capacity,بل كما تكاليف.,Terminé,2021-10-11,91
+02811c94-6867-42ef-a908-8a3d15b0205c,proj-23,emp-61,Integrated 6thgeneration software,Four threat billion she.,Terminé,2021-12-11,94
+4b354d33-9e47-47d0-a318-1d3b2bd214d8,proj-23,emp-84,Integrated 3rdgeneration orchestration,Entendre contre doucement ensemble hauteur.,Terminé,2021-08-07,70
+7f863148-99e0-4fc8-ba59-383620cf464b,proj-23,emp-69,Future-proofed coherent complexity,Affirmer papa lourd coûter.,Terminé,2021-11-24,78
+0668fcaf-7ded-4c93-b2df-bc3d650f6a6a,proj-23,emp-93,L'assurance d'évoluer à sa source,Derrière autour ordre et heureux certain intérieur.,Terminé,2021-11-14,68
+97807f0f-1eed-45c5-a924-53e57b91ba35,proj-23,emp-91,Business-focused bi-directional info-mediaries,بريطانيا-فرنسا التقليدي رئيس ديسمبر.,Terminé,2021-09-11,72
+b81d7bb5-89fc-4953-8ec0-30a0da24cf18,proj-23,emp-60,Total local pricing structure,Erreur couche rayon risquer avec.,Terminé,2022-01-13,72
+9851761f-d6cc-47a0-a8b9-705c0cddce22,proj-23,emp-73,Le plaisir de concrétiser vos projets plus rapidement,Politique presser inspirer dégager de.,Terminé,2021-11-05,57
+31a5d2e4-afca-4f53-9f6b-d313e1f88f2d,proj-23,emp-82,Fundamental high-level infrastructure,مسرح واندونيسيا بقعة أفاق بها انه.,Terminé,2021-10-06,66
+1ff75c3d-3a39-4529-8eef-c948d9b26536,proj-23,emp-demo-youssef,L'assurance de louer sans soucis,Meet if research blood.,Terminé,2021-11-07,72
+299826fd-858c-4323-b574-2c4ff5237c13,proj-23,emp-demo-karim,Streamlined asynchronous utilization,Imposer nombreux demi dernier cinquante joie aujourd'hui.,Terminé,2021-11-09,68
+156401e4-b256-4123-bbd7-ff27eb7550ef,proj-23,emp-12,Team-oriented optimizing Internet solution,Représenter même demande peur avec tout mouvement.,Terminé,2021-10-04,97
+438d7b96-fd03-42f7-8d24-645c8de23112,proj-23,emp-55,L'avantage de concrétiser vos projets avant-tout,State computer what attorney.,Terminé,2021-12-26,72
+141d3071-1868-455a-8be8-9ac8da4651c7,proj-23,emp-36,Synergized radical throughput,Le petit beaucoup rouge souvenir taille.,Terminé,2021-08-19,95
+f6a17d6f-1a5b-46a5-ac7b-061f786999ef,proj-24,emp-49,Adaptive web-enabled circuit,Laugh factor past language.,Terminé,2023-02-16,92
+d6275da0-3aa1-4ae6-989b-b970e419ee8b,proj-24,emp-38,Synergized foreground framework,Truth view response trip wrong.,Terminé,2023-01-23,93
+cf388f56-8b8a-4531-9bf1-c483f17edb0e,proj-24,emp-56,Advanced reciprocal migration,Seulement attirer table vert.,Terminé,2023-01-27,79
+bfefdad7-54a0-4c24-bcdd-4e840f2add61,proj-24,emp-39,Triple-buffered next generation help-desk,والروسية السبب كانت بانه المضي.,Terminé,2022-12-03,55
+9a5d6aab-6116-4b20-81ec-a955e0a0fd2c,proj-24,emp-40,Le pouvoir d'atteindre vos buts à la pointe,بها الثانية بالسيطرة وحرمان.,Terminé,2022-12-29,75
+b8339f68-ac52-465d-9c68-ba1f9497833b,proj-24,emp-55,L'assurance d'évoluer plus facilement,عليها الإتفاقية وايرلندا غضون.,Terminé,2023-03-16,64
+caaaaf11-a810-4a13-a757-ff87a24878eb,proj-24,emp-22,Configurable client-driven project,Suivre pourtant tout papier il gouvernement rue.,Terminé,2023-01-21,86
+d0898a48-9ffb-4f0c-ac53-7a8c26910365,proj-24,emp-17,La possibilité d'innover autrement,Happen within nothing relate both loss real.,Terminé,2023-02-26,99
+eef9722e-343f-48d1-af01-367ca2481386,proj-24,emp-28,Upgradable upward-trending moderator,L'Un maintenir ombre dès parmi pièce plaine.,Terminé,2022-12-19,79
+b59e92ba-2d74-4795-a162-b3c37b6d7943,proj-24,emp-80,Sharable needs-based website,Party tough movement action law.,Terminé,2023-01-31,57
+de49e147-e08b-455f-99f0-ead82946b3c4,proj-24,emp-76,Le pouvoir de louer de manière sûre,Combien pourtant nu emmener réponse.,Terminé,2023-01-09,60
+e6d86256-d3ea-4eee-87c7-3cd83218c8bc,proj-24,emp-40,La liberté de concrétiser vos projets sans soucis,أوروبا يعبأ مليارات شيء الفترة اتّجة تسبب.,Terminé,2022-09-28,90
+ee7dd590-836a-4e55-9144-e1c1be5518cc,proj-24,emp-91,Le confort d'innover en toute tranquilité,Que occasion témoin.,Terminé,2023-01-20,68
+5ab18c77-fecb-4fe4-8493-52dd289a363f,proj-24,emp-34,Distributed stable knowledge user,Digne précis joue retrouver.,Terminé,2022-11-20,78
+b773a165-4f9c-42b2-8c6b-49d7b8632207,proj-24,emp-53,Mandatory attitude-oriented circuit,Study sell include himself.,Terminé,2023-02-26,75
+141ffdbf-7251-4a6d-b2ca-a264f30c51f5,proj-24,emp-demo-sara,Organic uniform productivity,خلاف وأزيز أوسع الصينية مواقعها.,Terminé,2022-10-16,84
+fe704d09-5e86-4bef-800a-eb8ee9740018,proj-24,emp-70,Down-sized maximized initiative,Jambe troubler toile déjà police.,Terminé,2022-10-19,94
+a1982085-ac96-4b4c-93c7-f07fe5b0413a,proj-24,emp-41,L'assurance d'évoluer à la pointe,Eau retomber figurer.,Terminé,2023-01-29,94
+b2d56786-3fd5-4e27-aadb-f84c003bc242,proj-24,emp-49,L'avantage d'innover avant-tout,Réveiller devant neuf impossible pluie.,Terminé,2023-03-21,82
+1731ee81-77d4-4cc5-afaf-0fb74a31c7f2,proj-24,emp-92,Upgradable systematic parallelism,الى قبل التقليدي جمعت فقامت هذا أدوات.,Terminé,2022-11-18,56
+a7ec01fc-3b39-4550-9c5f-7145c8b1683c,proj-24,emp-91,Progressive bi-directional software,Danger droit convenir aimer beaux travail.,Terminé,2023-01-10,90
+721a5ed8-d990-4e95-9444-7f3043f3da5d,proj-24,emp-44,Extended radical productivity,ارتكبها سقطت بالجوي ليرتفع.,Terminé,2023-01-22,70
