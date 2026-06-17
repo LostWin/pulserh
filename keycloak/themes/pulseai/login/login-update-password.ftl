@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Pulse AI · Connexion sécurisée</title>
+    <title>Pulse AI · Modification du mot de passe</title>
     <link rel="icon" href="${url.resourcesPath}/img/favicon.png" />
     <link href="${url.resourcesPath}/css/login.css?v=20260614c" rel="stylesheet" />
 </head>
@@ -31,10 +31,10 @@
             <section class="pulse-login-card">
                 <div class="pulse-login-card-header">
                     <div class="pulse-shield-badge">
-                        <span>🛡️</span>
+                        <span>🔐</span>
                     </div>
-                    <h2>Authentification sécurisée</h2>
-                    <p>Veuillez vous connecter avec votre compte d'entreprise.</p>
+                    <h2>Modification du mot de passe</h2>
+                    <p>Veuillez définir un nouveau mot de passe pour votre compte.</p>
                 </div>
 
                 <#if message?has_content>
@@ -43,49 +43,46 @@
                     </div>
                 </#if>
 
-                <form id="kc-form-login" class="pulse-login-form" action="${url.loginAction}" method="post">
-                    <#if !usernameHidden??>
-                        <div class="pulse-field">
-                            <label for="username">
-                                <#if !realm.loginWithEmailAllowed>${msg("username")}
-                                <#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}
-                                <#else>${msg("email")}</#if>
-                            </label>
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                value="${(login.username!'')}"
-                                autocomplete="username"
-                                autofocus
-                            />
-                        </div>
-                    </#if>
-
+                <form id="kc-passwd-update-form" class="pulse-login-form" action="${url.loginAction}" method="post">
                     <div class="pulse-field">
-                        <label for="password">${msg("password")}</label>
+                        <label for="password-new">${msg("passwordNew")}</label>
                         <input
-                            id="password"
-                            name="password"
+                            id="password-new"
+                            name="password-new"
                             type="password"
-                            autocomplete="current-password"
+                            autocomplete="new-password"
+                            autofocus
                         />
                     </div>
 
-                    <#if realm.rememberMe && !usernameHidden??>
-                        <label class="pulse-checkbox">
-                            <input id="rememberMe" name="rememberMe" type="checkbox" <#if login.rememberMe??>checked</#if>>
-                            <span>${msg("rememberMe")}</span>
-                        </label>
+                    <div class="pulse-field">
+                        <label for="password-confirm">${msg("passwordConfirm")}</label>
+                        <input
+                            id="password-confirm"
+                            name="password-confirm"
+                            type="password"
+                            autocomplete="new-password"
+                        />
+                    </div>
+
+                    <#if isAppInitiatedAction??>
+                        <div class="pulse-checkbox" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <label>
+                                <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" checked="checked">
+                                <span>${msg("logoutOtherSessions")}</span>
+                            </label>
+                        </div>
                     </#if>
 
                     <button class="pulse-login-button" name="login" id="kc-login" type="submit">
-                        Se connecter avec Keycloak
+                        Mettre à jour le mot de passe
                     </button>
-
-                    <#if realm.resetPasswordAllowed>
-                        <div class="pulse-login-help">
-                            <a href="${url.loginResetCredentialsUrl}">${msg("doForgotPassword")}</a>
+                    
+                    <#if isAppInitiatedAction??>
+                        <div class="pulse-login-help" style="margin-top: 1rem;">
+                            <button type="submit" name="cancel-aia" value="true" class="pulse-login-button pulse-login-button-secondary" style="background: transparent; color: var(--text-brand-secondary); border: 1px solid var(--border-color);">
+                                ${msg("doCancel")}
+                            </button>
                         </div>
                     </#if>
                 </form>
