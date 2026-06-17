@@ -11,6 +11,7 @@ from app.schemas.department import DepartmentCreate, DepartmentUpdate, Departmen
 from app.schemas.employee import EmployeeResponse
 from app.core.rbac import require_hr, require_any_role
 from app.services.hr_analytics_service import department_engagement, employee_risk_payload
+from app.services.risk_predictor import risk_predictor
 
 router = APIRouter(prefix="/departments", tags=["Departments"])
 logger = logging.getLogger(__name__)
@@ -51,7 +52,10 @@ async def list_departments(db: AsyncSession = Depends(get_db)):
             manager_title = emp.job.title if emp.job else "Manager"
 
         scoped = [employee for employee in all_employees if employee.department_id == dept.id and employee.status != "inactif"]
-        risk_scores = [round(employee_risk_payload(employee)["score"]) for employee in scoped]
+        risk_scores = []
+        for employee in scoped:
+            pred = await risk_predictor.predict(employee, db)
+            risk_scores.append(round(pred["score_pct"]))
             
         items.append(
             DepartmentResponse(

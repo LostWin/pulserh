@@ -32,6 +32,7 @@ from app.services.hr_analytics_service import (
     interviews_to_schedule,
     next_benefits_enrollment_label,
 )
+from app.services.risk_predictor import risk_predictor
 
 router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 logger = logging.getLogger(__name__)
@@ -76,7 +77,10 @@ async def get_kpis(
         query = query.where(Employee.manager_id == manager.id)
     employees = (await db.execute(query)).scalars().all()
     active_employees = [employee for employee in employees if employee.status != "inactif"]
-    risk_scores = [employee_risk_payload(employee)["score"] for employee in active_employees]
+    risk_scores = []
+    for employee in active_employees:
+        pred = await risk_predictor.predict(employee, db)
+        risk_scores.append(pred["score_pct"])
     absent_days = 0
     attendance_days = 0
     salaries = []
@@ -328,10 +332,10 @@ def _manager_recommendation(top_factor: str) -> str:
     return mapping.get(top_factor, "Prévoir un échange managérial et ajuster le plan d'accompagnement.")
 
 
-def _manager_team_member_payload(employee: Employee) -> dict:
-    risk_payload = employee_risk_payload(employee)
+async def _manager_team_member_payload(employee: Employee, db: AsyncSession) -> dict:
+    risk_payload = await risk_predictor.predict(employee, db)
     factors = risk_payload["factors"]
-    risk_score = round(risk_payload["score"])
+    risk_score = round(risk_payload["score_pct"])
     risk = "high" if risk_payload["level"] == "red" else "medium" if risk_payload["level"] == "orange" else "low"
     engagement = risk_payload["engagement"]
     delta = 3 if risk == "low" else (-6 if risk == "medium" else -12)
@@ -530,7 +534,7 @@ async def get_manager_dashboard_summary(
     )
     team = team_result.scalars().all()
 
-    team_payload = [_manager_team_member_payload(employee) for employee in team]
+    team_payload = [await _manager_team_member_payload(employee, db) for employee in team]
     avg_engagement = round(sum(member["engagement"] for member in team_payload) / len(team_payload)) if team_payload else 0
     at_risk = [member for member in team_payload if member["risk"] != "low"]
     interviews_result = await db.execute(select(Interview).where(Interview.manager_id == manager.id))
@@ -648,9 +652,12 @@ async def get_rh_dashboard_summary(
 
         risk = 0
         if headcount > 0:
-            risk_payloads = [employee_risk_payload(employee) for employee in department_employees if employee.status != "inactif"]
-            risk_scores.extend([payload["score"] for payload in risk_payloads])
-            risk = round(sum(payload["score"] for payload in risk_payloads) / len(risk_payloads)) if risk_payloads else max(3, min(38, round((((overdue_tasks * 1.8) + repeated_absences) / headcount) * 8)))
+            risk_payloads = []
+            for employee in department_employees:
+                if employee.status != "inactif":
+                    risk_payloads.append(await risk_predictor.predict(employee, db))
+            risk_scores.extend([payload["score_pct"] for payload in risk_payloads])
+            risk = round(sum(payload["score_pct"] for payload in risk_payloads) / len(risk_payloads)) if risk_payloads else max(3, min(38, round((((overdue_tasks * 1.8) + repeated_absences) / headcount) * 8)))
         else:
             risk = 0
 
@@ -677,9 +684,11 @@ async def get_rh_dashboard_summary(
     orphan_employees = [employee for employee in employees if not employee.department_id or employee.department_id not in known_department_ids]
     if orphan_employees:
         headcount = len(orphan_employees)
-        orphan_payloads = [employee_risk_payload(employee) for employee in orphan_employees]
-        risk_scores.extend([payload["score"] for payload in orphan_payloads])
-        risk = round(sum(payload["score"] for payload in orphan_payloads) / len(orphan_payloads)) if orphan_payloads else max(5, min(22, 8 + headcount))
+        orphan_payloads = []
+        for employee in orphan_employees:
+            orphan_payloads.append(await risk_predictor.predict(employee, db))
+        risk_scores.extend([payload["score_pct"] for payload in orphan_payloads])
+        risk = round(sum(payload["score_pct"] for payload in orphan_payloads) / len(orphan_payloads)) if orphan_payloads else max(5, min(22, 8 + headcount))
         engagement = department_engagement(orphan_employees)
         department_items.append({
             "id": "unassigned",
@@ -752,10 +761,12 @@ async def get_direction_dashboard_summary(
         scoped = [employee for employee in employees if employee.department_id == department.id]
         headcount = len(scoped)
         total_headcount += headcount
-        department_risks = [employee_risk_payload(employee) for employee in scoped]
-        risk = round(sum(payload["score"] for payload in department_risks) / len(department_risks)) if department_risks else 0
+        department_risks = []
+        for employee in scoped:
+            department_risks.append(await risk_predictor.predict(employee, db))
+        risk = round(sum(payload["score_pct"] for payload in department_risks) / len(department_risks)) if department_risks else 0
         active_risks += risk
-        risk_scores.extend(payload["score"] for payload in department_risks)
+        risk_scores.extend(payload["score_pct"] for payload in department_risks)
         engagement = department_engagement(scoped)
         engagement_sum += engagement * headcount
         for employee in scoped:

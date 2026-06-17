@@ -241,6 +241,14 @@ class AlertingService:
         created += workflow_stats["created"]
         updated += workflow_stats["updated"]
 
+        # Synchronisation des anomalies d'observabilité IA (SECURITY_ANOMALY)
+        from app.services.security_anomaly_service import security_anomaly_service
+        try:
+            results = await security_anomaly_service.run_batch_analysis(db)
+            created += sum(1 for r in results if r.get("is_anomaly"))
+        except Exception as e:
+            logger.error(f"Erreur lors de la synchronisation des anomalies de sécurité : {e}")
+
         return {"created": created, "updated": updated}
 
     async def _sync_absence_alerts(self, db: AsyncSession) -> int:

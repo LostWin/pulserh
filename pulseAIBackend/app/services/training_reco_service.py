@@ -71,6 +71,7 @@ class TrainingRecoService:
     async def _recommend_heuristic(self, employee_id: str, db: AsyncSession, config=None) -> dict:
         """Règles métier : formations obligatoires en premier, puis par poste."""
         from app.models.domain import Employee, TrainingCourse, TrainingEnrollment
+        from sqlalchemy.orm import selectinload
 
         params = (config.heuristic_params or {}) if config else {}
         max_reco = int(params.get("max_recommendations", 3))
@@ -90,9 +91,9 @@ class TrainingRecoService:
             )
         )).scalars().all())
 
-        # Toutes les formations disponibles
+        # Toutes les formations disponibles avec leur skill cible loaded
         courses = (await db.execute(
-            select(TrainingCourse)
+            select(TrainingCourse).options(selectinload(TrainingCourse.target_skill))
         )).scalars().all()
 
         recommendations = []
@@ -107,8 +108,10 @@ class TrainingRecoService:
                     recommendations.append({
                         "training_id": c.id,
                         "title": c.title,
-                        "reason": "Formation obligatoire pour votre poste",
-                        "score": 1.0,
+                        "provider": c.provider,
+                        "target_skill_name": c.target_skill.name if c.target_skill else None,
+                        "reasons": ["Formation obligatoire pour votre poste"],
+                        "relevance_score": 100,
                         "mandatory": True,
                     })
 
@@ -120,8 +123,10 @@ class TrainingRecoService:
                 recommendations.append({
                     "training_id": c.id,
                     "title": c.title,
-                    "reason": "Recommandé pour votre famille de poste",
-                    "score": 0.7,
+                    "provider": c.provider,
+                    "target_skill_name": c.target_skill.name if c.target_skill else None,
+                    "reasons": ["Alignée avec le poste"],
+                    "relevance_score": 70,
                     "mandatory": False,
                 })
 
@@ -133,8 +138,10 @@ class TrainingRecoService:
                 recommendations.append({
                     "training_id": c.id,
                     "title": c.title,
-                    "reason": "Recommandé par défaut",
-                    "score": 0.5,
+                    "provider": c.provider,
+                    "target_skill_name": c.target_skill.name if c.target_skill else None,
+                    "reasons": ["Renforcement recommandé sur une compétence existante"],
+                    "relevance_score": 50,
                     "mandatory": False,
                 })
                 if len(recommendations) >= max_reco:
@@ -150,6 +157,7 @@ class TrainingRecoService:
     async def _recommend_ml(self, employee_id: str, db: AsyncSession, config=None) -> dict:
         """Filtrage basé sur le contenu (similarité cosinus sur vecteur de compétences)."""
         from app.models.domain import Employee, EmployeeSkill, TrainingCourse, TrainingEnrollment
+        from sqlalchemy.orm import selectinload
 
         params = (config.ml_params or {}) if config else {}
         top_k = int(params.get("top_k", 5))
@@ -182,9 +190,9 @@ class TrainingRecoService:
             # Construire le vecteur de compétences de l'employé
             skill_ids = {s.skill_id: s.proficiency_level for s in skills}
 
-            # Toutes les formations avec leur skill cible
+            # Toutes les formations avec leur skill cible loaded
             courses = (await db.execute(
-                select(TrainingCourse).where(
+                select(TrainingCourse).options(selectinload(TrainingCourse.target_skill)).where(
                     TrainingCourse.target_skill_id.is_not(None),
                     TrainingCourse.id.notin_(done_ids),
                 )
@@ -202,12 +210,14 @@ class TrainingRecoService:
                 scored.append({
                     "training_id": c.id,
                     "title": c.title,
-                    "reason": f"Lacune détectée sur la compétence cible (niveau actuel: {current_level}/5)",
-                    "score": round(gap_score, 3),
+                    "provider": c.provider,
+                    "target_skill_name": c.target_skill.name if c.target_skill else None,
+                    "reasons": [f"Lacune détectée sur la compétence cible (niveau actuel: {current_level}/5)"],
+                    "relevance_score": int(gap_score * 100),
                     "mandatory": False,
                 })
 
-            scored.sort(key=lambda x: x["score"], reverse=True)
+            scored.sort(key=lambda x: x["relevance_score"], reverse=True)
 
             return {
                 "employee_id": employee_id,

@@ -191,14 +191,23 @@ class SecurityAnomalyService:
 
                 # Créer une alerte si anomalie détectée
                 if analysis["is_anomaly"]:
-                    alert = Alert(
-                        type="SECURITY_ANOMALY",
-                        severity="HIGH",
-                        message=f"Comportement suspect détecté pour l'utilisateur {user_id}",
-                        details_json=analysis,
-                        source="SECURITY_ANOMALY_ML",
-                    )
-                    db.add(alert)
+                    fingerprint = f"security_anomaly:{user_id}:{datetime.now(timezone.utc).strftime('%Y%m%d%H')}"
+                    existing_alert = (await db.execute(
+                        select(Alert).where(Alert.fingerprint == fingerprint)
+                    )).scalar_one_or_none()
+
+                    if not existing_alert:
+                        alert = Alert(
+                            fingerprint=fingerprint,
+                            type="security",
+                            severity="critical",
+                            title=f"Usage IA Anormal — {user_id}",
+                            message=f"Comportement suspect détecté pour l'utilisateur {user_id}. Flags : {', '.join(analysis.get('flags', []))}",
+                            payload=analysis,
+                            source="SECURITY_ANOMALY_ML",
+                            target_roles=["admin", "hr"],
+                        )
+                        db.add(alert)
             except Exception as e:
                 logger.error(f"Erreur analyse utilisateur {user_id}: {e}")
 

@@ -20,7 +20,7 @@ from app.schemas.talent import (
     TrainingRecommendationItem,
 )
 from app.services.current_employee_service import get_or_create_current_employee
-from app.services.training_recommendation_service import recommend_trainings_for_employee
+from app.services.training_reco_service import training_reco_service
 
 router = APIRouter(tags=["Trainings"])
 
@@ -200,10 +200,5 @@ async def get_training_recommendations(
     db: AsyncSession = Depends(get_db),
 ):
     _, target = await _resolve_target_employee(employee_id, current_user, db)
-    trainings_result = await db.execute(
-        select(TrainingCourse).options(selectinload(TrainingCourse.target_skill)).order_by(TrainingCourse.title)
-    )
-    trainings = trainings_result.scalars().all()
-    skills_result = await db.execute(select(Skill))
-    skills_by_id = {skill.id: skill for skill in skills_result.scalars().all()}
-    return recommend_trainings_for_employee(target, trainings, skills_by_id)
+    reco_data = await training_reco_service.recommend(target.id, db)
+    return reco_data["recommendations"]

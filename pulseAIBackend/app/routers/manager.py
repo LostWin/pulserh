@@ -14,6 +14,7 @@ from app.schemas.auth import CurrentUser
 from app.schemas.manager import ObjectiveCreate, ObjectiveUpdate, ObjectiveResponse, AutoScheduleRequest, TeamVibeResponse
 from app.services.calendar_connector import calendar_connector
 from app.services.hr_analytics_service import employee_risk_payload
+from app.services.risk_predictor import risk_predictor
 
 router = APIRouter(prefix="/manager", tags=["Manager V2"])
 manager_roles = require_any_role("manager", "hr")
@@ -161,7 +162,9 @@ async def get_team_vibe(
             recommended_actions=[]
         )
         
-    team_payload = [employee_risk_payload(emp) for emp in team]
+    team_payload = []
+    for emp in team:
+        team_payload.append(await risk_predictor.predict(emp, db))
     avg_engagement = round(sum(p["engagement"] for p in team_payload) / len(team_payload))
     at_risk = sum(1 for p in team_payload if p["level"] in ["orange", "red"])
     

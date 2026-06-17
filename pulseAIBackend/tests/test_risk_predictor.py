@@ -30,7 +30,7 @@ def test_load_modele_absent(caplog):
     from minio.error import S3Error
 
     predictor = RiskPredictor()
-    with patch("app.services.risk_predictor.Minio") as MockMinio:
+    with patch("app.services.risk_predictor.Minio", create=True) as MockMinio:
         mock_client = MagicMock()
         mock_client.get_object.side_effect = S3Error(
             "NoSuchKey", "The specified key does not exist.",
@@ -47,13 +47,47 @@ def test_load_modele_absent(caplog):
 
 @pytest.mark.asyncio
 async def test_predict_modele_non_charge():
-    """predict() lève RuntimeError si le modèle n'est pas chargé."""
+    """predict() utilise le mode heuristique si le mode ML est demandé mais le modèle n'est pas chargé."""
     predictor = RiskPredictor()
     db = AsyncMock()
 
-    with patch("app.services.risk_predictor._get_redis", new=AsyncMock(return_value=None)):
-        with pytest.raises(RuntimeError, match="non disponible"):
-            await predictor.predict("emp-1", db)
+    # Mock DB return for Employee
+    mock_emp = MagicMock()
+    mock_emp.id = "emp-1"
+    mock_emp.first_name = "Jane"
+    mock_emp.last_name = "Doe"
+    mock_emp.status = "actif"
+    mock_emp.hire_date = None
+    mock_emp.engagement_snapshots = []
+    mock_emp.tasks = []
+    mock_emp.attendances = []
+    mock_emp.training_enrollments = []
+    mock_emp.project_assignments = []
+    mock_emp.department.name = "R&D"
+    mock_emp.job.title = "Ingénieur"
+
+    mock_res = MagicMock()
+    mock_res.scalar_one_or_none.return_value = mock_emp
+    db.execute.return_value = mock_res
+
+    # Mock Config to "ml"
+    mock_config = MagicMock()
+    mock_config.mode = "ml"
+    predictor._get_module_config = AsyncMock(return_value=mock_config)
+
+    features = {
+        "absence_count_3m": 1,
+        "sick_leave_count_12m": 0,
+        "avg_task_score": 8.0,
+    }
+
+    with patch("app.services.risk_predictor._get_redis", new=AsyncMock(return_value=None)), \
+         patch("app.services.risk_predictor.feature_extractor") as mock_fe:
+        mock_fe.get_employee_features = AsyncMock(return_value=features)
+        result = await predictor.predict("emp-1", db)
+
+    assert result["employee_id"] == "emp-1"
+    assert result["mode"] == "heuristic"
 
 
 @pytest.mark.asyncio
@@ -92,6 +126,30 @@ async def test_predict_calcul_et_mise_en_cache():
 
     db = AsyncMock()
 
+    # Mock DB return for Employee
+    mock_emp = MagicMock()
+    mock_emp.id = "emp-1"
+    mock_emp.first_name = "Jane"
+    mock_emp.last_name = "Doe"
+    mock_emp.status = "actif"
+    mock_emp.hire_date = None
+    mock_emp.engagement_snapshots = []
+    mock_emp.tasks = []
+    mock_emp.attendances = []
+    mock_emp.training_enrollments = []
+    mock_emp.project_assignments = []
+    mock_emp.department.name = "R&D"
+    mock_emp.job.title = "Ingénieur"
+
+    mock_res = MagicMock()
+    mock_res.scalar_one_or_none.return_value = mock_emp
+    db.execute.return_value = mock_res
+
+    # Mock Config to "ml"
+    mock_config = MagicMock()
+    mock_config.mode = "ml"
+    predictor._get_module_config = AsyncMock(return_value=mock_config)
+
     features = {
         "employee_id": "emp-1",
         "tenure_months": 24,
@@ -125,6 +183,11 @@ async def test_predict_calcul_et_mise_en_cache():
 async def test_predict_with_scenario_salary():
     """predict_with_scenario modifie les features avant la prédiction."""
     predictor = RiskPredictor()
+
+    # Mock Config to "ml"
+    mock_config = MagicMock()
+    mock_config.mode = "ml"
+    predictor._get_module_config = AsyncMock(return_value=mock_config)
 
     call_count = 0
 

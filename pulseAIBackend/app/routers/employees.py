@@ -26,17 +26,19 @@ from app.schemas.auth import CurrentUser
 from app.dependencies import get_current_user
 from app.core.rbac import require_hr, require_any_role, require_collaborator
 from app.services.hr_analytics_service import benefits_status_for_employee, current_project_names, employee_engagement_score, employee_performance_score, employee_risk_payload
+from app.services.risk_predictor import risk_predictor
 
 router = APIRouter(prefix="/employees", tags=["Employees"])
 logger = logging.getLogger(__name__)
 
 
-def _build_employee_payload(
+async def _build_employee_payload(
     emp: Employee,
     *,
     contract_type: str | None,
     salary: float | None,
     leave_balance: str | None,
+    db: AsyncSession,
 ) -> dict:
     prioritized_objective = next(
         (
@@ -58,6 +60,7 @@ def _build_employee_payload(
         ),
         None,
     )
+    risk_payload = await risk_predictor.predict(emp, db)
     return {
         "id": emp.id,
         "first_name": emp.first_name,
@@ -76,12 +79,12 @@ def _build_employee_payload(
         "engagement_score": employee_engagement_score(emp),
         "risk_level": (
             "high"
-            if employee_risk_payload(emp)["level"] == "red"
+            if risk_payload["level"] == "red"
             else "medium"
-            if employee_risk_payload(emp)["level"] == "orange"
+            if risk_payload["level"] == "orange"
             else "low"
         ),
-        "risk_score": round(employee_risk_payload(emp)["score"]),
+        "risk_score": round(risk_payload["score_pct"]),
         "trend_delta": max(-12, min(8, round((employee_engagement_score(emp) - 72) / 3))),
         "last_active_label": "Aujourd'hui" if current_project_names(emp) else "À relancer",
         "project_count": len(current_project_names(emp)),
@@ -104,11 +107,12 @@ async def _serialize_employee_response(
     salary: float | None,
     leave_balance: str | None,
 ) -> EmployeeResponse:
-    payload = _build_employee_payload(
+    payload = await _build_employee_payload(
         target_employee,
         contract_type=contract_type,
         salary=salary,
         leave_balance=leave_balance,
+        db=db,
     )
     filtered_payload, field_visibility = await apply_field_access(
         db,

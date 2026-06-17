@@ -1,3 +1,4 @@
+from __future__ import annotations
 import io
 import json
 import logging
@@ -10,6 +11,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.services.feature_extractor import feature_extractor
+from app.models.domain import Employee
 
 logger = logging.getLogger(__name__)
 
@@ -81,8 +83,17 @@ class RiskPredictor:
         except Exception:
             return None
 
-    async def predict(self, employee_id: str, db: AsyncSession) -> dict:
+    async def predict(self, employee_or_id: str | Employee, db: AsyncSession) -> dict:
         """Retourne le score de risque pour un employé (avec cache Redis, TTL 1h)."""
+        from sqlalchemy.orm import selectinload
+
+        if isinstance(employee_or_id, str):
+            employee_id = employee_or_id
+            employee = None
+        else:
+            employee = employee_or_id
+            employee_id = employee.id
+
         r = await _get_redis()
         cache_key = f"risk:{employee_id}"
 
@@ -90,6 +101,25 @@ class RiskPredictor:
             cached = await r.get(cache_key)
             if cached:
                 return json.loads(cached)
+
+        # Cache miss - load Employee object if not already provided
+        if employee is None:
+            emp_res = await db.execute(
+                select(Employee)
+                .options(
+                    selectinload(Employee.engagement_snapshots),
+                    selectinload(Employee.tasks),
+                    selectinload(Employee.attendances),
+                    selectinload(Employee.training_enrollments),
+                    selectinload(Employee.project_assignments),
+                    selectinload(Employee.department),
+                    selectinload(Employee.job),
+                )
+                .where(Employee.id == employee_id)
+            )
+            employee = emp_res.scalar_one_or_none()
+            if not employee:
+                raise ValueError(f"Employé {employee_id} introuvable")
 
         config = await self._get_module_config(db)
         mode = config.mode if config else "heuristic"
@@ -100,6 +130,52 @@ class RiskPredictor:
             if mode == "ml" and self.model is None:
                 logger.warning("Mode ML demandé mais modèle non chargé — fallback heuristique")
             result = await self._predict_heuristic(employee_id, db, config)
+
+        # Enrich parameters for dashboard compatibility
+        from datetime import date, timedelta
+        from app.services.hr_analytics_service import employee_engagement_score, employee_tenure_label
+
+        engagement = employee_engagement_score(employee)
+        overdue_tasks = sum(
+            1 for task in employee.tasks
+            if task.due_date and task.due_date < date.today() and task.status != "Terminé"
+        )
+        absences_30 = sum(
+            1 for attendance in employee.attendances
+            if attendance.date and attendance.date >= date.today() - timedelta(days=30) and (attendance.status or "").lower() == "absent"
+        )
+        mandatory_overdue = sum(
+            1 for enrollment in employee.training_enrollments
+            if enrollment.mandatory and enrollment.due_date and enrollment.due_date < date.today() and enrollment.status != "completed"
+        )
+        training_completed = sum(1 for enrollment in employee.training_enrollments if enrollment.status == "completed")
+        active_projects = max(1, sum(1 for assignment in employee.project_assignments if assignment.is_active))
+
+        factors = [
+            {"label": "Charge de travail", "value": min(95, 24 + overdue_tasks * 18 + active_projects * 4)},
+            {"label": "Assiduité", "value": min(95, 18 + absences_30 * 17)},
+            {"label": "Formation obligatoire", "value": min(95, 15 + mandatory_overdue * 22)},
+            {"label": "Engagement déclaré", "value": min(95, max(10, 100 - engagement))},
+            {"label": "Reconnaissance / progression", "value": min(95, 28 + max(0, 3 - training_completed) * 9)},
+        ]
+        top_factors = sorted(factors, key=lambda item: item["value"], reverse=True)[:3]
+        recommendation = {
+            "Charge de travail": "Rééquilibrer la charge, clarifier les priorités et revoir les échéances des projets actifs.",
+            "Assiduité": "Prévoir un point de suivi et analyser les causes des absences récentes avec le manager.",
+            "Formation obligatoire": "Débloquer rapidement les formations obligatoires et lever les freins d'accès.",
+            "Engagement déclaré": "Planifier un échange de proximité et mettre en place un plan d'accompagnement ciblé.",
+            "Reconnaissance / progression": "Proposer un feedback structuré, une perspective d'évolution et un plan de développement.",
+        }.get(top_factors[0]["label"], "Prévoir un échange managérial et ajuster le plan d'accompagnement.")
+
+        result["score"] = float(result["score"])
+        result["score_pct"] = float(result["score"] * 100)
+        result["engagement"] = engagement
+        result["factors"] = top_factors
+        result["recommendation"] = recommendation
+        result["employee_name"] = f"{employee.first_name} {employee.last_name}"
+        result["department"] = employee.department.name if employee.department else "Non assigné"
+        result["title"] = employee.job.title if employee.job else "Collaborateur"
+        result["tenure"] = employee_tenure_label(employee)
 
         if r:
             await r.setex(cache_key, CACHE_TTL, json.dumps(result))
