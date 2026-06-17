@@ -88,9 +88,9 @@ const ML_FIELDS = {
 function TrainingBadge({ status }) {
   const map = {
     untrained: { label: 'Non entraîné', cls: 'bg-slate-100 text-slate-600 border-slate-200' },
-    training:  { label: '⏳ En cours...', cls: 'bg-amber-50 text-amber-700 border-amber-200 animate-pulse' },
-    ready:     { label: '✅ Prêt',       cls: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    error:     { label: '❌ Erreur',     cls: 'bg-red-50 text-red-700 border-red-200' },
+    training:  { label: 'En cours...', cls: 'bg-amber-50 text-amber-700 border-amber-200 animate-pulse' },
+    ready:     { label: 'Prêt',       cls: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+    error:     { label: 'Erreur',     cls: 'bg-red-50 text-red-700 border-red-200' },
   };
   const { label, cls } = map[status] || map.untrained;
   return (
@@ -246,10 +246,15 @@ export default function MLModuleCard({ module: initialModule, onSave, onTrain })
     setTraining(true);
     try {
       await api.post(`/admin/ml/modules/${module.module_id}/train`);
-      setModule(m => ({ ...m, training_status: 'training' }));
+      setModule(m => ({ ...m, training_status: 'training', training_error: null }));
       onTrain?.(module.module_id);
     } catch (e) {
       console.error(e);
+      setModule(m => ({
+        ...m,
+        training_status: 'error',
+        training_error: e.response?.data?.detail || e.message || 'Erreur inconnue'
+      }));
     } finally {
       setTraining(false);
     }
@@ -277,7 +282,7 @@ export default function MLModuleCard({ module: initialModule, onSave, onTrain })
                 ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
                 : 'bg-amber-50 text-amber-700 border-amber-200'
             )}>
-              {module.mode === 'ml' ? '🤖 ML' : '⚡ Heuristique'}
+              {module.mode === 'ml' ? 'ML' : 'Heuristique'}
             </span>
             {module.mode === 'ml' && <TrainingBadge status={module.training_status} />}
             {module.last_trained_at && module.mode === 'ml' && (
@@ -320,7 +325,7 @@ export default function MLModuleCard({ module: initialModule, onSave, onTrain })
                       : 'text-brand-secondary/50 hover:text-brand-secondary'
                   )}
                 >
-                  {m === 'heuristic' ? '⚡ Heuristique' : '🤖 Machine Learning'}
+                  {m === 'heuristic' ? 'Heuristique' : 'Machine Learning'}
                 </button>
               ))}
             </div>
@@ -358,10 +363,10 @@ export default function MLModuleCard({ module: initialModule, onSave, onTrain })
 
               {/* Training status + button */}
               <div className="flex items-center justify-between bg-brand-light/40 rounded-xl p-3 border border-brand-secondary/10">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-1 min-w-0 mr-4">
                   <TrainingBadge status={module.training_status} />
-                  {module.training_error && (
-                    <span className="text-xxs text-red-500 truncate max-w-xs">{module.training_error}</span>
+                  {module.training_error && module.training_status === 'error' && (
+                    <span className="text-xxs text-red-500 leading-tight whitespace-normal">{module.training_error}</span>
                   )}
                 </div>
                 <button
