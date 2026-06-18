@@ -481,30 +481,6 @@ export default function ConfigIA() {
                   </div>
                 </div>
 
-                {/* Audit summary */}
-                <div className="bg-white rounded-2xl border border-brand-secondary/10 shadow-sm overflow-hidden">
-                  <div className="flex items-center gap-2 px-5 py-4 border-b border-brand-secondary/10">
-                    <History size={16} className="text-brand-secondary" />
-                    <h2 className="font-semibold text-brand-dark">Derniers logs admin</h2>
-                  </div>
-                  <div className="divide-y divide-brand-secondary/5">
-                    {history.map((h, i) => (
-                      <div key={i} className="p-4 hover:bg-brand-light/30 transition-colors text-xs space-y-1">
-                        <div className="flex justify-between font-medium text-brand-dark">
-                          <span>{h.action}</span>
-                          <span className="text-brand-secondary/50 font-normal">{h.date}</span>
-                        </div>
-                        <div className="flex justify-between text-brand-secondary/60">
-                          <span>Modifié par: {h.user}</span>
-                          <span>
-                            {h.old !== '—' && <span className="line-through mr-1">{h.old}</span>}
-                            <span className="text-brand-secondary font-semibold">{h.new}</span>
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
           )}

@@ -248,6 +248,10 @@ class AlertingService:
             created += sum(1 for r in results if r.get("is_anomaly"))
         except Exception as e:
             logger.error(f"Erreur lors de la synchronisation des anomalies de sécurité : {e}")
+            try:
+                await db.rollback()
+            except Exception:
+                pass
 
         return {"created": created, "updated": updated}
 

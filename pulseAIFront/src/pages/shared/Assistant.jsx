@@ -78,7 +78,6 @@ export default function Assistant() {
   const endRef = useRef(null);
   const streamRef = useRef(null);
   const { user } = useAuth();
-
   
   const getPrimaryRole = () => {
     if (!user?.roles) return 'collaborator';

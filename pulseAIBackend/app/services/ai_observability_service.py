@@ -29,5 +29,9 @@ class AIObservabilityService:
             await db.commit()
         except Exception as e:
             logger.error(f"Failed to log AI observability event: {e}")
+            try:
+                await db.rollback()
+            except Exception:
+                pass
 
 ai_observability_service = AIObservabilityService()
