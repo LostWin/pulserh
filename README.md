@@ -106,11 +106,12 @@ ou ajouter manuellement dans `/etc/hosts` :
 
 ### 3. Fichier d'environnement (⚠️ Obligatoire)
 
-Le conteneur de base de données PostgreSQL ne démarrera pas sans les mots de passe.
+Le conteneur de base de données PostgreSQL ne démarrera pas sans les mots de passe. De plus, **Pulse AI a besoin d'une clé d'API LLM** pour fonctionner.
 
 ```bash
 cp .env.example .env
 # Éditer .env si nécessaire (mots de passe, etc.)
+# IMPORTANT : Renseignez la clé OPENROUTER_API_KEY (ou OPENAI_API_KEY) pour que le chatbot puisse générer des réponses.
 ```
 
 ### 4. Générer les certificats de sécurité locaux
@@ -264,6 +265,25 @@ Les modules suivants doivent analyser l'historique de **votre** base de données
 - **Résultat :** Une fois entraîné, le modèle détectera ce comportement comme étant "hors norme" et générera une alerte de sécurité.
 
 > **🛡️ Note de robustesse (Fallback) :** Tous les systèmes disposent d'un Fallback Heuristique. Si le modèle ML n'est pas encore entraîné ou si un appel réseau échoue, le système bascule automatiquement sur des règles classiques pour que l'application ne plante jamais.
+
+---
+
+## 👥 Comptes de test Keycloak
+
+---
+
+## 🛠️ Fonctionnalités Techniques Avancées (Sous le capot)
+
+Au-delà des fonctionnalités visibles, Pulse RH intègre des mécanismes invisibles mais critiques pour la sécurité et la conformité RGPD en entreprise :
+
+#### 1. Discretionary Access Control (DAC)
+Contrairement aux systèmes RAG classiques où l'IA a accès à toute la base, le backend FastAPI filtre et obfusque **à la volée** les champs sensibles (comme le `salary` ou la `performance`) avant même qu'ils ne soient envoyés à l'IA, en fonction du rôle du demandeur (`collaborator` vs `hr`). Même avec une tentative d'injection ("Prompt Injection"), l'IA ne peut physiquement pas divulguer le salaire d'un collègue car elle ne l'a jamais reçu en contexte.
+
+#### 2. Moteur Documentaire RAG Hybride (Sécurisé)
+Les documents RH téléversés (contrats, politiques) sont vectorisés dans **Qdrant**. Cependant, chaque vecteur embarque les métadonnées de droits d'accès (`allowed_roles`, `document_id`). Lors d'une question au chatbot, la recherche sémantique est croisée avec une requête de filtrage : l'IA ne sourcera ses réponses que depuis les documents auxquels l'utilisateur a physiquement accès.
+
+#### 3. Observabilité IA & Audit Global
+Chaque action dans l'application (validation de document, changement de droit) est loggée dans la table **AuditLog**. De plus, chaque décision prise par l'Intelligence Artificielle ou chaque utilisation d'outil (Tool Calling) est tracée de manière indépendante via un service d'observabilité. L'administrateur peut auditer exactement **quels outils l'IA a appelés**, les tokens consommés, et la durée des flux.
 
 ---
 
