@@ -382,6 +382,16 @@ async def update_document_settings(
         action=action,
         details={"error": sync_error} if sync_error else {"allowed_roles": allowed_roles},
     )
+    await log_audit(
+        db, current_user.email,
+        f"Mise à jour des paramètres du document: {document.name}",
+        "document",
+        details={
+            "document_id": document.id,
+            "allowed_roles": allowed_roles,
+            "rag_enabled": payload.rag_enabled,
+        },
+    )
 
     return await _serialize_document_viewer(db, document=document, current_user=current_user)
 
@@ -486,6 +496,12 @@ async def validate_document(
         
     doc.status = "validated"
     await log_document_event(db, doc, current_user.email, ["hr"], "validation", {"action": "validated"})
+    await log_audit(
+        db, current_user.email,
+        f"Validation du document: {doc.name}",
+        "document",
+        details={"document_id": doc.id, "document_name": doc.name},
+    )
     await db.commit()
     return {"status": "success", "message": "Document validated successfully"}
 
@@ -501,5 +517,11 @@ async def reject_document(
         
     doc.status = "rejected"
     await log_document_event(db, doc, current_user.email, ["hr"], "validation", {"action": "rejected"})
+    await log_audit(
+        db, current_user.email,
+        f"Rejet du document: {doc.name}",
+        "document",
+        details={"document_id": doc.id, "document_name": doc.name},
+    )
     await db.commit()
     return {"status": "success", "message": "Document rejected successfully"}
