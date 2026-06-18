@@ -13,6 +13,19 @@ const IMPORT_TYPES = {
   projects: { id: 'projects', label: 'Projets' },
   tasks: { id: 'tasks', label: 'Tâches' },
   attendances: { id: 'attendances', label: 'Présences (Attendances)' },
+  skills: { id: 'skills', label: 'Compétences' },
+  'employee-skills': { id: 'employee-skills', label: 'Compétences Employés' },
+  'training-courses': { id: 'training-courses', label: 'Formations' },
+  'training-enrollments': { id: 'training-enrollments', label: 'Inscriptions Formations' },
+  'project-assignments': { id: 'project-assignments', label: 'Affectations Projets' },
+  'engagement-snapshots': { id: 'engagement-snapshots', label: 'Engagement' },
+  'performance-reviews': { id: 'performance-reviews', label: 'Revues de Performance' },
+  'performance-objectives': { id: 'performance-objectives', label: 'Objectifs Performance' },
+  'benefit-plans': { id: 'benefit-plans', label: 'Avantages Sociaux' },
+  'employee-benefits': { id: 'employee-benefits', label: 'Avantages Employés' },
+  'career-paths': { id: 'career-paths', label: 'Parcours Carrière' },
+  'mobility-requests': { id: 'mobility-requests', label: 'Mobilité' },
+  'promotion-history': { id: 'promotion-history', label: 'Promotions' },
 };
 
 export default function ImportDonnees() {
@@ -52,10 +65,23 @@ export default function ImportDonnees() {
   const detectFileType = (csvHeader) => {
     const header = csvHeader.toLowerCase();
     if (header.includes('first_name') && header.includes('last_name')) return 'employees';
+    if (header.includes('target_job_id') && header.includes('readiness_level')) return 'career-paths';
+    if (header.includes('target_department_id') && header.includes('request_type')) return 'mobility-requests';
+    if (header.includes('previous_job_title') && header.includes('new_job_title')) return 'promotion-history';
+    if (header.includes('benefit_plan_id') && header.includes('tier_label')) return 'employee-benefits';
+    if (header.includes('provider') && header.includes('coverage_summary')) return 'benefit-plans';
+    if (header.includes('progress_pct') && header.includes('due_date') && header.includes('title')) return 'performance-objectives';
+    if (header.includes('review_period') && header.includes('overall_score')) return 'performance-reviews';
+    if (header.includes('score') && header.includes('pulse_label')) return 'engagement-snapshots';
+    if (header.includes('project_id') && header.includes('role_on_project')) return 'project-assignments';
+    if (header.includes('training_id') && header.includes('completed_at')) return 'training-enrollments';
+    if (header.includes('duration_hours') && header.includes('format')) return 'training-courses';
+    if (header.includes('skill_id') && header.includes('proficiency_level')) return 'employee-skills';
+    if (header.includes('category') && header.includes('level_scale')) return 'skills';
     if (header.includes('title') && header.includes('level')) return 'jobs';
     if (header.includes('check_in')) return 'attendances';
     if (header.includes('salary')) return 'contracts';
-    if (header.includes('type') && header.includes('start_date') && header.includes('end_date')) return 'leaves';
+    if (header.includes('leave_type') && header.includes('start_date') && header.includes('end_date')) return 'leaves';
     if (header.includes('deadline')) return 'projects';
     if (header.includes('project_id') && header.includes('title')) return 'tasks';
     if (header.includes('name') && header.includes('manager_id')) return 'departments';

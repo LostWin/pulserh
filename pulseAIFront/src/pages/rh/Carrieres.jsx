@@ -248,7 +248,7 @@ export default function CarrieresRH() {
                   </td>
                   <td className="px-5 py-3 text-right">
                     <div className="flex flex-wrap items-center justify-end gap-2 w-max ml-auto">
-                      <Link to={`/rh/employees/${item.employee_id}`} className="rounded-lg border border-brand-secondary/20 px-2 py-1 text-xs font-medium text-brand-dark hover:bg-brand-secondary/5 transition">Profil</Link>
+                      <Link to={`/rh/employes/${item.employee_id}`} className="rounded-lg border border-brand-secondary/20 px-2 py-1 text-xs font-medium text-brand-dark hover:bg-brand-secondary/5 transition">Profil</Link>
                       <Link to={`/rh/employees/${item.employee_id}/carriere`} className="rounded-lg border border-brand-secondary/20 px-2 py-1 text-xs font-medium text-brand-dark hover:bg-brand-secondary/5 transition">Carrière</Link>
                       <button disabled title="Bientôt disponible" className="rounded-lg border border-brand-secondary/20 px-2 py-1 text-xs font-medium text-brand-dark/50 cursor-not-allowed bg-brand-light">Revue</button>
                     </div>

@@ -38,7 +38,7 @@ export const SIDEBAR_LINKS = {
     { name: 'Documents', path: '/collaborateur/documents', icon: FileText },
     { name: 'Profil', path: '/collaborateur/profil', icon: User },
     { name: 'Congés', path: '/collaborateur/conges', icon: Calendar },
-    { name: 'Onboarding', path: '/collaborateur/onboarding', icon: CheckSquare },
+    // Onboarding est injecté dynamiquement selon workflow actif
   ],
   Manager: [
     { name: 'Dashboard', path: '/manager/dashboard', icon: LayoutDashboard },

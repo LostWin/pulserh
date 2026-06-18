@@ -79,8 +79,8 @@ class Attendance(Base):
     id = Column(String, primary_key=True, default=generate_uuid)
     employee_id = Column(String, ForeignKey("employees.id"), nullable=False)
     date = Column(Date, nullable=False)
-    check_in = Column(DateTime, nullable=True)
-    check_out = Column(DateTime, nullable=True)
+    check_in = Column(DateTime(timezone=True), nullable=True)
+    check_out = Column(DateTime(timezone=True), nullable=True)
     status = Column(String, nullable=False) # Présent, Absent, Retard, Demi-journée
     
     employee = relationship("Employee", back_populates="attendances")
@@ -343,9 +343,10 @@ class AuditLog(Base):
     id = Column(String, primary_key=True, default=generate_uuid)
     user_email = Column(String, nullable=False)
     action = Column(String, nullable=False)
-    log_type = Column(String, nullable=False) # auth, security, export, system, ai, access
+    log_type = Column(String, nullable=False) # auth, security, export, system, ai, access, import, document, workflow, hr_action
     ip_address = Column(String, nullable=True)
     critical = Column(Boolean, default=False)
+    details = Column(JSON, nullable=True)  # Extra context (entity_id, filename, etc.)
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
 
 

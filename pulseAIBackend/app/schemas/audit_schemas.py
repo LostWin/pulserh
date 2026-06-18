@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 class AuditLogResponse(BaseModel):
     id: str
@@ -9,6 +9,7 @@ class AuditLogResponse(BaseModel):
     log_type: str
     ip_address: Optional[str] = None
     critical: bool
+    details: Optional[Dict[str, Any]] = None
     timestamp: datetime
 
     class Config:

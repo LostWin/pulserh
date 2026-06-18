@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Ban, CheckCircle, Key, Search, Shield, Users, Plus, UserPlus } from 'lucide-react';
+import { Ban, CheckCircle, Key, Search, Shield, Users, Plus, UserPlus, X, Mail } from 'lucide-react';
 
 import { api } from '../../lib/api';
 import { cn } from '../../lib/utils';
@@ -23,11 +23,16 @@ export default function Keycloak() {
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('Tous');
   
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  
   const [loadingId, setLoadingId] = useState(null);
   const [error, setError] = useState('');
   
   const [pendingForms, setPendingForms] = useState({});
   const [autoProvision, setAutoProvision] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [modalForm, setModalForm] = useState({ role: 'collaborator', password: '', send_email: false });
 
   const loadData = async () => {
     try {
@@ -80,6 +85,16 @@ export default function Keycloak() {
     (`${emp.first_name} ${emp.last_name} ${emp.email}`.toLowerCase().includes(search.toLowerCase()))
   ), [employees, search]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
+
+  const paginatedEmployees = useMemo(() => {
+    return filteredEmployees.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  }, [filteredEmployees, currentPage]);
+
+  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+
   const performAction = async (userId, action) => {
     setLoadingId(`${action}-${userId}`);
     try {
@@ -92,26 +107,36 @@ export default function Keycloak() {
     }
   };
 
-  const handleCreateAccount = async (employeeId) => {
-    setLoadingId(`create-${employeeId}`);
+  const handleCreateAccount = async () => {
+    if (!selectedEmployee) return;
+    setLoadingId(`create-${selectedEmployee.id}`);
     setError('');
     try {
-      const form = pendingForms[employeeId] || { role: 'collaborator', password: '' };
-      await api.post('/admin/users', { employee_id: employeeId, ...form });
+      await api.post('/admin/users', { 
+        employee_id: selectedEmployee.id, 
+        role: modalForm.role, 
+        password: modalForm.password,
+        send_email: modalForm.send_email
+      });
+      setSelectedEmployee(null);
       await loadData();
     } catch (err) {
-      setError(err.message || 'Impossible de créer l\'utilisateur.');
+      setError(err.message || "Impossible de créer l'utilisateur.");
     } finally {
       setLoadingId(null);
     }
   };
-  
-  const updatePendingForm = (employeeId, field, value) => {
-    setPendingForms(prev => ({
-      ...prev,
-      [employeeId]: { ...prev[employeeId], [field]: value }
-    }));
+
+  const openModal = (emp) => {
+    setSelectedEmployee(emp);
+    setModalForm({ role: 'collaborator', password: '', send_email: false });
   };
+
+  const closeModal = () => {
+    setSelectedEmployee(null);
+  };
+  
+
 
   return (
     <div className="animate-fade-in-up space-y-6">
@@ -254,71 +279,38 @@ export default function Keycloak() {
             </tbody>
           </table>
         ) : (
-          <table className="w-full text-sm">
+          <>
+            <table className="w-full text-sm">
             <thead className="bg-brand-light/60">
-              <tr>{['Employé', 'Email', 'Rôle', 'Mot de passe', 'Actions'].map((header) => (
+              <tr>{['Employé', 'Email', 'Département', 'Poste', 'Actions'].map((header) => (
                 <th key={header} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-brand-secondary/50">{header}</th>
               ))}</tr>
             </thead>
             <tbody className="divide-y divide-brand-secondary/5">
-              {filteredEmployees.length === 0 ? (
+              {paginatedEmployees.length === 0 ? (
                 <tr><td colSpan="5" className="p-8 text-center text-brand-secondary/50">Tous les employés ont déjà un compte.</td></tr>
               ) : (
-                filteredEmployees.map((emp) => {
-                  const form = pendingForms[emp.id] || { role: 'collaborator', password: '' };
-                  const isCreating = loadingId === `create-${emp.id}`;
-                  
+                paginatedEmployees.map((emp) => {
                   return (
-                    <tr key={emp.id} className="hover:bg-brand-light/40 transition-colors">
+                    <tr key={emp.id} className="hover:bg-brand-light/40 transition-colors cursor-pointer" onClick={() => openModal(emp)}>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2.5">
                           <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-secondary/10 text-xs font-bold text-brand-secondary">
                             {emp.first_name[0]}{emp.last_name[0]}
                           </div>
-                          <div>
-                            <span className="font-medium text-brand-dark">{emp.first_name} {emp.last_name}</span>
-                            {(emp.job || emp.department) && (
-                              <div className="text-[10px] text-brand-secondary/50">
-                                {emp.job} {emp.department ? `(${emp.department})` : ''}
-                              </div>
-                            )}
-                          </div>
+                          <span className="font-medium text-brand-dark">{emp.first_name} {emp.last_name}</span>
                         </div>
                       </td>
                       <td className="px-4 py-3 text-brand-secondary/70">{emp.email}</td>
-                      <td className="px-4 py-3 w-40">
-                        <select 
-                          value={form.role} 
-                          onChange={(e) => updatePendingForm(emp.id, 'role', e.target.value)}
-                          className="w-full rounded-lg border border-brand-secondary/20 bg-transparent px-2 py-1 text-xs outline-none focus:border-brand-primary"
-                        >
-                          {AVAILABLE_ROLES.map(role => <option key={role} value={role}>{role}</option>)}
-                        </select>
-                      </td>
-                      <td className="px-4 py-3 w-48">
-                        <input 
-                          type="password" 
-                          value={form.password}
-                          onChange={(e) => updatePendingForm(emp.id, 'password', e.target.value)}
-                          placeholder="Auto-généré"
-                          className="w-full rounded-lg border border-brand-secondary/20 bg-transparent px-2 py-1 text-xs outline-none focus:border-brand-primary"
-                        />
-                      </td>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3 text-brand-secondary/70">{emp.department || '—'}</td>
+                      <td className="px-4 py-3 text-brand-secondary/70">{emp.job || '—'}</td>
+                      <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                         <button 
-                          onClick={() => handleCreateAccount(emp.id)}
-                          disabled={isCreating}
-                          className={cn(
-                            "flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors",
-                            isCreating ? "bg-brand-secondary/10 text-brand-secondary" : "bg-brand-primary text-white hover:bg-brand-primary/90"
-                          )}
+                          onClick={() => openModal(emp)}
+                          className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors bg-brand-primary/10 text-brand-primary hover:bg-brand-primary/20"
                         >
-                          {isCreating ? 'Création...' : (
-                            <>
-                              <Plus size={12} />
-                              Créer
-                            </>
-                          )}
+                          <Plus size={12} />
+                          Créer compte
                         </button>
                       </td>
                     </tr>
@@ -327,8 +319,143 @@ export default function Keycloak() {
               )}
             </tbody>
           </table>
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between border-t border-brand-secondary/10 bg-brand-light/20 px-4 py-3">
+              <span className="text-xs text-brand-secondary/70">
+                Affichage {(currentPage - 1) * itemsPerPage + 1} à {Math.min(currentPage * itemsPerPage, filteredEmployees.length)} sur {filteredEmployees.length}
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-brand-secondary transition-colors hover:bg-brand-secondary/10 disabled:opacity-50"
+                >
+                  Précédent
+                </button>
+                <div className="flex items-center gap-1 mx-2 text-xs font-medium text-brand-dark">
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentPage(i + 1)}
+                      className={cn(
+                        "h-6 w-6 rounded-md flex items-center justify-center transition-colors",
+                        currentPage === i + 1 ? "bg-brand-primary text-white" : "hover:bg-brand-secondary/10 text-brand-secondary"
+                      )}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-brand-secondary transition-colors hover:bg-brand-secondary/10 disabled:opacity-50"
+                >
+                  Suivant
+                </button>
+              </div>
+            </div>
+          )}
+          </>
         )}
       </div>
+      {/* Modal de création de compte */}
+      {selectedEmployee && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm" onClick={closeModal} />
+          <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl animate-scale-in">
+            <button
+              onClick={closeModal}
+              className="absolute right-4 top-4 text-brand-secondary/50 hover:text-brand-dark transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <h2 className="text-xl font-bold text-brand-dark mb-1">Créer un compte</h2>
+            <p className="text-sm text-brand-secondary/70 mb-6">
+              Configurer les accès pour <span className="font-medium text-brand-dark">{selectedEmployee.first_name} {selectedEmployee.last_name}</span>.
+            </p>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-brand-secondary/70 mb-1.5">
+                  Rôle
+                </label>
+                <select
+                  value={modalForm.role}
+                  onChange={(e) => setModalForm(prev => ({ ...prev, role: e.target.value }))}
+                  className="w-full rounded-xl border border-brand-secondary/20 bg-brand-light/50 px-3 py-2.5 text-sm outline-none focus:border-brand-primary transition-colors"
+                >
+                  {AVAILABLE_ROLES.map(role => (
+                    <option key={role} value={role}>{role}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-brand-secondary/70 mb-1.5">
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  value={modalForm.password}
+                  onChange={(e) => setModalForm(prev => ({ ...prev, password: e.target.value }))}
+                  placeholder="Généré automatiquement si vide"
+                  className="w-full rounded-xl border border-brand-secondary/20 bg-brand-light/50 px-3 py-2.5 text-sm outline-none focus:border-brand-primary transition-colors"
+                />
+              </div>
+
+              <div className="flex items-center gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setModalForm(prev => ({ ...prev, send_email: !prev.send_email }))}
+                  className={cn(
+                    "flex h-5 w-5 shrink-0 items-center justify-center rounded border transition-colors",
+                    modalForm.send_email ? "border-brand-primary bg-brand-primary text-white" : "border-brand-secondary/30 bg-white"
+                  )}
+                >
+                  {modalForm.send_email && <CheckCircle size={12} strokeWidth={3} />}
+                </button>
+                <div 
+                  className="flex flex-col cursor-pointer"
+                  onClick={() => setModalForm(prev => ({ ...prev, send_email: !prev.send_email }))}
+                >
+                  <span className="text-sm font-medium text-brand-dark flex items-center gap-1.5">
+                    <Mail size={14} className="text-brand-secondary/70" />
+                    Notifier l'employé par email
+                  </span>
+                  <span className="text-xs text-brand-secondary/60">
+                    Envoie les identifiants de connexion à {selectedEmployee.email}.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex justify-end gap-3">
+              <button
+                onClick={closeModal}
+                className="rounded-xl px-4 py-2.5 text-sm font-semibold text-brand-secondary hover:bg-brand-secondary/10 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleCreateAccount}
+                disabled={loadingId === `create-${selectedEmployee.id}`}
+                className="flex items-center gap-2 rounded-xl bg-brand-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-primary/90 transition-all disabled:opacity-70"
+              >
+                {loadingId === `create-${selectedEmployee.id}` ? (
+                  'Création...'
+                ) : (
+                  <>
+                    <Plus size={16} />
+                    Confirmer
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

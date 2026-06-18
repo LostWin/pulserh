@@ -3,11 +3,12 @@ from pathlib import Path
 import textwrap
 import zipfile
 
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends, UploadFile, File, Request
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.services.import_service import process_csv_import
+from app.services.audit_service import log_audit_action
 from app.dependencies import get_current_user
 
 # Models
@@ -387,85 +388,127 @@ async def download_import_samples(current_user = Depends(get_current_user)):
     )
 
 @router.post("/departments", response_model=ImportReport)
-async def import_departments(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, DepartmentImport, Department, current_user.id, current_user.email, "departments")
+async def import_departments(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, DepartmentImport, Department, current_user.id, current_user.email, "departments")
+    await log_audit_action(db, current_user.email, f"Import departments: {file.filename} ({report.processed} lignes, {report.created} créées, {report.updated} màj, {len(report.errors)} erreurs)", "import", request, details={"entity": "departments", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/jobs", response_model=ImportReport)
-async def import_jobs(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, JobImport, Job, current_user.id, current_user.email, "jobs")
+async def import_jobs(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, JobImport, Job, current_user.id, current_user.email, "jobs")
+    await log_audit_action(db, current_user.email, f"Import jobs: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "jobs", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/employees", response_model=ImportReport)
-async def import_employees(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, EmployeeImport, Employee, current_user.id, current_user.email, "employees")
+async def import_employees(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, EmployeeImport, Employee, current_user.id, current_user.email, "employees")
+    await log_audit_action(db, current_user.email, f"Import employees: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "employees", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/contracts", response_model=ImportReport)
-async def import_contracts(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, ContractImport, Contract, current_user.id, current_user.email, "contracts")
+async def import_contracts(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, ContractImport, Contract, current_user.id, current_user.email, "contracts")
+    await log_audit_action(db, current_user.email, f"Import contracts: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "contracts", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/leaves", response_model=ImportReport)
-async def import_leaves(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, LeaveImport, Leave, current_user.id, current_user.email, "leaves")
+async def import_leaves(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, LeaveImport, Leave, current_user.id, current_user.email, "leaves")
+    await log_audit_action(db, current_user.email, f"Import leaves: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "leaves", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/projects", response_model=ImportReport)
-async def import_projects(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, ProjectImport, Project, current_user.id, current_user.email, "projects")
+async def import_projects(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, ProjectImport, Project, current_user.id, current_user.email, "projects")
+    await log_audit_action(db, current_user.email, f"Import projects: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "projects", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/tasks", response_model=ImportReport)
-async def import_tasks(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, TaskImport, Task, current_user.id, current_user.email, "tasks")
+async def import_tasks(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, TaskImport, Task, current_user.id, current_user.email, "tasks")
+    await log_audit_action(db, current_user.email, f"Import tasks: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "tasks", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/attendances", response_model=ImportReport)
-async def import_attendances(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, AttendanceImport, Attendance, current_user.id, current_user.email, "attendances")
+async def import_attendances(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, AttendanceImport, Attendance, current_user.id, current_user.email, "attendances")
+    await log_audit_action(db, current_user.email, f"Import attendances: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "attendances", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/skills", response_model=ImportReport)
-async def import_skills(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, SkillImport, Skill, current_user.id, current_user.email, "skills")
+async def import_skills(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, SkillImport, Skill, current_user.id, current_user.email, "skills")
+    await log_audit_action(db, current_user.email, f"Import skills: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "skills", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/employee-skills", response_model=ImportReport)
-async def import_employee_skills(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, EmployeeSkillImport, EmployeeSkill, current_user.id, current_user.email, "employee_skills")
+async def import_employee_skills(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, EmployeeSkillImport, EmployeeSkill, current_user.id, current_user.email, "employee_skills")
+    await log_audit_action(db, current_user.email, f"Import employee_skills: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "employee_skills", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/training-courses", response_model=ImportReport)
-async def import_training_courses(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, TrainingCourseImport, TrainingCourse, current_user.id, current_user.email, "training_courses")
+async def import_training_courses(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, TrainingCourseImport, TrainingCourse, current_user.id, current_user.email, "training_courses")
+    await log_audit_action(db, current_user.email, f"Import training_courses: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "training_courses", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/training-enrollments", response_model=ImportReport)
-async def import_training_enrollments(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, TrainingEnrollmentImport, TrainingEnrollment, current_user.id, current_user.email, "training_enrollments")
+async def import_training_enrollments(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, TrainingEnrollmentImport, TrainingEnrollment, current_user.id, current_user.email, "training_enrollments")
+    await log_audit_action(db, current_user.email, f"Import training_enrollments: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "training_enrollments", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/project-assignments", response_model=ImportReport)
-async def import_project_assignments(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, ProjectAssignmentImport, ProjectAssignment, current_user.id, current_user.email, "project_assignments")
+async def import_project_assignments(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, ProjectAssignmentImport, ProjectAssignment, current_user.id, current_user.email, "project_assignments")
+    await log_audit_action(db, current_user.email, f"Import project_assignments: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "project_assignments", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/engagement-snapshots", response_model=ImportReport)
-async def import_engagement_snapshots(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, EngagementSnapshotImport, EngagementSnapshot, current_user.id, current_user.email, "engagement_snapshots")
+async def import_engagement_snapshots(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, EngagementSnapshotImport, EngagementSnapshot, current_user.id, current_user.email, "engagement_snapshots")
+    await log_audit_action(db, current_user.email, f"Import engagement_snapshots: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "engagement_snapshots", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/performance-reviews", response_model=ImportReport)
-async def import_performance_reviews(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, PerformanceReviewImport, PerformanceReview, current_user.id, current_user.email, "performance_reviews")
+async def import_performance_reviews(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, PerformanceReviewImport, PerformanceReview, current_user.id, current_user.email, "performance_reviews")
+    await log_audit_action(db, current_user.email, f"Import performance_reviews: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "performance_reviews", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/performance-objectives", response_model=ImportReport)
-async def import_performance_objectives(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, PerformanceObjectiveImport, PerformanceObjective, current_user.id, current_user.email, "performance_objectives")
+async def import_performance_objectives(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, PerformanceObjectiveImport, PerformanceObjective, current_user.id, current_user.email, "performance_objectives")
+    await log_audit_action(db, current_user.email, f"Import performance_objectives: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "performance_objectives", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/benefit-plans", response_model=ImportReport)
-async def import_benefit_plans(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, BenefitPlanImport, BenefitPlan, current_user.id, current_user.email, "benefit_plans")
+async def import_benefit_plans(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, BenefitPlanImport, BenefitPlan, current_user.id, current_user.email, "benefit_plans")
+    await log_audit_action(db, current_user.email, f"Import benefit_plans: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "benefit_plans", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/employee-benefits", response_model=ImportReport)
-async def import_employee_benefits(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, EmployeeBenefitImport, EmployeeBenefit, current_user.id, current_user.email, "employee_benefits")
+async def import_employee_benefits(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, EmployeeBenefitImport, EmployeeBenefit, current_user.id, current_user.email, "employee_benefits")
+    await log_audit_action(db, current_user.email, f"Import employee_benefits: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "employee_benefits", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/career-paths", response_model=ImportReport)
-async def import_career_paths(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, CareerPathImport, CareerPath, current_user.id, current_user.email, "career_paths")
+async def import_career_paths(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, CareerPathImport, CareerPath, current_user.id, current_user.email, "career_paths")
+    await log_audit_action(db, current_user.email, f"Import career_paths: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "career_paths", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/mobility-requests", response_model=ImportReport)
-async def import_mobility_requests(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, MobilityRequestImport, MobilityRequest, current_user.id, current_user.email, "mobility_requests")
+async def import_mobility_requests(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, MobilityRequestImport, MobilityRequest, current_user.id, current_user.email, "mobility_requests")
+    await log_audit_action(db, current_user.email, f"Import mobility_requests: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "mobility_requests", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report
 
 @router.post("/promotion-history", response_model=ImportReport)
-async def import_promotion_history(file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    return await process_csv_import(file, db, PromotionHistoryImport, PromotionHistory, current_user.id, current_user.email, "promotion_history")
+async def import_promotion_history(request: Request, file: UploadFile = File(...), db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    report = await process_csv_import(file, db, PromotionHistoryImport, PromotionHistory, current_user.id, current_user.email, "promotion_history")
+    await log_audit_action(db, current_user.email, f"Import promotion_history: {file.filename} ({report.processed} lignes)", "import", request, details={"entity": "promotion_history", "filename": file.filename, "processed": report.processed, "errors": len(report.errors)})
+    return report

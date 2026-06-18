@@ -1,5 +1,6 @@
-
-from fastapi import APIRouter, Depends
+import logging
+from datetime import datetime, timedelta, timezone
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -17,8 +18,57 @@ from app.schemas.onboarding import (
     OnboardingResource,
     OnboardingStepResponse,
 )
+from app.services.audit_service import log_audit
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/onboarding", tags=["Onboarding"])
+
+ONBOARDING_ACTIVE_STATUSES = {"generating", "draft", "running"}
+ONBOARDING_READONLY_DAYS = 10
+
+
+def _get_active_onboarding_workflow(employee: Employee) -> Workflow | None:
+    """Return the active (or recently completed) onboarding workflow."""
+    now = datetime.now(timezone.utc)
+    for wf in employee.workflows:
+        if wf.type != "onboarding":
+            continue
+        if wf.status in ONBOARDING_ACTIVE_STATUSES:
+            return wf
+        if wf.status == "completed":
+            updated = wf.updated_at
+            if updated:
+                if updated.tzinfo is None:
+                    updated = updated.replace(tzinfo=timezone.utc)
+                if now - updated <= timedelta(days=ONBOARDING_READONLY_DAYS):
+                    return wf
+    return None
+
+
+@router.get("/me/status", dependencies=[Depends(require_collaborator)])
+async def get_my_onboarding_status(
+    current_user: CurrentUser = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Retourne si l'employé courant a un onboarding actif ou en lecture seule."""
+    current_employee = await _get_current_employee(current_user, db)
+    employee_result = await db.execute(
+        select(Employee)
+        .options(selectinload(Employee.workflows))
+        .where(Employee.id == current_employee.id)
+    )
+    employee = employee_result.scalar_one()
+    wf = _get_active_onboarding_workflow(employee)
+    if wf is None:
+        return {"has_active_onboarding": False, "workflow_id": None, "status": None, "read_only": False}
+    
+    read_only = wf.status == "completed"
+    return {
+        "has_active_onboarding": True,
+        "workflow_id": wf.id,
+        "status": wf.status,
+        "read_only": read_only,
+    }
 
 
 @router.get("/me", response_model=OnboardingOverviewResponse, dependencies=[Depends(require_collaborator)])
@@ -43,7 +93,17 @@ async def get_my_onboarding(
     documents_result = await db.execute(select(Document).order_by(Document.created_at.desc()).limit(10))
     documents = documents_result.scalars().all()
 
-    workflow = next((item for item in employee.workflows if item.type == "onboarding"), None)
+    workflow = _get_active_onboarding_workflow(employee)
+    if workflow is None:
+        raise HTTPException(status_code=404, detail="Aucun onboarding actif pour cet employé.")
+
+    await log_audit(
+        db, current_user.email,
+        f"Consultation onboarding employee {employee.id}",
+        "access",
+        details={"employee_id": employee.id, "workflow_id": workflow.id, "workflow_status": workflow.status},
+    )
+
     workflow_steps = workflow.steps if workflow else []
     task_items = []
     for step in workflow_steps:

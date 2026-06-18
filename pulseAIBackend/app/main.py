@@ -37,6 +37,17 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # ── Configure le logger d'audit dédié ──────────────────────────────────
+    audit_logger = logging.getLogger("pulserh.audit")
+    if not audit_logger.handlers:
+        handler = logging.StreamHandler()
+        handler.setFormatter(logging.Formatter(
+            "%(asctime)s [AUDIT] %(levelname)s %(message)s"
+        ))
+        audit_logger.addHandler(handler)
+        audit_logger.setLevel(logging.INFO)
+        audit_logger.propagate = True  # Remonte aussi au logger root
+    # ───────────────────────────────────────────────────────────────────────
     logger.info("Starting Pulse AI API without blocking warmup tasks.")
     yield
     logger.info("Closing connection pools...")

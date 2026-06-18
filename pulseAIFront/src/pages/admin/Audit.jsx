@@ -1,19 +1,43 @@
 import { useState, useEffect } from 'react';
-import { Search, Download, Filter, Shield, User, Database, LogIn, Upload, AlertTriangle, Eye } from 'lucide-react';
+import { Search, Download, Filter, Shield, User, Database, LogIn, Upload, AlertTriangle, Eye, Workflow, FileText, GitMerge, ChevronDown, ChevronRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { api } from '../../lib/api';
 
-const AUDIT_TYPES = ['Tous', 'auth', 'export', 'security', 'ai', 'system', 'access'];
+const AUDIT_TYPES = ['Tous', 'auth', 'access', 'import', 'document', 'workflow', 'hr_action', 'export', 'security', 'ai', 'system'];
 
-const TYPE_ICONS = { auth: LogIn, export: Upload, security: Shield, ai: Database, system: Database, access: Eye };
-const TYPE_COLORS = {
-  auth: { bg: '#dbeafe', color: '#1d4ed8' },
-  export: { bg: '#dcfce7', color: '#15803d' },
-  security: { bg: '#fee2e2', color: '#b91c1c' },
-  ai: { bg: '#ede9fe', color: '#7c3aed' },
-  system: { bg: '#f3f4f6', color: '#374151' },
-  access: { bg: '#ffedd5', color: '#c2410c' }
+const TYPE_META = {
+  auth:      { bg: '#dbeafe', color: '#1d4ed8', icon: LogIn,     label: 'Auth' },
+  access:    { bg: '#ffedd5', color: '#c2410c', icon: Eye,        label: 'Accès' },
+  import:    { bg: '#dcfce7', color: '#15803d', icon: Upload,     label: 'Import' },
+  document:  { bg: '#fce7f3', color: '#be185d', icon: FileText,  label: 'Document' },
+  workflow:  { bg: '#ede9fe', color: '#7c3aed', icon: GitMerge,  label: 'Workflow' },
+  hr_action: { bg: '#fef9c3', color: '#a16207', icon: User,       label: 'RH Action' },
+  export:    { bg: '#cffafe', color: '#0e7490', icon: Download,   label: 'Export' },
+  security:  { bg: '#fee2e2', color: '#b91c1c', icon: Shield,     label: 'Sécurité' },
+  ai:        { bg: '#f3e8ff', color: '#9333ea', icon: Database,   label: 'IA' },
+  system:    { bg: '#f3f4f6', color: '#374151', icon: Database,   label: 'Système' },
 };
+
+function DetailsCell({ details }) {
+  const [open, setOpen] = useState(false);
+  if (!details || Object.keys(details).length === 0) return <span className="text-brand-secondary/30 text-xs">—</span>;
+  return (
+    <div>
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="flex items-center gap-1 text-xs text-brand-secondary/60 hover:text-brand-secondary transition-colors"
+      >
+        {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+        Détails
+      </button>
+      {open && (
+        <pre className="mt-1 max-w-xs overflow-auto rounded-lg bg-brand-light/80 p-2 text-[10px] text-brand-dark/70 font-mono leading-relaxed">
+          {JSON.stringify(details, null, 2)}
+        </pre>
+      )}
+    </div>
+  );
+}
 
 export default function Audit() {
   const [search, setSearch] = useState('');
@@ -21,14 +45,18 @@ export default function Audit() {
   const [onlyCritical, setOnlyCritical] = useState(false);
   const [period, setPeriod] = useState('7d');
   const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const fetchLogs = async () => {
       try {
         const data = await api.get(`/audit?period=${period}`);
         setLogs(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchLogs();
@@ -37,7 +65,8 @@ export default function Audit() {
   const filtered = logs.filter((l) =>
     (typeFilter === 'Tous' || l.log_type === typeFilter) &&
     (!onlyCritical || l.critical) &&
-    (l.user_email.toLowerCase().includes(search.toLowerCase()) || l.action.toLowerCase().includes(search.toLowerCase()))
+    ((l.user_email || '').toLowerCase().includes(search.toLowerCase()) ||
+     (l.action || '').toLowerCase().includes(search.toLowerCase()))
   );
 
   const exportCSV = () => {
@@ -48,6 +77,18 @@ export default function Audit() {
     const a = document.createElement('a'); a.href = url; a.download = 'audit_log.csv'; a.click();
     URL.revokeObjectURL(url);
   };
+
+  // Count by type for KPIs
+  const kpis = [
+    { label: 'Total', val: logs.length },
+    { label: 'Critiques', val: logs.filter((l) => l.critical).length },
+    { label: 'Imports', val: logs.filter((l) => l.log_type === 'import').length },
+    { label: 'Documents', val: logs.filter((l) => l.log_type === 'document').length },
+    { label: 'Workflows', val: logs.filter((l) => l.log_type === 'workflow').length },
+    { label: 'RH Actions', val: logs.filter((l) => l.log_type === 'hr_action').length },
+    { label: 'Sécurité', val: logs.filter((l) => l.log_type === 'security').length },
+    { label: 'Accès', val: logs.filter((l) => l.log_type === 'access').length },
+  ];
 
   return (
     <div className="animate-fade-in-up space-y-6">
@@ -63,16 +104,11 @@ export default function Audit() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {[
-          { label: 'Total', val: logs.length },
-          { label: 'Critiques', val: logs.filter((l) => l.critical).length },
-          { label: 'Sécurité', val: logs.filter((l) => l.log_type === 'security').length },
-          { label: 'Accès', val: logs.filter((l) => l.log_type === 'access').length },
-        ].map((k) => (
-          <div key={k.label} className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm px-5 py-4">
-            <div className="text-2xl font-bold text-brand-dark">{k.val}</div>
-            <div className="text-xs text-brand-secondary/60 uppercase tracking-wider font-semibold mt-0.5">{k.label}</div>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+        {kpis.map((k) => (
+          <div key={k.label} className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm px-4 py-3 text-center">
+            <div className="text-xl font-bold text-brand-dark">{k.val}</div>
+            <div className="text-[10px] text-brand-secondary/60 uppercase tracking-wider font-semibold mt-0.5">{k.label}</div>
           </div>
         ))}
       </div>
@@ -85,13 +121,16 @@ export default function Audit() {
             className="w-full rounded-xl border border-brand-secondary/20 bg-white pl-9 pr-4 py-2.5 text-sm outline-none focus:border-brand-secondary" />
         </div>
         <div className="flex gap-1.5 flex-wrap">
-          {AUDIT_TYPES.map((t) => (
-            <button key={t} onClick={() => setTypeFilter(t)}
-              className={cn('rounded-xl px-3 py-2 text-xs font-medium capitalize transition-colors',
-                typeFilter === t ? 'bg-brand-secondary text-white' : 'bg-white border border-brand-secondary/20 text-brand-secondary/70 hover:border-brand-secondary/40')}>
-              {t}
-            </button>
-          ))}
+          {AUDIT_TYPES.map((t) => {
+            const meta = TYPE_META[t];
+            return (
+              <button key={t} onClick={() => setTypeFilter(t)}
+                className={cn('rounded-xl px-3 py-2 text-xs font-medium capitalize transition-colors',
+                  typeFilter === t ? 'bg-brand-secondary text-white' : 'bg-white border border-brand-secondary/20 text-brand-secondary/70 hover:border-brand-secondary/40')}>
+                {meta ? meta.label : t}
+              </button>
+            );
+          })}
         </div>
         <select
           value={period}
@@ -101,6 +140,7 @@ export default function Audit() {
           <option value="1d">Dernières 24h</option>
           <option value="7d">Derniers 7 jours</option>
           <option value="30d">Derniers 30 jours</option>
+          <option value="90d">Derniers 90 jours</option>
         </select>
         <button onClick={() => setOnlyCritical(!onlyCritical)}
           className={cn('flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium transition-colors',
@@ -113,14 +153,17 @@ export default function Audit() {
       <div className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-brand-light/60">
-            <tr>{['Utilisateur', 'Action', 'Type', 'IP', 'Horodatage'].map((h) => (
+            <tr>{['Utilisateur', 'Action', 'Type', 'Détails', 'IP', 'Horodatage'].map((h) => (
               <th key={h} className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-widest text-brand-secondary/50">{h}</th>
             ))}</tr>
           </thead>
           <tbody className="divide-y divide-brand-secondary/5">
-            {filtered.map((log) => {
-              const tc = TYPE_COLORS[log.log_type] || { bg: '#f3f4f6', color: '#374151' };
-              const Icon = TYPE_ICONS[log.log_type] || Database;
+            {loading && (
+              <tr><td colSpan={6} className="px-5 py-12 text-center text-sm text-brand-secondary/50">Chargement…</td></tr>
+            )}
+            {!loading && filtered.map((log) => {
+              const meta = TYPE_META[log.log_type] || { bg: '#f3f4f6', color: '#374151', icon: Database, label: log.log_type };
+              const Icon = meta.icon;
               return (
                 <tr key={log.id} className={cn('hover:bg-brand-light/40 transition-colors', log.critical && 'bg-red-50/30')}>
                   <td className="px-5 py-3">
@@ -128,23 +171,24 @@ export default function Audit() {
                       <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-secondary/10">
                         <User size={12} className="text-brand-secondary" />
                       </div>
-                      <span className="font-medium text-brand-dark">{log.user_email}</span>
+                      <span className="font-medium text-brand-dark text-xs">{log.user_email}</span>
                       {log.critical && <AlertTriangle size={13} className="text-brand-warning shrink-0" />}
                     </div>
                   </td>
-                  <td className="px-5 py-3 text-brand-secondary/70 max-w-[280px]">{log.action}</td>
+                  <td className="px-5 py-3 text-brand-secondary/70 max-w-[240px] text-xs">{log.action}</td>
                   <td className="px-5 py-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold" style={{ backgroundColor: tc.bg, color: tc.color }}>
-                      <Icon size={10} />{log.log_type}
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-semibold" style={{ backgroundColor: meta.bg, color: meta.color }}>
+                      <Icon size={10} />{meta.label}
                     </span>
                   </td>
+                  <td className="px-5 py-3"><DetailsCell details={log.details} /></td>
                   <td className="px-5 py-3 font-mono text-xs text-brand-secondary/60">{log.ip_address}</td>
                   <td className="px-5 py-3 text-brand-secondary/50 text-xs">{new Date(log.timestamp).toLocaleString()}</td>
                 </tr>
               );
             })}
-            {filtered.length === 0 && (
-              <tr><td colSpan={5} className="px-5 py-12 text-center text-sm text-brand-secondary/50">Aucun événement trouvé.</td></tr>
+            {!loading && filtered.length === 0 && (
+              <tr><td colSpan={6} className="px-5 py-12 text-center text-sm text-brand-secondary/50">Aucun événement trouvé.</td></tr>
             )}
           </tbody>
         </table>

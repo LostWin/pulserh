@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense } from 'react';
-import { Outlet, Navigate, NavLink, useLocation, Link } from 'react-router-dom';
-import { LogOut, Menu, X, Settings, HelpCircle, Sun, Moon } from 'lucide-react';
+import { Outlet, Navigate, NavLink, useLocation, Link, useNavigate } from 'react-router-dom';
+import { LogOut, Menu, X, Settings, HelpCircle, Sun, Moon, ChevronDown, CheckSquare } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { SIDEBAR_LINKS } from '../config/roles';
 import { cn } from '../lib/utils';
@@ -30,9 +30,18 @@ function Brand() {
   );
 }
 
-function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleTheme }) {
+function SidebarContent({ role, availableRoles, switchRole, links, onLogout, onNavigate, theme, onToggleTheme }) {
   const isDark = theme === 'dark';
   const displayRole = role === 'RH' ? 'Ressources Humaine' : role;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleRoleSwitch = (newRole) => {
+    switchRole(newRole);
+    setDropdownOpen(false);
+    navigate('/');
+    if (onNavigate) onNavigate();
+  };
 
   const linkClass = (isActive) => cn(
     'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
@@ -53,12 +62,45 @@ function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleThem
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
       {/* Role section */}
-      <div className={cn(
-        "mx-3 mb-2 mt-1 rounded-lg px-3 py-2 transition-colors duration-150",
-        isDark ? "bg-white/5" : "bg-brand-light"
-      )}>
-        <div className={cn("text-[10px] font-semibold uppercase tracking-widest", isDark ? "text-white/40" : "text-brand-secondary/60")}>Espace</div>
-        <div className={cn("text-sm font-semibold", isDark ? "text-white" : "text-brand-dark")}>{displayRole}</div>
+      <div className="relative mx-3 mb-2 mt-1">
+        <button
+          onClick={() => availableRoles?.length > 1 && setDropdownOpen(!dropdownOpen)}
+          className={cn(
+            "w-full flex items-center justify-between rounded-lg px-3 py-2 transition-colors duration-150",
+            isDark ? "bg-white/5 hover:bg-white/10" : "bg-brand-light hover:bg-brand-secondary/10",
+            availableRoles?.length > 1 ? "cursor-pointer" : "cursor-default"
+          )}
+        >
+          <div className="text-left">
+            <div className={cn("text-[10px] font-semibold uppercase tracking-widest", isDark ? "text-white/40" : "text-brand-secondary/60")}>Espace</div>
+            <div className={cn("text-sm font-semibold", isDark ? "text-white" : "text-brand-dark")}>{displayRole}</div>
+          </div>
+          {availableRoles?.length > 1 && (
+            <ChevronDown size={16} className={cn("transition-transform", dropdownOpen ? "rotate-180" : "", isDark ? "text-white/60" : "text-brand-dark/60")} />
+          )}
+        </button>
+
+        {dropdownOpen && availableRoles?.length > 1 && (
+          <div className={cn(
+            "absolute top-full left-0 mt-1 w-full rounded-lg border shadow-lg overflow-hidden z-50",
+            isDark ? "bg-brand-dark border-white/10" : "bg-white border-brand-secondary/10"
+          )}>
+            {availableRoles.map(r => (
+              <button
+                key={r}
+                onClick={() => handleRoleSwitch(r)}
+                className={cn(
+                  "w-full text-left px-3 py-2 text-sm font-medium transition-colors",
+                  role === r
+                    ? (isDark ? "bg-white/10 text-white" : "bg-brand-secondary/10 text-brand-secondary")
+                    : (isDark ? "text-white/75 hover:bg-white/5" : "text-brand-dark/75 hover:bg-brand-secondary/5")
+                )}
+              >
+                {r === 'RH' ? 'Ressources Humaine' : r}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Main nav */}
@@ -122,7 +164,7 @@ function SidebarContent({ role, links, onLogout, onNavigate, theme, onToggleThem
 }
 
 export default function Layout() {
-  const { user, role, logout } = useAuth();
+  const { user, role, availableRoles, switchRole, logout } = useAuth();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileAvatar, setProfileAvatar] = useState(null);
@@ -162,11 +204,30 @@ export default function Layout() {
     });
   };
 
+  const [onboardingStatus, setOnboardingStatus] = useState(null);
+
+  useEffect(() => {
+    if (role !== 'Collaborateur') return;
+    let mounted = true;
+    api.get('/onboarding/me/status')
+      .then(data => { if (mounted) setOnboardingStatus(data); })
+      .catch(() => { if (mounted) setOnboardingStatus({ has_active_onboarding: false }); });
+    return () => { mounted = false; };
+  }, [role]);
+
   if (!user || !role) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  const links = SIDEBAR_LINKS[role] || [];
+  const baseLinks = SIDEBAR_LINKS[role] || [];
+  const links = role === 'Collaborateur' && onboardingStatus?.has_active_onboarding
+    ? [...baseLinks, {
+        name: onboardingStatus.read_only ? 'Onboarding ✓' : 'Onboarding',
+        path: '/collaborateur/onboarding',
+        icon: CheckSquare,
+        readOnly: onboardingStatus.read_only,
+      }]
+    : baseLinks;
   const title = location.pathname.split('/').filter(Boolean).pop()?.replace(/-/g, ' ') || '';
   const isDark = theme === 'dark';
 
@@ -182,7 +243,7 @@ export default function Layout() {
         <div className={cn("border-b", isDark ? "border-white/10" : "border-brand-secondary/10")}>
           <Brand />
         </div>
-        <SidebarContent role={role} links={links} onLogout={logout} theme={theme} onToggleTheme={toggleTheme} />
+        <SidebarContent role={role} availableRoles={availableRoles} switchRole={switchRole} links={links} onLogout={logout} theme={theme} onToggleTheme={toggleTheme} />
       </aside>
 
       {/* ── Mobile drawer ── */}
@@ -212,6 +273,8 @@ export default function Layout() {
           </div>
           <SidebarContent
             role={role}
+            availableRoles={availableRoles}
+            switchRole={switchRole}
             links={links}
             onLogout={logout}
             theme={theme}

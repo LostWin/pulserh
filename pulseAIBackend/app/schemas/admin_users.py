@@ -22,6 +22,7 @@ class AdminUserCreate(BaseModel):
     employee_id: str
     role: str
     password: Optional[str] = None
+    send_email: bool = False
 
 class AdminUnlinkedEmployee(BaseModel):
     id: str

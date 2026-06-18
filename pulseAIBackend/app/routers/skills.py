@@ -20,6 +20,7 @@ from app.schemas.talent import (
     ValidateSkillPayload,
 )
 from app.services.current_employee_service import get_or_create_current_employee
+from app.services.audit_service import log_audit
 
 router = APIRouter(tags=["Skills"])
 
@@ -137,10 +138,13 @@ async def add_employee_skill(
         .where(EmployeeSkill.id == employee_skill.id)
     )
     employee_skill = refreshed.scalar_one()
-    return _serialize_employee_skill(employee_skill)
-
-
-@router.put("/employees/{employee_id}/skills/{skill_id}", response_model=EmployeeSkillItem, dependencies=[Depends(require_hr)])
+    await log_audit(
+        db, current_user.email,
+        f"Ajout compétence '{skill.name}' à employee {target.id}",
+        "hr_action",
+        details={"employee_id": target.id, "skill_id": payload.skill_id, "skill_name": skill.name, "proficiency_level": payload.proficiency_level},
+    )
+    return _serialize_employee_skill(employee_skill)("/employees/{employee_id}/skills/{skill_id}", response_model=EmployeeSkillItem, dependencies=[Depends(require_hr)])
 async def update_employee_skill(
     employee_id: str,
     skill_id: str,
@@ -175,6 +179,12 @@ async def update_employee_skill(
         .where(EmployeeSkill.id == employee_skill.id)
     )
     employee_skill = refreshed.scalar_one()
+    await log_audit(
+        db, current_user.email,
+        f"Mise à jour compétence {skill_id} pour employee {employee_id}",
+        "hr_action",
+        details={"employee_id": employee_id, "skill_id": skill_id, "proficiency_level": payload.proficiency_level},
+    )
     return _serialize_employee_skill(employee_skill)
 
 
@@ -208,4 +218,10 @@ async def validate_employee_skill(
         .where(EmployeeSkill.id == employee_skill.id)
     )
     employee_skill = refreshed.scalar_one()
+    await log_audit(
+        db, current_user.email,
+        f"Validation compétence {skill_id} pour employee {employee_id} par {validator_name}",
+        "hr_action",
+        details={"employee_id": employee_id, "skill_id": skill_id, "validated_by": validator_name},
+    )
     return _serialize_employee_skill(employee_skill)

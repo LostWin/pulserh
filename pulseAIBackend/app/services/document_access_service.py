@@ -28,10 +28,14 @@ def normalize_roles(roles: Iterable[str]) -> list[str]:
     return normalized
 
 
-def user_can_access_document(document: Document, user_roles: Iterable[str]) -> bool:
+def user_can_access_document(document: Document, user_roles: Iterable[str], user_id: str | None = None) -> bool:
     normalized_roles = normalize_roles(user_roles)
     if "hr" in normalized_roles or "admin" in normalized_roles:
         return True
+    
+    if document.employee_id and user_id and document.employee_id != user_id:
+        return False
+        
     allowed_roles = normalize_roles(document.allowed_roles or [])
     return any(role in allowed_roles for role in normalized_roles)
 

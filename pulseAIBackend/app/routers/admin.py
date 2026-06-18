@@ -50,6 +50,8 @@ from app.schemas.admin_users import AdminUserItem, AdminUsersResponse, AdminUser
 from app.dependencies import get_current_user
 from app.services.guardrail_service import guardrail_service
 from app.services.keycloak_admin_service import keycloak_admin_service
+from app.services.email_service import send_email_async
+import asyncio
 from app.services.llm_client import llm_client
 from app.services.calendar_connector import calendar_connector
 from app.services.admin_service import admin_service
@@ -591,7 +593,7 @@ async def get_monitoring_summary(db: AsyncSession = Depends(get_db)):
             traffic_counter[bucket]["err"] += 1
     for row in import_rows:
         bucket = (row.created_at or datetime.now(timezone.utc)).replace(minute=0, second=0, microsecond=0)
-        traffic_counter[bucket]["req"] += max(1, row.success_count + row.error_count)
+        traffic_counter[bucket]["req"] += max(1, row.processed_lines)
         traffic_counter[bucket]["err"] += row.error_count
     for row in workflow_rows:
         bucket = (row.created_at or datetime.now(timezone.utc)).replace(minute=0, second=0, microsecond=0)
@@ -823,7 +825,15 @@ async def create_user(user: AdminUserCreate, db: AsyncSession = Depends(get_db))
         employee.user_id = keycloak_user["id"]
         await db.commit()
 
-    return {"status": "User created", "id": keycloak_user["id"], "username": username}
+    if user.send_email:
+        logger.info(f"Email avec les informations de connexion envoyé à {employee.email}")
+        subject = "Vos identifiants PulseRH"
+        content = f"Bonjour {employee.first_name},\n\nVotre compte a été créé avec succès.\nRôle: {user.role}\nMot de passe temporaire: {temporary_password}\n\nCordialement,\nL'équipe RH."
+        
+        # Lancement de la tâche d'envoi de façon asynchrone sans bloquer l'endpoint
+        asyncio.create_task(send_email_async(employee.email, subject, content))
+
+    return {"status": "User created", "id": keycloak_user["id"], "username": username, "email_sent": user.send_email}
 
 @router.post("/users/{id}/block", dependencies=[Depends(admin_only)])
 async def block_user(id: str):
@@ -843,8 +853,9 @@ async def unblock_user(id: str):
 @router.post("/users/{id}/reset-password", dependencies=[Depends(admin_only)])
 async def reset_user_password(id: str):
     """Force une réinitialisation du mot de passe (temporary=True)."""
-    await keycloak_admin_service.set_password(id, "Welcome123!")
-    return {"message": "Mot de passe réinitialisé (temporaire)"}
+    default_pwd = keycloak_admin_service.default_password
+    await keycloak_admin_service.set_password(id, default_pwd)
+    return {"message": f"Mot de passe réinitialisé (temporaire: {default_pwd})"}
 
 
 @router.get("/keycloak-settings", dependencies=[Depends(admin_only)])

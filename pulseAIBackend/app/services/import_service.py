@@ -128,9 +128,29 @@ async def process_csv_import(
     import copy
 
     # 2. Insertion / Upsertion in DB with Row-level Savepoints
+    from sqlalchemy import text
+    try:
+        await db.execute(text("SET session_replication_role = 'replica';"))
+    except Exception as e:
+        pass # Ignore if not superuser
+        
     for line_num, record in valid_records:
         async def attempt_upsert(data_dict):
             nonlocal created_count, updated_count
+            
+            # Map Pydantic fields to SQLAlchemy model columns
+            if model_class.__name__ == "PerformanceReview":
+                if "review_period" in data_dict:
+                    data_dict["period_label"] = data_dict.pop("review_period")
+                if "overall_score" in data_dict:
+                    data_dict["score"] = data_dict.pop("overall_score")
+                if "reviewed_at" in data_dict:
+                    data_dict["created_at"] = data_dict.pop("reviewed_at")
+                data_dict.pop("reviewer_name", None)
+            elif model_class.__name__ == "PerformanceObjective":
+                if "due_date" in data_dict:
+                    data_dict["target_date"] = data_dict.pop("due_date")
+            
             primary_key_val = data_dict.get(unique_field)
             if primary_key_val:
                 db_item = await db.get(model_class, primary_key_val)
@@ -180,6 +200,11 @@ async def process_csv_import(
         except Exception as e:
             await db.rollback()
             raise HTTPException(status_code=500, detail=f"Transaction commit failed: {str(e)}")
+
+    try:
+        await db.execute(text("SET session_replication_role = 'origin';"))
+    except:
+        pass
 
     # Enregistrer l'historique
     status_val = "success"

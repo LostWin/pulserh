@@ -44,7 +44,11 @@ class KeycloakAdminService:
         url = f"{self.base_url}{path}"
         async with httpx.AsyncClient(timeout=20.0) as client:
             response = await client.request(method, url, headers=headers, **kwargs)
-            response.raise_for_status()
+            try:
+                response.raise_for_status()
+            except httpx.HTTPStatusError as e:
+                logger.error(f"Keycloak API Error: {e.response.text}")
+                raise
             return response
 
     async def list_users(self) -> list[dict[str, Any]]:

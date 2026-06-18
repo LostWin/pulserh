@@ -13,6 +13,7 @@ from app.routers.dashboard import _get_current_employee
 from app.schemas.auth import CurrentUser
 from app.schemas.interview import InterviewCreate, InterviewItem, InterviewOverview, InterviewUpdate
 from app.schemas.talent_insights import InterviewSummaryPayload
+from app.services.audit_service import log_audit
 
 router = APIRouter(prefix="/interviews", tags=["Interviews"])
 manager_roles = require_any_role("manager", "hr")
@@ -91,6 +92,12 @@ async def create_interview(
     db.add(interview)
     await db.commit()
     await db.refresh(interview)
+    await log_audit(
+        db, current_user.email,
+        f"Planification entretien '{interview.interview_type}' avec {employee.first_name} {employee.last_name} le {interview.scheduled_at.strftime('%d/%m/%Y %H:%M')}",
+        "hr_action",
+        details={"interview_id": interview.id, "employee_id": employee.id, "interview_type": interview.interview_type, "scheduled_at": interview.scheduled_at.isoformat()},
+    )
     return InterviewItem(
         id=interview.id,
         collaborator_id=employee.id,
@@ -150,6 +157,12 @@ async def update_interview(
 
     await db.commit()
     await db.refresh(interview)
+    await log_audit(
+        db, current_user.email,
+        f"Modification entretien {interview_id} (statut: {payload.status or interview.status})",
+        "hr_action",
+        details={"interview_id": interview_id, "employee_id": interview.employee_id, "status": payload.status},
+    )
     return InterviewItem(
         id=interview.id,
         collaborator_id=interview.employee_id,
@@ -195,6 +208,12 @@ async def save_interview_summary(
 
     await db.commit()
     await db.refresh(interview)
+    await log_audit(
+        db, current_user.email,
+        f"Création compte-rendu entretien {interview_id} (statut: {interview.status})",
+        "hr_action",
+        details={"interview_id": interview_id, "employee_id": interview.employee_id, "outcome": payload.outcome},
+    )
     return InterviewItem(
         id=interview.id,
         collaborator_id=interview.employee_id,
@@ -228,4 +247,10 @@ async def cancel_interview(
 
     interview.status = "Annulé"
     await db.commit()
+    await log_audit(
+        db, current_user.email,
+        f"Annulation entretien {interview_id}",
+        "hr_action",
+        details={"interview_id": interview_id, "employee_id": interview.employee_id},
+    )
     return {"status": "cancelled", "id": interview_id}

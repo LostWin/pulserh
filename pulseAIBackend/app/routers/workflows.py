@@ -8,21 +8,33 @@ from app.schemas.workflow import (
 )
 from app.core.rbac import require_hr
 from app.services.workflow_engine import workflow_engine
+from app.services.audit_service import log_audit
 from app.database import AsyncSessionLocal
 from app.models.domain import Workflow, WorkflowStep
+from app.schemas.auth import CurrentUser
+from app.dependencies import get_current_user
 from sqlalchemy.future import select
 
 router = APIRouter(prefix="/workflows", tags=["Workflows"])
 logger = logging.getLogger(__name__)
 
 @router.post("/onboarding", dependencies=[Depends(require_hr)])
-async def trigger_onboarding(request: OnboardingRequest):
+async def trigger_onboarding(request: OnboardingRequest, current_user: CurrentUser = Depends(get_current_user)):
     """Déclencher un onboarding agentique (Phase de génération)"""
     logger.info(f"Triggered onboarding generation for employee {request.employee_id}")
-    return await workflow_engine.trigger_onboarding(request.employee_id)
+    result = await workflow_engine.trigger_onboarding(request.employee_id)
+    async with AsyncSessionLocal() as db:
+        await log_audit(
+            db, current_user.email,
+            f"Déclenchement onboarding pour employee {request.employee_id}",
+            "workflow",
+            critical=False,
+            details={"employee_id": request.employee_id, "workflow_id": result.get("workflow_id")},
+        )
+    return result
 
 @router.post("/{id}/approve", response_model=WorkflowResponse, dependencies=[Depends(require_hr)])
-async def approve_workflow(id: str, request: WorkflowApproveRequest):
+async def approve_workflow(id: str, request: WorkflowApproveRequest, current_user: CurrentUser = Depends(get_current_user)):
     """Approuver et lancer un workflow 'draft' (avec éventuelles modifications)"""
     logger.info(f"Approving workflow {id}")
     async with AsyncSessionLocal() as db:
@@ -48,6 +60,12 @@ async def approve_workflow(id: str, request: WorkflowApproveRequest):
         
         workflow.status = "running"
         await db.commit()
+        await log_audit(
+            db, current_user.email,
+            f"Approbation workflow {id} (employee: {workflow.employee_id})",
+            "workflow",
+            details={"workflow_id": id, "employee_id": workflow.employee_id},
+        )
         await workflow_engine.launch_workflow_execution(id)
         return await workflow_engine.get_workflow_status(id)
 

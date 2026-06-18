@@ -38,6 +38,7 @@ from app.services.document_access_service import (
 )
 from app.services.field_access_service import apply_field_access, get_primary_role
 from app.services.secure_document_storage import secure_document_storage
+from app.services.audit_service import log_audit_action, log_audit
 
 ALLOWED_DOCUMENT_EXTENSIONS = {
     ".pdf",
@@ -107,7 +108,7 @@ async def get_document_or_404(db: AsyncSession, document_id: str) -> Document:
 
 
 def ensure_document_access(document: Document, current_user: CurrentUser) -> None:
-    if not user_can_access_document(document, current_user.roles):
+    if not user_can_access_document(document, current_user.roles, current_user.id):
         raise HTTPException(status_code=403, detail="Vous n'avez pas accès à ce document.")
 
 
@@ -235,6 +236,13 @@ async def generate_document(request: DocumentGenerateRequest, current_user: Curr
     
     logger.info(f"Document enregistré en DB avec succès (ID: {new_doc.id})")
     
+    await log_audit_action(
+        db, current_user.email,
+        f"Génération document: {filename} pour employee {request.employee_id}",
+        "document",
+        details={"document_id": new_doc.id, "employee_id": request.employee_id, "type": request.type, "filename": filename},
+    )
+    
     return DocumentResponse(
         id=new_doc.id,
         type=request.type,
@@ -258,7 +266,7 @@ async def list_documents(current_user: CurrentUser = Depends(get_current_user), 
     documents = result.scalars().all()
     normalized_roles = normalize_roles(current_user.roles)
     visible_documents = documents if "hr" in normalized_roles or "admin" in normalized_roles else [
-        document for document in documents if user_can_access_document(document, normalized_roles)
+        document for document in documents if user_can_access_document(document, normalized_roles, current_user.id)
     ]
     return [await _serialize_document(db, document=document, current_user=current_user) for document in visible_documents]
 
@@ -290,6 +298,13 @@ async def upload_document(
         await db.commit()
         await db.refresh(new_doc)
         
+        await log_audit_action(
+            db, current_user.email,
+            f"Upload document: {file.filename} (type={doc_type})",
+            "document",
+            request,
+            details={"document_id": new_doc.id, "type": doc_type, "filename": file.filename, "size": size_str},
+        )
         return await _serialize_document(db, document=new_doc, current_user=current_user)
     except HTTPException:
         raise
@@ -427,6 +442,12 @@ async def download_document(id: str, db: AsyncSession = Depends(get_db), current
         user_roles=current_user.roles,
         action="download",
     )
+    await log_audit(
+        db, current_user.email,
+        f"Téléchargement document: {doc.name}",
+        "document",
+        details={"document_id": doc.id, "document_name": doc.name},
+    )
     file_bytes = secure_document_storage.download_bytes(doc.file_path)
     return StreamingResponse(
         BytesIO(file_bytes),
@@ -435,8 +456,15 @@ async def download_document(id: str, db: AsyncSession = Depends(get_db), current
     )
 
 @router.delete("/{id}", dependencies=[Depends(require_hr)])
-async def delete_document(id: str, db: AsyncSession = Depends(get_db)):
+async def delete_document(id: str, db: AsyncSession = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
     doc = await get_document_or_404(db, id)
+    await log_audit(
+        db, current_user.email,
+        f"Suppression document: {doc.name}",
+        "document",
+        critical=True,
+        details={"document_id": doc.id, "document_name": doc.name},
+    )
     delete_document_from_rag(doc.id)
     secure_document_storage.delete(doc.file_path)
     await db.delete(doc)

@@ -91,6 +91,8 @@ export default function CollaborateurDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Onboarding journey – visible uniquement si un onboarding est actif */}
+      {onboarding.length > 0 && (
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-50 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-6">
             <div>
@@ -155,6 +157,7 @@ export default function CollaborateurDashboard() {
             </div>
           </div>
         </div>
+      )}
 
         <div className="lg:col-span-1 bg-brand-secondary rounded-2xl p-6 shadow-sm text-white flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">

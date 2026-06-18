@@ -21,6 +21,7 @@ from app.schemas.talent import (
 )
 from app.services.current_employee_service import get_or_create_current_employee
 from app.services.training_reco_service import training_reco_service
+from app.services.audit_service import log_audit
 
 router = APIRouter(tags=["Trainings"])
 
@@ -156,6 +157,12 @@ async def assign_training(
         .where(TrainingEnrollment.id == enrollment.id)
     )
     enrollment = refreshed.scalar_one()
+    await log_audit(
+        db, current_user.email,
+        f"Affectation formation '{training.title}' à employee {target.id}",
+        "hr_action",
+        details={"training_id": training.id, "training_title": training.title, "employee_id": target.id, "mandatory": payload.mandatory},
+    )
     return _serialize_enrollment(enrollment)
 
 
@@ -190,6 +197,12 @@ async def complete_training(
         .where(TrainingEnrollment.id == enrollment.id)
     )
     enrollment = refreshed.scalar_one()
+    await log_audit(
+        db, current_user.email,
+        f"Complétion formation '{enrollment.training.title if enrollment.training else training_id}' pour employee {target.id}",
+        "hr_action",
+        details={"training_id": training_id, "employee_id": target.id, "score": payload.score},
+    )
     return _serialize_enrollment(enrollment)
 
 
@@ -201,4 +214,10 @@ async def get_training_recommendations(
 ):
     _, target = await _resolve_target_employee(employee_id, current_user, db)
     reco_data = await training_reco_service.recommend(target.id, db)
+    await log_audit(
+        db, current_user.email,
+        f"Consultation recommandations formation pour employee {target.id}",
+        "ai",
+        details={"employee_id": target.id},
+    )
     return reco_data["recommendations"]

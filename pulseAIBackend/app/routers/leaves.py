@@ -20,6 +20,7 @@ from app.schemas.leave import (
 )
 from app.services.current_employee_service import get_or_create_current_employee
 from app.services.field_access_service import apply_field_access, get_primary_role
+from app.services.audit_service import log_audit
 
 router = APIRouter(prefix="/leaves", tags=["Leaves"])
 
@@ -209,5 +210,12 @@ async def create_leave_request(
     db.add(leave)
     await db.commit()
     await db.refresh(leave)
+
+    await log_audit(
+        db, current_user.email,
+        f"Demande congé: {payload.leave_type} du {payload.start_date} au {payload.end_date}",
+        "hr_action",
+        details={"leave_id": leave.id, "employee_id": employee.id, "leave_type": payload.leave_type, "start": payload.start_date, "end": payload.end_date},
+    )
 
     return await _serialize_leave_request(db, leave=leave, current_user=current_user)
