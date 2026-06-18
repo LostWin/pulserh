@@ -5,7 +5,7 @@ from pathlib import Path
 from io import BytesIO
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Request
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import selectinload
 
@@ -272,6 +272,7 @@ async def list_documents(current_user: CurrentUser = Depends(get_current_user), 
 
 @router.post("/upload", response_model=UploadedDocumentResponse, dependencies=[Depends(require_hr)])
 async def upload_document(
+    request: Request,
     file: UploadFile = File(...),
     doc_type: str = Form(...),
     db: AsyncSession = Depends(get_db),

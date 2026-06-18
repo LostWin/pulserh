@@ -66,13 +66,7 @@ export default function Documents() {
       });
   }, [documents, query, sortAsc, typeFilter]);
 
-  const stats = useMemo(() => {
-    const total = documents.length;
-    const payslips = documents.filter((doc) => /paie/i.test(doc.type || '')).length;
-    const pending = documents.filter((doc) => (doc.rag_status || '').toLowerCase().includes('pending')).length;
-    const compliance = Math.min(100, 82 + documents.filter((doc) => /politique|compliance|rgpd/i.test(doc.type || doc.name || '')).length * 4);
-    return { total, payslips, pending, compliance };
-  }, [documents]);
+
 
   const downloadDocument = async (doc) => {
     try {
@@ -109,25 +103,7 @@ export default function Documents() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {[
-          { label: 'TOTAL DOCUMENTS', value: stats.total, sub: 'Disponible', icon: FileText, subColor: 'text-emerald-600 bg-emerald-50' },
-          { label: 'LATEST PAYSLIPS', value: stats.payslips, sub: 'Documents paie', icon: ReceiptText, subColor: 'text-amber-600 bg-amber-50' },
-          { label: 'OPEN REQUESTS', value: stats.pending, sub: 'Traitements en cours', icon: FileBadge, subColor: 'text-red-500 bg-red-50' },
-          { label: 'COMPLIANCE SCORE', value: `${stats.compliance}%`, sub: 'Estimation backend', icon: ShieldCheck, subColor: 'text-emerald-600 bg-emerald-50' },
-        ].map(({ label, value, sub, icon: Icon, subColor }) => (
-          <div key={label} className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand-secondary/8">
-                <Icon size={17} className="text-brand-secondary" />
-              </div>
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${subColor}`}>{sub}</span>
-            </div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-brand-secondary/40 mb-1">{label}</p>
-            <p className="text-2xl font-extrabold text-brand-dark">{value}</p>
-          </div>
-        ))}
-      </div>
+
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-4">
@@ -271,7 +247,7 @@ export default function Documents() {
             </div>
             <div className="space-y-3 text-sm text-brand-secondary/80">
               <p>Vos documents proviennent maintenant du stockage sécurisé backend/MinIO.</p>
-              <p>{stats.total} fichier(s) sont actuellement visibles selon vos droits d&apos;accès.</p>
+              <p>{documents.length} fichier(s) sont actuellement visibles selon vos droits d&apos;accès.</p>
             </div>
           </div>
         </div>

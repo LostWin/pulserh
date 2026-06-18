@@ -1,106 +1,106 @@
 id,employee_id,target_job_id,target_title,readiness_level,next_step,mentor_name,last_reviewed_at
-career-path-emp-demo-youssef,emp-demo-youssef,job-13,Lead Software Engineer,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-18T10:54:07.697367+00:00
-career-path-emp-demo-fatima,emp-demo-fatima,job-8,Lead Engineering Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-23T10:54:07.697381+00:00
-career-path-emp-demo-karim,emp-demo-karim,job-2,Lead Responsable RH,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-06-10T10:54:07.697385+00:00
-career-path-emp-demo-sara,emp-demo-sara,job-31,Lead Directrice des opérations RH,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-31T10:54:07.697391+00:00
-career-path-emp-demo-admin,emp-demo-admin,job-14,Lead Administrateur Système,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-28T10:54:07.697394+00:00
-career-path-emp-1,emp-1,job-10,Lead Développeur Backend,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-22T10:54:07.697397+00:00
-career-path-emp-2,emp-2,job-29,Lead SDR,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-06-08T10:54:07.697400+00:00
-career-path-emp-3,emp-3,job-5,Lead Gestionnaire de Paie,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-05T10:54:07.697403+00:00
-career-path-emp-4,emp-4,job-25,Lead SEO Specialist,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-04-28T10:54:07.697405+00:00
-career-path-emp-5,emp-5,job-33,Lead Assistant de Direction,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-06T10:54:07.697410+00:00
-career-path-emp-6,emp-6,job-1,Directeur RH,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-05T10:54:07.697412+00:00
-career-path-emp-7,emp-7,job-6,Lead Office Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-06-02T10:54:07.697415+00:00
-career-path-emp-8,emp-8,job-28,Lead Commercial B2B,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-29T10:54:07.697418+00:00
-career-path-emp-9,emp-9,job-8,Lead Engineering Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-02T10:54:07.697421+00:00
-career-path-emp-10,emp-10,job-4,Lead Chargé de Recrutement,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-05-13T10:54:07.697423+00:00
-career-path-emp-11,emp-11,job-18,Lead Contrôleur de Gestion,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-25T10:54:07.697426+00:00
-career-path-emp-12,emp-12,job-31,Lead Directrice des opérations RH,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-29T10:54:07.697429+00:00
-career-path-emp-13,emp-13,job-31,Lead Directrice des opérations RH,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-27T10:54:07.697432+00:00
-career-path-emp-14,emp-14,job-3,Lead HR Business Partner,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-04-24T10:54:07.697435+00:00
-career-path-emp-15,emp-15,job-14,Lead Administrateur Système,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-03T10:54:07.697437+00:00
-career-path-emp-16,emp-16,job-10,Lead Développeur Backend,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-23T10:54:07.697440+00:00
-career-path-emp-17,emp-17,job-29,Lead SDR,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-11T10:54:07.697444+00:00
-career-path-emp-18,emp-18,job-1,Directeur RH,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-04-28T10:54:07.697447+00:00
-career-path-emp-19,emp-19,job-26,Directeur Commercial,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-11T10:54:07.697450+00:00
-career-path-emp-20,emp-20,job-26,Directeur Commercial,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-29T10:54:07.697453+00:00
-career-path-emp-21,emp-21,job-17,Directeur Financier,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-11T10:54:07.697455+00:00
-career-path-emp-22,emp-22,job-26,Directeur Commercial,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-22T10:54:07.697458+00:00
-career-path-emp-23,emp-23,job-18,Lead Contrôleur de Gestion,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-14T10:54:07.697461+00:00
-career-path-emp-24,emp-24,job-21,Directeur Marketing,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-09T10:54:07.697463+00:00
-career-path-emp-25,emp-25,job-16,Lead Data Scientist,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-03T10:54:07.697466+00:00
-career-path-emp-26,emp-26,job-14,Lead Administrateur Système,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-04-27T10:54:07.697468+00:00
-career-path-emp-27,emp-27,job-27,Lead Key Account Manager,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-05T10:54:07.697471+00:00
-career-path-emp-28,emp-28,job-21,Directeur Marketing,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-29T10:54:07.697474+00:00
-career-path-emp-29,emp-29,job-27,Lead Key Account Manager,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-27T10:54:07.697477+00:00
-career-path-emp-30,emp-30,job-17,Directeur Financier,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-07T10:54:07.697479+00:00
-career-path-emp-31,emp-31,job-33,Lead Assistant de Direction,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-14T10:54:07.697482+00:00
-career-path-emp-32,emp-32,job-33,Lead Assistant de Direction,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-24T10:54:07.697485+00:00
-career-path-emp-33,emp-33,job-23,Lead Community Manager,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-09T10:54:07.697488+00:00
-career-path-emp-34,emp-34,job-13,Lead Software Engineer,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-27T10:54:07.697490+00:00
-career-path-emp-35,emp-35,job-26,Directeur Commercial,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-25T10:54:07.697493+00:00
-career-path-emp-36,emp-36,job-13,Lead Software Engineer,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-11T10:54:07.697495+00:00
-career-path-emp-37,emp-37,job-4,Lead Chargé de Recrutement,emerging,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-05-27T10:54:07.697497+00:00
-career-path-emp-38,emp-38,job-33,Lead Assistant de Direction,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-06T10:54:07.697500+00:00
-career-path-emp-39,emp-39,job-26,Directeur Commercial,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-23T10:54:07.697503+00:00
-career-path-emp-40,emp-40,job-7,Directeur Technique,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-26T10:54:07.697506+00:00
-career-path-emp-41,emp-41,job-13,Lead Software Engineer,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-24T10:54:07.697508+00:00
-career-path-emp-42,emp-42,job-26,Directeur Commercial,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-21T10:54:07.697511+00:00
-career-path-emp-43,emp-43,job-32,Lead COO,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-27T10:54:07.697513+00:00
-career-path-emp-44,emp-44,job-17,Directeur Financier,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-03T10:54:07.697516+00:00
-career-path-emp-45,emp-45,job-15,Lead QA Tester,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-06-02T10:54:07.697518+00:00
-career-path-emp-46,emp-46,job-18,Lead Contrôleur de Gestion,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-30T10:54:07.697521+00:00
-career-path-emp-47,emp-47,job-32,Lead COO,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-13T10:54:07.697524+00:00
-career-path-emp-48,emp-48,job-31,Lead Directrice des opérations RH,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-25T10:54:07.697527+00:00
-career-path-emp-49,emp-49,job-32,Lead COO,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-22T10:54:07.697530+00:00
-career-path-emp-50,emp-50,job-23,Lead Community Manager,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-12T10:54:07.697533+00:00
-career-path-emp-51,emp-51,job-25,Lead SEO Specialist,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-21T10:54:07.697536+00:00
-career-path-emp-52,emp-52,job-3,Lead HR Business Partner,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Pulse RH,2026-04-18T10:54:07.697538+00:00
-career-path-emp-53,emp-53,job-3,Lead HR Business Partner,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-05-14T10:54:07.697541+00:00
-career-path-emp-54,emp-54,job-27,Lead Key Account Manager,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-17T10:54:07.697544+00:00
-career-path-emp-55,emp-55,job-12,Lead Ingénieur DevOps,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-21T10:54:07.697546+00:00
-career-path-emp-56,emp-56,job-30,Directeur Général,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-29T10:54:07.697549+00:00
-career-path-emp-57,emp-57,job-19,Lead Comptable,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-11T10:54:07.697551+00:00
-career-path-emp-58,emp-58,job-19,Lead Comptable,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-03T10:54:07.697554+00:00
-career-path-emp-59,emp-59,job-32,Lead COO,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-18T10:54:07.697557+00:00
-career-path-emp-60,emp-60,job-1,Directeur RH,ready_soon,Obtenir une certification dans le domaine cible.,Pulse RH,2026-05-05T10:54:07.697559+00:00
-career-path-emp-61,emp-61,job-26,Directeur Commercial,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-09T10:54:07.697562+00:00
-career-path-emp-62,emp-62,job-27,Lead Key Account Manager,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-24T10:54:07.697565+00:00
-career-path-emp-63,emp-63,job-30,Directeur Général,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-31T10:54:07.697567+00:00
-career-path-emp-64,emp-64,job-32,Lead COO,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-03T10:54:07.697570+00:00
-career-path-emp-65,emp-65,job-28,Lead Commercial B2B,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-27T10:54:07.697573+00:00
-career-path-emp-66,emp-66,job-28,Lead Commercial B2B,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-28T10:54:07.697576+00:00
-career-path-emp-67,emp-67,job-8,Lead Engineering Manager,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-24T10:54:07.697578+00:00
-career-path-emp-68,emp-68,job-32,Lead COO,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-18T10:54:07.697581+00:00
-career-path-emp-69,emp-69,job-26,Directeur Commercial,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-24T10:54:07.697583+00:00
-career-path-emp-70,emp-70,job-22,Lead Product Marketing Manager,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-26T10:54:07.697586+00:00
-career-path-emp-71,emp-71,job-9,Lead Développeur,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-04T10:54:07.697588+00:00
-career-path-emp-72,emp-72,job-4,Lead Chargé de Recrutement,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-04-20T10:54:07.697590+00:00
-career-path-emp-73,emp-73,job-25,Lead SEO Specialist,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-25T10:54:07.697594+00:00
-career-path-emp-74,emp-74,job-33,Lead Assistant de Direction,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-23T10:54:07.697596+00:00
-career-path-emp-75,emp-75,job-22,Lead Product Marketing Manager,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-07T10:54:07.697599+00:00
-career-path-emp-76,emp-76,job-17,Directeur Financier,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-19T10:54:07.697601+00:00
-career-path-emp-77,emp-77,job-24,Lead Content Creator,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-18T10:54:07.697604+00:00
-career-path-emp-78,emp-78,job-26,Directeur Commercial,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-03T10:54:07.697607+00:00
-career-path-emp-79,emp-79,job-25,Lead SEO Specialist,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-07T10:54:07.697609+00:00
-career-path-emp-80,emp-80,job-20,Lead Analyste Financier,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-19T10:54:07.697612+00:00
-career-path-emp-81,emp-81,job-14,Lead Administrateur Système,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-16T10:54:07.697614+00:00
-career-path-emp-82,emp-82,job-30,Directeur Général,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-24T10:54:07.697617+00:00
-career-path-emp-83,emp-83,job-20,Lead Analyste Financier,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-07T10:54:07.697620+00:00
-career-path-emp-84,emp-84,job-23,Lead Community Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-06T10:54:07.697622+00:00
-career-path-emp-85,emp-85,job-8,Lead Engineering Manager,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-23T10:54:07.697625+00:00
-career-path-emp-86,emp-86,job-5,Lead Gestionnaire de Paie,ready_soon,Obtenir une certification dans le domaine cible.,Pulse RH,2026-04-30T10:54:07.697627+00:00
-career-path-emp-87,emp-87,job-23,Lead Community Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-04-23T10:54:07.697629+00:00
-career-path-emp-88,emp-88,job-5,Lead Gestionnaire de Paie,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-05-15T10:54:07.697631+00:00
-career-path-emp-89,emp-89,job-8,Lead Engineering Manager,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-01T10:54:07.697634+00:00
-career-path-emp-90,emp-90,job-26,Directeur Commercial,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-05T10:54:07.697637+00:00
-career-path-emp-91,emp-91,job-32,Lead COO,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-30T10:54:07.697640+00:00
-career-path-emp-92,emp-92,job-4,Lead Chargé de Recrutement,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Pulse RH,2026-05-11T10:54:07.697642+00:00
-career-path-emp-93,emp-93,job-32,Lead COO,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-04T10:54:07.697645+00:00
-career-path-emp-94,emp-94,job-32,Lead COO,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-03T10:54:07.697648+00:00
-career-path-emp-95,emp-95,job-14,Lead Administrateur Système,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-23T10:54:07.697651+00:00
-career-path-emp-96,emp-96,job-14,Lead Administrateur Système,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-26T10:54:07.697654+00:00
-career-path-emp-97,emp-97,job-17,Directeur Financier,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-06-02T10:54:07.697656+00:00
-career-path-emp-98,emp-98,job-27,Lead Key Account Manager,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-28T10:54:07.697659+00:00
-career-path-emp-99,emp-99,job-18,Lead Contrôleur de Gestion,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-23T10:54:07.697662+00:00
-career-path-emp-100,emp-100,job-28,Lead Commercial B2B,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-06T10:54:07.697664+00:00
+career-path-emp-demo-youssef,emp-demo-youssef,job-13,Lead Software Engineer,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-18T11:30:11.453154+00:00
+career-path-emp-demo-fatima,emp-demo-fatima,job-8,Lead Engineering Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-23T11:30:11.453166+00:00
+career-path-emp-demo-karim,emp-demo-karim,job-2,Lead Responsable RH,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-06-10T11:30:11.453169+00:00
+career-path-emp-demo-sara,emp-demo-sara,job-31,Lead Directrice des opérations RH,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-31T11:30:11.453174+00:00
+career-path-emp-demo-admin,emp-demo-admin,job-14,Lead Administrateur Système,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-28T11:30:11.453176+00:00
+career-path-emp-1,emp-1,job-10,Lead Développeur Backend,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-22T11:30:11.453179+00:00
+career-path-emp-2,emp-2,job-29,Lead SDR,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-06-08T11:30:11.453182+00:00
+career-path-emp-3,emp-3,job-5,Lead Gestionnaire de Paie,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-05T11:30:11.453185+00:00
+career-path-emp-4,emp-4,job-25,Lead SEO Specialist,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-04-28T11:30:11.453188+00:00
+career-path-emp-5,emp-5,job-33,Lead Assistant de Direction,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-06T11:30:11.453191+00:00
+career-path-emp-6,emp-6,job-1,Directeur RH,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-05T11:30:11.453193+00:00
+career-path-emp-7,emp-7,job-6,Lead Office Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-06-02T11:30:11.453196+00:00
+career-path-emp-8,emp-8,job-28,Lead Commercial B2B,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-29T11:30:11.453198+00:00
+career-path-emp-9,emp-9,job-8,Lead Engineering Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-02T11:30:11.453200+00:00
+career-path-emp-10,emp-10,job-4,Lead Chargé de Recrutement,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-05-13T11:30:11.453202+00:00
+career-path-emp-11,emp-11,job-18,Lead Contrôleur de Gestion,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-25T11:30:11.453205+00:00
+career-path-emp-12,emp-12,job-31,Lead Directrice des opérations RH,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-29T11:30:11.453208+00:00
+career-path-emp-13,emp-13,job-31,Lead Directrice des opérations RH,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-27T11:30:11.453211+00:00
+career-path-emp-14,emp-14,job-3,Lead HR Business Partner,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-04-24T11:30:11.453213+00:00
+career-path-emp-15,emp-15,job-14,Lead Administrateur Système,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-03T11:30:11.453215+00:00
+career-path-emp-16,emp-16,job-10,Lead Développeur Backend,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-23T11:30:11.453219+00:00
+career-path-emp-17,emp-17,job-29,Lead SDR,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-11T11:30:11.453221+00:00
+career-path-emp-18,emp-18,job-1,Directeur RH,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-04-28T11:30:11.453223+00:00
+career-path-emp-19,emp-19,job-26,Directeur Commercial,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-11T11:30:11.453226+00:00
+career-path-emp-20,emp-20,job-26,Directeur Commercial,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-29T11:30:11.453229+00:00
+career-path-emp-21,emp-21,job-17,Directeur Financier,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-11T11:30:11.453231+00:00
+career-path-emp-22,emp-22,job-26,Directeur Commercial,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-22T11:30:11.453234+00:00
+career-path-emp-23,emp-23,job-18,Lead Contrôleur de Gestion,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-14T11:30:11.453236+00:00
+career-path-emp-24,emp-24,job-21,Directeur Marketing,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-09T11:30:11.453238+00:00
+career-path-emp-25,emp-25,job-16,Lead Data Scientist,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-03T11:30:11.453240+00:00
+career-path-emp-26,emp-26,job-14,Lead Administrateur Système,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-04-27T11:30:11.453243+00:00
+career-path-emp-27,emp-27,job-27,Lead Key Account Manager,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-05T11:30:11.453245+00:00
+career-path-emp-28,emp-28,job-21,Directeur Marketing,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-29T11:30:11.453247+00:00
+career-path-emp-29,emp-29,job-27,Lead Key Account Manager,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-27T11:30:11.453250+00:00
+career-path-emp-30,emp-30,job-17,Directeur Financier,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-07T11:30:11.453259+00:00
+career-path-emp-31,emp-31,job-33,Lead Assistant de Direction,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-14T11:30:11.453262+00:00
+career-path-emp-32,emp-32,job-33,Lead Assistant de Direction,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-24T11:30:11.453264+00:00
+career-path-emp-33,emp-33,job-23,Lead Community Manager,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-09T11:30:11.453267+00:00
+career-path-emp-34,emp-34,job-13,Lead Software Engineer,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-27T11:30:11.453269+00:00
+career-path-emp-35,emp-35,job-26,Directeur Commercial,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-25T11:30:11.453272+00:00
+career-path-emp-36,emp-36,job-13,Lead Software Engineer,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-11T11:30:11.453275+00:00
+career-path-emp-37,emp-37,job-4,Lead Chargé de Recrutement,emerging,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-05-27T11:30:11.453277+00:00
+career-path-emp-38,emp-38,job-33,Lead Assistant de Direction,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-06T11:30:11.453279+00:00
+career-path-emp-39,emp-39,job-26,Directeur Commercial,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-23T11:30:11.453282+00:00
+career-path-emp-40,emp-40,job-7,Directeur Technique,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-26T11:30:11.453284+00:00
+career-path-emp-41,emp-41,job-13,Lead Software Engineer,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-24T11:30:11.453286+00:00
+career-path-emp-42,emp-42,job-26,Directeur Commercial,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-21T11:30:11.453289+00:00
+career-path-emp-43,emp-43,job-32,Lead COO,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-27T11:30:11.453291+00:00
+career-path-emp-44,emp-44,job-17,Directeur Financier,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-03T11:30:11.453293+00:00
+career-path-emp-45,emp-45,job-15,Lead QA Tester,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-06-02T11:30:11.453296+00:00
+career-path-emp-46,emp-46,job-18,Lead Contrôleur de Gestion,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-30T11:30:11.453298+00:00
+career-path-emp-47,emp-47,job-32,Lead COO,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-13T11:30:11.453300+00:00
+career-path-emp-48,emp-48,job-31,Lead Directrice des opérations RH,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-25T11:30:11.453303+00:00
+career-path-emp-49,emp-49,job-32,Lead COO,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-22T11:30:11.453306+00:00
+career-path-emp-50,emp-50,job-23,Lead Community Manager,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-12T11:30:11.453310+00:00
+career-path-emp-51,emp-51,job-25,Lead SEO Specialist,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-21T11:30:11.453312+00:00
+career-path-emp-52,emp-52,job-3,Lead HR Business Partner,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Pulse RH,2026-04-18T11:30:11.453315+00:00
+career-path-emp-53,emp-53,job-3,Lead HR Business Partner,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Pulse RH,2026-05-14T11:30:11.453317+00:00
+career-path-emp-54,emp-54,job-27,Lead Key Account Manager,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-17T11:30:11.453320+00:00
+career-path-emp-55,emp-55,job-12,Lead Ingénieur DevOps,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-21T11:30:11.453325+00:00
+career-path-emp-56,emp-56,job-30,Directeur Général,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-29T11:30:11.453328+00:00
+career-path-emp-57,emp-57,job-19,Lead Comptable,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-11T11:30:11.453331+00:00
+career-path-emp-58,emp-58,job-19,Lead Comptable,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-03T11:30:11.453333+00:00
+career-path-emp-59,emp-59,job-32,Lead COO,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-18T11:30:11.453336+00:00
+career-path-emp-60,emp-60,job-1,Directeur RH,ready_soon,Obtenir une certification dans le domaine cible.,Pulse RH,2026-05-05T11:30:11.453338+00:00
+career-path-emp-61,emp-61,job-26,Directeur Commercial,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-09T11:30:11.453341+00:00
+career-path-emp-62,emp-62,job-27,Lead Key Account Manager,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-24T11:30:11.453343+00:00
+career-path-emp-63,emp-63,job-30,Directeur Général,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-31T11:30:11.453345+00:00
+career-path-emp-64,emp-64,job-32,Lead COO,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-03T11:30:11.453348+00:00
+career-path-emp-65,emp-65,job-28,Lead Commercial B2B,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-27T11:30:11.453351+00:00
+career-path-emp-66,emp-66,job-28,Lead Commercial B2B,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-04-28T11:30:11.453354+00:00
+career-path-emp-67,emp-67,job-8,Lead Engineering Manager,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-24T11:30:11.453356+00:00
+career-path-emp-68,emp-68,job-32,Lead COO,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-18T11:30:11.453358+00:00
+career-path-emp-69,emp-69,job-26,Directeur Commercial,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-24T11:30:11.453361+00:00
+career-path-emp-70,emp-70,job-22,Lead Product Marketing Manager,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-26T11:30:11.453363+00:00
+career-path-emp-71,emp-71,job-9,Lead Développeur,emerging,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-04T11:30:11.453365+00:00
+career-path-emp-72,emp-72,job-4,Lead Chargé de Recrutement,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-04-20T11:30:11.453367+00:00
+career-path-emp-73,emp-73,job-25,Lead SEO Specialist,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-25T11:30:11.453370+00:00
+career-path-emp-74,emp-74,job-33,Lead Assistant de Direction,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-23T11:30:11.453373+00:00
+career-path-emp-75,emp-75,job-22,Lead Product Marketing Manager,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-07T11:30:11.453376+00:00
+career-path-emp-76,emp-76,job-17,Directeur Financier,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-19T11:30:11.453378+00:00
+career-path-emp-77,emp-77,job-24,Lead Content Creator,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-18T11:30:11.453381+00:00
+career-path-emp-78,emp-78,job-26,Directeur Commercial,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-03T11:30:11.453383+00:00
+career-path-emp-79,emp-79,job-25,Lead SEO Specialist,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-06-07T11:30:11.453386+00:00
+career-path-emp-80,emp-80,job-20,Lead Analyste Financier,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-19T11:30:11.453390+00:00
+career-path-emp-81,emp-81,job-14,Lead Administrateur Système,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-16T11:30:11.453392+00:00
+career-path-emp-82,emp-82,job-30,Directeur Général,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-24T11:30:11.453395+00:00
+career-path-emp-83,emp-83,job-20,Lead Analyste Financier,ready_soon,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-06-07T11:30:11.453397+00:00
+career-path-emp-84,emp-84,job-23,Lead Community Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-06T11:30:11.453400+00:00
+career-path-emp-85,emp-85,job-8,Lead Engineering Manager,ready_soon,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-23T11:30:11.453402+00:00
+career-path-emp-86,emp-86,job-5,Lead Gestionnaire de Paie,ready_soon,Obtenir une certification dans le domaine cible.,Pulse RH,2026-04-30T11:30:11.453404+00:00
+career-path-emp-87,emp-87,job-23,Lead Community Manager,ready_now,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-04-23T11:30:11.453407+00:00
+career-path-emp-88,emp-88,job-5,Lead Gestionnaire de Paie,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Pulse RH,2026-05-15T11:30:11.453409+00:00
+career-path-emp-89,emp-89,job-8,Lead Engineering Manager,ready_soon,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-01T11:30:11.453411+00:00
+career-path-emp-90,emp-90,job-26,Directeur Commercial,ready_soon,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-05T11:30:11.453413+00:00
+career-path-emp-91,emp-91,job-32,Lead COO,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-04-30T11:30:11.453416+00:00
+career-path-emp-92,emp-92,job-4,Lead Chargé de Recrutement,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Pulse RH,2026-05-11T11:30:11.453418+00:00
+career-path-emp-93,emp-93,job-32,Lead COO,ready_now,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-04T11:30:11.453420+00:00
+career-path-emp-94,emp-94,job-32,Lead COO,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-03T11:30:11.453428+00:00
+career-path-emp-95,emp-95,job-14,Lead Administrateur Système,ready_now,Renforcer la visibilité des réalisations trimestrielles.,Manager direct,2026-05-23T11:30:11.453431+00:00
+career-path-emp-96,emp-96,job-14,Lead Administrateur Système,ready_now,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-04-26T11:30:11.453433+00:00
+career-path-emp-97,emp-97,job-17,Directeur Financier,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-06-02T11:30:11.453435+00:00
+career-path-emp-98,emp-98,job-27,Lead Key Account Manager,emerging,Obtenir une certification dans le domaine cible.,Manager direct,2026-05-28T11:30:11.453438+00:00
+career-path-emp-99,emp-99,job-18,Lead Contrôleur de Gestion,emerging,Préparer une prise de responsabilité progressive sur l'équipe.,Manager direct,2026-05-23T11:30:11.453440+00:00
+career-path-emp-100,emp-100,job-28,Lead Commercial B2B,emerging,Finaliser la formation prioritaire et élargir le périmètre projet.,Manager direct,2026-05-06T11:30:11.453443+00:00

@@ -40,4 +40,5 @@ celery[redis]
 xgboost
 scikit-learn
 joblib
+prophet
 pytest-mock

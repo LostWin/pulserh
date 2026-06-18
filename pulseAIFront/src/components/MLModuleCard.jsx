@@ -284,7 +284,7 @@ export default function MLModuleCard({ module: initialModule, onSave, onTrain })
             )}>
               {module.mode === 'ml' ? 'ML' : 'Heuristique'}
             </span>
-            {module.mode === 'ml' && <TrainingBadge status={module.training_status} />}
+            {module.mode === 'ml' && module.module_id !== 'TRAINING_RECO' && module.module_id !== 'SENTIMENT' && <TrainingBadge status={module.training_status} />}
             {module.last_trained_at && module.mode === 'ml' && (
               <span className="text-xxs text-brand-secondary/40">
                 v{module.model_version || '—'} · {new Date(module.last_trained_at).toLocaleDateString()}
@@ -364,23 +364,31 @@ export default function MLModuleCard({ module: initialModule, onSave, onTrain })
               {/* Training status + button */}
               <div className="flex items-center justify-between bg-brand-light/40 rounded-xl p-3 border border-brand-secondary/10">
                 <div className="flex items-center gap-2 flex-1 min-w-0 mr-4">
-                  <TrainingBadge status={module.training_status} />
-                  {module.training_error && module.training_status === 'error' && (
-                    <span className="text-xxs text-red-500 leading-tight whitespace-normal">{module.training_error}</span>
+                  {module.module_id !== 'TRAINING_RECO' && module.module_id !== 'SENTIMENT' && (
+                    <>
+                      <TrainingBadge status={module.training_status} />
+                      {module.training_error && module.training_status === 'error' && (
+                        <span className="text-xxs text-red-500 leading-tight whitespace-normal">{module.training_error}</span>
+                      )}
+                    </>
                   )}
                 </div>
-                <button
-                  onClick={handleTrain}
-                  disabled={training || module.training_status === 'training'}
-                  className="flex items-center gap-1.5 text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 px-3 py-1.5 rounded-lg transition-all disabled:opacity-50 focus:outline-none"
-                >
-                  {(training || module.training_status === 'training')
-                    ? <><RefreshCw size={12} className="animate-spin" />En cours...</>
-                    : <><Play size={12} />Entraîner</>}
-                </button>
+                {module.module_id !== 'TRAINING_RECO' && module.module_id !== 'SENTIMENT' ? (
+                  <button
+                    onClick={handleTrain}
+                    disabled={training || module.training_status === 'training'}
+                    className="flex items-center gap-1.5 text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 px-3 py-1.5 rounded-lg transition-all disabled:opacity-50 focus:outline-none"
+                  >
+                    {(training || module.training_status === 'training')
+                      ? <><RefreshCw size={12} className="animate-spin" />En cours...</>
+                      : <><Play size={12} />Entraîner</>}
+                  </button>
+                ) : (
+                  <span className="text-xxs text-brand-secondary/50 italic px-2">Modèle sans entraînement custom</span>
+                )}
               </div>
 
-              {module.mode === 'ml' && module.training_status !== 'ready' && (
+              {module.mode === 'ml' && module.training_status !== 'ready' && module.module_id !== 'TRAINING_RECO' && module.module_id !== 'SENTIMENT' && (
                 <div className="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-3">
                   <Info size={14} className="shrink-0 mt-0.5" />
                   <p>Le mode ML est sélectionné mais le modèle n'est pas encore entraîné. Le système utilisera le mode heuristique comme fallback jusqu'à la fin de l'entraînement.</p>

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CalendarDays, CheckCircle, Circle, FileText, Download, Bot, Shield, TrendingUp, Plane, Activity, Lock } from 'lucide-react';
 
 import { useAuth } from '../../contexts/AuthContext';
@@ -8,9 +8,14 @@ import { cn } from '../../lib/utils';
 
 export default function CollaborateurDashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const handleSuggestionClick = (msg) => {
+    navigate('/collaborateur/assistant', { state: { initialMessage: msg } });
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -91,8 +96,8 @@ export default function CollaborateurDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Onboarding journey – visible uniquement si un onboarding est actif */}
-      {onboarding.length > 0 && (
+      {/* Onboarding journey – visible uniquement si un onboarding n'est pas terminé */}
+      {onboarding.length > 0 && onboardingPct < 100 && (
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-50 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-6">
             <div>
@@ -100,7 +105,7 @@ export default function CollaborateurDashboard() {
               <p className="text-sm text-gray-500 mt-1">Vous êtes sur la bonne voie. Les prochaines étapes sont alimentées par votre dossier réel.</p>
             </div>
             <span className="bg-brand-warning text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
-              {onboardingPct >= 100 ? 'Completed' : 'In Progress'}
+              In Progress
             </span>
           </div>
 
@@ -159,27 +164,7 @@ export default function CollaborateurDashboard() {
         </div>
       )}
 
-        <div className="lg:col-span-1 bg-brand-secondary rounded-2xl p-6 shadow-sm text-white flex flex-col justify-between">
-          <div className="flex justify-between items-start mb-4">
-            <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm">
-              <Plane className="w-5 h-5 text-white/90" />
-            </div>
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-white/70 uppercase">Active Balance</span>
-          </div>
-          <div className="mt-8 mb-4">
-            <div className="text-[48px] font-bold leading-none tracking-tight">{currentBalance} days</div>
-            <div className="text-[15px] text-white/80 mt-2">Paid Time Off available</div>
-          </div>
-          <div className="mt-auto pt-8">
-            <div className="flex justify-between text-[13px] text-white/90 mb-2.5 font-medium">
-              <span>Used: {usedBalance} days</span>
-              <span>Total: {totalBalance} days</span>
-            </div>
-            <div className="h-1.5 w-full bg-black/20 rounded-full overflow-hidden">
-              <div className="h-full bg-white rounded-full transition-all duration-1000 ease-out" style={{ width: `${totalBalance ? (usedBalance / totalBalance) * 100 : 0}%` }} />
-            </div>
-          </div>
-        </div>
+
 
         <div className="lg:col-span-1 lg:row-span-2 bg-[#FDF8F7] rounded-2xl p-6 shadow-sm flex flex-col border border-brand-warning/10">
           <div className="flex items-center gap-3 mb-6">
@@ -192,11 +177,20 @@ export default function CollaborateurDashboard() {
             Obtenez des réponses instantanées sur vos congés, vos documents ou vos démarches RH personnelles.
           </p>
           <div className="space-y-4 mb-8">
-            <button className="w-full text-left bg-white p-4 rounded-xl text-[14px] text-brand-dark font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow hover:text-brand-warning">
+            <button 
+              onClick={() => handleSuggestionClick("Combien de jours de congés me reste-t-il ?")}
+              className="w-full text-left bg-white p-4 rounded-xl text-[14px] text-brand-dark font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow hover:text-brand-warning">
               &quot;Combien de jours de congés me reste-t-il ?&quot;
             </button>
-            <button className="w-full text-left bg-white p-4 rounded-xl text-[14px] text-brand-dark font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow hover:text-brand-warning">
+            <button 
+              onClick={() => handleSuggestionClick("Montre-moi mes derniers documents RH.")}
+              className="w-full text-left bg-white p-4 rounded-xl text-[14px] text-brand-dark font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow hover:text-brand-warning">
               &quot;Montre-moi mes derniers documents RH.&quot;
+            </button>
+            <button 
+              onClick={() => handleSuggestionClick("Quels sont mes taches à faire ?")}
+              className="w-full text-left bg-white p-4 rounded-xl text-[14px] text-brand-dark font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow hover:text-brand-warning">
+              &quot;Quels sont mes taches à faire ?&quot;
             </button>
           </div>
           <div className="mt-auto">

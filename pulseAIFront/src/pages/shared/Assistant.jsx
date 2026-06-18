@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Send, Bot, Sparkles, Plus, Share2, X, FileText, CheckCircle, Paperclip, Mic, Zap, Download, Wrench, Loader2, Trash2, Edit2, Check } from 'lucide-react';
 import { api } from '../../lib/api';
 import { cn } from '../../lib/utils';
@@ -273,6 +274,23 @@ export default function Assistant() {
       loadConversations(); // Rafraîchir la sidebar
     }
   }, [streaming, activeConversationId, messages.length]);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Handle location.state.initialMessage
+  useEffect(() => {
+    if (location.state?.initialMessage) {
+      const msg = location.state.initialMessage;
+      // Nettoyer le state pour éviter de renvoyer au reload
+      navigate(location.pathname, { replace: true, state: {} });
+      
+      // Send the message
+      setTimeout(() => {
+        send(msg);
+      }, 100);
+    }
+  }, [location.state, navigate, send]);
 
   return (
     <div className="animate-fade-in-up flex h-[calc(100vh-5rem)] gap-0 overflow-hidden rounded-2xl shadow-sm border border-brand-secondary/10 bg-white">

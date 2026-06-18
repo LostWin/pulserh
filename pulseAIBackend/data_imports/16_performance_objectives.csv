@@ -1,479 +1,479 @@
 id,employee_id,title,description,status,progress_pct,due_date,created_at
 perf-obj-emp-demo-youssef-past-0,emp-demo-youssef,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-08-15,2026-05-12T00:00:00+00:00
-perf-obj-emp-demo-youssef-current-0,emp-demo-youssef,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,83,2026-09-24,2026-04-22T10:54:07.692314+00:00
-perf-obj-emp-demo-youssef-current-1,emp-demo-youssef,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,44,2026-07-22,2026-05-24T10:54:07.692322+00:00
+perf-obj-emp-demo-youssef-current-0,emp-demo-youssef,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,83,2026-09-24,2026-04-22T11:30:11.446044+00:00
+perf-obj-emp-demo-youssef-current-1,emp-demo-youssef,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,44,2026-07-22,2026-05-24T11:30:11.446051+00:00
 perf-obj-emp-demo-fatima-past-0,emp-demo-fatima,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-04-16,2026-03-06T00:00:00+00:00
 perf-obj-emp-demo-fatima-past-1,emp-demo-fatima,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-06-12,2026-02-13T00:00:00+00:00
 perf-obj-emp-demo-fatima-past-2,emp-demo-fatima,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-07-15,2026-01-26T00:00:00+00:00
-perf-obj-emp-demo-fatima-current-0,emp-demo-fatima,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,69,2026-08-17,2026-04-08T10:54:07.692341+00:00
-perf-obj-emp-demo-fatima-current-1,emp-demo-fatima,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,52,2026-11-04,2026-05-29T10:54:07.692344+00:00
+perf-obj-emp-demo-fatima-current-0,emp-demo-fatima,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,69,2026-08-17,2026-04-08T11:30:11.446064+00:00
+perf-obj-emp-demo-fatima-current-1,emp-demo-fatima,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,52,2026-11-04,2026-05-29T11:30:11.446067+00:00
 perf-obj-emp-demo-karim-past-0,emp-demo-karim,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-07-16,2025-03-27T00:00:00+00:00
 perf-obj-emp-demo-karim-past-1,emp-demo-karim,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-02-22,2024-09-06T00:00:00+00:00
 perf-obj-emp-demo-karim-past-2,emp-demo-karim,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-02-03,2024-11-09T00:00:00+00:00
-perf-obj-emp-demo-karim-current-0,emp-demo-karim,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,26,2026-08-07,2026-06-07T10:54:07.692357+00:00
-perf-obj-emp-demo-karim-current-1,emp-demo-karim,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,12,2026-09-10,2026-03-22T10:54:07.692361+00:00
+perf-obj-emp-demo-karim-current-0,emp-demo-karim,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,26,2026-08-07,2026-06-07T11:30:11.446079+00:00
+perf-obj-emp-demo-karim-current-1,emp-demo-karim,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,12,2026-09-10,2026-03-22T11:30:11.446082+00:00
 perf-obj-emp-demo-sara-past-0,emp-demo-sara,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-07-24,2024-02-03T00:00:00+00:00
 perf-obj-emp-demo-sara-past-1,emp-demo-sara,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-10-28,2025-07-09T00:00:00+00:00
 perf-obj-emp-demo-sara-past-2,emp-demo-sara,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-07-06,2024-02-13T00:00:00+00:00
-perf-obj-emp-demo-sara-current-0,emp-demo-sara,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,54,2026-07-26,2026-05-24T10:54:07.692374+00:00
-perf-obj-emp-demo-sara-current-1,emp-demo-sara,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,31,2026-10-15,2026-04-20T10:54:07.692377+00:00
+perf-obj-emp-demo-sara-current-0,emp-demo-sara,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,54,2026-07-26,2026-05-24T11:30:11.446098+00:00
+perf-obj-emp-demo-sara-current-1,emp-demo-sara,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,31,2026-10-15,2026-04-20T11:30:11.446100+00:00
 perf-obj-emp-demo-admin-past-0,emp-demo-admin,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-07-12,2025-02-16T00:00:00+00:00
 perf-obj-emp-demo-admin-past-1,emp-demo-admin,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2024-09-11,2024-08-03T00:00:00+00:00
-perf-obj-emp-demo-admin-current-0,emp-demo-admin,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,14,2026-08-19,2026-04-19T10:54:07.692387+00:00
-perf-obj-emp-demo-admin-current-1,emp-demo-admin,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,17,2026-07-26,2026-05-14T10:54:07.692390+00:00
+perf-obj-emp-demo-admin-current-0,emp-demo-admin,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,14,2026-08-19,2026-04-19T11:30:11.446109+00:00
+perf-obj-emp-demo-admin-current-1,emp-demo-admin,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,17,2026-07-26,2026-05-14T11:30:11.446111+00:00
 perf-obj-emp-1-past-0,emp-1,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-05-02,2025-11-30T00:00:00+00:00
 perf-obj-emp-1-past-1,emp-1,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-01-27,2023-08-10T00:00:00+00:00
 perf-obj-emp-1-past-2,emp-1,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-05-11,2024-01-19T00:00:00+00:00
-perf-obj-emp-1-current-0,emp-1,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,44,2026-08-06,2026-03-28T10:54:07.692402+00:00
-perf-obj-emp-1-current-1,emp-1,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,44,2026-08-17,2026-05-18T10:54:07.692405+00:00
+perf-obj-emp-1-current-0,emp-1,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,44,2026-08-06,2026-03-28T11:30:11.446123+00:00
+perf-obj-emp-1-current-1,emp-1,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,44,2026-08-17,2026-05-18T11:30:11.446125+00:00
 perf-obj-emp-2-past-0,emp-2,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-05-10,2024-03-04T00:00:00+00:00
 perf-obj-emp-2-past-1,emp-2,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-04-06,2024-01-10T00:00:00+00:00
 perf-obj-emp-2-past-2,emp-2,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-01-30,2023-12-08T00:00:00+00:00
 perf-obj-emp-2-past-3,emp-2,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2024-03-29,2024-02-04T00:00:00+00:00
-perf-obj-emp-2-current-0,emp-2,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,20,2026-10-01,2026-05-10T10:54:07.692420+00:00
-perf-obj-emp-2-current-1,emp-2,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,75,2026-09-23,2026-05-09T10:54:07.692423+00:00
+perf-obj-emp-2-current-0,emp-2,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,20,2026-10-01,2026-05-10T11:30:11.446140+00:00
+perf-obj-emp-2-current-1,emp-2,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,75,2026-09-23,2026-05-09T11:30:11.446143+00:00
 perf-obj-emp-3-past-0,emp-3,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2025-08-05,2025-06-20T00:00:00+00:00
-perf-obj-emp-3-current-0,emp-3,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,26,2026-08-03,2026-04-08T10:54:07.692429+00:00
-perf-obj-emp-3-current-1,emp-3,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,28,2026-10-05,2026-05-27T10:54:07.692432+00:00
+perf-obj-emp-3-current-0,emp-3,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,26,2026-08-03,2026-04-08T11:30:11.446149+00:00
+perf-obj-emp-3-current-1,emp-3,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,28,2026-10-05,2026-05-27T11:30:11.446151+00:00
 perf-obj-emp-4-past-0,emp-4,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-02-16,2024-10-01T00:00:00+00:00
 perf-obj-emp-4-past-1,emp-4,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2023-08-21,2023-06-21T00:00:00+00:00
 perf-obj-emp-4-past-2,emp-4,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2023-05-24,2023-02-06T00:00:00+00:00
-perf-obj-emp-4-current-0,emp-4,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,34,2026-11-05,2026-04-25T10:54:07.692445+00:00
-perf-obj-emp-4-current-1,emp-4,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,16,2026-10-27,2026-05-31T10:54:07.692448+00:00
+perf-obj-emp-4-current-0,emp-4,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,34,2026-11-05,2026-04-25T11:30:11.446162+00:00
+perf-obj-emp-4-current-1,emp-4,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,16,2026-10-27,2026-05-31T11:30:11.446165+00:00
 perf-obj-emp-5-past-0,emp-5,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-08-12,2025-06-06T00:00:00+00:00
 perf-obj-emp-5-past-1,emp-5,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2024-07-08,2024-02-11T00:00:00+00:00
 perf-obj-emp-5-past-2,emp-5,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2023-10-04,2023-07-19T00:00:00+00:00
 perf-obj-emp-5-past-3,emp-5,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-12-02,2024-06-19T00:00:00+00:00
-perf-obj-emp-5-current-0,emp-5,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,41,2026-09-10,2026-06-02T10:54:07.692463+00:00
-perf-obj-emp-5-current-1,emp-5,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,76,2026-09-24,2026-05-08T10:54:07.692466+00:00
+perf-obj-emp-5-current-0,emp-5,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,41,2026-09-10,2026-06-02T11:30:11.446177+00:00
+perf-obj-emp-5-current-1,emp-5,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,76,2026-09-24,2026-05-08T11:30:11.446180+00:00
 perf-obj-emp-6-past-0,emp-6,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-03-29,2023-12-16T00:00:00+00:00
-perf-obj-emp-6-current-0,emp-6,Améliorer la satisfaction client interne,Objectif en cours du semestre.,planned,78,2026-11-08,2026-03-28T10:54:07.692472+00:00
-perf-obj-emp-6-current-1,emp-6,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,47,2026-07-25,2026-05-13T10:54:07.692475+00:00
+perf-obj-emp-6-current-0,emp-6,Améliorer la satisfaction client interne,Objectif en cours du semestre.,planned,78,2026-11-08,2026-03-28T11:30:11.446185+00:00
+perf-obj-emp-6-current-1,emp-6,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,47,2026-07-25,2026-05-13T11:30:11.446188+00:00
 perf-obj-emp-7-past-0,emp-7,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2025-03-26,2024-11-13T00:00:00+00:00
 perf-obj-emp-7-past-1,emp-7,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-05-05,2024-02-26T00:00:00+00:00
 perf-obj-emp-7-past-2,emp-7,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-03-06,2025-12-12T00:00:00+00:00
 perf-obj-emp-7-past-3,emp-7,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-06-02,2024-12-04T00:00:00+00:00
-perf-obj-emp-7-current-0,emp-7,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,18,2026-10-11,2026-05-27T10:54:07.692490+00:00
-perf-obj-emp-7-current-1,emp-7,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,71,2026-08-17,2026-05-28T10:54:07.692493+00:00
+perf-obj-emp-7-current-0,emp-7,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,18,2026-10-11,2026-05-27T11:30:11.446201+00:00
+perf-obj-emp-7-current-1,emp-7,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,71,2026-08-17,2026-05-28T11:30:11.446204+00:00
 perf-obj-emp-8-past-0,emp-8,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-04-11,2026-02-18T00:00:00+00:00
 perf-obj-emp-8-past-1,emp-8,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-04-21,2026-02-06T00:00:00+00:00
-perf-obj-emp-8-current-0,emp-8,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,82,2026-09-12,2026-05-21T10:54:07.692502+00:00
-perf-obj-emp-8-current-1,emp-8,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,50,2026-09-15,2026-04-12T10:54:07.692505+00:00
+perf-obj-emp-8-current-0,emp-8,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,82,2026-09-12,2026-05-21T11:30:11.446212+00:00
+perf-obj-emp-8-current-1,emp-8,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,50,2026-09-15,2026-04-12T11:30:11.446216+00:00
 perf-obj-emp-9-past-0,emp-9,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2022-09-30,2022-04-13T00:00:00+00:00
 perf-obj-emp-9-past-1,emp-9,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-03-28,2025-02-04T00:00:00+00:00
 perf-obj-emp-9-past-2,emp-9,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2022-05-16,2022-02-10T00:00:00+00:00
 perf-obj-emp-9-past-3,emp-9,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-09-22,2024-05-14T00:00:00+00:00
-perf-obj-emp-9-current-0,emp-9,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,67,2026-08-01,2026-04-26T10:54:07.692519+00:00
-perf-obj-emp-9-current-1,emp-9,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,69,2026-09-05,2026-05-08T10:54:07.692523+00:00
+perf-obj-emp-9-current-0,emp-9,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,67,2026-08-01,2026-04-26T11:30:11.446228+00:00
+perf-obj-emp-9-current-1,emp-9,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,69,2026-09-05,2026-05-08T11:30:11.446231+00:00
 perf-obj-emp-10-past-0,emp-10,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-04-24,2023-11-11T00:00:00+00:00
 perf-obj-emp-10-past-1,emp-10,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-08-18,2025-06-12T00:00:00+00:00
 perf-obj-emp-10-past-2,emp-10,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-08-26,2024-03-27T00:00:00+00:00
 perf-obj-emp-10-past-3,emp-10,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-06-12,2025-12-25T00:00:00+00:00
-perf-obj-emp-10-current-0,emp-10,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,63,2026-10-22,2026-05-27T10:54:07.692537+00:00
-perf-obj-emp-10-current-1,emp-10,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,54,2026-08-03,2026-04-15T10:54:07.692540+00:00
+perf-obj-emp-10-current-0,emp-10,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,63,2026-10-22,2026-05-27T11:30:11.446244+00:00
+perf-obj-emp-10-current-1,emp-10,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,54,2026-08-03,2026-04-15T11:30:11.446246+00:00
 perf-obj-emp-11-past-0,emp-11,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-04-26,2026-02-14T00:00:00+00:00
-perf-obj-emp-11-current-0,emp-11,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,81,2026-08-29,2026-04-19T10:54:07.692546+00:00
-perf-obj-emp-11-current-1,emp-11,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,67,2026-10-26,2026-03-27T10:54:07.692548+00:00
+perf-obj-emp-11-current-0,emp-11,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,81,2026-08-29,2026-04-19T11:30:11.446252+00:00
+perf-obj-emp-11-current-1,emp-11,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,67,2026-10-26,2026-03-27T11:30:11.446254+00:00
 perf-obj-emp-12-past-0,emp-12,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-10-13,2025-07-19T00:00:00+00:00
 perf-obj-emp-12-past-1,emp-12,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-10-12,2025-08-23T00:00:00+00:00
-perf-obj-emp-12-current-0,emp-12,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,20,2026-11-01,2026-06-02T10:54:07.692558+00:00
-perf-obj-emp-12-current-1,emp-12,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,44,2026-09-08,2026-04-24T10:54:07.692561+00:00
+perf-obj-emp-12-current-0,emp-12,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,20,2026-11-01,2026-06-02T11:30:11.446264+00:00
+perf-obj-emp-12-current-1,emp-12,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,44,2026-09-08,2026-04-24T11:30:11.446267+00:00
 perf-obj-emp-13-past-0,emp-13,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-01-23,2025-11-26T00:00:00+00:00
-perf-obj-emp-13-current-0,emp-13,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,70,2026-10-09,2026-06-03T10:54:07.692567+00:00
-perf-obj-emp-13-current-1,emp-13,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,43,2026-10-18,2026-04-09T10:54:07.692570+00:00
+perf-obj-emp-13-current-0,emp-13,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,70,2026-10-09,2026-06-03T11:30:11.446272+00:00
+perf-obj-emp-13-current-1,emp-13,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,43,2026-10-18,2026-04-09T11:30:11.446275+00:00
 perf-obj-emp-14-past-0,emp-14,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-08-10,2026-03-06T00:00:00+00:00
 perf-obj-emp-14-past-1,emp-14,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-08-26,2024-06-30T00:00:00+00:00
 perf-obj-emp-14-past-2,emp-14,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-12-05,2025-07-24T00:00:00+00:00
-perf-obj-emp-14-current-0,emp-14,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,41,2026-08-30,2026-05-10T10:54:07.692582+00:00
-perf-obj-emp-14-current-1,emp-14,Structurer un plan de progression métier,Objectif en cours du semestre.,blocked,57,2026-09-22,2026-03-19T10:54:07.692585+00:00
+perf-obj-emp-14-current-0,emp-14,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,41,2026-08-30,2026-05-10T11:30:11.446285+00:00
+perf-obj-emp-14-current-1,emp-14,Structurer un plan de progression métier,Objectif en cours du semestre.,blocked,57,2026-09-22,2026-03-19T11:30:11.446288+00:00
 perf-obj-emp-15-past-0,emp-15,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-03-05,2025-11-12T00:00:00+00:00
-perf-obj-emp-15-current-0,emp-15,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,62,2026-08-21,2026-03-28T10:54:07.692590+00:00
-perf-obj-emp-15-current-1,emp-15,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,39,2026-08-26,2026-04-27T10:54:07.692593+00:00
+perf-obj-emp-15-current-0,emp-15,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,62,2026-08-21,2026-03-28T11:30:11.446294+00:00
+perf-obj-emp-15-current-1,emp-15,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,39,2026-08-26,2026-04-27T11:30:11.446297+00:00
 perf-obj-emp-16-past-0,emp-16,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-04-03,2025-12-17T00:00:00+00:00
 perf-obj-emp-16-past-1,emp-16,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-04-18,2026-02-20T00:00:00+00:00
 perf-obj-emp-16-past-2,emp-16,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-02-19,2025-10-14T00:00:00+00:00
-perf-obj-emp-16-current-0,emp-16,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,29,2026-10-06,2026-04-23T10:54:07.692605+00:00
-perf-obj-emp-16-current-1,emp-16,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,81,2026-08-05,2026-05-11T10:54:07.692608+00:00
+perf-obj-emp-16-current-0,emp-16,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,29,2026-10-06,2026-04-23T11:30:11.446308+00:00
+perf-obj-emp-16-current-1,emp-16,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,81,2026-08-05,2026-05-11T11:30:11.446311+00:00
 perf-obj-emp-17-past-0,emp-17,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-06-09,2025-01-09T00:00:00+00:00
-perf-obj-emp-17-current-0,emp-17,Structurer un plan de progression métier,Objectif en cours du semestre.,blocked,80,2026-09-24,2026-03-30T10:54:07.692614+00:00
-perf-obj-emp-17-current-1,emp-17,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,69,2026-09-09,2026-06-02T10:54:07.692616+00:00
+perf-obj-emp-17-current-0,emp-17,Structurer un plan de progression métier,Objectif en cours du semestre.,blocked,80,2026-09-24,2026-03-30T11:30:11.446316+00:00
+perf-obj-emp-17-current-1,emp-17,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,69,2026-09-09,2026-06-02T11:30:11.446319+00:00
 perf-obj-emp-18-past-0,emp-18,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-01-20,2023-11-13T00:00:00+00:00
 perf-obj-emp-18-past-1,emp-18,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2023-09-07,2023-07-27T00:00:00+00:00
 perf-obj-emp-18-past-2,emp-18,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-02-22,2024-10-21T00:00:00+00:00
-perf-obj-emp-18-current-0,emp-18,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,61,2026-11-04,2026-05-08T10:54:07.692628+00:00
-perf-obj-emp-18-current-1,emp-18,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,47,2026-10-06,2026-03-24T10:54:07.692630+00:00
+perf-obj-emp-18-current-0,emp-18,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,61,2026-11-04,2026-05-08T11:30:11.446329+00:00
+perf-obj-emp-18-current-1,emp-18,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,47,2026-10-06,2026-03-24T11:30:11.446331+00:00
 perf-obj-emp-19-past-0,emp-19,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-08-24,2024-06-27T00:00:00+00:00
 perf-obj-emp-19-past-1,emp-19,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-07-03,2024-05-05T00:00:00+00:00
 perf-obj-emp-19-past-2,emp-19,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-06-01,2024-01-19T00:00:00+00:00
 perf-obj-emp-19-past-3,emp-19,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2025-03-26,2024-11-16T00:00:00+00:00
-perf-obj-emp-19-current-0,emp-19,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,50,2026-10-22,2026-03-25T10:54:07.692644+00:00
-perf-obj-emp-19-current-1,emp-19,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,57,2026-10-10,2026-05-05T10:54:07.692647+00:00
+perf-obj-emp-19-current-0,emp-19,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,50,2026-10-22,2026-03-25T11:30:11.446345+00:00
+perf-obj-emp-19-current-1,emp-19,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,57,2026-10-10,2026-05-05T11:30:11.446347+00:00
 perf-obj-emp-20-past-0,emp-20,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-07-17,2025-05-26T00:00:00+00:00
 perf-obj-emp-20-past-1,emp-20,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-02-19,2025-09-17T00:00:00+00:00
 perf-obj-emp-20-past-2,emp-20,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2025-11-09,2025-09-08T00:00:00+00:00
-perf-obj-emp-20-current-0,emp-20,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,22,2026-07-21,2026-04-20T10:54:07.692660+00:00
-perf-obj-emp-20-current-1,emp-20,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,10,2026-07-20,2026-03-20T10:54:07.692663+00:00
+perf-obj-emp-20-current-0,emp-20,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,22,2026-07-21,2026-04-20T11:30:11.446357+00:00
+perf-obj-emp-20-current-1,emp-20,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,10,2026-07-20,2026-03-20T11:30:11.446360+00:00
 perf-obj-emp-21-past-0,emp-21,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-08-30,2024-03-05T00:00:00+00:00
-perf-obj-emp-21-current-0,emp-21,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,74,2026-10-08,2026-04-04T10:54:07.692671+00:00
-perf-obj-emp-21-current-1,emp-21,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,10,2026-09-07,2026-05-02T10:54:07.692673+00:00
+perf-obj-emp-21-current-0,emp-21,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,74,2026-10-08,2026-04-04T11:30:11.446366+00:00
+perf-obj-emp-21-current-1,emp-21,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,10,2026-09-07,2026-05-02T11:30:11.446368+00:00
 perf-obj-emp-22-past-0,emp-22,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-01-06,2025-08-28T00:00:00+00:00
 perf-obj-emp-22-past-1,emp-22,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-06-26,2025-04-05T00:00:00+00:00
 perf-obj-emp-22-past-2,emp-22,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-06-10,2026-01-18T00:00:00+00:00
-perf-obj-emp-22-current-0,emp-22,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,81,2026-10-21,2026-04-14T10:54:07.692685+00:00
-perf-obj-emp-22-current-1,emp-22,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,61,2026-10-18,2026-04-07T10:54:07.692688+00:00
+perf-obj-emp-22-current-0,emp-22,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,81,2026-10-21,2026-04-14T11:30:11.446379+00:00
+perf-obj-emp-22-current-1,emp-22,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,61,2026-10-18,2026-04-07T11:30:11.446382+00:00
 perf-obj-emp-23-past-0,emp-23,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-04-22,2026-02-18T00:00:00+00:00
 perf-obj-emp-23-past-1,emp-23,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-06-05,2025-04-19T00:00:00+00:00
-perf-obj-emp-23-current-0,emp-23,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,79,2026-11-04,2026-04-20T10:54:07.692697+00:00
-perf-obj-emp-23-current-1,emp-23,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,79,2026-07-24,2026-04-12T10:54:07.692699+00:00
+perf-obj-emp-23-current-0,emp-23,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,79,2026-11-04,2026-04-20T11:30:11.446391+00:00
+perf-obj-emp-23-current-1,emp-23,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,79,2026-07-24,2026-04-12T11:30:11.446393+00:00
 perf-obj-emp-24-past-0,emp-24,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2022-08-23,2022-07-19T00:00:00+00:00
 perf-obj-emp-24-past-1,emp-24,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2025-09-03,2025-06-26T00:00:00+00:00
 perf-obj-emp-24-past-2,emp-24,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2023-11-13,2023-07-20T00:00:00+00:00
-perf-obj-emp-24-current-0,emp-24,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,54,2026-09-22,2026-05-26T10:54:07.692711+00:00
-perf-obj-emp-24-current-1,emp-24,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,29,2026-09-21,2026-03-30T10:54:07.692714+00:00
+perf-obj-emp-24-current-0,emp-24,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,54,2026-09-22,2026-05-26T11:30:11.446404+00:00
+perf-obj-emp-24-current-1,emp-24,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,29,2026-09-21,2026-03-30T11:30:11.446406+00:00
 perf-obj-emp-25-past-0,emp-25,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2023-07-08,2023-01-13T00:00:00+00:00
 perf-obj-emp-25-past-1,emp-25,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-02-19,2025-11-25T00:00:00+00:00
 perf-obj-emp-25-past-2,emp-25,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-07-30,2024-06-11T00:00:00+00:00
-perf-obj-emp-25-current-0,emp-25,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,48,2026-07-14,2026-04-25T10:54:07.692725+00:00
-perf-obj-emp-25-current-1,emp-25,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,78,2026-08-13,2026-03-24T10:54:07.692727+00:00
+perf-obj-emp-25-current-0,emp-25,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,48,2026-07-14,2026-04-25T11:30:11.446417+00:00
+perf-obj-emp-25-current-1,emp-25,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,78,2026-08-13,2026-03-24T11:30:11.446419+00:00
 perf-obj-emp-26-past-0,emp-26,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-06-16,2025-12-23T00:00:00+00:00
-perf-obj-emp-26-current-0,emp-26,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,82,2026-09-19,2026-04-03T10:54:07.692733+00:00
-perf-obj-emp-26-current-1,emp-26,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,47,2026-08-25,2026-03-31T10:54:07.692736+00:00
+perf-obj-emp-26-current-0,emp-26,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,82,2026-09-19,2026-04-03T11:30:11.446425+00:00
+perf-obj-emp-26-current-1,emp-26,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,47,2026-08-25,2026-03-31T11:30:11.446427+00:00
 perf-obj-emp-27-past-0,emp-27,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-05-26,2025-11-29T00:00:00+00:00
 perf-obj-emp-27-past-1,emp-27,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-10-12,2025-06-05T00:00:00+00:00
 perf-obj-emp-27-past-2,emp-27,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-01-19,2025-10-24T00:00:00+00:00
 perf-obj-emp-27-past-3,emp-27,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2025-10-02,2025-07-12T00:00:00+00:00
-perf-obj-emp-27-current-0,emp-27,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,65,2026-08-03,2026-04-08T10:54:07.692750+00:00
-perf-obj-emp-27-current-1,emp-27,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,18,2026-10-03,2026-03-28T10:54:07.692753+00:00
+perf-obj-emp-27-current-0,emp-27,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,65,2026-08-03,2026-04-08T11:30:11.446439+00:00
+perf-obj-emp-27-current-1,emp-27,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,18,2026-10-03,2026-03-28T11:30:11.446442+00:00
 perf-obj-emp-28-past-0,emp-28,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2024-05-11,2024-03-01T00:00:00+00:00
 perf-obj-emp-28-past-1,emp-28,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-11-18,2025-09-15T00:00:00+00:00
 perf-obj-emp-28-past-2,emp-28,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-07-13,2024-05-17T00:00:00+00:00
 perf-obj-emp-28-past-3,emp-28,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-02-18,2024-11-24T00:00:00+00:00
-perf-obj-emp-28-current-0,emp-28,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,59,2026-07-15,2026-06-06T10:54:07.692767+00:00
-perf-obj-emp-28-current-1,emp-28,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,41,2026-08-21,2026-04-03T10:54:07.692770+00:00
+perf-obj-emp-28-current-0,emp-28,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,59,2026-07-15,2026-06-06T11:30:11.446454+00:00
+perf-obj-emp-28-current-1,emp-28,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,41,2026-08-21,2026-04-03T11:30:11.446457+00:00
 perf-obj-emp-29-past-0,emp-29,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-04-07,2023-10-16T00:00:00+00:00
 perf-obj-emp-29-past-1,emp-29,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-10-18,2025-04-27T00:00:00+00:00
-perf-obj-emp-29-current-0,emp-29,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,63,2026-07-13,2026-05-18T10:54:07.692779+00:00
-perf-obj-emp-29-current-1,emp-29,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,68,2026-09-28,2026-03-26T10:54:07.692782+00:00
+perf-obj-emp-29-current-0,emp-29,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,63,2026-07-13,2026-05-18T11:30:11.446466+00:00
+perf-obj-emp-29-current-1,emp-29,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,68,2026-09-28,2026-03-26T11:30:11.446469+00:00
 perf-obj-emp-30-past-0,emp-30,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2025-02-04,2024-08-08T00:00:00+00:00
 perf-obj-emp-30-past-1,emp-30,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2025-01-18,2024-12-03T00:00:00+00:00
-perf-obj-emp-30-current-0,emp-30,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,72,2026-09-24,2026-03-21T10:54:07.692791+00:00
-perf-obj-emp-30-current-1,emp-30,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,21,2026-10-24,2026-04-17T10:54:07.692794+00:00
+perf-obj-emp-30-current-0,emp-30,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,72,2026-09-24,2026-03-21T11:30:11.446477+00:00
+perf-obj-emp-30-current-1,emp-30,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,21,2026-10-24,2026-04-17T11:30:11.446480+00:00
 perf-obj-emp-31-past-0,emp-31,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2023-03-21,2022-12-13T00:00:00+00:00
 perf-obj-emp-31-past-1,emp-31,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-06-07,2023-12-29T00:00:00+00:00
 perf-obj-emp-31-past-2,emp-31,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-05-23,2025-12-23T00:00:00+00:00
-perf-obj-emp-31-current-0,emp-31,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,85,2026-08-17,2026-04-28T10:54:07.692805+00:00
-perf-obj-emp-31-current-1,emp-31,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,49,2026-08-18,2026-04-21T10:54:07.692808+00:00
+perf-obj-emp-31-current-0,emp-31,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,85,2026-08-17,2026-04-28T11:30:11.446490+00:00
+perf-obj-emp-31-current-1,emp-31,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,49,2026-08-18,2026-04-21T11:30:11.446492+00:00
 perf-obj-emp-32-past-0,emp-32,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-07-05,2024-03-18T00:00:00+00:00
 perf-obj-emp-32-past-1,emp-32,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-02-10,2024-11-21T00:00:00+00:00
 perf-obj-emp-32-past-2,emp-32,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2023-09-21,2023-08-21T00:00:00+00:00
 perf-obj-emp-32-past-3,emp-32,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2023-12-02,2023-06-22T00:00:00+00:00
-perf-obj-emp-32-current-0,emp-32,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,40,2026-07-20,2026-03-27T10:54:07.692822+00:00
-perf-obj-emp-32-current-1,emp-32,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,33,2026-07-26,2026-05-08T10:54:07.692825+00:00
+perf-obj-emp-32-current-0,emp-32,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,40,2026-07-20,2026-03-27T11:30:11.446505+00:00
+perf-obj-emp-32-current-1,emp-32,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,33,2026-07-26,2026-05-08T11:30:11.446507+00:00
 perf-obj-emp-33-past-0,emp-33,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-05-14,2026-02-27T00:00:00+00:00
 perf-obj-emp-33-past-1,emp-33,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-05-27,2026-03-17T00:00:00+00:00
 perf-obj-emp-33-past-2,emp-33,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-08-12,2026-02-26T00:00:00+00:00
-perf-obj-emp-33-current-0,emp-33,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,69,2026-08-05,2026-03-30T10:54:07.692836+00:00
-perf-obj-emp-33-current-1,emp-33,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,30,2026-10-24,2026-03-31T10:54:07.692839+00:00
+perf-obj-emp-33-current-0,emp-33,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,69,2026-08-05,2026-03-30T11:30:11.446518+00:00
+perf-obj-emp-33-current-1,emp-33,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,30,2026-10-24,2026-03-31T11:30:11.446520+00:00
 perf-obj-emp-34-past-0,emp-34,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2023-07-16,2023-03-28T00:00:00+00:00
 perf-obj-emp-34-past-1,emp-34,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-11-03,2025-06-12T00:00:00+00:00
 perf-obj-emp-34-past-2,emp-34,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2023-09-05,2023-08-05T00:00:00+00:00
-perf-obj-emp-34-current-0,emp-34,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,23,2026-08-11,2026-04-17T10:54:07.692850+00:00
-perf-obj-emp-34-current-1,emp-34,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,61,2026-09-29,2026-05-03T10:54:07.692853+00:00
+perf-obj-emp-34-current-0,emp-34,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,23,2026-08-11,2026-04-17T11:30:11.446530+00:00
+perf-obj-emp-34-current-1,emp-34,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,61,2026-09-29,2026-05-03T11:30:11.446540+00:00
 perf-obj-emp-35-past-0,emp-35,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2022-01-19,2021-12-08T00:00:00+00:00
 perf-obj-emp-35-past-1,emp-35,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2023-03-12,2023-01-08T00:00:00+00:00
-perf-obj-emp-35-current-0,emp-35,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,59,2026-10-05,2026-04-02T10:54:07.692861+00:00
-perf-obj-emp-35-current-1,emp-35,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,77,2026-11-01,2026-06-03T10:54:07.692864+00:00
+perf-obj-emp-35-current-0,emp-35,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,59,2026-10-05,2026-04-02T11:30:11.446548+00:00
+perf-obj-emp-35-current-1,emp-35,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,77,2026-11-01,2026-06-03T11:30:11.446551+00:00
 perf-obj-emp-36-past-0,emp-36,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-03-19,2024-10-06T00:00:00+00:00
-perf-obj-emp-36-current-0,emp-36,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,23,2026-07-16,2026-05-02T10:54:07.692870+00:00
-perf-obj-emp-36-current-1,emp-36,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,64,2026-11-07,2026-04-05T10:54:07.692873+00:00
+perf-obj-emp-36-current-0,emp-36,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,23,2026-07-16,2026-05-02T11:30:11.446558+00:00
+perf-obj-emp-36-current-1,emp-36,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,64,2026-11-07,2026-04-05T11:30:11.446560+00:00
 perf-obj-emp-37-past-0,emp-37,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-02-02,2025-11-28T00:00:00+00:00
 perf-obj-emp-37-past-1,emp-37,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-05-19,2025-11-25T00:00:00+00:00
 perf-obj-emp-37-past-2,emp-37,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-01-10,2025-09-17T00:00:00+00:00
-perf-obj-emp-37-current-0,emp-37,Structurer un plan de progression métier,Objectif en cours du semestre.,blocked,63,2026-07-29,2026-05-28T10:54:07.692884+00:00
-perf-obj-emp-37-current-1,emp-37,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,54,2026-11-13,2026-03-27T10:54:07.692886+00:00
+perf-obj-emp-37-current-0,emp-37,Structurer un plan de progression métier,Objectif en cours du semestre.,blocked,63,2026-07-29,2026-05-28T11:30:11.446571+00:00
+perf-obj-emp-37-current-1,emp-37,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,54,2026-11-13,2026-03-27T11:30:11.446573+00:00
 perf-obj-emp-38-past-0,emp-38,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-04-12,2025-11-09T00:00:00+00:00
 perf-obj-emp-38-past-1,emp-38,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-05-16,2025-12-18T00:00:00+00:00
 perf-obj-emp-38-past-2,emp-38,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2023-08-22,2023-05-30T00:00:00+00:00
 perf-obj-emp-38-past-3,emp-38,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2022-11-21,2022-08-07T00:00:00+00:00
-perf-obj-emp-38-current-0,emp-38,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,13,2026-07-15,2026-04-21T10:54:07.692901+00:00
-perf-obj-emp-38-current-1,emp-38,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,12,2026-10-16,2026-05-31T10:54:07.692903+00:00
+perf-obj-emp-38-current-0,emp-38,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,13,2026-07-15,2026-04-21T11:30:11.446585+00:00
+perf-obj-emp-38-current-1,emp-38,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,12,2026-10-16,2026-05-31T11:30:11.446588+00:00
 perf-obj-emp-39-past-0,emp-39,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-03-11,2026-01-10T00:00:00+00:00
 perf-obj-emp-39-past-1,emp-39,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-04-23,2025-11-21T00:00:00+00:00
-perf-obj-emp-39-current-0,emp-39,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,50,2026-09-29,2026-05-01T10:54:07.692912+00:00
-perf-obj-emp-39-current-1,emp-39,Améliorer la satisfaction client interne,Objectif en cours du semestre.,planned,54,2026-08-23,2026-05-08T10:54:07.692915+00:00
+perf-obj-emp-39-current-0,emp-39,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,50,2026-09-29,2026-05-01T11:30:11.446595+00:00
+perf-obj-emp-39-current-1,emp-39,Améliorer la satisfaction client interne,Objectif en cours du semestre.,planned,54,2026-08-23,2026-05-08T11:30:11.446598+00:00
 perf-obj-emp-40-past-0,emp-40,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-01-26,2025-10-28T00:00:00+00:00
 perf-obj-emp-40-past-1,emp-40,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-07-31,2026-02-06T00:00:00+00:00
-perf-obj-emp-40-current-0,emp-40,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,19,2026-07-28,2026-04-21T10:54:07.692923+00:00
-perf-obj-emp-40-current-1,emp-40,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,69,2026-11-04,2026-05-22T10:54:07.692926+00:00
+perf-obj-emp-40-current-0,emp-40,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,19,2026-07-28,2026-04-21T11:30:11.446606+00:00
+perf-obj-emp-40-current-1,emp-40,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,69,2026-11-04,2026-05-22T11:30:11.446608+00:00
 perf-obj-emp-41-past-0,emp-41,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2024-09-30,2024-04-10T00:00:00+00:00
-perf-obj-emp-41-current-0,emp-41,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,43,2026-08-07,2026-04-01T10:54:07.692933+00:00
-perf-obj-emp-41-current-1,emp-41,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,73,2026-08-06,2026-05-29T10:54:07.692936+00:00
+perf-obj-emp-41-current-0,emp-41,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,43,2026-08-07,2026-04-01T11:30:11.446613+00:00
+perf-obj-emp-41-current-1,emp-41,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,73,2026-08-06,2026-05-29T11:30:11.446616+00:00
 perf-obj-emp-42-past-0,emp-42,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-02-28,2023-10-30T00:00:00+00:00
 perf-obj-emp-42-past-1,emp-42,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-01-05,2025-08-24T00:00:00+00:00
 perf-obj-emp-42-past-2,emp-42,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-11-24,2024-09-04T00:00:00+00:00
-perf-obj-emp-42-current-0,emp-42,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,49,2026-09-14,2026-04-20T10:54:07.692947+00:00
-perf-obj-emp-42-current-1,emp-42,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,34,2026-09-20,2026-04-03T10:54:07.692950+00:00
+perf-obj-emp-42-current-0,emp-42,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,49,2026-09-14,2026-04-20T11:30:11.446626+00:00
+perf-obj-emp-42-current-1,emp-42,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,34,2026-09-20,2026-04-03T11:30:11.446629+00:00
 perf-obj-emp-43-past-0,emp-43,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-03-09,2025-12-18T00:00:00+00:00
 perf-obj-emp-43-past-1,emp-43,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-05-05,2025-11-16T00:00:00+00:00
 perf-obj-emp-43-past-2,emp-43,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-01-20,2023-11-07T00:00:00+00:00
-perf-obj-emp-43-current-0,emp-43,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,42,2026-08-20,2026-04-29T10:54:07.692961+00:00
-perf-obj-emp-43-current-1,emp-43,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,21,2026-08-01,2026-05-26T10:54:07.692964+00:00
+perf-obj-emp-43-current-0,emp-43,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,42,2026-08-20,2026-04-29T11:30:11.446639+00:00
+perf-obj-emp-43-current-1,emp-43,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,21,2026-08-01,2026-05-26T11:30:11.446642+00:00
 perf-obj-emp-44-past-0,emp-44,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-06-16,2024-02-22T00:00:00+00:00
 perf-obj-emp-44-past-1,emp-44,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2024-09-29,2024-04-23T00:00:00+00:00
 perf-obj-emp-44-past-2,emp-44,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2023-08-02,2023-04-28T00:00:00+00:00
 perf-obj-emp-44-past-3,emp-44,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-08-08,2025-04-26T00:00:00+00:00
-perf-obj-emp-44-current-0,emp-44,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,36,2026-08-18,2026-05-21T10:54:07.692978+00:00
-perf-obj-emp-44-current-1,emp-44,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,62,2026-07-15,2026-05-24T10:54:07.692980+00:00
+perf-obj-emp-44-current-0,emp-44,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,36,2026-08-18,2026-05-21T11:30:11.446655+00:00
+perf-obj-emp-44-current-1,emp-44,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,62,2026-07-15,2026-05-24T11:30:11.446657+00:00
 perf-obj-emp-45-past-0,emp-45,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2023-12-08,2023-10-20T00:00:00+00:00
 perf-obj-emp-45-past-1,emp-45,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-12-30,2024-08-10T00:00:00+00:00
 perf-obj-emp-45-past-2,emp-45,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-03-19,2025-09-23T00:00:00+00:00
-perf-obj-emp-45-current-0,emp-45,Améliorer la satisfaction client interne,Objectif en cours du semestre.,planned,40,2026-07-18,2026-05-08T10:54:07.692991+00:00
-perf-obj-emp-45-current-1,emp-45,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,54,2026-08-29,2026-05-28T10:54:07.692994+00:00
+perf-obj-emp-45-current-0,emp-45,Améliorer la satisfaction client interne,Objectif en cours du semestre.,planned,40,2026-07-18,2026-05-08T11:30:11.446667+00:00
+perf-obj-emp-45-current-1,emp-45,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,54,2026-08-29,2026-05-28T11:30:11.446669+00:00
 perf-obj-emp-46-past-0,emp-46,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-07-27,2024-05-15T00:00:00+00:00
 perf-obj-emp-46-past-1,emp-46,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-09-23,2025-06-29T00:00:00+00:00
-perf-obj-emp-46-current-0,emp-46,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,83,2026-09-02,2026-04-19T10:54:07.693003+00:00
-perf-obj-emp-46-current-1,emp-46,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,65,2026-11-03,2026-05-03T10:54:07.693005+00:00
+perf-obj-emp-46-current-0,emp-46,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,83,2026-09-02,2026-04-19T11:30:11.446677+00:00
+perf-obj-emp-46-current-1,emp-46,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,65,2026-11-03,2026-05-03T11:30:11.446680+00:00
 perf-obj-emp-47-past-0,emp-47,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-07-07,2025-04-15T00:00:00+00:00
 perf-obj-emp-47-past-1,emp-47,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-05-01,2026-03-09T00:00:00+00:00
 perf-obj-emp-47-past-2,emp-47,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-08-16,2025-04-30T00:00:00+00:00
 perf-obj-emp-47-past-3,emp-47,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-08-02,2026-03-05T00:00:00+00:00
-perf-obj-emp-47-current-0,emp-47,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,80,2026-08-24,2026-05-13T10:54:07.693019+00:00
-perf-obj-emp-47-current-1,emp-47,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,10,2026-07-19,2026-04-13T10:54:07.693021+00:00
+perf-obj-emp-47-current-0,emp-47,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,80,2026-08-24,2026-05-13T11:30:11.446692+00:00
+perf-obj-emp-47-current-1,emp-47,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,10,2026-07-19,2026-04-13T11:30:11.446694+00:00
 perf-obj-emp-48-past-0,emp-48,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-09-23,2024-08-19T00:00:00+00:00
 perf-obj-emp-48-past-1,emp-48,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2024-11-09,2024-08-08T00:00:00+00:00
 perf-obj-emp-48-past-2,emp-48,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2023-04-05,2023-02-07T00:00:00+00:00
 perf-obj-emp-48-past-3,emp-48,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2023-05-14,2023-02-14T00:00:00+00:00
-perf-obj-emp-48-current-0,emp-48,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,50,2026-07-10,2026-05-18T10:54:07.693035+00:00
-perf-obj-emp-48-current-1,emp-48,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,71,2026-09-11,2026-04-28T10:54:07.693038+00:00
+perf-obj-emp-48-current-0,emp-48,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,50,2026-07-10,2026-05-18T11:30:11.446706+00:00
+perf-obj-emp-48-current-1,emp-48,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,71,2026-09-11,2026-04-28T11:30:11.446709+00:00
 perf-obj-emp-49-past-0,emp-49,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2025-12-19,2025-07-06T00:00:00+00:00
-perf-obj-emp-49-current-0,emp-49,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,22,2026-08-13,2026-06-02T10:54:07.693044+00:00
-perf-obj-emp-49-current-1,emp-49,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,45,2026-07-25,2026-04-25T10:54:07.693047+00:00
+perf-obj-emp-49-current-0,emp-49,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,22,2026-08-13,2026-06-02T11:30:11.446714+00:00
+perf-obj-emp-49-current-1,emp-49,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,45,2026-07-25,2026-04-25T11:30:11.446716+00:00
 perf-obj-emp-50-past-0,emp-50,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2022-12-03,2022-07-19T00:00:00+00:00
 perf-obj-emp-50-past-1,emp-50,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2023-01-14,2022-07-28T00:00:00+00:00
 perf-obj-emp-50-past-2,emp-50,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2023-07-15,2023-03-26T00:00:00+00:00
 perf-obj-emp-50-past-3,emp-50,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2022-09-20,2022-05-23T00:00:00+00:00
-perf-obj-emp-50-current-0,emp-50,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,57,2026-07-31,2026-04-12T10:54:07.693060+00:00
-perf-obj-emp-50-current-1,emp-50,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,28,2026-09-19,2026-05-19T10:54:07.693063+00:00
+perf-obj-emp-50-current-0,emp-50,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,57,2026-07-31,2026-04-12T11:30:11.446733+00:00
+perf-obj-emp-50-current-1,emp-50,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,28,2026-09-19,2026-05-19T11:30:11.446736+00:00
 perf-obj-emp-51-past-0,emp-51,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-06-10,2026-03-11T00:00:00+00:00
 perf-obj-emp-51-past-1,emp-51,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-01-19,2025-12-20T00:00:00+00:00
 perf-obj-emp-51-past-2,emp-51,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-10-23,2025-06-19T00:00:00+00:00
 perf-obj-emp-51-past-3,emp-51,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-10-23,2025-06-05T00:00:00+00:00
-perf-obj-emp-51-current-0,emp-51,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,46,2026-07-14,2026-05-17T10:54:07.693077+00:00
-perf-obj-emp-51-current-1,emp-51,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,40,2026-08-27,2026-05-24T10:54:07.693080+00:00
+perf-obj-emp-51-current-0,emp-51,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,46,2026-07-14,2026-05-17T11:30:11.446749+00:00
+perf-obj-emp-51-current-1,emp-51,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,40,2026-08-27,2026-05-24T11:30:11.446751+00:00
 perf-obj-emp-52-past-0,emp-52,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-11-20,2025-09-16T00:00:00+00:00
-perf-obj-emp-52-current-0,emp-52,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,11,2026-11-13,2026-05-16T10:54:07.693086+00:00
-perf-obj-emp-52-current-1,emp-52,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,79,2026-07-18,2026-04-21T10:54:07.693088+00:00
+perf-obj-emp-52-current-0,emp-52,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,11,2026-11-13,2026-05-16T11:30:11.446756+00:00
+perf-obj-emp-52-current-1,emp-52,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,79,2026-07-18,2026-04-21T11:30:11.446759+00:00
 perf-obj-emp-53-past-0,emp-53,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-02-20,2024-10-29T00:00:00+00:00
 perf-obj-emp-53-past-1,emp-53,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2023-10-13,2023-09-07T00:00:00+00:00
-perf-obj-emp-53-current-0,emp-53,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,67,2026-08-25,2026-03-19T10:54:07.693097+00:00
-perf-obj-emp-53-current-1,emp-53,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,57,2026-08-01,2026-04-04T10:54:07.693099+00:00
+perf-obj-emp-53-current-0,emp-53,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,67,2026-08-25,2026-03-19T11:30:11.446766+00:00
+perf-obj-emp-53-current-1,emp-53,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,57,2026-08-01,2026-04-04T11:30:11.446769+00:00
 perf-obj-emp-54-past-0,emp-54,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2025-05-18,2025-02-15T00:00:00+00:00
-perf-obj-emp-54-current-0,emp-54,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,12,2026-11-10,2026-05-15T10:54:07.693105+00:00
-perf-obj-emp-54-current-1,emp-54,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,72,2026-07-28,2026-05-05T10:54:07.693109+00:00
+perf-obj-emp-54-current-0,emp-54,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,12,2026-11-10,2026-05-15T11:30:11.446774+00:00
+perf-obj-emp-54-current-1,emp-54,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,72,2026-07-28,2026-05-05T11:30:11.446777+00:00
 perf-obj-emp-55-past-0,emp-55,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-11-24,2025-10-21T00:00:00+00:00
-perf-obj-emp-55-current-0,emp-55,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,61,2026-09-11,2026-04-15T10:54:07.693115+00:00
-perf-obj-emp-55-current-1,emp-55,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,74,2026-08-26,2026-03-20T10:54:07.693117+00:00
+perf-obj-emp-55-current-0,emp-55,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,61,2026-09-11,2026-04-15T11:30:11.446782+00:00
+perf-obj-emp-55-current-1,emp-55,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,74,2026-08-26,2026-03-20T11:30:11.446785+00:00
 perf-obj-emp-56-past-0,emp-56,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-02-14,2024-11-20T00:00:00+00:00
 perf-obj-emp-56-past-1,emp-56,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-11-15,2025-09-22T00:00:00+00:00
 perf-obj-emp-56-past-2,emp-56,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-06-11,2025-02-03T00:00:00+00:00
 perf-obj-emp-56-past-3,emp-56,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-09-15,2024-08-12T00:00:00+00:00
-perf-obj-emp-56-current-0,emp-56,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,15,2026-09-24,2026-05-04T10:54:07.693131+00:00
-perf-obj-emp-56-current-1,emp-56,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,47,2026-08-12,2026-05-18T10:54:07.693133+00:00
+perf-obj-emp-56-current-0,emp-56,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,15,2026-09-24,2026-05-04T11:30:11.446797+00:00
+perf-obj-emp-56-current-1,emp-56,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,47,2026-08-12,2026-05-18T11:30:11.446799+00:00
 perf-obj-emp-57-past-0,emp-57,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-06-25,2026-03-08T00:00:00+00:00
 perf-obj-emp-57-past-1,emp-57,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-07-09,2026-02-09T00:00:00+00:00
-perf-obj-emp-57-current-0,emp-57,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,28,2026-10-12,2026-05-06T10:54:07.693142+00:00
-perf-obj-emp-57-current-1,emp-57,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,52,2026-10-16,2026-05-13T10:54:07.693144+00:00
+perf-obj-emp-57-current-0,emp-57,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,28,2026-10-12,2026-05-06T11:30:11.446808+00:00
+perf-obj-emp-57-current-1,emp-57,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,52,2026-10-16,2026-05-13T11:30:11.446811+00:00
 perf-obj-emp-58-past-0,emp-58,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2022-11-10,2022-09-25T00:00:00+00:00
 perf-obj-emp-58-past-1,emp-58,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2023-07-05,2023-06-04T00:00:00+00:00
 perf-obj-emp-58-past-2,emp-58,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-04-18,2025-12-21T00:00:00+00:00
 perf-obj-emp-58-past-3,emp-58,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2024-11-13,2024-06-14T00:00:00+00:00
-perf-obj-emp-58-current-0,emp-58,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,50,2026-09-11,2026-06-02T10:54:07.693158+00:00
-perf-obj-emp-58-current-1,emp-58,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,42,2026-11-11,2026-03-29T10:54:07.693161+00:00
+perf-obj-emp-58-current-0,emp-58,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,50,2026-09-11,2026-06-02T11:30:11.446824+00:00
+perf-obj-emp-58-current-1,emp-58,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,42,2026-11-11,2026-03-29T11:30:11.446826+00:00
 perf-obj-emp-59-past-0,emp-59,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2023-05-11,2023-02-28T00:00:00+00:00
-perf-obj-emp-59-current-0,emp-59,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,64,2026-07-31,2026-03-23T10:54:07.693166+00:00
-perf-obj-emp-59-current-1,emp-59,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,38,2026-08-10,2026-04-01T10:54:07.693169+00:00
+perf-obj-emp-59-current-0,emp-59,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,64,2026-07-31,2026-03-23T11:30:11.446832+00:00
+perf-obj-emp-59-current-1,emp-59,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,38,2026-08-10,2026-04-01T11:30:11.446834+00:00
 perf-obj-emp-60-past-0,emp-60,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-04-26,2025-12-29T00:00:00+00:00
 perf-obj-emp-60-past-1,emp-60,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-07-30,2025-02-17T00:00:00+00:00
 perf-obj-emp-60-past-2,emp-60,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-06-08,2025-01-26T00:00:00+00:00
 perf-obj-emp-60-past-3,emp-60,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-05-28,2025-01-24T00:00:00+00:00
-perf-obj-emp-60-current-0,emp-60,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,37,2026-07-26,2026-04-01T10:54:07.693184+00:00
-perf-obj-emp-60-current-1,emp-60,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,32,2026-09-21,2026-03-22T10:54:07.693187+00:00
+perf-obj-emp-60-current-0,emp-60,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,planned,37,2026-07-26,2026-04-01T11:30:11.446847+00:00
+perf-obj-emp-60-current-1,emp-60,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,32,2026-09-21,2026-03-22T11:30:11.446849+00:00
 perf-obj-emp-61-past-0,emp-61,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-02-08,2023-10-14T00:00:00+00:00
-perf-obj-emp-61-current-0,emp-61,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,47,2026-08-01,2026-04-26T10:54:07.693192+00:00
-perf-obj-emp-61-current-1,emp-61,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,53,2026-07-28,2026-03-20T10:54:07.693195+00:00
+perf-obj-emp-61-current-0,emp-61,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,47,2026-08-01,2026-04-26T11:30:11.446855+00:00
+perf-obj-emp-61-current-1,emp-61,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,53,2026-07-28,2026-03-20T11:30:11.446857+00:00
 perf-obj-emp-62-past-0,emp-62,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-04-23,2024-03-22T00:00:00+00:00
 perf-obj-emp-62-past-1,emp-62,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-04-30,2025-11-26T00:00:00+00:00
 perf-obj-emp-62-past-2,emp-62,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-01-08,2024-12-05T00:00:00+00:00
-perf-obj-emp-62-current-0,emp-62,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,57,2026-08-22,2026-04-22T10:54:07.693206+00:00
-perf-obj-emp-62-current-1,emp-62,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,80,2026-11-12,2026-05-05T10:54:07.693210+00:00
+perf-obj-emp-62-current-0,emp-62,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,57,2026-08-22,2026-04-22T11:30:11.446867+00:00
+perf-obj-emp-62-current-1,emp-62,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,80,2026-11-12,2026-05-05T11:30:11.446870+00:00
 perf-obj-emp-63-past-0,emp-63,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-01-23,2025-10-24T00:00:00+00:00
 perf-obj-emp-63-past-1,emp-63,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2025-11-03,2025-06-17T00:00:00+00:00
 perf-obj-emp-63-past-2,emp-63,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-09-25,2025-08-01T00:00:00+00:00
-perf-obj-emp-63-current-0,emp-63,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,41,2026-10-03,2026-05-07T10:54:07.693222+00:00
-perf-obj-emp-63-current-1,emp-63,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,48,2026-07-22,2026-06-05T10:54:07.693225+00:00
+perf-obj-emp-63-current-0,emp-63,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,41,2026-10-03,2026-05-07T11:30:11.446880+00:00
+perf-obj-emp-63-current-1,emp-63,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,48,2026-07-22,2026-06-05T11:30:11.446883+00:00
 perf-obj-emp-64-past-0,emp-64,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-01-24,2025-11-19T00:00:00+00:00
-perf-obj-emp-64-current-0,emp-64,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,38,2026-11-04,2026-05-27T10:54:07.693231+00:00
-perf-obj-emp-64-current-1,emp-64,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,15,2026-10-19,2026-05-26T10:54:07.693233+00:00
+perf-obj-emp-64-current-0,emp-64,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,38,2026-11-04,2026-05-27T11:30:11.446888+00:00
+perf-obj-emp-64-current-1,emp-64,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,15,2026-10-19,2026-05-26T11:30:11.446891+00:00
 perf-obj-emp-65-past-0,emp-65,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-01-05,2023-10-26T00:00:00+00:00
-perf-obj-emp-65-current-0,emp-65,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,35,2026-09-13,2026-04-17T10:54:07.693239+00:00
-perf-obj-emp-65-current-1,emp-65,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,70,2026-11-12,2026-05-20T10:54:07.693242+00:00
+perf-obj-emp-65-current-0,emp-65,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,35,2026-09-13,2026-04-17T11:30:11.446897+00:00
+perf-obj-emp-65-current-1,emp-65,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,70,2026-11-12,2026-05-20T11:30:11.446899+00:00
 perf-obj-emp-66-past-0,emp-66,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-10-31,2025-08-20T00:00:00+00:00
 perf-obj-emp-66-past-1,emp-66,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2024-10-01,2024-08-24T00:00:00+00:00
 perf-obj-emp-66-past-2,emp-66,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-10-19,2024-07-12T00:00:00+00:00
 perf-obj-emp-66-past-3,emp-66,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-12-05,2025-08-25T00:00:00+00:00
-perf-obj-emp-66-current-0,emp-66,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,73,2026-10-15,2026-04-06T10:54:07.693256+00:00
-perf-obj-emp-66-current-1,emp-66,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,16,2026-10-29,2026-03-19T10:54:07.693259+00:00
+perf-obj-emp-66-current-0,emp-66,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,73,2026-10-15,2026-04-06T11:30:11.446911+00:00
+perf-obj-emp-66-current-1,emp-66,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,16,2026-10-29,2026-03-19T11:30:11.446914+00:00
 perf-obj-emp-67-past-0,emp-67,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-05-05,2023-11-25T00:00:00+00:00
 perf-obj-emp-67-past-1,emp-67,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2023-12-29,2023-08-27T00:00:00+00:00
 perf-obj-emp-67-past-2,emp-67,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-08-22,2025-06-10T00:00:00+00:00
-perf-obj-emp-67-current-0,emp-67,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,85,2026-08-19,2026-04-03T10:54:07.693270+00:00
-perf-obj-emp-67-current-1,emp-67,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,48,2026-09-29,2026-05-11T10:54:07.693273+00:00
+perf-obj-emp-67-current-0,emp-67,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,85,2026-08-19,2026-04-03T11:30:11.446924+00:00
+perf-obj-emp-67-current-1,emp-67,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,48,2026-09-29,2026-05-11T11:30:11.446926+00:00
 perf-obj-emp-68-past-0,emp-68,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-11-03,2024-06-02T00:00:00+00:00
 perf-obj-emp-68-past-1,emp-68,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-09-30,2024-07-12T00:00:00+00:00
-perf-obj-emp-68-current-0,emp-68,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,73,2026-10-20,2026-04-17T10:54:07.693281+00:00
-perf-obj-emp-68-current-1,emp-68,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,32,2026-10-16,2026-06-04T10:54:07.693284+00:00
+perf-obj-emp-68-current-0,emp-68,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,73,2026-10-20,2026-04-17T11:30:11.446934+00:00
+perf-obj-emp-68-current-1,emp-68,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,in_progress,32,2026-10-16,2026-06-04T11:30:11.446936+00:00
 perf-obj-emp-69-past-0,emp-69,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-01-26,2025-09-24T00:00:00+00:00
 perf-obj-emp-69-past-1,emp-69,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-02-09,2024-09-06T00:00:00+00:00
 perf-obj-emp-69-past-2,emp-69,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-03-12,2024-02-09T00:00:00+00:00
-perf-obj-emp-69-current-0,emp-69,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,24,2026-11-01,2026-04-16T10:54:07.693296+00:00
-perf-obj-emp-69-current-1,emp-69,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,23,2026-10-30,2026-04-20T10:54:07.693298+00:00
+perf-obj-emp-69-current-0,emp-69,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,24,2026-11-01,2026-04-16T11:30:11.446946+00:00
+perf-obj-emp-69-current-1,emp-69,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,23,2026-10-30,2026-04-20T11:30:11.446949+00:00
 perf-obj-emp-70-past-0,emp-70,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-06-19,2026-03-14T00:00:00+00:00
 perf-obj-emp-70-past-1,emp-70,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-10-06,2025-05-16T00:00:00+00:00
-perf-obj-emp-70-current-0,emp-70,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,58,2026-07-19,2026-05-31T10:54:07.693307+00:00
-perf-obj-emp-70-current-1,emp-70,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,57,2026-09-19,2026-06-03T10:54:07.693310+00:00
+perf-obj-emp-70-current-0,emp-70,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,58,2026-07-19,2026-05-31T11:30:11.446956+00:00
+perf-obj-emp-70-current-1,emp-70,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,57,2026-09-19,2026-06-03T11:30:11.446959+00:00
 perf-obj-emp-71-past-0,emp-71,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-01-08,2025-12-06T00:00:00+00:00
 perf-obj-emp-71-past-1,emp-71,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-05-17,2026-03-10T00:00:00+00:00
 perf-obj-emp-71-past-2,emp-71,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-04-21,2026-03-06T00:00:00+00:00
 perf-obj-emp-71-past-3,emp-71,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-01-13,2025-12-06T00:00:00+00:00
-perf-obj-emp-71-current-0,emp-71,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,11,2026-08-27,2026-04-02T10:54:07.693324+00:00
-perf-obj-emp-71-current-1,emp-71,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,18,2026-09-24,2026-05-25T10:54:07.693326+00:00
+perf-obj-emp-71-current-0,emp-71,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,11,2026-08-27,2026-04-02T11:30:11.446972+00:00
+perf-obj-emp-71-current-1,emp-71,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,18,2026-09-24,2026-05-25T11:30:11.446974+00:00
 perf-obj-emp-72-past-0,emp-72,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-07-13,2025-05-01T00:00:00+00:00
 perf-obj-emp-72-past-1,emp-72,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2022-12-05,2022-10-01T00:00:00+00:00
-perf-obj-emp-72-current-0,emp-72,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,43,2026-07-23,2026-05-21T10:54:07.693336+00:00
-perf-obj-emp-72-current-1,emp-72,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,20,2026-09-19,2026-05-23T10:54:07.693339+00:00
+perf-obj-emp-72-current-0,emp-72,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,43,2026-07-23,2026-05-21T11:30:11.446983+00:00
+perf-obj-emp-72-current-1,emp-72,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,20,2026-09-19,2026-05-23T11:30:11.446986+00:00
 perf-obj-emp-73-past-0,emp-73,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-09-12,2026-03-17T00:00:00+00:00
 perf-obj-emp-73-past-1,emp-73,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-03-28,2026-01-06T00:00:00+00:00
-perf-obj-emp-73-current-0,emp-73,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,51,2026-08-15,2026-04-10T10:54:07.693348+00:00
-perf-obj-emp-73-current-1,emp-73,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,73,2026-11-10,2026-05-09T10:54:07.693350+00:00
+perf-obj-emp-73-current-0,emp-73,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,51,2026-08-15,2026-04-10T11:30:11.446993+00:00
+perf-obj-emp-73-current-1,emp-73,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,73,2026-11-10,2026-05-09T11:30:11.446995+00:00
 perf-obj-emp-74-past-0,emp-74,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-11-25,2025-08-21T00:00:00+00:00
 perf-obj-emp-74-past-1,emp-74,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-07-13,2025-04-27T00:00:00+00:00
-perf-obj-emp-74-current-0,emp-74,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,78,2026-09-04,2026-04-23T10:54:07.693359+00:00
-perf-obj-emp-74-current-1,emp-74,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,41,2026-10-19,2026-05-31T10:54:07.693361+00:00
+perf-obj-emp-74-current-0,emp-74,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,78,2026-09-04,2026-04-23T11:30:11.447003+00:00
+perf-obj-emp-74-current-1,emp-74,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,41,2026-10-19,2026-05-31T11:30:11.447006+00:00
 perf-obj-emp-75-past-0,emp-75,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2023-12-24,2023-09-14T00:00:00+00:00
 perf-obj-emp-75-past-1,emp-75,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-06-17,2025-03-19T00:00:00+00:00
 perf-obj-emp-75-past-2,emp-75,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-12-10,2024-06-27T00:00:00+00:00
-perf-obj-emp-75-current-0,emp-75,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,14,2026-08-05,2026-05-05T10:54:07.693373+00:00
-perf-obj-emp-75-current-1,emp-75,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,31,2026-08-14,2026-04-12T10:54:07.693375+00:00
+perf-obj-emp-75-current-0,emp-75,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,blocked,14,2026-08-05,2026-05-05T11:30:11.447015+00:00
+perf-obj-emp-75-current-1,emp-75,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,31,2026-08-14,2026-04-12T11:30:11.447018+00:00
 perf-obj-emp-76-past-0,emp-76,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-01-19,2023-11-04T00:00:00+00:00
 perf-obj-emp-76-past-1,emp-76,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-01-12,2023-10-24T00:00:00+00:00
 perf-obj-emp-76-past-2,emp-76,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-10-20,2024-08-18T00:00:00+00:00
 perf-obj-emp-76-past-3,emp-76,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2025-08-23,2025-06-09T00:00:00+00:00
-perf-obj-emp-76-current-0,emp-76,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,64,2026-10-03,2026-04-06T10:54:07.693389+00:00
-perf-obj-emp-76-current-1,emp-76,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,84,2026-10-10,2026-04-25T10:54:07.693391+00:00
+perf-obj-emp-76-current-0,emp-76,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,64,2026-10-03,2026-04-06T11:30:11.447030+00:00
+perf-obj-emp-76-current-1,emp-76,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,84,2026-10-10,2026-04-25T11:30:11.447033+00:00
 perf-obj-emp-77-past-0,emp-77,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-02-03,2025-10-11T00:00:00+00:00
 perf-obj-emp-77-past-1,emp-77,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-11-20,2024-08-08T00:00:00+00:00
-perf-obj-emp-77-current-0,emp-77,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,50,2026-11-12,2026-05-28T10:54:07.693400+00:00
-perf-obj-emp-77-current-1,emp-77,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,84,2026-07-20,2026-05-21T10:54:07.693402+00:00
+perf-obj-emp-77-current-0,emp-77,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,50,2026-11-12,2026-05-28T11:30:11.447040+00:00
+perf-obj-emp-77-current-1,emp-77,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,planned,84,2026-07-20,2026-05-21T11:30:11.447043+00:00
 perf-obj-emp-78-past-0,emp-78,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-03-05,2025-12-07T00:00:00+00:00
 perf-obj-emp-78-past-1,emp-78,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-07-29,2026-03-03T00:00:00+00:00
-perf-obj-emp-78-current-0,emp-78,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,66,2026-09-05,2026-05-11T10:54:07.693411+00:00
-perf-obj-emp-78-current-1,emp-78,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,31,2026-11-13,2026-05-17T10:54:07.693414+00:00
+perf-obj-emp-78-current-0,emp-78,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,66,2026-09-05,2026-05-11T11:30:11.447050+00:00
+perf-obj-emp-78-current-1,emp-78,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,31,2026-11-13,2026-05-17T11:30:11.447053+00:00
 perf-obj-emp-79-past-0,emp-79,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2026-01-07,2025-08-20T00:00:00+00:00
 perf-obj-emp-79-past-1,emp-79,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-02-12,2025-09-09T00:00:00+00:00
 perf-obj-emp-79-past-2,emp-79,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-11-01,2025-09-15T00:00:00+00:00
-perf-obj-emp-79-current-0,emp-79,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,47,2026-08-22,2026-05-05T10:54:07.693425+00:00
-perf-obj-emp-79-current-1,emp-79,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,72,2026-09-28,2026-05-30T10:54:07.693428+00:00
+perf-obj-emp-79-current-0,emp-79,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,47,2026-08-22,2026-05-05T11:30:11.447063+00:00
+perf-obj-emp-79-current-1,emp-79,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,72,2026-09-28,2026-05-30T11:30:11.447066+00:00
 perf-obj-emp-80-past-0,emp-80,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-04-26,2024-11-22T00:00:00+00:00
 perf-obj-emp-80-past-1,emp-80,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-07-03,2026-01-15T00:00:00+00:00
-perf-obj-emp-80-current-0,emp-80,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,63,2026-08-30,2026-05-09T10:54:07.693436+00:00
-perf-obj-emp-80-current-1,emp-80,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,52,2026-10-15,2026-04-01T10:54:07.693439+00:00
+perf-obj-emp-80-current-0,emp-80,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,63,2026-08-30,2026-05-09T11:30:11.447074+00:00
+perf-obj-emp-80-current-1,emp-80,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,planned,52,2026-10-15,2026-04-01T11:30:11.447077+00:00
 perf-obj-emp-81-past-0,emp-81,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-02-04,2023-08-28T00:00:00+00:00
 perf-obj-emp-81-past-1,emp-81,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-01-13,2024-08-22T00:00:00+00:00
 perf-obj-emp-81-past-2,emp-81,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2025-12-03,2025-06-19T00:00:00+00:00
 perf-obj-emp-81-past-3,emp-81,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-05-16,2024-04-09T00:00:00+00:00
-perf-obj-emp-81-current-0,emp-81,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,43,2026-11-11,2026-04-16T10:54:07.693452+00:00
-perf-obj-emp-81-current-1,emp-81,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,59,2026-08-02,2026-05-05T10:54:07.693455+00:00
+perf-obj-emp-81-current-0,emp-81,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,43,2026-11-11,2026-04-16T11:30:11.447089+00:00
+perf-obj-emp-81-current-1,emp-81,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,59,2026-08-02,2026-05-05T11:30:11.447091+00:00
 perf-obj-emp-82-past-0,emp-82,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2023-10-31,2023-05-18T00:00:00+00:00
 perf-obj-emp-82-past-1,emp-82,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2023-10-06,2023-04-25T00:00:00+00:00
 perf-obj-emp-82-past-2,emp-82,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2022-05-01,2022-01-30T00:00:00+00:00
-perf-obj-emp-82-current-0,emp-82,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,39,2026-10-30,2026-03-31T10:54:07.693466+00:00
-perf-obj-emp-82-current-1,emp-82,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,52,2026-11-03,2026-05-07T10:54:07.693468+00:00
+perf-obj-emp-82-current-0,emp-82,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,39,2026-10-30,2026-03-31T11:30:11.447101+00:00
+perf-obj-emp-82-current-1,emp-82,Améliorer la satisfaction client interne,Objectif en cours du semestre.,blocked,52,2026-11-03,2026-05-07T11:30:11.447104+00:00
 perf-obj-emp-83-past-0,emp-83,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-08-11,2025-05-27T00:00:00+00:00
-perf-obj-emp-83-current-0,emp-83,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,62,2026-07-31,2026-05-18T10:54:07.693474+00:00
-perf-obj-emp-83-current-1,emp-83,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,47,2026-09-07,2026-04-17T10:54:07.693477+00:00
+perf-obj-emp-83-current-0,emp-83,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,62,2026-07-31,2026-05-18T11:30:11.447110+00:00
+perf-obj-emp-83-current-1,emp-83,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,47,2026-09-07,2026-04-17T11:30:11.447113+00:00
 perf-obj-emp-84-past-0,emp-84,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-07-18,2026-02-24T00:00:00+00:00
-perf-obj-emp-84-current-0,emp-84,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,83,2026-07-24,2026-04-28T10:54:07.693483+00:00
-perf-obj-emp-84-current-1,emp-84,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,49,2026-08-22,2026-04-30T10:54:07.693486+00:00
+perf-obj-emp-84-current-0,emp-84,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,83,2026-07-24,2026-04-28T11:30:11.447118+00:00
+perf-obj-emp-84-current-1,emp-84,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,49,2026-08-22,2026-04-30T11:30:11.447120+00:00
 perf-obj-emp-85-past-0,emp-85,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2026-04-01,2025-11-01T00:00:00+00:00
 perf-obj-emp-85-past-1,emp-85,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2026-06-30,2026-03-18T00:00:00+00:00
 perf-obj-emp-85-past-2,emp-85,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-02-01,2025-12-25T00:00:00+00:00
 perf-obj-emp-85-past-3,emp-85,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-04-08,2026-02-10T00:00:00+00:00
-perf-obj-emp-85-current-0,emp-85,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,84,2026-09-26,2026-05-27T10:54:07.693501+00:00
-perf-obj-emp-85-current-1,emp-85,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,24,2026-07-15,2026-05-08T10:54:07.693504+00:00
+perf-obj-emp-85-current-0,emp-85,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,84,2026-09-26,2026-05-27T11:30:11.447133+00:00
+perf-obj-emp-85-current-1,emp-85,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,24,2026-07-15,2026-05-08T11:30:11.447136+00:00
 perf-obj-emp-86-past-0,emp-86,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2023-06-19,2022-12-25T00:00:00+00:00
 perf-obj-emp-86-past-1,emp-86,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2024-06-10,2024-01-11T00:00:00+00:00
 perf-obj-emp-86-past-2,emp-86,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-07-06,2025-03-09T00:00:00+00:00
 perf-obj-emp-86-past-3,emp-86,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-03-09,2024-12-14T00:00:00+00:00
-perf-obj-emp-86-current-0,emp-86,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,16,2026-07-29,2026-04-12T10:54:07.693518+00:00
-perf-obj-emp-86-current-1,emp-86,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,61,2026-07-07,2026-04-16T10:54:07.693520+00:00
+perf-obj-emp-86-current-0,emp-86,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,16,2026-07-29,2026-04-12T11:30:11.447149+00:00
+perf-obj-emp-86-current-1,emp-86,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,61,2026-07-07,2026-04-16T11:30:11.447152+00:00
 perf-obj-emp-87-past-0,emp-87,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-03-30,2026-02-19T00:00:00+00:00
 perf-obj-emp-87-past-1,emp-87,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-05-29,2025-12-24T00:00:00+00:00
 perf-obj-emp-87-past-2,emp-87,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2026-05-11,2026-02-25T00:00:00+00:00
-perf-obj-emp-87-current-0,emp-87,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,19,2026-11-08,2026-03-26T10:54:07.693531+00:00
-perf-obj-emp-87-current-1,emp-87,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,36,2026-08-31,2026-05-23T10:54:07.693534+00:00
+perf-obj-emp-87-current-0,emp-87,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,19,2026-11-08,2026-03-26T11:30:11.447162+00:00
+perf-obj-emp-87-current-1,emp-87,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,36,2026-08-31,2026-05-23T11:30:11.447164+00:00
 perf-obj-emp-88-past-0,emp-88,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2022-09-17,2022-03-27T00:00:00+00:00
-perf-obj-emp-88-current-0,emp-88,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,38,2026-08-03,2026-06-04T10:54:07.693540+00:00
-perf-obj-emp-88-current-1,emp-88,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,38,2026-11-02,2026-04-01T10:54:07.693543+00:00
+perf-obj-emp-88-current-0,emp-88,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,38,2026-08-03,2026-06-04T11:30:11.447169+00:00
+perf-obj-emp-88-current-1,emp-88,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,38,2026-11-02,2026-04-01T11:30:11.447172+00:00
 perf-obj-emp-89-past-0,emp-89,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-05-18,2024-12-15T00:00:00+00:00
-perf-obj-emp-89-current-0,emp-89,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,49,2026-08-07,2026-05-15T10:54:07.693550+00:00
-perf-obj-emp-89-current-1,emp-89,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,74,2026-11-09,2026-06-05T10:54:07.693552+00:00
+perf-obj-emp-89-current-0,emp-89,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,49,2026-08-07,2026-05-15T11:30:11.447178+00:00
+perf-obj-emp-89-current-1,emp-89,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,74,2026-11-09,2026-06-05T11:30:11.447180+00:00
 perf-obj-emp-90-past-0,emp-90,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-04-27,2026-01-09T00:00:00+00:00
 perf-obj-emp-90-past-1,emp-90,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-07-15,2026-01-28T00:00:00+00:00
-perf-obj-emp-90-current-0,emp-90,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,47,2026-11-11,2026-04-29T10:54:07.693561+00:00
-perf-obj-emp-90-current-1,emp-90,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,37,2026-10-12,2026-04-24T10:54:07.693564+00:00
+perf-obj-emp-90-current-0,emp-90,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,blocked,47,2026-11-11,2026-04-29T11:30:11.447188+00:00
+perf-obj-emp-90-current-1,emp-90,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,37,2026-10-12,2026-04-24T11:30:11.447191+00:00
 perf-obj-emp-91-past-0,emp-91,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2023-09-03,2023-04-26T00:00:00+00:00
 perf-obj-emp-91-past-1,emp-91,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2024-02-07,2023-10-23T00:00:00+00:00
-perf-obj-emp-91-current-0,emp-91,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,33,2026-07-08,2026-03-31T10:54:07.693573+00:00
-perf-obj-emp-91-current-1,emp-91,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,71,2026-08-30,2026-03-23T10:54:07.693576+00:00
+perf-obj-emp-91-current-0,emp-91,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,33,2026-07-08,2026-03-31T11:30:11.447198+00:00
+perf-obj-emp-91-current-1,emp-91,Partager les connaissances sur les projets actifs,Objectif en cours du semestre.,in_progress,71,2026-08-30,2026-03-23T11:30:11.447201+00:00
 perf-obj-emp-92-past-0,emp-92,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-04-18,2024-02-27T00:00:00+00:00
 perf-obj-emp-92-past-1,emp-92,Monter en expertise sur le périmètre équipe,Objectif passé complété.,completed,100,2024-07-11,2024-01-28T00:00:00+00:00
 perf-obj-emp-92-past-2,emp-92,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2025-07-26,2025-04-21T00:00:00+00:00
-perf-obj-emp-92-current-0,emp-92,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,22,2026-11-03,2026-05-27T10:54:07.693587+00:00
-perf-obj-emp-92-current-1,emp-92,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,48,2026-08-01,2026-05-12T10:54:07.693590+00:00
+perf-obj-emp-92-current-0,emp-92,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,in_progress,22,2026-11-03,2026-05-27T11:30:11.447210+00:00
+perf-obj-emp-92-current-1,emp-92,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,blocked,48,2026-08-01,2026-05-12T11:30:11.447213+00:00
 perf-obj-emp-93-past-0,emp-93,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-03-16,2025-12-14T00:00:00+00:00
 perf-obj-emp-93-past-1,emp-93,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-03-20,2024-11-24T00:00:00+00:00
 perf-obj-emp-93-past-2,emp-93,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2025-03-23,2025-01-08T00:00:00+00:00
-perf-obj-emp-93-current-0,emp-93,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,13,2026-08-13,2026-03-22T10:54:07.693601+00:00
-perf-obj-emp-93-current-1,emp-93,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,21,2026-10-16,2026-03-20T10:54:07.693603+00:00
+perf-obj-emp-93-current-0,emp-93,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,13,2026-08-13,2026-03-22T11:30:11.447223+00:00
+perf-obj-emp-93-current-1,emp-93,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,planned,21,2026-10-16,2026-03-20T11:30:11.447226+00:00
 perf-obj-emp-94-past-0,emp-94,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-07-24,2024-02-13T00:00:00+00:00
-perf-obj-emp-94-current-0,emp-94,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,53,2026-10-30,2026-04-24T10:54:07.693609+00:00
-perf-obj-emp-94-current-1,emp-94,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,32,2026-09-13,2026-04-28T10:54:07.693612+00:00
+perf-obj-emp-94-current-0,emp-94,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,53,2026-10-30,2026-04-24T11:30:11.447232+00:00
+perf-obj-emp-94-current-1,emp-94,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,32,2026-09-13,2026-04-28T11:30:11.447235+00:00
 perf-obj-emp-95-past-0,emp-95,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2026-04-29,2026-02-11T00:00:00+00:00
 perf-obj-emp-95-past-1,emp-95,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2026-01-30,2025-12-12T00:00:00+00:00
 perf-obj-emp-95-past-2,emp-95,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2024-12-03,2024-08-24T00:00:00+00:00
-perf-obj-emp-95-current-0,emp-95,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,12,2026-09-21,2026-03-19T10:54:07.693623+00:00
-perf-obj-emp-95-current-1,emp-95,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,62,2026-08-28,2026-04-18T10:54:07.693626+00:00
+perf-obj-emp-95-current-0,emp-95,Réduire le temps de cycle sur les livrables,Objectif en cours du semestre.,blocked,12,2026-09-21,2026-03-19T11:30:11.447244+00:00
+perf-obj-emp-95-current-1,emp-95,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,62,2026-08-28,2026-04-18T11:30:11.447247+00:00
 perf-obj-emp-96-past-0,emp-96,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-05-28,2026-03-01T00:00:00+00:00
 perf-obj-emp-96-past-1,emp-96,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-05-27,2024-12-25T00:00:00+00:00
 perf-obj-emp-96-past-2,emp-96,Consolider les indicateurs de qualité de livraison,Objectif passé complété.,completed,100,2025-10-11,2025-08-14T00:00:00+00:00
-perf-obj-emp-96-current-0,emp-96,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,18,2026-07-11,2026-06-04T10:54:07.693637+00:00
-perf-obj-emp-96-current-1,emp-96,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,18,2026-08-05,2026-03-30T10:54:07.693640+00:00
+perf-obj-emp-96-current-0,emp-96,Améliorer la satisfaction client interne,Objectif en cours du semestre.,in_progress,18,2026-07-11,2026-06-04T11:30:11.447256+00:00
+perf-obj-emp-96-current-1,emp-96,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,in_progress,18,2026-08-05,2026-03-30T11:30:11.447259+00:00
 perf-obj-emp-97-past-0,emp-97,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-05-29,2025-12-21T00:00:00+00:00
 perf-obj-emp-97-past-1,emp-97,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2024-12-21,2024-10-14T00:00:00+00:00
 perf-obj-emp-97-past-2,emp-97,Structurer un plan de progression métier,Objectif passé complété.,completed,100,2024-08-19,2024-05-04T00:00:00+00:00
-perf-obj-emp-97-current-0,emp-97,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,25,2026-07-14,2026-05-27T10:54:07.693651+00:00
-perf-obj-emp-97-current-1,emp-97,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,46,2026-10-05,2026-04-18T10:54:07.693653+00:00
+perf-obj-emp-97-current-0,emp-97,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,planned,25,2026-07-14,2026-05-27T11:30:11.447268+00:00
+perf-obj-emp-97-current-1,emp-97,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,in_progress,46,2026-10-05,2026-04-18T11:30:11.447271+00:00
 perf-obj-emp-98-past-0,emp-98,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2026-05-17,2025-11-27T00:00:00+00:00
 perf-obj-emp-98-past-1,emp-98,Réduire le temps de cycle sur les livrables,Objectif passé complété.,completed,100,2026-04-28,2026-01-14T00:00:00+00:00
-perf-obj-emp-98-current-0,emp-98,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,33,2026-08-14,2026-04-21T10:54:07.693661+00:00
-perf-obj-emp-98-current-1,emp-98,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,40,2026-07-07,2026-06-03T10:54:07.693664+00:00
+perf-obj-emp-98-current-0,emp-98,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif en cours du semestre.,planned,33,2026-08-14,2026-04-21T11:30:11.447278+00:00
+perf-obj-emp-98-current-1,emp-98,Structurer un plan de progression métier,Objectif en cours du semestre.,planned,40,2026-07-07,2026-06-03T11:30:11.447281+00:00
 perf-obj-emp-99-past-0,emp-99,Fluidifier les rituels de collaboration,Objectif passé complété.,completed,100,2024-03-08,2023-12-09T00:00:00+00:00
 perf-obj-emp-99-past-1,emp-99,Partager les connaissances sur les projets actifs,Objectif passé complété.,completed,100,2024-11-04,2024-05-25T00:00:00+00:00
-perf-obj-emp-99-current-0,emp-99,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,34,2026-10-09,2026-05-16T10:54:07.693672+00:00
-perf-obj-emp-99-current-1,emp-99,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,17,2026-08-04,2026-04-12T10:54:07.693675+00:00
+perf-obj-emp-99-current-0,emp-99,Structurer un plan de progression métier,Objectif en cours du semestre.,in_progress,34,2026-10-09,2026-05-16T11:30:11.447288+00:00
+perf-obj-emp-99-current-1,emp-99,Consolider les indicateurs de qualité de livraison,Objectif en cours du semestre.,blocked,17,2026-08-04,2026-04-12T11:30:11.447290+00:00
 perf-obj-emp-100-past-0,emp-100,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-01-02,2024-08-18T00:00:00+00:00
 perf-obj-emp-100-past-1,emp-100,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-03-18,2025-02-14T00:00:00+00:00
 perf-obj-emp-100-past-2,emp-100,Améliorer la satisfaction client interne,Objectif passé complété.,completed,100,2025-09-23,2025-06-30T00:00:00+00:00
 perf-obj-emp-100-past-3,emp-100,Sécuriser les bonnes pratiques sécurité et RGPD,Objectif passé complété.,completed,100,2025-07-08,2025-01-18T00:00:00+00:00
-perf-obj-emp-100-current-0,emp-100,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,73,2026-11-06,2026-05-22T10:54:07.693689+00:00
-perf-obj-emp-100-current-1,emp-100,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,83,2026-08-08,2026-03-25T10:54:07.693691+00:00
+perf-obj-emp-100-current-0,emp-100,Fluidifier les rituels de collaboration,Objectif en cours du semestre.,blocked,73,2026-11-06,2026-05-22T11:30:11.447303+00:00
+perf-obj-emp-100-current-1,emp-100,Monter en expertise sur le périmètre équipe,Objectif en cours du semestre.,in_progress,83,2026-08-08,2026-03-25T11:30:11.447305+00:00

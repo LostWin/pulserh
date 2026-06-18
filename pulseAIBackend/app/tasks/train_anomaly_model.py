@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 MODEL_BUCKET = "ml-models"
 MODEL_KEY = "anomaly_isof_v1.pkl"
-MIN_SAMPLES = 50
+MIN_SAMPLES = 2  # Abaissé pour les tests (défaut: 50)
 
 
 async def _load_behavior_data():

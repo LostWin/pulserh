@@ -170,9 +170,19 @@ async def get_my_info(
     emp = await get_or_create_current_employee(current_user, db, extra_options=[
         selectinload(Employee.department), 
         selectinload(Employee.job),
+        selectinload(Employee.manager),
+        selectinload(Employee.tasks),
+        selectinload(Employee.attendances),
         selectinload(Employee.contracts),
         selectinload(Employee.leaves),
-        selectinload(Employee.manager)
+        selectinload(Employee.engagement_snapshots),
+        selectinload(Employee.performance_reviews),
+        selectinload(Employee.performance_objectives),
+        selectinload(Employee.benefit_enrollments).selectinload(EmployeeBenefit.benefit_plan),
+        selectinload(Employee.mobility_requests).selectinload(MobilityRequest.target_department),
+        selectinload(Employee.mobility_requests).selectinload(MobilityRequest.target_job),
+        selectinload(Employee.training_enrollments).selectinload(TrainingEnrollment.training),
+        selectinload(Employee.project_assignments).selectinload(ProjectAssignment.project),
     ])
         
     contract_type = emp.job.title if emp.job else None

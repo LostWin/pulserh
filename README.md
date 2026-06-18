@@ -233,6 +233,40 @@ Une fois les données importées, lancez l'entraînement des modèles ML depuis 
 
 ---
 
+## 🧪 Tester l'Intelligence Artificielle (Scénarios)
+
+Le système intègre 5 modules d'intelligence artificielle. Voici comment les tester de manière optimale après avoir importé les données :
+
+### 🤖 Modèles pré-entraînés (Fonctionnels instantanément)
+
+Ces modules utilisent des algorithmes directs ou des modèles HuggingFace (téléchargés automatiquement) et **ne nécessitent pas d'entraînement manuel** de votre part.
+
+#### 1. Analyse de Sentiment (Dashboard Manager / RH)
+*Ce modèle détecte l'humeur des collaborateurs à partir de leurs feedbacks.*
+- **Comment tester :** Connectez-vous avec plusieurs collaborateurs (ou modifiez des données en base) et laissez des feedbacks très marqués (ex: *"Je suis à bout, trop de surcharge de travail"*). 
+- **Résultat :** Allez sur le dashboard Manager. Le modèle ML (DistilCamemBERT) catégorisera automatiquement ces phrases et, si le seuil d'alertes négatives est dépassé, affichera une alerte de "Risque d'engagement" pour le département.
+
+#### 2. Recommandation de Formation (Espace Collaborateur)
+*Ce module utilise l'analyse d'écarts (Gap Analysis / Cosinus Similarité) pour suggérer des formations.*
+- **Comment tester :** Assurez-vous qu'un employé a une compétence faible (ex: *Management 1/5*) et qu'une formation cible cette compétence. Connectez-vous avec cet employé.
+- **Résultat :** Dans la section formations, le moteur ML calculera l'écart et lui recommandera de lui-même la formation pertinente avec un score de pertinence élevé.
+
+### 📈 Modèles sur-mesure (À entraîner)
+
+Les modules suivants doivent analyser l'historique de **votre** base de données pour apprendre les comportements. Vous devez cliquer sur **"Entraîner"** dans l'onglet *Config IA*.
+
+#### 3. Risque de départ (Churn Risk)
+- **Comment tester :** Modifiez les données d'un employé pour simuler un mal-être (beaucoup d'absences, solde de congés négatif, revues de performances basses).
+- **Résultat :** Après avoir cliqué sur "Entraîner" dans l'administration, le modèle XGBoost s'entraînera. Le dashboard RH remontera alors cet employé avec une alerte de "Risque de départ".
+
+#### 4. Anomalies de Sécurité (Isolation Forest)
+- **Comment tester :** Les collaborateurs effectuent des actions normales en journée. Injectez via la base (ou simulez des requêtes massives) un comportement anormal pour un utilisateur à 3h du matin (ex: téléchargement de dizaines de documents).
+- **Résultat :** Une fois entraîné, le modèle détectera ce comportement comme étant "hors norme" et générera une alerte de sécurité.
+
+> **🛡️ Note de robustesse (Fallback) :** Tous les systèmes disposent d'un Fallback Heuristique. Si le modèle ML n'est pas encore entraîné ou si un appel réseau échoue, le système bascule automatiquement sur des règles classiques pour que l'application ne plante jamais.
+
+---
+
 ## 👥 Comptes de test Keycloak
 
 | Utilisateur        | Rôle          | Mot de passe        |

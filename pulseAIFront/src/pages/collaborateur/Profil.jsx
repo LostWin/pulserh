@@ -10,20 +10,20 @@ import FieldVisibilityBadge from '../../components/ui/FieldVisibilityBadge';
 
 // ─── Initial editable profile state ───────────────────────────────────────
 const INITIAL_PERSONAL = {
-  fullName:  'Alexandre Dupont',
-  birthDate: 'March 14, 1996',
-  email:     'alex.dupont@pulse-rh.ai',
-  address:   '12 bis Rue de l\'Innovation,\n75008 Paris, France',
-  phone:     '+33 6 12 34 56 78',
+  fullName:  '',
+  birthDate: '',
+  email:     '',
+  address:   '',
+  phone:     '',
 };
 
 const INITIAL_PROFESSIONAL = {
-  employeeId:   '#88429',
-  joinDate:     'Jan 12, 2023',
-  department:   'Cloud Architecture & R&D',
-  contractType: 'Permanent (CDI)',
-  salary:       '52 000 € / year',
-  leaveBalance: '18 / 30 days',
+  employeeId:   '',
+  joinDate:     '',
+  department:   '',
+  contractType: '',
+  salary:       '',
+  leaveBalance: '',
 };
 
 // ─── Permission rules ──────────────────────────────────────────────────────
@@ -94,7 +94,7 @@ function FieldRow({ label, fieldKey, value, editing, canEdit, onChange, multilin
 // ─── Main component ────────────────────────────────────────────────────────
 export default function Profil() {
   const { user, role } = useAuth();
-  const displayName = user?.name || 'Alex Dupont';
+  const displayName = user?.name || 'Utilisateur';
 
   // Is the current user RH or admin?
   const isRhOrAdmin = role === 'rh' || role === 'admin';

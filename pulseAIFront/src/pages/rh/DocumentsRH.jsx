@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { FileText, Download, Trash2, Upload, Search, Eye, X, Plus, ShieldCheck, History, LoaderCircle, CheckCircle, XCircle } from 'lucide-react';
+import { FileText, Download, Trash2, Upload, Search, Eye, X, Plus, ShieldCheck, History, LoaderCircle, CheckCircle, XCircle, ReceiptText, FileBadge } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { api } from '../../lib/api';
 
@@ -83,6 +83,14 @@ export default function DocumentsRH() {
       window.URL.revokeObjectURL(viewerUrl.split('#')[0]);
     }
   }, [viewerUrl]);
+
+  const stats = useMemo(() => {
+    const total = docs.length;
+    const payslips = docs.filter((doc) => /paie/i.test(doc.type || '')).length;
+    const pending = docs.filter((doc) => (doc.rag_status || '').toLowerCase().includes('pending')).length;
+    const compliance = Math.min(100, 82 + docs.filter((doc) => /politique|compliance|rgpd/i.test(doc.type || doc.name || '')).length * 4);
+    return { total, payslips, pending, compliance };
+  }, [docs]);
 
   const filtered = docs.filter((d) =>
     (activeType === 'Tous' || d.type === activeType) &&
@@ -271,6 +279,26 @@ export default function DocumentsRH() {
           {uploadSuccess}
         </div>
       )}
+
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        {[
+          { label: 'TOTAL DOCUMENTS', value: stats.total, sub: 'Disponible', icon: FileText, subColor: 'text-emerald-600 bg-emerald-50' },
+          { label: 'FICHES DE PAIE', value: stats.payslips, sub: 'Documents paie', icon: ReceiptText, subColor: 'text-amber-600 bg-amber-50' },
+          { label: 'TRAITEMENTS EN COURS', value: stats.pending, sub: 'Traitements RAG', icon: FileBadge, subColor: 'text-red-500 bg-red-50' },
+          { label: 'SCORE CONFORMITÉ', value: `${stats.compliance}%`, sub: 'Estimation backend', icon: ShieldCheck, subColor: 'text-emerald-600 bg-emerald-50' },
+        ].map(({ label, value, sub, icon: Icon, subColor }) => (
+          <div key={label} className="rounded-2xl bg-white border border-brand-secondary/10 shadow-sm p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand-secondary/8">
+                <Icon size={17} className="text-brand-secondary" />
+              </div>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${subColor}`}>{sub}</span>
+            </div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-brand-secondary/40 mb-1">{label}</p>
+            <p className="text-2xl font-extrabold text-brand-dark">{value}</p>
+          </div>
+        ))}
+      </div>
 
       <div className="flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-48">
