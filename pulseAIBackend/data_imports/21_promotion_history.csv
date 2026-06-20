@@ -1,17 +1,15 @@
 id,employee_id,previous_job_title,new_job_title,effective_date,notes
-promotion-emp-demo-fatima,emp-demo-fatima,Lead Engineer,Engineering Manager,2025-11-09,Évolution de poste validée par la direction.
-promotion-emp-demo-karim,emp-demo-karim,HR Business Partner,Responsable RH,2025-11-09,Évolution de poste validée par la direction.
-45386d47-3c13-4d96-8505-0262cac9743e,emp-2,Assistant,SDR,2023-05-21,Prise de responsabilité élargie.
-6f7b0b28-478c-43c4-9cb1-250cd8dd1279,emp-4,Consultant Junior,SEO Specialist,2025-06-11,Reconnaissance de la montée en compétence.
-8bf5be18-097f-4726-bef0-901094ea8fe5,emp-19,Assistant,Directeur Commercial,2025-12-11,Prise de responsabilité élargie.
-b21b28c7-590c-48a2-8cef-24532219e4b7,emp-24,Stagiaire,Directeur Marketing,2025-10-29,Promotion suite à l'évaluation annuelle.
-1c5b09af-2785-443a-8cee-1a94e651640f,emp-28,Stagiaire,Directeur Marketing,2024-04-07,Promotion suite à l'évaluation annuelle.
-dba135f0-a677-4265-b4ae-621942808bb2,emp-30,Stagiaire,Directeur Financier,2025-05-23,Reconnaissance de la montée en compétence.
-48ac5986-292b-4f87-8e3e-d7edb5d501f1,emp-35,Stagiaire,Directeur Commercial,2024-01-25,Prise de responsabilité élargie.
-e30659f8-fc7c-4472-98f3-e2073dfdd7a2,emp-36,Consultant Junior,Software Engineer,2026-01-08,Prise de responsabilité élargie.
-2cd86d67-f725-4aa6-bd6f-65f87b949b21,emp-53,Analyste,HR Business Partner,2024-05-14,Reconnaissance de la montée en compétence.
-bdeb8001-cd77-426f-a85b-7857f68f17c4,emp-76,Stagiaire,Directeur Financier,2026-01-07,Promotion suite à l'évaluation annuelle.
-aa5adf23-b9ee-4554-b4ca-ecbf6f778510,emp-86,Analyste,Gestionnaire de Paie,2025-05-30,Prise de responsabilité élargie.
-8fcab2f5-fa54-4acd-ba4e-d65178fc4850,emp-88,Chargé de mission,Gestionnaire de Paie,2023-04-07,Reconnaissance de la montée en compétence.
-6412c02f-0c1c-4c34-9bf0-be500f7ba56e,emp-91,Stagiaire,COO,2023-01-13,Reconnaissance de la montée en compétence.
-52bffdd5-4e9d-4c54-9343-30a495ef6a14,emp-96,Assistant,Administrateur Système,2024-03-07,Évolution naturelle dans le parcours de carrière.
+promotion-emp-demo-fatima,emp-demo-fatima,Lead Engineer,Engineering Manager,2025-11-11,Évolution de poste validée par la direction.
+promotion-emp-demo-karim,emp-demo-karim,HR Business Partner,Responsable RH,2025-11-11,Évolution de poste validée par la direction.
+6f0714d6-5d59-4e78-88b5-c73dcc86e8b3,emp-9,Assistant,Engineering Manager,2025-06-01,Prise de responsabilité élargie.
+cc7eacd6-88d5-4fa9-a299-77c68d5fbad5,emp-14,Stagiaire,HR Business Partner,2026-01-20,Promotion suite à l'évaluation annuelle.
+e2b7d66c-f7df-4ac5-afda-d0105621ad55,emp-17,Stagiaire,SDR,2024-11-27,Promotion suite à l'évaluation annuelle.
+89abafbb-a1a2-4e95-93c2-4ef7a37616aa,emp-19,Stagiaire,Directeur Commercial,2024-10-06,Reconnaissance de la montée en compétence.
+af59d2d2-2581-42e1-980d-65ad80388fb0,emp-25,Stagiaire,Data Scientist,2024-03-23,Prise de responsabilité élargie.
+c279a402-b2bb-4774-911f-cf64ebfe58d1,emp-28,Consultant Junior,Directeur Marketing,2025-07-29,Prise de responsabilité élargie.
+a9d6e252-4c77-45e7-9fe5-c7bc62be0006,emp-43,Analyste,COO,2024-07-11,Reconnaissance de la montée en compétence.
+2e0e971f-1bb5-44b7-b1b0-9856e45792bc,emp-67,Stagiaire,Engineering Manager,2025-06-02,Promotion suite à l'évaluation annuelle.
+13c9caad-e9f6-4fcb-a8d6-fe7ea38fbe1e,emp-75,Analyste,Product Marketing Manager,2025-01-09,Prise de responsabilité élargie.
+2dfb44ab-0f1a-4fc8-b476-b92ebd02ed1d,emp-76,Chargé de mission,Directeur Financier,2023-11-24,Reconnaissance de la montée en compétence.
+fef874c8-ab3c-4816-bdd9-c47f1f32680d,emp-77,Stagiaire,Content Creator,2024-05-20,Reconnaissance de la montée en compétence.
+0d5e1125-d694-4abf-b7b0-0d96fed08d4a,emp-85,Assistant,Office Manager,2025-09-22,Évolution naturelle dans le parcours de carrière.

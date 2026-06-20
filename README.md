@@ -549,3 +549,18 @@ docker compose up -d
 ## 📜 Licence
 
 Projet interne Ynov Campus Maroc – Y‑Days 2026.
+
+### 6b. Initialiser Wazuh (obligatoire au premier démarrage)
+
+Après que tous les services sont **healthy**, lance ce script :
+
+```bash
+bash wazuh/init-wazuh.sh
+```
+
+Ce script configure automatiquement :
+- Le mot de passe admin OpenSearch
+- Les configs de sécurité (rôles, mappings, OpenID)
+- Le client Keycloak `wazuh-dashboard` avec le mapper de rôles
+
+Attends le message `🎉 Initialisation Wazuh terminée !` puis accède à `https://wazuh.pulse.local`.

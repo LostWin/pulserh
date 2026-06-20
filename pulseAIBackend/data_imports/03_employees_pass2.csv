@@ -2,7 +2,6 @@ id,user_id,first_name,last_name,email,phone,hire_date,status,department_id,job_i
 emp-demo-youssef,,Youssef,Benali,youssef.benali@pulse.ma,804-233-2181,2026-05-12,actif,dep-2,job-13,emp-demo-fatima
 emp-demo-fatima,,Fatima,Alaoui,fatima.alaoui@pulse.ma,833-589-0838,2025-11-03,actif,dep-2,job-8,emp-demo-sara
 emp-demo-karim,,Karim,Tazi,karim.tazi@pulse.ma,0140265423,2024-09-02,actif,dep-1,job-2,emp-demo-sara
-emp-demo-sara,,Sara,Bennani,sara.bennani@pulse.ma,+33 (0)2 35 61 55 94,2023-04-10,actif,dep-6,job-31,
 emp-demo-admin,,Admin,Technique,admin.tech@pulse.ma,001-278-516-1849x5931,2024-01-15,actif,dep-2,job-14,emp-demo-sara
 emp-1,,Amine,Lahlou,aminelahlou.d3cf2d@pulse.com,+33 (0)3 73 16 47 52,2022-03-13,actif,dep-2,job-10,emp-demo-fatima
 emp-2,,Bilal,Chraibi,bilalchraibi.f07dfb@pulse.com,0361419283,2021-08-05,actif,dep-2,job-29,emp-demo-fatima
@@ -13,17 +12,6 @@ emp-6,,Hanane,Mansouri,hananemansouri.feab30@pulse.com,03 85 80 18 45,2023-07-19
 emp-7,,Driss,Lahlou,drisslahlou.2cbcfc@pulse.com,562-470-4828x1489,2023-12-28,actif,dep-1,job-6,emp-demo-sara
 emp-8,,Rachid,Chraibi,rachidchraibi.6edd4c@pulse.com,+33 1 30 95 70 15,2026-01-24,actif,dep-5,job-28,emp-demo-sara
 emp-9,,Nizar,Bouazza,nizarbouazza.6b7c86@pulse.com,+33 1 80 39 11 71,2021-09-02,actif,dep-2,job-8,emp-demo-sara
-emp-10,,Mehdi,Guessous,mehdiguessous.8db9e4@pulse.com,001-822-778-2489x63834,2022-12-22,actif,dep-1,job-4,
-emp-11,,Oussama,Tahiri,oussamatahiri.b90645@pulse.com,02 51 33 15 09,2025-03-04,actif,dep-3,job-18,
-emp-12,,Mehdi,Cherkaoui,mehdicherkaoui.26d94f@pulse.com,793.301.0310,2024-05-29,actif,dep-6,job-31,
-emp-13,,Khaoula,Lahlou,khaoulalahlou.636cda@pulse.com,547.938.2997,2025-04-03,actif,dep-6,job-31,
-emp-14,,Youssef,Guessous,youssefguessous.3eb93f@pulse.com,+33 2 36 16 56 67,2023-08-31,actif,dep-1,job-3,
-emp-15,,Zineb,Mansouri,zinebmansouri.a01da6@pulse.com,9104651333,2023-08-20,inactif,dep-2,job-14,
-emp-16,,Karim,Lahlou,karimlahlou.68160f@pulse.com,+33 4 30 73 17 81,2025-08-04,actif,dep-2,job-10,
-emp-17,,Zineb,El Malki,zinebelmalki.3cf711@pulse.com,+1-880-213-2677x3602,2023-06-12,actif,dep-5,job-29,
-emp-18,,Saad,Bouzid,saadbouzid.79d411@pulse.com,0631468723,2022-01-11,actif,dep-1,job-1,
-emp-19,,Laila,El Malki,lailaelmalki.693c6c@pulse.com,+33 1 80 98 05 00,2023-07-29,actif,dep-5,job-26,
-emp-20,,Saad,Lahlou,saadlahlou.984261@pulse.com,388.520.8121x9136,2025-03-25,actif,dep-5,job-26,
 emp-21,,Bilal,Lahlou,bilallahlou.d01913@pulse.com,+1-509-616-9985x435,2023-01-23,actif,dep-3,job-17,emp-17
 emp-22,,Anas,El Amrani,anaselamrani.2dda98@pulse.com,+33 4 57 75 10 79,2024-12-02,actif,dep-5,job-26,emp-2
 emp-23,,Driss,El Fassi,drisselfassi.7afb60@pulse.com,518-738-4251,2024-06-09,suspendu,dep-3,job-18,emp-1
