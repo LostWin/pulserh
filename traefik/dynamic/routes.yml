@@ -83,6 +83,7 @@ http:
           - url: "http://pulse_frontend:5173"
     backend-service:
       loadBalancer:
+        passHostHeader: true
         servers:
           - url: "http://pulse_backend:8000"
 
@@ -91,3 +92,6 @@ http:
       basicAuth:
         users:
           - "admin:$apr1$stlxSCoh$MII0dN6SITBq9pSb8tkBB."
+  serversTransports:
+    insecureTransport:
+      insecureSkipVerify: true

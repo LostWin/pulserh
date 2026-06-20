@@ -133,10 +133,7 @@ services:
   # KEYCLOAK
   # =========================================================
   keycloak:
-    build:
-      context: ./keycloak
-      dockerfile: Dockerfile
-    image: pulse-keycloak:25.0
+    image: quay.io/keycloak/keycloak:25.0
     container_name: pulse_keycloak
     restart: unless-stopped
     ports:
@@ -165,9 +162,6 @@ services:
           KC_PROXY_HEADERS: xforwarded
           KC_HEALTH_ENABLED: "true"
           KC_METRICS_ENABLED: "true"
-          KC_SPI_THEME_STATIC_MAX_AGE: "-1"
-          KC_SPI_THEME_CACHE_THEMES: "false"
-          KC_SPI_THEME_CACHE_TEMPLATES: "false"
           KC_LOG_LEVEL: INFO
           TZ: Africa/Casablanca
     command: start
@@ -269,7 +263,6 @@ services:
     environment:
       OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g -Dcom.amazon.dlic.auth.http.jwt.keybyoidc.KeySetRetriever.sslValidate=false"
       bootstrap.memory_lock: "true"
-      bootstrap.system_call_filter: "false"
       TZ: Africa/Casablanca
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
       WAZUH_INDEXER_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
@@ -283,6 +276,9 @@ services:
     volumes:
       - wazuh_indexer_data:/var/lib/wazuh-indexer
       - ./wazuh/config/wazuh-indexer.yml:/usr/share/wazuh-indexer/opensearch.yml:ro
+      - ./wazuh/config/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml:ro
+      - ./wazuh/config/roles_mapping.yml:/usr/share/wazuh-indexer/opensearch-security/roles_mapping.yml:ro
+      - ./wazuh/config/opensearch-security-config.yml:/usr/share/wazuh-indexer/opensearch-security/config.yml:ro
       - ./wazuh/certs/indexer.pem:/usr/share/wazuh-indexer/certs/indexer.pem:ro
       - ./wazuh/certs/indexer.key:/usr/share/wazuh-indexer/certs/indexer.key:ro
       - ./wazuh/certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem:ro
@@ -364,6 +360,9 @@ services:
       - ./wazuh/certs/dashboard.pem:/usr/share/wazuh-dashboard/certs/dashboard.pem:ro
       - ./wazuh/certs/dashboard.key:/usr/share/wazuh-dashboard/certs/dashboard.key:ro
       - ./wazuh/certs/ca-bundle.crt:/usr/share/wazuh-dashboard/certs/ca-bundle.crt:ro
+    extra_hosts:
+          - "auth.pulse.local:172.20.0.1"
+          - "wazuh.pulse.local:172.20.0.1"
     depends_on:
       wazuh-manager:
         condition: service_healthy
@@ -373,6 +372,7 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+
 
   # =========================================================
   # FRONTEND (Pulse AI)
@@ -407,6 +407,9 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://pulse_ai_user:PulseRH_PulseAI_2026!Secure@pulse_postgres:5432/pulse_ai"
+      REDIS_URL: "redis://:PulseRH_Redis_2026!Secure@pulse_redis:6379/0"
     volumes:
       - ./pulseAIBackend:/app
     expose:

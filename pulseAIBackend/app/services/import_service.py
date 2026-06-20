@@ -128,12 +128,12 @@ async def process_csv_import(
     import copy
 
     # 2. Insertion / Upsertion in DB with Row-level Savepoints
-    from sqlalchemy import text
-    try:
-        await db.execute(text("SET session_replication_role = 'replica';"))
-    except Exception as e:
-        pass # Ignore if not superuser
-        
+    # from sqlalchemy import text  # disabled
+    # from sqlalchemy import text  # disabled
+    # try:
+    #     await db.execute(text("SET session_replication_role = 'replica'"))
+    # except Exception:
+    #     await db.rollback()
     for line_num, record in valid_records:
         async def attempt_upsert(data_dict):
             nonlocal created_count, updated_count
@@ -173,24 +173,17 @@ async def process_csv_import(
             async with db.begin_nested():
                 await attempt_upsert(record)
         except IntegrityError as e:
-            if record.get(unique_field) and await db.get(model_class, record.get(unique_field)):
-                updated_count -= 1
-            else:
-                created_count -= 1
-            
-            # Message clair sur la dépendance manquante
+            await db.rollback()
+            created_count -= 1
             error_msg = str(e)
             if "ForeignKeyViolationError" in error_msg or "foreign key constraint" in error_msg.lower():
                 errors.append(ErrorLine(line=line_num, error="Échec d'intégrité (clé étrangère). Dépendance introuvable. Importez d'abord les entités parentes (départements, etc.)."))
             else:
                 errors.append(ErrorLine(line=line_num, error="Erreur d'intégrité SQL (ex: clé étrangère introuvable)."))
         except Exception as e:
-            if record.get(unique_field) and await db.get(model_class, record.get(unique_field)):
-                updated_count -= 1
-            else:
-                created_count -= 1
+            await db.rollback()
+            created_count -= 1
             errors.append(ErrorLine(line=line_num, error=f"Database insertion error: {str(e)}"))
-
     # Commit only if there are valid records or we want to save history
     from app.models.domain import ImportHistory
 

@@ -1,0 +1,62 @@
+---
+_meta:
+  type: "rolesmapping"
+  config_version: 2
+
+all_access:
+  reserved: false
+  backend_roles:
+  - "admin"
+  description: "Maps admin to all_access"
+
+own_index:
+  reserved: false
+  users: []
+  description: "Disabled - no wildcard access"
+
+logstash:
+  reserved: false
+  backend_roles:
+  - "logstash"
+
+kibana_user:
+  reserved: false
+  backend_roles: []
+  users: []
+
+readall:
+  reserved: false
+  backend_roles:
+  - "readall"
+
+manage_snapshots:
+  reserved: false
+  backend_roles:
+  - "snapshotrestore"
+
+kibana_server:
+  reserved: true
+  users:
+  - "kibanaserver"
+
+wazuh_ui_admin:
+  reserved: true
+  hidden: false
+  backend_roles:
+  - "admin"
+  users:
+  - "kibanaserver"
+  and_backend_roles: []
+
+wazuh_ui_user:
+  reserved: true
+  hidden: false
+  backend_roles: []
+  users: []
+  and_backend_roles: []
+
+manage_ism:
+  reserved: true
+  hidden: false
+  users:
+  - "kibanaserver"

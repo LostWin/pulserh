@@ -24,11 +24,11 @@ plugins.security.ssl.http.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs
 # Security
 plugins.security.allow_default_init_securityindex: true
 plugins.security.authcz.admin_dn:
-  - "CN=wazuh-indexer,O=PulseRH,ST=Casablanca,C=MA"
+  - "CN=wazuh-indexer,O=PulseRH,L=Casablanca,ST=Casablanca,C=MA"
 plugins.security.nodes_dn:
-  - "CN=wazuh-indexer,O=PulseRH,ST=Casablanca,C=MA"
-  - "CN=wazuh-manager,O=PulseRH,ST=Casablanca,C=MA"
-  - "CN=wazuh-dashboard,O=PulseRH,ST=Casablanca,C=MA"
+  - "CN=wazuh-indexer,O=PulseRH,L=Casablanca,ST=Casablanca,C=MA"
+  - "CN=wazuh-manager,O=PulseRH,L=Casablanca,ST=Casablanca,C=MA"
+  - "CN=wazuh-dashboard,O=PulseRH,L=Casablanca,ST=Casablanca,C=MA"
 
 plugins.security.audit.type: internal_opensearch
 plugins.security.enable_snapshot_restore_privilege: true
@@ -36,6 +36,3 @@ plugins.security.check_snapshot_restore_write_privileges: true
 plugins.security.restapi.roles_enabled:
   - "all_access"
   - "security_rest_api_access"
-
-# Disable system call filters to fix bootstrap error on some kernels
-bootstrap.system_call_filter: false
