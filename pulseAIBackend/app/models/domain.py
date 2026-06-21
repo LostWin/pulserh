@@ -410,7 +410,7 @@ class AIConfiguration(Base):
     __tablename__ = "ai_configuration"
     id = Column(String, primary_key=True, default=generate_uuid)
     provider = Column(String, default="openrouter")   # "openrouter" | "ollama"
-    model_name = Column(String, default="mistralai/mistral-7b-instruct")
+    model_name = Column(String, default="openrouter/free")
     temperature = Column(Float, default=0.7)
     max_tokens = Column(Integer, default=2048)
     system_prompt = Column(Text, default="Tu es Pulse AI, un assistant RH intelligent. Tu aides les collaborateurs avec leurs questions sur les congés, la paie, les formations et les démarches administratives. Tu es professionnel, empathique et précis. Tu ne divulgues jamais d'informations confidentielles au-delà du rôle de l'utilisateur.")

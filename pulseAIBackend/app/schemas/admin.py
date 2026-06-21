@@ -36,7 +36,7 @@ class GuardrailTestRequest(BaseModel):
 
 class AIConfig(BaseModel):
     provider: str = "openrouter"
-    model_name: str = "mistralai/mistral-7b-instruct"
+    model_name: str = "openrouter/free"
     temperature: float = 0.7
     max_tokens: int = 2048
     system_prompt: str = ""

@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     # ── LLM Provider ──
     LLM_PROVIDER: str = "openrouter"  # "openrouter" | "ollama"
     LLM_API_KEY: str = ""             # Clé OpenRouter (placeholder)
-    LLM_MODEL: str = "mistralai/mistral-7b-instruct"
+    LLM_MODEL: str = "openrouter/free"
     LLM_API_URL: str = "https://openrouter.ai/api/v1"
     OLLAMA_BASE_URL: str = "http://localhost:11434/v1"
 
