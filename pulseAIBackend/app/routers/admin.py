@@ -343,6 +343,39 @@ async def create_guardrail(
     )
 
 
+
+@router.post("/guardrails/init-defaults", dependencies=[Depends(admin_only)])
+async def init_default_guardrails(
+    current_user: CurrentUser = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Initialiser les guardrails par défaut couvrant toutes les catégories de gouvernance IA."""
+    from app.services.guardrail_service import guardrail_service
+    defaults = guardrail_service.get_default_guardrails()
+    created = 0
+    skipped = 0
+    for g in defaults:
+        existing = await db.execute(
+            select(Guardrail).where(Guardrail.name == g["name"])
+        )
+        if existing.scalars().first():
+            skipped += 1
+            continue
+        new_g = Guardrail(
+            name=g["name"],
+            pattern=g["pattern"],
+            action=g["action"],
+            description=g.get("description", ""),
+            category=g.get("category", "security"),
+            is_active=True,
+            priority=g.get("priority", 50),
+            created_by=current_user.email,
+        )
+        db.add(new_g)
+        created += 1
+    await db.commit()
+    return {"created": created, "skipped": skipped, "total": len(defaults)}
+
 @router.put("/guardrails/{guardrail_id}", response_model=GuardrailResponse, dependencies=[Depends(admin_only)])
 async def update_guardrail(
     guardrail_id: str,

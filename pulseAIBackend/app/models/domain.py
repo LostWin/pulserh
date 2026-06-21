@@ -402,6 +402,7 @@ class Guardrail(Base):
     is_active = Column(Boolean, default=True)
     priority = Column(Integer, default=0)
     triggered_count = Column(Integer, default=0)
+    category = Column(String, default="security")
     created_by = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

@@ -23,6 +23,7 @@ from app.schemas.auth import CurrentUser
 from app.dependencies import get_current_user
 from app.core.rbac import require_any_role
 from app.services.rag_service import rag_service
+from app.services.guardrail_service import guardrail_service
 from app.models.domain import Conversation, ChatMessage
 from app.database import get_db
 
@@ -183,6 +184,22 @@ async def stream_message(
     ]
     if conversation_history:
         conversation_history = conversation_history[:-1]
+
+
+    # ── Vérification guardrails sur l input ──
+    from app.services.guardrail_service import guardrail_service
+    guardrail_result = await guardrail_service.check_input(
+        text=request.message,
+        db=db,
+        user_id=current_user.id,
+        user_email=current_user.email,
+    )
+    if not guardrail_result.passed:
+        block_msg = guardrail_result.message
+        async def blocked_generator():
+            yield "data: " + json.dumps({"type": "text", "content": block_msg}) + "\n\n"
+            yield "data: " + json.dumps({"type": "done", "content": {"tokens_used": 0}}) + "\n\n"
+        return StreamingResponse(blocked_generator(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
 
     async def event_generator():
         full_answer = ""
