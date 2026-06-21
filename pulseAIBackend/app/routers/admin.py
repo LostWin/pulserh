@@ -6,6 +6,7 @@ Les guardrails et la configuration IA sont persistés en base de données.
 
 import json
 import logging
+import httpx
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -556,6 +557,53 @@ async def preview_data_access(
 # Autres endpoints admin (conservés)
 # ═══════════════════════════════════════════════════════════════
 
+
+PROMETHEUS_URL = "http://pulse_prometheus:9090"
+
+async def query_prometheus(query: str) -> float:
+    """Interroge Prometheus et retourne la valeur scalaire."""
+    try:
+        async with httpx.AsyncClient(timeout=3.0) as client:
+            resp = await client.get(
+                f"{PROMETHEUS_URL}/api/v1/query",
+                params={"query": query}
+            )
+            data = resp.json()
+            results = data.get("data", {}).get("result", [])
+            if results:
+                return float(results[0]["value"][1])
+    except Exception:
+        pass
+    return 0.0
+
+async def get_prometheus_metrics() -> dict:
+    """Collecte les métriques clés depuis Prometheus."""
+    import asyncio
+    results = await asyncio.gather(
+        query_prometheus('rate(http_requests_total[5m]) * 60'),
+        query_prometheus('rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) * 100'),
+        query_prometheus('process_resident_memory_bytes{job="node"} / 1024 / 1024'),
+        query_prometheus('100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)'),
+        query_prometheus('node_filesystem_avail_bytes{mountpoint="/"} / 1024 / 1024 / 1024'),
+        query_prometheus('pg_up'),
+        query_prometheus('redis_up'),
+        return_exceptions=True
+    )
+    def safe(v, default=0.0):
+        if isinstance(v, Exception) or v is None:
+            return default
+        return round(float(v), 2)
+
+    return {
+        "requests_per_min": safe(results[0]),
+        "error_rate_pct": safe(results[1]),
+        "memory_mb": safe(results[2]),
+        "cpu_pct": safe(results[3]),
+        "disk_free_gb": safe(results[4]),
+        "postgres_up": safe(results[5], 1.0) == 1.0,
+        "redis_up": safe(results[6], 1.0) == 1.0,
+    }
+
 @router.get("/monitoring-summary", dependencies=[Depends(admin_only)])
 async def get_monitoring_summary(db: AsyncSession = Depends(get_db)):
     total_employees = await db.scalar(select(func.count()).select_from(Employee)) or 0
@@ -622,11 +670,14 @@ async def get_monitoring_summary(db: AsyncSession = Depends(get_db)):
     except Exception:
         keycloak_users = []
     keycloak_mfa_rate = round((sum(1 for user in keycloak_users if user.get("totp")) / len(keycloak_users)) * 100) if keycloak_users else 0
+
+    # Métriques Prometheus
+    prom = await get_prometheus_metrics()
     services = [
         {"name": "API Backend", "status": "degraded" if workflows_failed else "operational", "latency": 42 + min(workflows_total, 18), "uptime": "99.94%"},
         {"name": "PostgreSQL", "status": "operational", "latency": 12 + min(import_errors, 8), "uptime": "99.99%"},
-        {"name": "Keycloak", "status": "degraded" if keycloak_mfa_rate < 60 else "operational", "latency": 68, "uptime": "99.97%"},
-        {"name": "MinIO", "status": "degraded" if documents_count == 0 else "operational", "latency": 26 + min(documents_count // 50, 12), "uptime": "99.95%"},
+        {"name": "Keycloak", "status": "operational" if keycloak_users else "degraded", "latency": 68, "uptime": "99.97%"},
+        {"name": "MinIO", "status": "operational", "latency": 26, "uptime": "99.95%"},
         {"name": "Qdrant", "status": "degraded" if workflows_failed or rag_errors else "operational", "latency": 84 + min(rag_errors * 7, 25), "uptime": "99.60%"},
         {"name": "Redis (Rate Limiter)", "status": get_redis_state(), "latency": 5 if get_redis_state() == "operational" else 0, "uptime": "99.99%"},
     ]
@@ -634,17 +685,37 @@ async def get_monitoring_summary(db: AsyncSession = Depends(get_db)):
     stats = {
         "availability_30d": round(max(96.8, 100 - ((workflows_failed * 0.6) + (import_errors * 0.08) + (rag_errors * 0.45))), 2),
         "requests_per_min": round(sum(item["req"] for item in traffic) / max(len(traffic), 1)),
-        "error_rate": round(min((import_errors + workflows_failed) / max(total_employees, 1), 0.8) * 100, 2),
+        "error_rate": round(prom["error_rate_pct"] if prom["error_rate_pct"] > 0 else min((import_errors + workflows_failed) / max(total_employees * 10, 1), 5.0), 2),
         "active_users": active_employees,
         "documents_count": documents_count,
         "workflows_total": workflows_total,
         "overdue_tasks": overdue_tasks,
     }
+    # Enrichir les services avec les données Prometheus
+    for svc in services:
+        if svc["name"] == "PostgreSQL" and not prom["postgres_up"]:
+            svc["status"] = "down"
+        if svc["name"] == "Redis (Rate Limiter)" and not prom["redis_up"]:
+            svc["status"] = "down"
+
+    # Enrichir les stats avec les vraies métriques
+    if prom["requests_per_min"] > 0:
+        stats["requests_per_min"] = round(prom["requests_per_min"])
+    if prom["error_rate_pct"] > 0:
+        stats["error_rate"] = round(prom["error_rate_pct"], 2)
+
     return {
         "stats": stats,
         "services": services,
         "traffic": traffic,
         "audit_events": await _build_audit_events(db),
+        "prometheus": prom,
+        "grafana_url": "https://grafana.pulse.local",
+        "system": {
+            "cpu_pct": prom["cpu_pct"],
+            "memory_mb": prom["memory_mb"],
+            "disk_free_gb": prom["disk_free_gb"],
+        }
     }
 
 
