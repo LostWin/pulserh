@@ -374,6 +374,53 @@ services:
       start_period: 10s
 
 
+  # =============================================
+  # EXPORTERS PROMETHEUS
+  # =============================================
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pulse_postgres_exporter
+    restart: unless-stopped
+    environment:
+      DATA_SOURCE_NAME: "postgresql://pulse_ai_user:PulseRH_PulseAI_2026!Secure@pulse_postgres:5432/pulse_ai?sslmode=disable"
+    networks:
+      - pulse_data
+      - pulse_internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: pulse_redis_exporter
+    restart: unless-stopped
+    environment:
+      REDIS_ADDR: "redis://pulse_redis:6379"
+      REDIS_PASSWORD: "PulseRH_Redis_2026!Secure"
+    networks:
+      - pulse_data
+      - pulse_internal
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: pulse_node_exporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - pulse_internal
+
+
   # =========================================================
   # FRONTEND (Pulse AI)
   # =========================================================
