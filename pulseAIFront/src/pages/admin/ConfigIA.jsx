@@ -503,13 +503,29 @@ export default function ConfigIA() {
                       </div>
                     </div>
                     {!showForm && (
-                      <button
-                        onClick={openCreateGuardrail}
-                        className="flex items-center gap-2 bg-brand-secondary text-white hover:bg-brand-dark font-medium text-sm rounded-xl px-4 py-2.5 shadow-sm transition-all focus:outline-none self-start sm:self-auto"
-                      >
-                        <Plus size={16} />
-                        Ajouter une règle
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={async () => {
+                            if (!window.confirm("Initialiser les 21 guardrails par defaut (securite, legal, RH, ethique, conformite) ?")) return;
+                            try {
+                              const res = await api.post('/admin/guardrails/init-defaults', {});
+                              alert(res.created + " guardrails crees, " + res.skipped + " deja presents.");
+                              await fetchConfigAndGuardrails();
+                            } catch(e) { alert("Erreur lors de l initialisation"); }
+                          }}
+                          className="flex items-center gap-2 border border-brand-secondary/30 text-brand-secondary hover:bg-brand-light font-medium text-sm rounded-xl px-4 py-2.5 transition-all focus:outline-none self-start sm:self-auto"
+                        >
+                          <Shield size={16} />
+                          Init. par defaut
+                        </button>
+                        <button
+                          onClick={openCreateGuardrail}
+                          className="flex items-center gap-2 bg-brand-secondary text-white hover:bg-brand-dark font-medium text-sm rounded-xl px-4 py-2.5 shadow-sm transition-all focus:outline-none self-start sm:self-auto"
+                        >
+                          <Plus size={16} />
+                          Ajouter une regle
+                        </button>
+                      </div>
                     )}
                   </div>
 
@@ -634,6 +650,7 @@ export default function ConfigIA() {
                             <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Statut</th>
                             <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Règle</th>
                             <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Pattern</th>
+                            <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Categorie</th>
                             <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Action</th>
                             <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Déclenchements</th>
                             <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-brand-secondary/50">Actions</th>
@@ -659,6 +676,11 @@ export default function ConfigIA() {
                               </td>
                               <td className="px-4 py-3.5 font-mono text-xxs bg-brand-light/20 text-brand-secondary/80 max-w-xxs truncate">
                                 {g.pattern}
+                              </td>
+                              <td className="px-4 py-3.5">
+                                <span className="text-xxs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                                  {g.category || 'security'}
+                                </span>
                               </td>
                               <td className="px-4 py-3.5">
                                 <span className={cn(
