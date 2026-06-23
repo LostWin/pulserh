@@ -9,6 +9,7 @@ http:
       middlewares:
         - traefik-auth
         - security-headers
+
     keycloak:
       rule: "Host(`auth.pulse.local`)"
       entryPoints:
@@ -17,6 +18,7 @@ http:
       tls: {}
       middlewares:
         - security-headers
+
     prometheus:
       rule: "Host(`prometheus.pulse.local`)"
       entryPoints:
@@ -26,6 +28,7 @@ http:
       middlewares:
         - security-headers
         - rate-limit
+
     grafana:
       rule: "Host(`grafana.pulse.local`)"
       entryPoints:
@@ -34,6 +37,7 @@ http:
       tls: {}
       middlewares:
         - security-headers
+
     wazuh:
       rule: "Host(`wazuh.pulse.local`)"
       entryPoints:
@@ -42,6 +46,7 @@ http:
       tls: {}
       middlewares:
         - security-headers
+
     frontend:
       rule: "Host(`ai.pulse.local`)"
       entryPoints:
@@ -50,6 +55,7 @@ http:
       tls: {}
       middlewares:
         - security-headers
+
     backend:
       rule: "Host(`api.pulse.local`)"
       entryPoints:
@@ -65,33 +71,33 @@ http:
       loadBalancer:
         servers:
           - url: "http://pulse_keycloak:8080"
+
     prometheus-service:
       loadBalancer:
         servers:
           - url: "http://pulse_prometheus:9090"
+
     grafana-service:
       loadBalancer:
         servers:
           - url: "http://pulse_grafana:3000"
+
     wazuh-service:
       loadBalancer:
         servers:
           - url: "http://wazuh-dashboard:5601"
+
     frontend-service:
       loadBalancer:
         servers:
-          - url: "http://pulse_frontend:5173"
+          - url: "http://pulse_frontend:80"
+
     backend-service:
       loadBalancer:
         passHostHeader: true
         servers:
           - url: "http://pulse_backend:8000"
 
-  middlewares:
-    traefik-auth:
-      basicAuth:
-        users:
-          - "admin:$apr1$stlxSCoh$MII0dN6SITBq9pSb8tkBB."
   serversTransports:
     insecureTransport:
       insecureSkipVerify: true
