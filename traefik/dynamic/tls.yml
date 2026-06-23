@@ -2,3 +2,8 @@ tls:
   certificates:
     - certFile: /etc/traefik/certs/pulse.crt
       keyFile: /etc/traefik/certs/pulse.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/certs/pulse.crt
+        keyFile: /etc/traefik/certs/pulse.key
