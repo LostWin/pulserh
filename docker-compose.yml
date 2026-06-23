@@ -122,15 +122,6 @@ services:
 
   # =========================================================
   # KEYCLOAK
-  # Corrections :
-  # - healthcheck sur port 9000 (management Quarkus)
-  # - pas de KC_HOSTNAME_ADMIN
-  # - KC_HOSTNAME sans protocole
-  # - exposition port 9000 en interne pour healthcheck
-  # - start-dev pour éviter la recompilation à chaque restart
-  # =========================================================
-# =========================================================
-  # KEYCLOAK
   # =========================================================
   keycloak:
     image: quay.io/keycloak/keycloak:25.0
@@ -149,30 +140,29 @@ services:
     volumes:
       - keycloak_data:/opt/keycloak/data
     environment:
-          # Remplacer KC_BOOTSTRAP_ADMIN_* par les variables legacy
-          KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-          KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-          KC_DB: postgres
-          KC_DB_URL: jdbc:postgresql://postgres:5432/${KEYCLOAK_DB}
-          KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
-          KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-          KC_HOSTNAME: auth.pulse.local
-          KC_HOSTNAME_STRICT: "false"
-          KC_HTTP_ENABLED: "true"
-          KC_PROXY_HEADERS: xforwarded
-          KC_HEALTH_ENABLED: "true"
-          KC_METRICS_ENABLED: "true"
-          KC_LOG_LEVEL: INFO
-          TZ: Africa/Casablanca
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://pulse_postgres:5432/${KEYCLOAK_DB}
+      KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_HOSTNAME: auth.pulse.local
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_LOG_LEVEL: INFO
+      TZ: Africa/Casablanca
     command: start
     healthcheck:
-          test:
-            - "CMD-SHELL"
-            - "exec 3<>/dev/tcp/localhost/9000 && echo -e 'GET /health/ready HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n' >&3 && cat <&3 | grep -q 'UP' || exit 1"
-          interval: 30s
-          timeout: 10s
-          retries: 10
-          start_period: 120s
+      test:
+        - "CMD-SHELL"
+        - "exec 3<>/dev/tcp/localhost/9000 && echo -e 'GET /health/ready HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n' >&3 && cat <&3 | grep -q 'UP' || exit 1"
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
 
   # =========================================================
   # KEYCLOAK INIT (import realm une seule fois)
@@ -183,16 +173,18 @@ services:
     restart: "no"
     networks:
       - pulse_public
+      - pulse_data
     depends_on:
       keycloak:
         condition: service_healthy
     volumes:
       - ./keycloak/init-realm.sh:/opt/init-realm.sh:ro
-      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+      - ./keycloak/exports/pulse-realm.json:/opt/keycloak/data/import/realm-export.json:ro
     environment:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     entrypoint: ["/bin/bash", "/opt/init-realm.sh"]
+
   # =========================================================
   # PROMETHEUS
   # =========================================================
@@ -221,7 +213,7 @@ services:
       timeout: 10s
       retries: 3
 
-# =========================================================
+  # =========================================================
   # GRAFANA
   # =========================================================
   grafana:
@@ -248,6 +240,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
+
   # =========================================================
   # WAZUH INDEXER (OpenSearch)
   # =========================================================
@@ -261,7 +254,7 @@ services:
       - pulse_internal
       - pulse_public
     environment:
-      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g -Dcom.amazon.dlic.auth.http.jwt.keybyoidc.KeySetRetriever.sslValidate=false"
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
       bootstrap.memory_lock: "true"
       TZ: Africa/Casablanca
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
@@ -284,7 +277,7 @@ services:
       - ./wazuh/certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem:ro
       - ./wazuh/certs/indexer-trust.crt:/usr/share/wazuh-indexer/certs/indexer-trust.crt:ro
     healthcheck:
-      test: ["CMD-SHELL", "curl -sk https://localhost:9200/_cluster/health -u admin:$${WAZUH_INDEXER_PASSWORD} | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      test: ["CMD-SHELL", "curl -sk https://localhost:9200/_cluster/health -u admin:${WAZUH_INDEXER_PASSWORD} | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
       interval: 30s
       timeout: 10s
       retries: 10
@@ -313,15 +306,11 @@ services:
       SSL_CERTIFICATE_AUTHORITIES: /etc/ssl/wazuh/root-ca.pem
       SSL_CERTIFICATE: /etc/ssl/wazuh/manager.pem
       SSL_KEY: /etc/ssl/wazuh/manager.key
-      FILEBEAT_ELASTICSEARCH_PIPELINE: ""    # ← ajouter cette ligne (pipeline vide)
       TZ: Africa/Casablanca
     volumes:
       - wazuh_manager_data:/var/ossec/data
       - wazuh_manager_logs:/var/ossec/logs
-       # - ./wazuh/config/filebeat.yml:/etc/filebeat/filebeat.yml:ro
-      #- ./wazuh/config/ossec-minimal.conf:/wazuh-config-mount/etc/ossec.conf:ro
       - ./wazuh/rules/pulse_rules.xml:/var/ossec/etc/rules/pulse_rules.xml:ro
-     # - ./wazuh/config/users.yml:/var/ossec/api/configuration/security/users.yml:ro
       - ./wazuh/certs/manager.pem:/etc/ssl/wazuh/manager.pem:ro
       - ./wazuh/certs/manager.key:/etc/ssl/wazuh/manager.key:ro
       - ./wazuh/certs/root-ca.pem:/etc/ssl/wazuh/root-ca.pem:ro
@@ -360,9 +349,6 @@ services:
       - ./wazuh/certs/dashboard.pem:/usr/share/wazuh-dashboard/certs/dashboard.pem:ro
       - ./wazuh/certs/dashboard.key:/usr/share/wazuh-dashboard/certs/dashboard.key:ro
       - ./wazuh/certs/ca-bundle.crt:/usr/share/wazuh-dashboard/certs/ca-bundle.crt:ro
-    extra_hosts:
-          - "auth.pulse.local:172.20.0.1"
-          - "wazuh.pulse.local:172.20.0.1"
     depends_on:
       wazuh-manager:
         condition: service_healthy
@@ -373,16 +359,15 @@ services:
       retries: 5
       start_period: 10s
 
-
-  # =============================================
+  # =========================================================
   # EXPORTERS PROMETHEUS
-  # =============================================
+  # =========================================================
   postgres-exporter:
     image: prometheuscommunity/postgres-exporter:latest
     container_name: pulse_postgres_exporter
     restart: unless-stopped
     environment:
-      DATA_SOURCE_NAME: "postgresql://pulse_ai_user:PulseRH_PulseAI_2026!Secure@pulse_postgres:5432/pulse_ai?sslmode=disable"
+      DATA_SOURCE_NAME: "postgresql://${PULSE_AI_DB_USER}:${PULSE_AI_DB_PASSWORD}@pulse_postgres:5432/${PULSE_AI_DB}?sslmode=disable"
     networks:
       - pulse_data
       - pulse_internal
@@ -396,7 +381,7 @@ services:
     restart: unless-stopped
     environment:
       REDIS_ADDR: "redis://pulse_redis:6379"
-      REDIS_PASSWORD: "PulseRH_Redis_2026!Secure"
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
     networks:
       - pulse_data
       - pulse_internal
@@ -420,28 +405,24 @@ services:
     networks:
       - pulse_internal
 
-
   # =========================================================
-  # FRONTEND (Pulse AI)
+  # FRONTEND (Pulse AI) — nginx production
   # =========================================================
   frontend:
     build:
       context: ./pulseAIFront
       dockerfile: Dockerfile
+      args:
+        VITE_KEYCLOAK_URL: https://auth.pulse.local
+        VITE_KEYCLOAK_REALM: pulse
+        VITE_KEYCLOAK_CLIENT: pulse-web
+        VITE_API_URL: https://api.pulse.local
     container_name: pulse_frontend
     restart: unless-stopped
     expose:
-      - "5173"
+      - "80"
     networks:
       - pulse_public
-    volumes:
-      - ./pulseAIFront:/app
-      - /app/node_modules
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - VITE_KEYCLOAK_URL=https://auth.pulse.local
-      - VITE_KEYCLOAK_REALM=pulse
-      - VITE_KEYCLOAK_CLIENT=pulse-web
 
   # =========================================================
   # PULSE AI BACKEND (FastAPI)
@@ -455,10 +436,10 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: "postgresql+asyncpg://pulse_ai_user:PulseRH_PulseAI_2026!Secure@pulse_postgres:5432/pulse_ai"
-      REDIS_URL: "redis://:PulseRH_Redis_2026!Secure@pulse_redis:6379/0"
-    volumes:
-      - ./pulseAIBackend:/app
+      DATABASE_URL: "postgresql+asyncpg://${PULSE_AI_DB_USER}:${PULSE_AI_DB_PASSWORD}@pulse_postgres:5432/${PULSE_AI_DB}"
+      REDIS_URL: "redis://:${REDIS_PASSWORD}@pulse_redis:6379/0"
+      MINIO_ACCESS_KEY: "${MINIO_ROOT_USER}"
+      MINIO_SECRET_KEY: "${MINIO_ROOT_PASSWORD}"
     expose:
       - "8000"
     depends_on:
@@ -467,7 +448,7 @@ services:
       redis:
         condition: service_healthy
       keycloak:
-        condition: service_started
+        condition: service_healthy
       minio:
         condition: service_healthy
       qdrant:
@@ -481,7 +462,7 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 15s
+      start_period: 30s
 
   # =========================================================
   # MINIO (Object Storage)
@@ -492,8 +473,8 @@ services:
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     expose:
       - "9000"
       - "9001"
