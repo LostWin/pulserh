@@ -1,20 +1,11 @@
-tls:
-  certificates:
-    - certFile: /etc/traefik/certs/pulse.crt
-      keyFile: /etc/traefik/certs/pulse.key
-  stores:
-    default:
-      defaultCertificate:
-        certFile: /etc/traefik/certs/pulse.crt
-        keyFile: /etc/traefik/certs/pulse.key
 http:
   middlewares:
     security-headers:
       headers:
-        stsSeconds: 0
-        stsIncludeSubdomains: false
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
         stsPreload: false
-        frameDeny: false          # ← changer true en false
+        frameDeny: false
         contentTypeNosniff: true
         browserXssFilter: true
         referrerPolicy: "strict-origin-when-cross-origin"
@@ -25,3 +16,8 @@ http:
         average: 500
         burst: 200
         period: 1s
+
+    traefik-auth:
+      basicAuth:
+        users:
+          - "admin:$apr1$stlxSCoh$MII0dN6SITBq9pSb8tkBB."
