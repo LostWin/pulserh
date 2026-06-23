@@ -1,29 +1,38 @@
 #!/bin/bash
 set -e
 
-echo "[init] Authenticating..."
+KC_URL="http://pulse_keycloak:8080"
+
+echo "[init] Attente que Keycloak soit prêt..."
+until curl -sf "${KC_URL}/health/ready" > /dev/null 2>&1; do
+  echo "[init]   ... pas encore prêt, on attend 5s"
+  sleep 5
+done
+echo "[init] Keycloak est prêt."
+
+echo "[init] Authentification admin..."
 /opt/keycloak/bin/kcadm.sh config credentials \
-  --server http://pulse_keycloak:8080 \
+  --server "${KC_URL}" \
   --realm master \
   --client admin-cli \
   --user "$KEYCLOAK_ADMIN" \
   --password "$KEYCLOAK_ADMIN_PASSWORD"
 
-echo "[init] Checking if realm pulse exists..."
+echo "[init] Vérification du realm pulse..."
 if /opt/keycloak/bin/kcadm.sh get realms/pulse > /dev/null 2>&1; then
-  echo "[init] Realm pulse already exists, skipping import."
+  echo "[init] Realm pulse existe déjà — skip import."
 else
-  echo "[init] Importing realm pulse (full config with users)..."
+  echo "[init] Import du realm pulse..."
   /opt/keycloak/bin/kcadm.sh create realms \
     -f /opt/keycloak/data/import/realm-export.json
-  echo "[init] Realm pulse imported successfully."
+  echo "[init] Realm importé avec succès."
 fi
 
-echo "[init] Applying login theme pulseai..."
-/opt/keycloak/bin/kcadm.sh update realms/pulse -s loginTheme=pulseai
+echo "[init] Application du thème de login..."
+/opt/keycloak/bin/kcadm.sh update realms/pulse -s loginTheme=keycloak || true
 
-echo "[init] Verifying users..."
+echo "[init] Vérification des utilisateurs..."
 /opt/keycloak/bin/kcadm.sh get users -r pulse \
-  --fields username,enabled 2>/dev/null | grep username || echo "No users found"
+  --fields username,enabled 2>/dev/null | grep username || echo "[init] Aucun user trouvé"
 
-echo "[init] Done."
+echo "[init] Initialisation terminée avec succès."
