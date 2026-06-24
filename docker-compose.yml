@@ -146,8 +146,9 @@ services:
       KC_DB_URL: jdbc:postgresql://pulse_postgres:5432/${KEYCLOAK_DB}
       KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
       KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-      KC_HOSTNAME: auth.pulse.local
       KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME: "https://auth.pulse.local"
+      KC_HOSTNAME_ADMIN: "https://auth.pulse.local"
       KC_HTTP_ENABLED: "true"
       KC_PROXY_HEADERS: xforwarded
       KC_HEALTH_ENABLED: "true"
@@ -248,6 +249,8 @@ services:
     image: wazuh/wazuh-indexer:4.8.0
     container_name: wazuh-indexer
     restart: unless-stopped
+    extra_hosts:
+      - "auth.pulse.local:172.19.0.1"
     expose:
       - "9200"
     networks:
@@ -331,11 +334,15 @@ services:
     image: wazuh/wazuh-dashboard:4.8.0
     container_name: wazuh-dashboard
     restart: unless-stopped
+    extra_hosts:
+      - "auth.pulse.local:172.19.0.1"
+      - "wazuh.pulse.local:172.19.0.1"
     expose:
       - "5601"
     networks:
       - pulse_public
       - pulse_internal
+      - pulse_data
     environment:
       INDEXER_USERNAME: admin
       INDEXER_PASSWORD: ${WAZUH_INDEXER_PASSWORD}
@@ -344,6 +351,7 @@ services:
       DASHBOARD_PASSWORD: kibanaserver
       TZ: Africa/Casablanca
       NODE_EXTRA_CA_CERTS: /usr/share/wazuh-dashboard/certs/ca-bundle.crt
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
     volumes:
       - ./wazuh/config/wazuh-dashboard.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml:ro
       - ./wazuh/certs/dashboard.pem:/usr/share/wazuh-dashboard/certs/dashboard.pem:ro

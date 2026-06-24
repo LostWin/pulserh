@@ -2,69 +2,52 @@ http:
   routers:
     traefik-dashboard:
       rule: "Host(`traefik.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: api@internal
       tls: {}
-      middlewares:
-        - traefik-auth
-        - security-headers
+      middlewares: [traefik-auth, security-headers]
 
     keycloak:
       rule: "Host(`auth.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: keycloak-service
       tls: {}
-      middlewares:
-        - security-headers
+      middlewares: [security-headers]
 
     prometheus:
       rule: "Host(`prometheus.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: prometheus-service
       tls: {}
-      middlewares:
-        - security-headers
-        - rate-limit
+      middlewares: [security-headers]
 
     grafana:
       rule: "Host(`grafana.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: grafana-service
       tls: {}
-      middlewares:
-        - security-headers
+      middlewares: [security-headers]
 
     wazuh:
       rule: "Host(`wazuh.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: wazuh-service
       tls: {}
-      middlewares:
-        - security-headers
+      middlewares: [security-headers]
 
     frontend:
       rule: "Host(`ai.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: frontend-service
       tls: {}
-      middlewares:
-        - security-headers
+      middlewares: [security-headers]
 
     backend:
       rule: "Host(`api.pulse.local`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: backend-service
       tls: {}
-      middlewares:
-        - security-headers
-        - rate-limit
+      middlewares: [security-headers, rate-limit]
 
   services:
     keycloak-service:
@@ -94,7 +77,6 @@ http:
 
     backend-service:
       loadBalancer:
-        passHostHeader: true
         servers:
           - url: "http://pulse_backend:8000"
 
