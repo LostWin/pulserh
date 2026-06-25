@@ -1,12 +1,19 @@
 ---
-# Wazuh admin → accès complet OpenSearch
+_meta:
+  type: "rolesmapping"
+  config_version: 2
+
 all_access:
   reserved: false
   backend_roles:
     - "admin"
-  description: "Maps Keycloak admin role to all_access"
+  description: "Maps admin to all_access"
 
-# Utilisateurs RH/Manager/Direction → accès lecture Wazuh
+own_index:
+  reserved: false
+  users: []
+  description: "Disabled"
+
 kibana_user:
   reserved: false
   backend_roles:
@@ -19,17 +26,8 @@ readall:
   reserved: false
   backend_roles:
     - "collaborator"
-    - "manager"
-    - "rh"
-    - "direction"
 
-# Compte interne kibanaserver pour le dashboard
 kibana_server:
   reserved: true
   users:
     - "kibanaserver"
-
-own_index:
-  reserved: false
-  users: []
-  description: "Disabled"
