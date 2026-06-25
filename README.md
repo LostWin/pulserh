@@ -170,10 +170,80 @@ Double-clic sur traefik/certs/pulse.crt → Trousseau d'accès
 → Trouver "pulse.local" → Double-clic → Faire confiance → Toujours faire confiance
 ```
 
-### Étape 5 — Accéder à l'application
+### Étape 5 — Configurer le Client-WEB
+```
+docker exec -it pulse_keycloak bash -c '
+/opt/keycloak/bin/kcadm.sh config credentials \
+  --server http://localhost:8080 \
+  --realm master \
+  --client admin-cli \
+  --user $KEYCLOAK_ADMIN \
+  --password $KEYCLOAK_ADMIN_PASSWORD
+
+CLIENT_ID=$(
+  /opt/keycloak/bin/kcadm.sh get clients -r pulse --fields id,clientId |
+  grep -B1 "\"clientId\" : \"pulse-web\"" |
+  grep "\"id\"" |
+  sed -E "s/.*\"id\" : \"([^\"]+)\".*/\1/"
+)
+
+echo "Client ID trouvé : $CLIENT_ID"
+
+/opt/keycloak/bin/kcadm.sh update clients/$CLIENT_ID -r pulse \
+  -s '\''rootUrl=https://ai.pulse.local'\'' \
+  -s '\''redirectUris=["https://ai.pulse.local/*","http://localhost:5173/*"]'\'' \
+  -s '\''webOrigins=["https://ai.pulse.local","http://localhost:5173"]'\''
+
+echo "✅ pulse-web mis à jour"
+'
+```
+
+### Étape 6 — Créer le role-mapping
+
+```
+docker exec -it pulse_keycloak /bin/bash -c "
+  /opt/keycloak/bin/kcadm.sh config credentials \
+    --server http://localhost:8080 \
+    --realm master \
+    --client admin-cli \
+    --user \$KEYCLOAK_ADMIN \
+    --password \$KEYCLOAK_ADMIN_PASSWORD
+
+  CLIENT_UUID=\$(/opt/keycloak/bin/kcadm.sh get clients -r pulse -q clientId=wazuh-dashboard | grep '\"id\"' | head -1 | cut -d '\"' -f4)
+
+  echo \"Client UUID: \$CLIENT_UUID\"
+
+  MAPPER_ID=\$(/opt/keycloak/bin/kcadm.sh get clients/\$CLIENT_UUID/protocol-mappers/models -r pulse 2>/dev/null | grep -B2 'realm-roles-mapper' | grep id | tr -d ' \"id:,')
+
+  if [ -n \"\$MAPPER_ID\" ]; then
+    /opt/keycloak/bin/kcadm.sh delete clients/\$CLIENT_UUID/protocol-mappers/models/\$MAPPER_ID -r pulse
+    echo 'Ancien mapper supprimé'
+  fi
+
+  /opt/keycloak/bin/kcadm.sh create clients/\$CLIENT_UUID/protocol-mappers/models -r pulse \
+    -s name=realm-roles-mapper \
+    -s protocol=openid-connect \
+    -s protocolMapper=oidc-usermodel-realm-role-mapper \
+    -s consentRequired=false \
+    -s 'config={\"claim.name\":\"roles\",\"multivalued\":\"true\",\"access.token.claim\":\"true\",\"id.token.claim\":\"true\",\"userinfo.token.claim\":\"true\"}'
+
+  echo '✅ Mapper créé'
+"
+```
+
+
+### Étape 7 — Relancer le container
+
+```
+docker stop wazuh-dashboard && docker rm wazuh-dashboard
+docker compose up -d wazuh-dashboard
+sleep 40
+```
+
+
+### Étape 8 — Accéder à l'application
 
 Ouvre **https://ai.pulse.local** dans ton navigateur et connecte-toi avec un des comptes ci-dessous.
-
 ---
 
 ## Configuration
